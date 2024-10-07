@@ -1,4 +1,8 @@
 = 4.3.4 - 2024-09-18 =
+
+## [4.3.5] - 2024-10-07 
+### Added
+- Support for WooCommerce 9.4
 * Issue with listing placeholders after selecting an event in automation editor.
 
 = 4.3.3 - 2024-09-12 =
