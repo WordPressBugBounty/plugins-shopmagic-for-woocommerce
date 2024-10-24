@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WPDesk\\ShopMagic\\migrations\\' => array($baseDir . '/migrations'),
     'WPDesk\\ShopMagic\\' => array($baseDir . '/src'),
     'WPDesk\\Dashboard\\' => array($vendorDir . '/wpdesk/ltv-dashboard-widget/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),

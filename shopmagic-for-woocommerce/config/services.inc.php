@@ -7,13 +7,8 @@ use ShopMagicVendor\Getresponse\Sdk\GetresponseClientFactory;
 use ShopMagicVendor\Psr\Container\ContainerInterface;
 use ShopMagicVendor\Psr\Log\LoggerInterface;
 use ShopMagicVendor\Psr\Log\LogLevel;
-use ShopMagicVendor\Monolog\Formatter\LineFormatter;
-use ShopMagicVendor\Monolog\Handler\ErrorLogHandler;
-use ShopMagicVendor\Monolog\Handler\FingersCrossedHandler;
-use ShopMagicVendor\Monolog\Logger;
-use ShopMagicVendor\Monolog\Processor\PsrLogMessageProcessor;
-use ShopMagicVendor\Monolog\Processor\UidProcessor;
 use ShopMagicVendor\WPDesk\Dashboard\DashboardWidget;
+use ShopMagicVendor\WPDesk\Logger\SimpleLoggerFactory;
 use ShopMagicVendor\WPDesk\Migrations\Migrator;
 use ShopMagicVendor\WPDesk\Migrations\WpdbMigrator;
 use ShopMagicVendor\WPDesk\Notice\AjaxHandler;
@@ -322,25 +317,15 @@ return [
 
 	LoggerInterface::class                         => factory(
 		static function ( \ShopMagicVendor\DI\Container $c ) {
-			$original_handler = new ErrorLogHandler();
+			$debug = $c->get( PluginBag::class )->debug_enabled();
 
-			if ( $c->get( PluginBag::class )->debug_enabled() ) {
-				$handler = $original_handler;
-			} else {
-				// In production environment we use FingersCrossedHandler to get rich output at errors.
-				$handler = new FingersCrossedHandler( $original_handler, LogLevel::ERROR );
-			}
-
-			$logger = new Logger(
+			return ( new SimpleLoggerFactory(
 				'shopmagic',
-				[ $handler ],
-				[ new PsrLogMessageProcessor( null, true ), new UidProcessor() ]
-			);
-			$handler->setFormatter(
-				new LineFormatter( '%channel%.%level_name% [%extra.uid%]: %message% %context% %extra%' )
-			);
-
-			return $logger;
+				[
+					'level'        => 'debug',
+					'action_level' => $debug ? null : LogLevel::ERROR,
+				]
+			) )->getLogger();
 		}
 	),
 	'logger'                                       => get( LoggerInterface::class ),
@@ -354,11 +339,22 @@ return [
 	->constructorParameter( 'permit_exceptions', true ),
 
 	WorkflowInitializer::class                     => autowire(),
-	Migrator::class                                => static function ( ContainerInterface $c ) {
-		$plugin_bag = $c->get( PluginBag::class );
-
-		return WpdbMigrator::from_directories(
-			[ $plugin_bag->get_migrations_path() ],
+	Migrator::class                                => static function () {
+		return WpdbMigrator::from_classes(
+			[
+				WPDesk\ShopMagic\migrations\Version_37::class,
+				WPDesk\ShopMagic\migrations\Version_38::class,
+				WPDesk\ShopMagic\migrations\Version_39::class,
+				WPDesk\ShopMagic\migrations\Version_40::class,
+				WPDesk\ShopMagic\migrations\Version_41::class,
+				WPDesk\ShopMagic\migrations\Version_42::class,
+				WPDesk\ShopMagic\migrations\Version_43::class,
+				WPDesk\ShopMagic\migrations\Version_44::class,
+				WPDesk\ShopMagic\migrations\Version_45::class,
+				WPDesk\ShopMagic\migrations\Version_46::class,
+				WPDesk\ShopMagic\migrations\Version_47::class,
+				WPDesk\ShopMagic\migrations\Version_48::class,
+			],
 			'shopmagic_db'
 		);
 	},

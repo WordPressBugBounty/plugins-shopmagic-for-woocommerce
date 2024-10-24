@@ -1,3 +1,7 @@
+## 1.5.7 - 2024-10-14
+### Fixed
+- Error notice in strnatcmp function when priority is null.
+
 ## 1.5.6 - 2024-04-24
 ### Changed
 - Introduce the ability to completely disable the widget.

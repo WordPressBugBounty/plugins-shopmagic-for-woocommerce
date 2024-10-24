@@ -41,6 +41,7 @@
 		"wpdesk/wp-code-sniffer": "^1.2.6",
 		"wpdesk/wp-codeception": "^2.11",
 		"wpdesk/wp-forms": "^3.1",
+		"wpdesk/wp-logs": "^1.13",
 		"wpdesk/wp-migrations": "^1.0.1",
 		"wpdesk/wp-persistence": "^3",
 		"wpdesk/wp-plugin-flow-free": "^1.0.2",
@@ -50,7 +51,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"WPDesk\\ShopMagic\\": "src"
+			"WPDesk\\ShopMagic\\": "src",
+			"WPDesk\\ShopMagic\\migrations\\": "migrations"
 		},
 		"classmap": [
 			"vendor_prefixed"

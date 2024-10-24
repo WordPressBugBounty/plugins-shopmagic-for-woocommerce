@@ -135,6 +135,8 @@ final class DashboardWidget {
         }
 
         usort( $plugins, static function ( $a, $b ) {
+            $a['priority'] = $a['priority'] ?? '0';
+            $b['priority'] = $b['priority'] ?? '0';
             return strnatcmp( $a['priority'], $b['priority'] );
         } );
         $installed_plugins_dir = $this->get_all_plugins_dirs();

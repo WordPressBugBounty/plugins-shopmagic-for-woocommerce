@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14
+class ComposerStaticInit7b20977a1d5d8fad7bb35cf03627aeae
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -15,6 +15,7 @@ class ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
+            'WPDesk\\ShopMagic\\migrations\\' => 28,
             'WPDesk\\ShopMagic\\' => 17,
             'WPDesk\\Dashboard\\' => 17,
         ),
@@ -32,6 +33,10 @@ class ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14
     );
 
     public static $prefixDirsPsr4 = array (
+        'WPDesk\\ShopMagic\\migrations\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/migrations',
+        ),
         'WPDesk\\ShopMagic\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -1478,6 +1483,18 @@ class ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14
         'ShopMagicVendor\\WPDesk\\Forms\\Validator\\NoValidateValidator' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Validator/NoValidateValidator.php',
         'ShopMagicVendor\\WPDesk\\Forms\\Validator\\NonceValidator' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Validator/NonceValidator.php',
         'ShopMagicVendor\\WPDesk\\Forms\\Validator\\RequiredValidator' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Validator/RequiredValidator.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\BasicLoggerFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/BasicLoggerFactory.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\LoggerFacade' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/LoggerFacade.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\LoggerFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/LoggerFactory.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\Processor\\SensitiveDataProcessor' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/Processor/SensitiveDataProcessor.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\Settings' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/Settings.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\SimpleLoggerFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/SimpleLoggerFactory.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\WC\\Exception\\WCLoggerAlreadyCaptured' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/WC/Exception/WCLoggerAlreadyCaptured.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\WC\\WooCommerceCapture' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/WC/WooCommerceCapture.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\WC\\WooCommerceHandler' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/WC/WooCommerceHandler.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\WC\\WooCommerceMonologPlugin' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/WC/WooCommerceMonologPlugin.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\WPDeskLoggerFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/WPDeskLoggerFactory.php',
+        'ShopMagicVendor\\WPDesk\\Logger\\WP\\WPCapture' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/WP/WPCapture.php',
         'ShopMagicVendor\\WPDesk\\Migrations\\AbstractMigration' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-migrations/src/AbstractMigration.php',
         'ShopMagicVendor\\WPDesk\\Migrations\\AbstractMigrationsRepository' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-migrations/src/AbstractMigrationsRepository.php',
         'ShopMagicVendor\\WPDesk\\Migrations\\ArrayMigrationsRepository' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-migrations/src/ArrayMigrationsRepository.php',
@@ -1578,6 +1595,8 @@ class ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14
         'ShopMagicVendor\\WPDesk_Basic_Requirement_Checker_With_Update_Disable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker_With_Update_Disable.php',
         'ShopMagicVendor\\WPDesk_Buildable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Buildable.php',
         'ShopMagicVendor\\WPDesk_Has_Plugin_Info' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Has_Plugin_Info.php',
+        'ShopMagicVendor\\WPDesk_Logger' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/deprecated/wpdesk-logger.php',
+        'ShopMagicVendor\\WPDesk_Logger_Factory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/deprecated/wpdesk-logger-factory.php',
         'ShopMagicVendor\\WPDesk_Plugin_Info' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Plugin_Info.php',
         'ShopMagicVendor\\WPDesk_Requirement_Checker' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-basic-requirements/src/Requirement_Checker.php',
         'ShopMagicVendor\\WPDesk_Requirement_Checker_Factory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-basic-requirements/src/Requirement_Checker_Factory.php',
@@ -2147,6 +2166,18 @@ class ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14
         'WPDesk\\ShopMagic\\Workflow\\ValueNotFound' => __DIR__ . '/../..' . '/src/Workflow/ValueNotFound.php',
         'WPDesk\\ShopMagic\\Workflow\\Workflow' => __DIR__ . '/../..' . '/src/Workflow/Workflow.php',
         'WPDesk\\ShopMagic\\Workflow\\WorkflowInitializer' => __DIR__ . '/../..' . '/src/Workflow/WorkflowInitializer.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_37' => __DIR__ . '/../..' . '/migrations/Version_37.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_38' => __DIR__ . '/../..' . '/migrations/Version_38.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_39' => __DIR__ . '/../..' . '/migrations/Version_39.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_40' => __DIR__ . '/../..' . '/migrations/Version_40.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_41' => __DIR__ . '/../..' . '/migrations/Version_41.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_42' => __DIR__ . '/../..' . '/migrations/Version_42.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_43' => __DIR__ . '/../..' . '/migrations/Version_43.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_44' => __DIR__ . '/../..' . '/migrations/Version_44.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_45' => __DIR__ . '/../..' . '/migrations/Version_45.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_46' => __DIR__ . '/../..' . '/migrations/Version_46.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_47' => __DIR__ . '/../..' . '/migrations/Version_47.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_48' => __DIR__ . '/../..' . '/migrations/Version_48.php',
         'WPDesk_Tracker_Data_Provider' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-data-provider.php',
         'WPDesk_Tracker_Factory' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Helper/TrackerFactory.php',
         'WPDesk_Tracker_Interface' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-interface.php',
@@ -2156,9 +2187,9 @@ class ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit2fe1c2c7ddafd9c5bbde8b3e02d3dc14::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7b20977a1d5d8fad7bb35cf03627aeae::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7b20977a1d5d8fad7bb35cf03627aeae::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7b20977a1d5d8fad7bb35cf03627aeae::$classMap;
 
         }, null, ClassLoader::class);
     }
