@@ -21,8 +21,10 @@ final class OrderStatusDeferredEvent extends Event implements SupportsDeferredCh
 
 	/** @var FieldValuesBag */
 	protected $fields_data;
+
 	/** @var OrderCommonEvent */
 	private $event;
+
 	/** @var string */
 	private $status;
 

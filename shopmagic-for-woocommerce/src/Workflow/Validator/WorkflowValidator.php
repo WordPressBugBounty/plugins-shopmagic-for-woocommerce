@@ -66,7 +66,7 @@ class WorkflowValidator {
 	 *
 	 * @param $resources DataLayer This will be introduced in 4.0.0.
 	 */
-	public function valid(/* DataLayer $resources */ ): bool {
+	public function valid( /* DataLayer $resources */ ): bool {
 		if ( empty( func_get_args() ) ) {
 			@trigger_error(
 				sprintf(

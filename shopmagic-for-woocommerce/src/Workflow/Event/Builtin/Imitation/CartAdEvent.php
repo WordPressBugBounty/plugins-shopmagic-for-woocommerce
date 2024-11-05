@@ -20,7 +20,6 @@ final class CartAdEvent extends ImitationCommonEvent {
 			'Run automation {x} minute(s) after the cart is considered abandoned.',
 			'shopmagic-for-woocommerce'
 		);
-
 	}
 
 	public function get_group_slug(): string {
@@ -33,8 +32,8 @@ final class CartAdEvent extends ImitationCommonEvent {
 		$description = ob_get_clean();
 		return [
 			( new ProItemInfoField() )
-				->set_name('abandoned-cart-ad')
-				->set_description( $description )
+				->set_name( 'abandoned-cart-ad' )
+				->set_description( $description ),
 		];
 	}
 }

@@ -20,7 +20,7 @@ class SettingsController {
 		SettingsCollection $settings,
 		JsonSchemaNormalizer $normalizer
 	) {
-		$this->settings = $settings;
+		$this->settings   = $settings;
 		$this->normalizer = $normalizer;
 	}
 
@@ -82,5 +82,4 @@ class SettingsController {
 			$name
 		);
 	}
-
 }

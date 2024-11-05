@@ -37,5 +37,4 @@ class EntityNotFound extends CannotProvideItemException implements \WPDesk\ShopM
 			)
 		);
 	}
-
 }

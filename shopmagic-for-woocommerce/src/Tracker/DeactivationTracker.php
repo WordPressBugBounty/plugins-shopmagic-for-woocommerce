@@ -36,4 +36,3 @@ class DeactivationTracker implements HookProvider {
 		return $plugins;
 	}
 }
-

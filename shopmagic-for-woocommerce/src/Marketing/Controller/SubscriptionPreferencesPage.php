@@ -67,7 +67,7 @@ class SubscriptionPreferencesPage {
 			return $this->serve_error_response();
 		}
 
-		$html = $this->renderer->render_wrap_start();
+		$html  = $this->renderer->render_wrap_start();
 		$html .= $this->renderer->render( $customer, [ 'success' => $success ] );
 		$html .= $this->renderer->render_wrap_end();
 
@@ -75,12 +75,10 @@ class SubscriptionPreferencesPage {
 	}
 
 	public function serve_error_response(): \WP_HTTP_Response {
-		$html = $this->renderer->render_wrap_start();
+		$html  = $this->renderer->render_wrap_start();
 		$html .= esc_html__( 'Sorry, but something is wrong with your request.', 'shopmagic-for-woocommerce' );
 		$html .= $this->renderer->render_wrap_end();
 
 		return new \WP_HTTP_Response( $html, \WP_Http::FORBIDDEN );
 	}
-
-
 }

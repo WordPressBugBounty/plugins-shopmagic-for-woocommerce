@@ -23,5 +23,4 @@ interface Normalizer {
 	 * @return bool
 	 */
 	public function supports_normalization( object $object ): bool;
-
 }

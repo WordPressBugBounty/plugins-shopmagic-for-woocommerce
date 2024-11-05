@@ -89,5 +89,4 @@ final class SignUpCustomerOnSubmit implements HookProvider {
 			$this->subscriber_service->subscribe( $user->user_email, $opt_out->get_id() );
 		}
 	}
-
 }

@@ -22,5 +22,4 @@ class ContainerControllerResolver extends SimpleControllerResolver {
 
 		return parent::instantiate_controller( $class );
 	}
-
 }

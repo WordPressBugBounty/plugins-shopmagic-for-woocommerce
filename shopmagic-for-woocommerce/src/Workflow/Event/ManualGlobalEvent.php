@@ -16,5 +16,5 @@ interface ManualGlobalEvent {
 	 *
 	 * @return void
 	 */
-	public static function trigger( array $args): void;
+	public static function trigger( array $args ): void;
 }

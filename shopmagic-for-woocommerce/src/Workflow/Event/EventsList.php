@@ -30,5 +30,4 @@ final class EventsList extends AbstractCollection implements Sortable {
 	public function compare( object $a, object $b ): int {
 		return strcmp( $a->get_group_slug(), $b->get_group_slug() );
 	}
-
 }

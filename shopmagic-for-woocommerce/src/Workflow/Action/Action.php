@@ -40,12 +40,17 @@ abstract class Action implements
 	public function get_parameters(): FieldValuesBag {
 		/**
 		 * Hack for backward-compatible decorators.
+		 *
 		 * @see shopmagic-delayed-actions
 		 */
 		if ( property_exists( $this, 'action' ) ) {
-			return \Closure::bind(function () {
-				return $this->action->get_parameters();
-			}, $this, $this)();
+			return \Closure::bind(
+				function () {
+					return $this->action->get_parameters();
+				},
+				$this,
+				$this
+			)();
 		}
 
 		return $this->fields_data;
@@ -132,5 +137,4 @@ abstract class Action implements
 		$this->provided_data = $resources;
 		$this->resources     = $resources;
 	}
-
 }

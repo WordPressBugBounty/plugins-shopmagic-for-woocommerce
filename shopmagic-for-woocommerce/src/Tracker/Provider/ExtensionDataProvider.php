@@ -21,4 +21,3 @@ class ExtensionDataProvider implements \WPDesk_Tracker_Data_Provider {
 		];
 	}
 }
-

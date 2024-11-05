@@ -85,5 +85,4 @@ class OutcomeSavingState implements OutcomeSaver {
 
 		return $outcome;
 	}
-
 }

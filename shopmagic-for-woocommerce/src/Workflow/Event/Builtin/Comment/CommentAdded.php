@@ -12,9 +12,14 @@ final class CommentAdded extends \WPDesk\ShopMagic\Workflow\Event\Event {
 	}
 
 	public function initialize(): void {
-		add_action( 'comment_post', function ( int $comment_id, $approved ): void {
-			$this->on_comment_published( $comment_id, $approved );
-		}, 10, 2 );
+		add_action(
+			'comment_post',
+			function ( int $comment_id, $approved ): void {
+				$this->on_comment_published( $comment_id, $approved );
+			},
+			10,
+			2
+		);
 	}
 
 	private function on_comment_published( int $comment_id, $approved ): void {

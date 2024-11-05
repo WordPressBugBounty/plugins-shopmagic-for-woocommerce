@@ -19,5 +19,4 @@ interface Runner {
 	public function run( DataLayer $data_layer ): void;
 
 	public function get_automation(): Automation;
-
 }

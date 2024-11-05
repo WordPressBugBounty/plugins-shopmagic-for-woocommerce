@@ -20,5 +20,4 @@ abstract class AbstractExtension implements Extension {
 	public function get_events(): array {
 		return [];
 	}
-
 }

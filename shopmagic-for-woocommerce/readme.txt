@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.3
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 4.3.6
+Stable tag: 4.3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -405,9 +405,8 @@ You can also choose one from the list below based on your needs.
 
 == Changelog ==
 
-= 4.3.6 =
-* If WooCommerce logger is available, use it to save ShopMagic logs to WooCommerce -> Status -> Logs.
-* Decreased ShopMagic memory consumption for executing database migrations.
+= 4.3.7 - 2024-11-05 =
+* Capturing guest data before checkout submission now works with WooCommerce Checkout Blocks.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

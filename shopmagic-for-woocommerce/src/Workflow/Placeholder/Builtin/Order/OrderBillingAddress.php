@@ -23,4 +23,3 @@ final class OrderBillingAddress extends WooCommerceOrderBasedPlaceholder {
 		return '';
 	}
 }
-

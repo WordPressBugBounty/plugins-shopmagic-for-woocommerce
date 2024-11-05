@@ -27,8 +27,8 @@ class OutcomesController {
 	public function index( \WP_REST_Request $request ): \WP_REST_Response {
 		return new \WP_REST_Response(
 			$this->repository->find_by( ...$this->parse_params( $request ) )
-			                 ->map( \Closure::fromCallable( [ $this->normalizer, 'normalize' ] ) )
-			                 ->to_array()
+					->map( \Closure::fromCallable( [ $this->normalizer, 'normalize' ] ) )
+						->to_array()
 		);
 	}
 
@@ -68,14 +68,17 @@ class OutcomesController {
 
 	public function delete( int $id, OutcomeManager $manager ): \WP_REST_Response {
 		try {
-			$outcome = $manager->find($id);
-		} catch (CannotProvideItemException $e) {
-			throw new HttpProblemException( [
-				'title'  => __( 'Could not find outcome to delete.', 'shopmagic-for-woocommerce' ),
-				'detail' => $e->getMessage(),
-			], \WP_Http::NOT_FOUND );
+			$outcome = $manager->find( $id );
+		} catch ( CannotProvideItemException $e ) {
+			throw new HttpProblemException(
+				[
+					'title'  => __( 'Could not find outcome to delete.', 'shopmagic-for-woocommerce' ),
+					'detail' => $e->getMessage(),
+				],
+				\WP_Http::NOT_FOUND
+			);
 		}
-		$manager->delete($outcome);
-		return new \WP_REST_Response(null, \WP_Http::NO_CONTENT);
+		$manager->delete( $outcome );
+		return new \WP_REST_Response( null, \WP_Http::NO_CONTENT );
 	}
 }

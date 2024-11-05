@@ -9,6 +9,7 @@ namespace WPDesk\ShopMagic\Components\Database;
  * @template T of object
  */
 class IdentityMap {
+
 	/** @var array<string, T> */
 	private $map = [];
 
@@ -34,5 +35,4 @@ class IdentityMap {
 	public function has( string $id ): bool {
 		return isset( $this->map[ $id ] );
 	}
-
 }

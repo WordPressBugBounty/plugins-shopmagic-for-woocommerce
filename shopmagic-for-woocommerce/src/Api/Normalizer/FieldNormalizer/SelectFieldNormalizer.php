@@ -16,8 +16,8 @@ class SelectFieldNormalizer extends JsonSchemaFieldNormalizer {
 		$options = array_map(
 			static function ( $value, $label ) {
 				return [
-					"const" => $value,
-					"title" => $label,
+					'const' => $value,
+					'title' => $label,
 				];
 			},
 			array_keys( $object->get_possible_values() ),
@@ -26,7 +26,7 @@ class SelectFieldNormalizer extends JsonSchemaFieldNormalizer {
 
 		return array_merge(
 			parent::normalize( $object ),
-			[ "oneOf" => $options ]
+			[ 'oneOf' => $options ]
 		);
 	}
 

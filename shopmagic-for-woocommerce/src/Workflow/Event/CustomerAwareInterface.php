@@ -12,5 +12,4 @@ use WPDesk\ShopMagic\Customer\CustomerRepository;
 interface CustomerAwareInterface {
 
 	public function set_customer_repository( CustomerRepository $customer_repository ): void;
-
 }

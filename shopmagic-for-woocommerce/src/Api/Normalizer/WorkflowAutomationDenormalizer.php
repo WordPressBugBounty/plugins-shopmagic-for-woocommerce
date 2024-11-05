@@ -113,9 +113,9 @@ class WorkflowAutomationDenormalizer implements Denormalizer {
 
 		// At the moment we support parent->child relationship only in context of multilingual
 		// support but this may change in time and this part of code will need refactor.
-//		if ( isset( $data['parent'] ) && empty( $data['language'] ) ) {
-//			$this->errors[] = esc_html__( 'You are creating a child automation, which requires to pick automation language. Set the language and save automation again or save your automation as main one by removing parent automation in settings.', 'shopmagic-for-woocommerce' );
-//		}
+		// if ( isset( $data['parent'] ) && empty( $data['language'] ) ) {
+		// $this->errors[] = esc_html__( 'You are creating a child automation, which requires to pick automation language. Set the language and save automation again or save your automation as main one by removing parent automation in settings.', 'shopmagic-for-woocommerce' );
+		// }
 
 		// If either parent or language is set, we need to check for the other parameter as well.
 		if ( isset( $data['parent'] ) xor isset( $data['language'] ) ) {

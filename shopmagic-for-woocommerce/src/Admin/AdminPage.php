@@ -22,5 +22,4 @@ interface AdminPage {
 	 * @return void
 	 */
 	public function render(): void;
-
 }

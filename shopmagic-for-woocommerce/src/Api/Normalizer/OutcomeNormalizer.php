@@ -11,7 +11,7 @@ class OutcomeNormalizer implements Normalizer {
 
 	public function normalize( object $object ): array {
 		if ( ! $this->supports_normalization( $object ) ) {
-			throw InvalidArgumentException::invalid_object(Outcome::class, $object);
+			throw InvalidArgumentException::invalid_object( Outcome::class, $object );
 		}
 
 		if ( $object->get_note() !== null ) {

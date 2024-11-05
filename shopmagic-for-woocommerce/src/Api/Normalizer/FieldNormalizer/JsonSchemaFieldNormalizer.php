@@ -19,17 +19,17 @@ class JsonSchemaFieldNormalizer implements \WPDesk\ShopMagic\Api\Normalizer\Norm
 		}
 
 		return [
-			"type"         => "string",
-			"title"        => $object->get_label(),
-			"description"  => $object->get_description(),
-			"format"       => $object->get_type(),
-			"default"      => $object->get_default_value(),
-			"readOnly"     => $object->is_readonly(),
-			"examples"     => [
+			'type'         => 'string',
+			'title'        => $object->get_label(),
+			'description'  => $object->get_description(),
+			'format'       => $object->get_type(),
+			'default'      => $object->get_default_value(),
+			'readOnly'     => $object->is_readonly(),
+			'examples'     => [
 				$object->get_placeholder(),
 			],
-			"presentation" => [
-				"position" => $object->get_priority(),
+			'presentation' => [
+				'position' => $object->get_priority(),
 			],
 		];
 	}

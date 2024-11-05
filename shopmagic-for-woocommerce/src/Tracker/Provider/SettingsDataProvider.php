@@ -14,4 +14,3 @@ class SettingsDataProvider implements \WPDesk_Tracker_Data_Provider {
 		return [];
 	}
 }
-

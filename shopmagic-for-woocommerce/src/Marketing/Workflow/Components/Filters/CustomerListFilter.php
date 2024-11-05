@@ -67,5 +67,4 @@ final class CustomerListFilter extends CustomerFilter {
 	protected function get_type(): ComparisonType {
 		return new SelectManyToManyType( $this->list_repository->get_as_select_options() );
 	}
-
 }

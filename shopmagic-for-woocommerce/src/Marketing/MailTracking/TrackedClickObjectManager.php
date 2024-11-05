@@ -12,12 +12,11 @@ class TrackedClickObjectManager extends \WPDesk\ShopMagic\Components\Database\Ab
 			'id',
 			'message_id',
 			'original_uri',
-			'clicked_at'
+			'clicked_at',
 		];
 	}
 
 	protected function get_name(): string {
 		return DatabaseTable::tracked_emails_clicks();
 	}
-
 }

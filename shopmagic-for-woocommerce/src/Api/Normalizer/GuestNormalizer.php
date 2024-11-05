@@ -18,10 +18,12 @@ class GuestNormalizer implements Normalizer {
 		}
 
 		$meta = $object->get_meta()
-		               ->map( static function ( GuestMeta $m ) {
-			               return [ $m->get_meta_key(), $m->get_meta_value() ];
-		               } )
-		               ->to_array();
+				->map(
+					static function ( GuestMeta $m ) {
+								return [ $m->get_meta_key(), $m->get_meta_value() ];
+					}
+				)
+						->to_array();
 
 		return [
 			'id'         => $object->get_raw_id(),

@@ -14,7 +14,7 @@ final class ProductSelectType extends SelectManyToManyType {
 	public const VALUE_KEY = 'products_ids';
 
 	protected function get_select_field(): SelectField {
-		return ( new class extends ProductSelect {
+		return ( new class() extends ProductSelect {
 			public function has_serializer(): bool {
 				return false;
 			}

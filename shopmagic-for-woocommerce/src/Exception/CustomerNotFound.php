@@ -21,7 +21,8 @@ final class CustomerNotFound extends RuntimeException implements ShopMagicExcept
 		return new self(
 			sprintf(
 				esc_html__(
-					'Failed to find customer with ID #%s.', 'shopmagic-for-woocommerce'
+					'Failed to find customer with ID #%s.',
+					'shopmagic-for-woocommerce'
 				),
 				$id
 			) . ' ' . $hint

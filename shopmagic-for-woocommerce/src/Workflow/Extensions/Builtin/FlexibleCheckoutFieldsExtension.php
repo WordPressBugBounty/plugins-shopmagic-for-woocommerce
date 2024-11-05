@@ -29,5 +29,4 @@ final class FlexibleCheckoutFieldsExtension extends AbstractExtension {
 			new OrderCheckoutField( $this->integrator, $this->logger ),
 		];
 	}
-
 }

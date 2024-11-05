@@ -39,5 +39,4 @@ class Manifest {
 	public function has( string $entry ): bool {
 		return isset( $this->entries[ $entry ] );
 	}
-
 }

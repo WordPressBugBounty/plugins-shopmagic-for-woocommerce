@@ -29,5 +29,4 @@ final class OrderProcessing extends OrderCommonEvent {
 			2
 		);
 	}
-
 }

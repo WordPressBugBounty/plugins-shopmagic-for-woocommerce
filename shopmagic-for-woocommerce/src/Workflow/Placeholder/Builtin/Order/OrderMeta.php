@@ -19,14 +19,14 @@ final class OrderMeta extends WooCommerceOrderBasedPlaceholder {
 
 	public function get_description(): string {
 		return esc_html__(
-			       'Display any meta value associated with current order.',
-			       'shopmagic-for-woocommerce'
-		       ) . ' ' .
-		       esc_html__( 'You can find more about using this placeholder in ' ) .
-		       '<a target="_blank" href="https://docs.shopmagic.app/article/1163-meta-placeholders">' . esc_html__(
-			       'documentation',
-			       'shopmagic-for-woocommerce'
-		       ) . '</a>.';
+			'Display any meta value associated with current order.',
+			'shopmagic-for-woocommerce'
+		) . ' ' .
+				esc_html__( 'You can find more about using this placeholder in ' ) .
+				'<a target="_blank" href="https://docs.shopmagic.app/article/1163-meta-placeholders">' . esc_html__(
+					'documentation',
+					'shopmagic-for-woocommerce'
+				) . '</a>.';
 	}
 
 	/**

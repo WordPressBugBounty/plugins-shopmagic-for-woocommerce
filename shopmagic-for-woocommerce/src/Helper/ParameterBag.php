@@ -18,6 +18,7 @@ namespace WPDesk\ShopMagic\Helper;
  * @implements \IteratorAggregate<string, mixed>
  */
 class ParameterBag implements \IteratorAggregate, \Countable {
+
 	/**
 	 * Parameter storage.
 	 *
@@ -133,10 +134,14 @@ class ParameterBag implements \IteratorAggregate, \Countable {
 	 */
 	public function getDigits( string $key, string $default = '' ): string {
 		// we need to remove - and + because they're allowed in the filter
-		return str_replace( [
-			'-',
-			'+',
-		], '', $this->filter( $key, $default, \FILTER_SANITIZE_NUMBER_INT ) );
+		return str_replace(
+			[
+				'-',
+				'+',
+			],
+			'',
+			$this->filter( $key, $default, \FILTER_SANITIZE_NUMBER_INT )
+		);
 	}
 
 	/**

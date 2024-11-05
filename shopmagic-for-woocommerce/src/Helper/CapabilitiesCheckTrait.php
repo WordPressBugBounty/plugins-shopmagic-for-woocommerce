@@ -22,5 +22,4 @@ trait CapabilitiesCheckTrait {
 
 		return false;
 	}
-
 }

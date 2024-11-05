@@ -10,6 +10,7 @@ use ShopMagicVendor\Psr\Container\ContainerInterface;
  * @note Copy of `acclimate/container` CompositeContainer class
  */
 class CompositeContainer implements ContainerInterface {
+
 	/**
 	 * @var array Containers that are contained within this composite container
 	 */

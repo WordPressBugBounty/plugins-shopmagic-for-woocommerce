@@ -20,5 +20,4 @@ final class ActionList extends AbstractCollection {
 
 		return new NullAction();
 	}
-
 }

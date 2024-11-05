@@ -34,8 +34,8 @@ class MarketingListsController {
 	public function index( MarketingListNormalizer $normalizer, \WP_REST_Request $request ): \WP_REST_Response {
 		return new \WP_REST_Response(
 			$this->repository->find_by( ...$this->parse_params( $request ) )
-			                 ->map( \Closure::fromCallable( [ $normalizer, 'normalize' ] ) )
-			                 ->to_array()
+					->map( \Closure::fromCallable( [ $normalizer, 'normalize' ] ) )
+						->to_array()
 		);
 	}
 
@@ -55,21 +55,30 @@ class MarketingListsController {
 			$list   = $this->repository->find( $id );
 			$result = $manager->delete( $list );
 		} catch ( EntityNotFound $e ) {
-			throw new HttpProblemException( [
-				'title'  => esc_html__( 'Newsletter list not found.', 'shopmagic-for-woocommerce' ),
-				'detail' => $e->getMessage(),
-			], \WP_Http::NOT_FOUND );
+			throw new HttpProblemException(
+				[
+					'title'  => esc_html__( 'Newsletter list not found.', 'shopmagic-for-woocommerce' ),
+					'detail' => $e->getMessage(),
+				],
+				\WP_Http::NOT_FOUND
+			);
 		} catch ( PersisterException $e ) {
-			throw new HttpProblemException( [
-				'title'  => esc_html__( 'Could not delete newsletter list.', 'shopmagic-for-woocommerce' ),
-				'detail' => $e->getMessage(),
-			], \WP_Http::UNPROCESSABLE_ENTITY );
+			throw new HttpProblemException(
+				[
+					'title'  => esc_html__( 'Could not delete newsletter list.', 'shopmagic-for-woocommerce' ),
+					'detail' => $e->getMessage(),
+				],
+				\WP_Http::UNPROCESSABLE_ENTITY
+			);
 		}
 
 		if ( $result === false ) {
-			throw new HttpProblemException( [
-				'title' => esc_html__( 'Could not delete communication list', 'shopmagic-for-woocommerce' ),
-			], \WP_Http::UNPROCESSABLE_ENTITY );
+			throw new HttpProblemException(
+				[
+					'title' => esc_html__( 'Could not delete communication list', 'shopmagic-for-woocommerce' ),
+				],
+				\WP_Http::UNPROCESSABLE_ENTITY
+			);
 		}
 
 		return new \WP_REST_Response( null, \WP_Http::NO_CONTENT );
@@ -93,11 +102,14 @@ class MarketingListsController {
 			$wpdb->query( 'ROLLBACK' );
 			$this->logger->error( sprintf( 'List could not be created. Reason: %s', $e->getMessage() ) );
 
-			return new \WP_REST_Response( [
-				"title"  => esc_html__( "List could not be created" ),
-				"code"   => \WP_Http::UNPROCESSABLE_ENTITY,
-				"detail" => $e->getMessage(),
-			], \WP_Http::UNPROCESSABLE_ENTITY );
+			return new \WP_REST_Response(
+				[
+					'title'  => esc_html__( 'List could not be created' ),
+					'code'   => \WP_Http::UNPROCESSABLE_ENTITY,
+					'detail' => $e->getMessage(),
+				],
+				\WP_Http::UNPROCESSABLE_ENTITY
+			);
 		}
 
 		$response = new \WP_REST_Response( $list->get_id(), \WP_Http::CREATED );
@@ -129,11 +141,14 @@ class MarketingListsController {
 			$wpdb->query( 'ROLLBACK' );
 			$this->logger->error( sprintf( 'Marketing list could not be created. Reason: %s', $e->getMessage() ) );
 
-			return new \WP_REST_Response( [
-				"title"  => esc_html__( "List could not be created", 'shopmagic-for-woocommerce' ),
-				"code"   => \WP_Http::UNPROCESSABLE_ENTITY,
-				"detail" => $e->getMessage(),
-			], \WP_Http::UNPROCESSABLE_ENTITY );
+			return new \WP_REST_Response(
+				[
+					'title'  => esc_html__( 'List could not be created', 'shopmagic-for-woocommerce' ),
+					'code'   => \WP_Http::UNPROCESSABLE_ENTITY,
+					'detail' => $e->getMessage(),
+				],
+				\WP_Http::UNPROCESSABLE_ENTITY
+			);
 		}
 	}
 
@@ -163,20 +178,28 @@ class MarketingListsController {
 		$filters   = $request->get_param( 'filters' );
 
 		$criteria = [];
-		if ( isset( $filters['status'] ) && in_array( $filters['status'], [
+		if ( isset( $filters['status'] ) && in_array(
+			$filters['status'],
+			[
 				'publish',
 				'draft',
 				'trash',
-			], true ) ) {
+			],
+			true
+		) ) {
 			$criteria['post_status'] = $filters['status'];
 		} else {
 			$criteria['post_status'] = 'any';
 		}
 
-		if ( isset( $filters['type'] ) && in_array( $filters['type'], [
+		if ( isset( $filters['type'] ) && in_array(
+			$filters['type'],
+			[
 				'opt_in',
 				'opt_out',
-			], true ) ) {
+			],
+			true
+		) ) {
 			$criteria['meta_key']   = 'type';
 			$criteria['meta_value'] = $filters['type'];
 		}
@@ -187,5 +210,4 @@ class MarketingListsController {
 
 		return [ $criteria, [], ( ( $page - 1 ) * $page_size ), $page_size ];
 	}
-
 }

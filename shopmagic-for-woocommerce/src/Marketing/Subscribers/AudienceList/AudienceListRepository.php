@@ -62,31 +62,35 @@ class AudienceListRepository implements ObjectRepository {
 	}
 
 	public function find_checkout_viewable_items(): Collection {
-		return $this->find_by( [
-			'post_status' => AudienceList::STATUS_PUBLISH,
-			'meta_query'  => [
-				[
-					'key'   => 'checkout_available',
-					'value' => '1',
+		return $this->find_by(
+			[
+				'post_status' => AudienceList::STATUS_PUBLISH,
+				'meta_query'  => [
+					[
+						'key'   => 'checkout_available',
+						'value' => '1',
+					],
+					[
+						'key'   => 'type',
+						'value' => AudienceList::TYPE_OPTIN,
+					],
 				],
-				[
-					'key'   => 'type',
-					'value' => AudienceList::TYPE_OPTIN,
-				],
-			],
-		] );
+			]
+		);
 	}
 
 	public function find_opt_out_lists(): Collection {
-		return $this->find_by( [
-			'post_status' => AudienceList::STATUS_PUBLISH,
-			'meta_query'  => [
-				[
-					'key'   => 'type',
-					'value' => AudienceList::TYPE_OPTOUT,
+		return $this->find_by(
+			[
+				'post_status' => AudienceList::STATUS_PUBLISH,
+				'meta_query'  => [
+					[
+						'key'   => 'type',
+						'value' => AudienceList::TYPE_OPTOUT,
+					],
 				],
-			],
-		] );
+			]
+		);
 	}
 
 	public function find_one_by( array $criteria, ?array $order = null ): object {

@@ -13,5 +13,4 @@ interface SettingTab extends LegacySettingsTab {
 
 	/** @return Field[] */
 	public function get_fields(): array;
-
 }

@@ -86,5 +86,4 @@ final class OutcomeMeta {
 	public function set_context( array $context ): void {
 		$this->context = $context;
 	}
-
 }

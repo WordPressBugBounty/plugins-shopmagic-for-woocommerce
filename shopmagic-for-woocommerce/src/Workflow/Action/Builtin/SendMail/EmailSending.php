@@ -43,6 +43,4 @@ class EmailSending {
 
 		return $self;
 	}
-
-
 }

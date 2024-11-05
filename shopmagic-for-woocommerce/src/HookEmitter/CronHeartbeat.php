@@ -143,7 +143,7 @@ final class CronHeartbeat implements Hookable {
 	 */
 	private function is_worker_locked( string $action ): bool {
 		$time_unlocked = $this->get_last_run( $action )
-		                      ->modify( '+' . self::TOO_MUCH_INTERVAL . ' seconds' );
+				->modify( '+' . self::TOO_MUCH_INTERVAL . ' seconds' );
 
 		return $time_unlocked->getTimestamp() > time();
 	}

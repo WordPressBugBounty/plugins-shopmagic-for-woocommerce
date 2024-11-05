@@ -32,8 +32,8 @@ class CustomerController {
 	): \WP_REST_Response {
 		return new \WP_REST_Response(
 			$repository->find_by( ...$this->parse_params( $request ) )
-			           ->map( \Closure::fromCallable( [ $normalizer, 'normalize' ] ) )
-			           ->to_array()
+					->map( \Closure::fromCallable( [ $normalizer, 'normalize' ] ) )
+						->to_array()
 		);
 	}
 
@@ -61,14 +61,17 @@ class CustomerController {
 
 	public function delete_guest( int $id, GuestManager $manager ): \WP_REST_Response {
 		try {
-			$guest = $manager->find($id);
+			$guest = $manager->find( $id );
 		} catch ( CannotProvideItemException $e ) {
-			throw new HttpProblemException( [
-				'title'  => __( 'Could not find guest to delete.', 'shopmagic-for-woocommerce' ),
-				'detail' => $e->getMessage(),
-			], \WP_Http::NOT_FOUND );
+			throw new HttpProblemException(
+				[
+					'title'  => __( 'Could not find guest to delete.', 'shopmagic-for-woocommerce' ),
+					'detail' => $e->getMessage(),
+				],
+				\WP_Http::NOT_FOUND
+			);
 		}
-		$manager->delete($guest);
-		return new \WP_REST_Response(null, \WP_Http::NO_CONTENT);
+		$manager->delete( $guest );
+		return new \WP_REST_Response( null, \WP_Http::NO_CONTENT );
 	}
 }

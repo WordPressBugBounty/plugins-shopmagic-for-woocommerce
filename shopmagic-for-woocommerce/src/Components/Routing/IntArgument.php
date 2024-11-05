@@ -8,6 +8,7 @@ class IntArgument extends Argument {
 
 	/** @var int */
 	public $minimum;
+
 	/** @var int */
 	public $maximum;
 

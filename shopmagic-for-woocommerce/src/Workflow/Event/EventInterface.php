@@ -21,5 +21,4 @@ interface EventInterface {
 	 * @see EventInterface::initialize()
 	 */
 	public function trigger_automation(): void;
-
 }

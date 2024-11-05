@@ -2,7 +2,6 @@
 
 namespace WPDesk\ShopMagic\Integration\Mailchimp;
 
-
 use WPDesk\ShopMagic\Customer\UserAsCustomer;
 
 /**

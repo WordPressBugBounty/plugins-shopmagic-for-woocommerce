@@ -22,22 +22,25 @@ class JsonSchemaNormalizer extends JsonSchemaFieldNormalizer {
 			throw InvalidArgumentException::invalid_object( FieldsCollection::class, $object );
 		}
 
-		return array_merge( parent::normalize( $object ), [
-			'type'       => 'object',
-			'properties' => array_map(
-				function ( $field ) {
-					if ( $this->supports_normalization( $field ) ) {
-						return $this->normalize( $field );
-					}
+		return array_merge(
+			parent::normalize( $object ),
+			[
+				'type'       => 'object',
+				'properties' => array_map(
+					function ( $field ) {
+						if ( $this->supports_normalization( $field ) ) {
+							return $this->normalize( $field );
+						}
 
-					return $this->normalizers->normalize( $field );
-				},
-				$object->get_fields()
-			) ?: new \stdClass(),
-			'required'   => array_keys(
-				$object->get_required_fields()
-			),
-		] );
+						return $this->normalizers->normalize( $field );
+					},
+					$object->get_fields()
+				) ?: new \stdClass(),
+				'required'   => array_keys(
+					$object->get_required_fields()
+				),
+			]
+		);
 	}
 
 	public function supports_normalization( object $object ): bool {

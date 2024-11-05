@@ -76,8 +76,7 @@ final class PlaceholderUTMBuilder {
 				', you have to fill fields marked with * (UTM Source, Medium and Campaign).',
 				'shopmagic-for-woocommerce'
 			) .
-			   '<br>' .
+				'<br>' .
 			esc_html__( 'Otherwise, leave it blank and your placeholder will work fine.', 'shopmagic-for-woocommerce' );
 	}
-
 }

@@ -58,14 +58,14 @@ abstract class ObjectManager implements DAO\ObjectPersister {
 	 */
 	public function save( object $item ): bool {
 		$saved_count = null;
-		//if ( ! $item->has_changed() ) {
-		//	return false;
-		//}
+		// if ( ! $item->has_changed() ) {
+		// return false;
+		// }
 
 		$item_data = $this->normalizer->normalize( $item );
-		//if ( $item->get_changed_fields() !== [] ) {
-		//	$item_data = array_intersect_key( $item_data, $item->get_changed_fields() );
-		//}
+		// if ( $item->get_changed_fields() !== [] ) {
+		// $item_data = array_intersect_key( $item_data, $item->get_changed_fields() );
+		// }
 
 		$item_data = array_intersect_key( $item_data, array_flip( $this->get_columns() ) );
 
@@ -151,7 +151,7 @@ abstract class ObjectManager implements DAO\ObjectPersister {
 	 */
 	protected function get_primary_key_from_object( object $item ): array {
 		$primary_key = $this->get_primary_key();
-		$pk_value = [];
+		$pk_value    = [];
 		foreach ( $primary_key as $pk ) {
 			$get_pk = "get_$pk";
 			if ( method_exists( $item, $get_pk ) ) {
@@ -164,5 +164,4 @@ abstract class ObjectManager implements DAO\ObjectPersister {
 	public function find( $id ): object {
 		return $this->repository->find( $id );
 	}
-
 }

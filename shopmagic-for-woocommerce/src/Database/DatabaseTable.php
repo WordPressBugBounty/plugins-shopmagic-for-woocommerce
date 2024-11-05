@@ -53,5 +53,4 @@ final class DatabaseTable {
 
 		return $wpdb->prefix . 'shopmagic_tracked_emails_clicks';
 	}
-
 }

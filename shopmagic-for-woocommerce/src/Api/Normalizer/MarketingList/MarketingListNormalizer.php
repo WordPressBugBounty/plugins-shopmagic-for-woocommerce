@@ -41,12 +41,13 @@ class MarketingListNormalizer implements Normalizer, Denormalizer {
 		$shortcode = null;
 
 		if ( $object->get_type() === 'opt_in' ) {
-			$shortcode = array_merge( [
-				'name'         => true,
-				'labels'       => true,
-				'double_optin' => false,
-				'agreement'    => '',
-			],
+			$shortcode = array_merge(
+				[
+					'name'         => true,
+					'labels'       => true,
+					'double_optin' => false,
+					'agreement'    => '',
+				],
 				$meta->has( FormShortcodeMetabox::PARAMS_META )
 					? $meta->get( FormShortcodeMetabox::PARAMS_META )
 					: []

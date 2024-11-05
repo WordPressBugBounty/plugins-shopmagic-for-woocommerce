@@ -34,18 +34,20 @@ class SubscribersController {
 	public function index( \WP_REST_Request $request, SubscriberHydrator $normalizer ): \WP_REST_Response {
 		return new \WP_REST_Response(
 			$this->repository->find_by( ...$this->parse_params( $request ) )
-			                 ->map( \Closure::fromCallable( [ $normalizer, 'normalize' ] ) )
-			                 ->to_array()
+					->map( \Closure::fromCallable( [ $normalizer, 'normalize' ] ) )
+						->to_array()
 		);
 	}
 
 	private function parse_params( \WP_REST_Request $request ): array {
 		$criteria = ( new RequestToCriteria() )
 			->set_order_keys( [ 'created', 'updated' ] )
-			->set_where_whitelist( [
-				'type'   => [ 0, 1, "0", "1" ],
-				'active' => [ 0, 1, "0", "1" ],
-			] );
+			->set_where_whitelist(
+				[
+					'type'   => [ 0, 1, '0', '1' ],
+					'active' => [ 0, 1, '0', '1' ],
+				]
+			);
 
 		[ $where, $order, $offset, $limit ] = $criteria->parse_request( $request );
 
@@ -71,19 +73,24 @@ class SubscribersController {
 			return $this->export( $id );
 		}
 
-		return new \WP_REST_Response( [
-			'title' => esc_html__( 'Currently, audience can be exported only as CSV.' ),
-			'code'  => \WP_Http::NOT_IMPLEMENTED,
-		], \WP_Http::NOT_IMPLEMENTED );
+		return new \WP_REST_Response(
+			[
+				'title' => esc_html__( 'Currently, audience can be exported only as CSV.' ),
+				'code'  => \WP_Http::NOT_IMPLEMENTED,
+			],
+			\WP_Http::NOT_IMPLEMENTED
+		);
 	}
 
 	private function export( int $id ): \WP_REST_Response {
 		$file_path   = $this->get_file_path();
 		$writer      = Writer::createFromPath( $file_path, 'a+' );
 		$subscribers = $this->repository->find_by( [ 'list_id' => $id ] )
-		                                ->map( static function ( SingleListSubscriber $subscriber ): string {
-			                                return $subscriber->get_email();
-		                                } );
+				->map(
+					static function ( SingleListSubscriber $subscriber ): string {
+												return $subscriber->get_email();
+					}
+				);
 
 		foreach ( $subscribers as $subscriber ) {
 			try {
@@ -92,12 +99,16 @@ class SubscribersController {
 			}
 		}
 
-		return new \WP_REST_Response( $writer->getContent(), \WP_Http::OK, [
-			'Content-Type'        => 'text/csv',
-			'Content-Disposition' => sprintf( 'attachment; filename="%s"', basename( $file_path ) ),
-			'Content-Description' => 'File Transfer',
-			'Content-Encoding'    => 'None',
-		] );
+		return new \WP_REST_Response(
+			$writer->getContent(),
+			\WP_Http::OK,
+			[
+				'Content-Type'        => 'text/csv',
+				'Content-Disposition' => sprintf( 'attachment; filename="%s"', basename( $file_path ) ),
+				'Content-Description' => 'File Transfer',
+				'Content-Encoding'    => 'None',
+			]
+		);
 	}
 
 	private function get_file_path(): string {
@@ -132,10 +143,13 @@ class SubscribersController {
 			);
 		}
 
-		return new \WP_REST_Response( [
-			'title' => esc_html__( 'Currently, audience can be imported only from CSV.' ),
-			'code'  => \WP_Http::NOT_IMPLEMENTED,
-		], \WP_Http::NOT_IMPLEMENTED );
+		return new \WP_REST_Response(
+			[
+				'title' => esc_html__( 'Currently, audience can be imported only from CSV.' ),
+				'code'  => \WP_Http::NOT_IMPLEMENTED,
+			],
+			\WP_Http::NOT_IMPLEMENTED
+		);
 	}
 
 	private function import_from_file(
@@ -148,9 +162,11 @@ class SubscribersController {
 	): \WP_REST_Response {
 		$file = $request->get_file_params();
 		if ( ! isset( $file['file'] ) ) {
-			throw new HttpProblemException( [
-				'title' => 'No file provided.',
-			] );
+			throw new HttpProblemException(
+				[
+					'title' => 'No file provided.',
+				]
+			);
 		}
 
 		$csv = Reader::createFromPath( $file['file']['tmp_name'] );
@@ -182,20 +198,25 @@ class SubscribersController {
 			}
 		}
 
-		return new \WP_REST_Response( [
-			'imported' => $imported,
-			'errors'   => $errors,
-		] );
+		return new \WP_REST_Response(
+			[
+				'imported' => $imported,
+				'errors'   => $errors,
+			]
+		);
 	}
 
 	public function delete( int $id, SubscriptionManager $manager ): \WP_REST_Response {
 		try {
 			$subscription = $manager->find( $id );
 		} catch ( CannotProvideItemException $e ) {
-			throw new HttpProblemException( [
-				'title'  => __( 'Could not find subscriber to delete.', 'shopmagic-for-woocommerce' ),
-				'detail' => $e->getMessage(),
-			], \WP_Http::NOT_FOUND );
+			throw new HttpProblemException(
+				[
+					'title'  => __( 'Could not find subscriber to delete.', 'shopmagic-for-woocommerce' ),
+					'detail' => $e->getMessage(),
+				],
+				\WP_Http::NOT_FOUND
+			);
 		}
 		$manager->delete( $subscription );
 

@@ -7,5 +7,4 @@ namespace WPDesk\ShopMagic\Components\HookProvider;
 interface Conditional {
 
 	public static function is_needed(): bool;
-
 }

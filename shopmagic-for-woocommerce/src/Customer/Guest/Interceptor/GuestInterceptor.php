@@ -18,5 +18,4 @@ interface GuestInterceptor {
 	 * @throws \InvalidArgumentException When provider doesn't match implementation
 	 */
 	public function intercept( object $provider ): Guest;
-
 }

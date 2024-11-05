@@ -90,5 +90,4 @@ final class TemplateResolver implements Resolver {
 		}
 		throw new CanNotResolve( "Cannot resolve {$name}" );
 	}
-
 }

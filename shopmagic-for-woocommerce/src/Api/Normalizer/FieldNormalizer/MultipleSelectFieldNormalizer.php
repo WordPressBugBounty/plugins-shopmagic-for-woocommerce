@@ -12,13 +12,12 @@ class MultipleSelectFieldNormalizer extends SelectFieldNormalizer {
 	public function normalize( object $object ): array {
 		return array_merge(
 			parent::normalize( $object ),
-			[ "uniqueItems" => true ]
+			[ 'uniqueItems' => true ]
 		);
 	}
 
 	public function supports_normalization( object $object ): bool {
 		return ( $object instanceof SelectField && $object->is_multiple() ) ||
-		       $object instanceof MultipleCheckboxField;
+				$object instanceof MultipleCheckboxField;
 	}
-
 }

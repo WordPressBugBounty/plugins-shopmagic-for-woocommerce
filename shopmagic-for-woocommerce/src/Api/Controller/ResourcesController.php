@@ -135,13 +135,15 @@ class ResourcesController {
 				$processor
 			);
 		} catch ( \Throwable $e ) {
-			throw new HttpProblemException( [
-				"title"  => __( "Unable to test action", 'shopmagic-for-woocommerce' ),
-				"detail" => $e->getMessage(),
-			], \WP_Http::UNPROCESSABLE_ENTITY );
+			throw new HttpProblemException(
+				[
+					'title'  => __( 'Unable to test action', 'shopmagic-for-woocommerce' ),
+					'detail' => $e->getMessage(),
+				],
+				\WP_Http::UNPROCESSABLE_ENTITY
+			);
 		}
 
 		return new \WP_REST_Response( null, \WP_Http::NO_CONTENT );
 	}
-
 }

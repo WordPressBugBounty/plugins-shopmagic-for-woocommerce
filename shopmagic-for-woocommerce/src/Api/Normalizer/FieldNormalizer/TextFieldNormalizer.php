@@ -17,10 +17,9 @@ class TextFieldNormalizer extends JsonSchemaFieldNormalizer {
 			parent::normalize( $object ),
 			[
 				'presentation' => [
-					'type' => $object instanceof WyswigField ? 'rich' : 'plain'
-				]
+					'type' => $object instanceof WyswigField ? 'rich' : 'plain',
+				],
 			]
 		);
 	}
-
 }

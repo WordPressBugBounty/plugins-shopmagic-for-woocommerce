@@ -24,5 +24,4 @@ class GuestMetaManager extends ObjectManager {
 	protected function get_name(): string {
 		return DatabaseTable::guest_meta();
 	}
-
 }

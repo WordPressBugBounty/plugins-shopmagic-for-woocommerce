@@ -33,7 +33,7 @@
 						</h3>
 					</div>
 					<?php
-					$n++;
+					++$n;
 				endforeach;
 				?>
 			</div>

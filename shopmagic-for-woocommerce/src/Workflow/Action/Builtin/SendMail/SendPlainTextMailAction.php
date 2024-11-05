@@ -19,7 +19,7 @@ final class SendPlainTextMailAction extends AbstractSendMailAction {
 	}
 
 	public function get_description(): string {
-		return esc_html__('Send simple email without HTML tags. Perfect for short, concise messages.', 'shopmagic-for-woocommerce');
+		return esc_html__( 'Send simple email without HTML tags. Perfect for short, concise messages.', 'shopmagic-for-woocommerce' );
 	}
 
 	public function get_fields(): array {

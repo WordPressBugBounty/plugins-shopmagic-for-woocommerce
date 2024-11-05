@@ -104,7 +104,8 @@ class Workflow implements Runner {
 	}
 
 	private function should_execute_action( Action $action ): bool {
-		return apply_filters( 'shopmagic/core/automation/should_execute_action',
+		return apply_filters(
+			'shopmagic/core/automation/should_execute_action',
 			true,
 			$this->automation,
 			$this->automation->get_event(),

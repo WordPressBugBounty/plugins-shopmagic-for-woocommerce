@@ -9,5 +9,4 @@ use ShopMagicVendor\Psr\Container\ContainerInterface;
 interface ContainerAwareInterface {
 
 	public function set_container( ContainerInterface $container );
-
 }

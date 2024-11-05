@@ -23,7 +23,7 @@ class MailChimp {
 	private const BODY = 'body';
 
 	/*
-	  SSL Verification
+		SSL Verification
 		Read before disabling:
 		http://snippets.webaware.com.au/howto/stop-turning-off-curlopt_ssl_verifypeer-and-fix-your-php-config/
 	*/
@@ -31,27 +31,34 @@ class MailChimp {
 	 * @var string
 	 */
 	private const STATUS = 'status';
+
 	/**
 	 * @var bool
 	 */
 	public $verify_ssl = true;
+
 	private $api_key;
+
 	/**
 	 * @var mixed[]|string
 	 */
 	private $api_endpoint = 'https://<dc>.api.mailchimp.com/3.0';
+
 	/**
 	 * @var bool
 	 */
 	private $request_successful = false;
+
 	/**
 	 * @var string
 	 */
 	private $last_error = '';
+
 	/**
 	 * @var array<int|string, null>&mixed[]
 	 */
 	private $last_response = [];
+
 	/**
 	 * @var mixed[]
 	 */

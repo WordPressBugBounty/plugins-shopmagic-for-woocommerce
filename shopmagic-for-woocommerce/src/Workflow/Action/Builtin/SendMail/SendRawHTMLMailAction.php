@@ -19,7 +19,7 @@ final class SendRawHTMLMailAction extends AbstractSendMailAction {
 	}
 
 	public function get_description(): string {
-		return esc_html__('Compose your own email from scratch in raw HTML.', 'shopmagic-for-woocommerce');
+		return esc_html__( 'Compose your own email from scratch in raw HTML.', 'shopmagic-for-woocommerce' );
 	}
 
 	public function get_fields(): array {

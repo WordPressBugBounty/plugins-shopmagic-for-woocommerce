@@ -25,8 +25,8 @@ class WpRoutesRegistry implements \WPDesk\ShopMagic\Components\HookProvider\Hook
 		ControllerResolver $resolver,
 		ArgumentResolver $argument_resolver
 	) {
-		$this->configurator = $configurator;
-		$this->resolver = $resolver;
+		$this->configurator      = $configurator;
+		$this->resolver          = $resolver;
 		$this->argument_resolver = $argument_resolver;
 	}
 
@@ -110,9 +110,9 @@ class WpRoutesRegistry implements \WPDesk\ShopMagic\Components\HookProvider\Hook
 			$request->set_query_params( wp_unslash( $_GET ) );
 			$request->set_body_params( wp_unslash( $_POST ) );
 			$request->set_file_params( $_FILES );
-//			$request->set_headers( $this->get_headers( wp_unslash( $_SERVER ) ) );
-//			$request->set_body( self::get_raw_data() );
-			$arguments  = $this->argument_resolver->get_arguments( $request, $controller );
+			// $request->set_headers( $this->get_headers( wp_unslash( $_SERVER ) ) );
+			// $request->set_body( self::get_raw_data() );
+			$arguments = $this->argument_resolver->get_arguments( $request, $controller );
 
 			$response = ( $controller )( ...$arguments );
 			if ( ! $response instanceof \WP_HTTP_Response ) {
@@ -140,5 +140,4 @@ class WpRoutesRegistry implements \WPDesk\ShopMagic\Components\HookProvider\Hook
 			die;
 		}
 	}
-
 }

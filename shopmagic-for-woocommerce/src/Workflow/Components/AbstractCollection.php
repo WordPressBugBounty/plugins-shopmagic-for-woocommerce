@@ -51,7 +51,7 @@ abstract class AbstractCollection implements ArrayAccess, IteratorAggregate, \Co
 
 	public function offsetSet( $offset, $value ): void {
 		if ( ! $value instanceof NamedComponent ) {
-			throw new \InvalidArgumentException( "Workflow extension requires NamedComponent to register." );
+			throw new \InvalidArgumentException( 'Workflow extension requires NamedComponent to register.' );
 		}
 
 		$this->add( $value );
@@ -61,7 +61,7 @@ abstract class AbstractCollection implements ArrayAccess, IteratorAggregate, \Co
 		if ( empty( $component->get_id() ) ) {
 			throw new \InvalidArgumentException(
 				sprintf(
-					"Workflow extension component needs a valid ID. Trying to register %s",
+					'Workflow extension component needs a valid ID. Trying to register %s',
 					get_class( $component )
 				)
 			);
@@ -69,7 +69,8 @@ abstract class AbstractCollection implements ArrayAccess, IteratorAggregate, \Co
 
 		if ( ! $component instanceof $this->type ) {
 			throw new \TypeError(
-				sprintf( 'Argument 2 passed to WPDesk\ShopMagic\Event\EventsList::offsetSet() must be an instance of %s, %s given',
+				sprintf(
+					'Argument 2 passed to WPDesk\ShopMagic\Event\EventsList::offsetSet() must be an instance of %s, %s given',
 					$this->type,
 					\get_class( $component )
 				)
@@ -125,5 +126,4 @@ abstract class AbstractCollection implements ArrayAccess, IteratorAggregate, \Co
 	public function count(): int {
 		return count( $this->storage );
 	}
-
 }

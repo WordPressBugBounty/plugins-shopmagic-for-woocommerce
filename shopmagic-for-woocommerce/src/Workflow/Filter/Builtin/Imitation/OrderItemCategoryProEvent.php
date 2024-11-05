@@ -43,5 +43,4 @@ final class OrderItemCategoryProEvent extends ImitationCommonFilter {
 				->add_class( 'notice-info' ),
 		];
 	}
-
 }

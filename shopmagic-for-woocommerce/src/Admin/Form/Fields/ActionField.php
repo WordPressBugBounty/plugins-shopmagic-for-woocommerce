@@ -27,6 +27,4 @@ class ActionField extends \ShopMagicVendor\WPDesk\Forms\Field\NoValueField {
 
 		return $this;
 	}
-
-
 }

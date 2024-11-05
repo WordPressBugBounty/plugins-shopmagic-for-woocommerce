@@ -68,5 +68,4 @@ class Language {
 	public function __toString(): string {
 		return $this->get_code();
 	}
-
 }

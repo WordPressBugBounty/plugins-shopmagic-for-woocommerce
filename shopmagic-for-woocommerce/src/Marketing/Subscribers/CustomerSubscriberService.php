@@ -22,9 +22,9 @@ class CustomerSubscriberService {
 		SubscriptionManager $manager,
 		SingleListSubscriberHydrator $hydrator
 	) {
-		$this->manager = $manager;
+		$this->manager    = $manager;
 		$this->repository = $this->manager->get_repository();
-		$this->hydrator = $hydrator;
+		$this->hydrator   = $hydrator;
 	}
 
 	/**
@@ -46,5 +46,4 @@ class CustomerSubscriberService {
 
 		return $this->manager->save( $customer_status );
 	}
-
 }

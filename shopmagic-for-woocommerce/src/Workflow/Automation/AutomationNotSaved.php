@@ -8,5 +8,4 @@ class AutomationNotSaved extends \RuntimeException implements \WPDesk\ShopMagic\
 	public static function insufficient_permission(): self {
 		return new AutomationNotSaved( 'Automation could not be saved due to insufficient user permission.' );
 	}
-
 }

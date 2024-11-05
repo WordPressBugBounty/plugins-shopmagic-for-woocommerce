@@ -194,7 +194,7 @@ final class TwoWeeksNotice {
 	 * Get rate message
 	 */
 	private function get_message(): string {
-		$message = __(
+		$message  = __(
 			"Awesome, you've been using ShopMagic for more than 2 weeks. Could you please do me a BIG favor and give it a 5-star rating on WordPress.org? ~ Mac @ ShopMagic Team",
 			'shopmagic-for-woocommerce'
 		);
@@ -203,5 +203,4 @@ final class TwoWeeksNotice {
 
 		return $message;
 	}
-
 }

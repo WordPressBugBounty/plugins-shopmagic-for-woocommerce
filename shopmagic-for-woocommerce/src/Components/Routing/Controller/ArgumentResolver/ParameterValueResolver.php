@@ -10,8 +10,8 @@ class ParameterValueResolver implements ArgumentValueResolver {
 
 	public function supports( \WP_REST_Request $request, \ReflectionParameter $parameter ): bool {
 		return $parameter->hasType() &&
-			   in_array( $parameter->getType()->getName(), [ 'string', 'int', 'float', 'array' ] ) &&
-			   $request->has_param( $parameter->getName() );
+				in_array( $parameter->getType()->getName(), [ 'string', 'int', 'float', 'array' ] ) &&
+				$request->has_param( $parameter->getName() );
 	}
 
 	public function resolve( \WP_REST_Request $request, \ReflectionParameter $parameter ) {

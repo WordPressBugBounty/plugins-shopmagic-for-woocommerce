@@ -14,6 +14,7 @@ use WPDesk\ShopMagic\Workflow\Event\DataLayer;
  * ShopMagic add to MailChimp list action.
  */
 final class AddToMailChimpListAction extends Action {
+
 	/** @var MailchimpApi */
 	private $mailchimp;
 
@@ -45,7 +46,6 @@ final class AddToMailChimpListAction extends Action {
 			->set_name( '_mailchimp_list_id' )
 			->set_label( __( 'The default list ID is', 'shopmagic-for-woocommerce' ) )
 			->set_options( $this->mailchimp->get_all_lists_options() );
-
 
 		return array_merge(
 			parent::get_fields(),
@@ -99,5 +99,4 @@ final class AddToMailChimpListAction extends Action {
 
 		return $this->mailchimp->add_member( $member );
 	}
-
 }

@@ -9,7 +9,7 @@ interface Queue {
 
 	public function add( string $hook, array $args = [], string $group = '' ): int;
 
-	public function schedule( DateTimeInterface $time, string $hook, array $args = [], string $group = '');
+	public function schedule( DateTimeInterface $time, string $hook, array $args = [], string $group = '' );
 
 	public function cancel( int $action_id ): void;
 

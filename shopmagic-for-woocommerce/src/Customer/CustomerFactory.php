@@ -28,5 +28,4 @@ final class CustomerFactory {
 	public function create_from_user_and_order( \WP_User $user, \WC_Order $order ): \WPDesk\ShopMagic\Customer\UserInOrderContextAsCustomer {
 		return new UserInOrderContextAsCustomer( $user, $order );
 	}
-
 }

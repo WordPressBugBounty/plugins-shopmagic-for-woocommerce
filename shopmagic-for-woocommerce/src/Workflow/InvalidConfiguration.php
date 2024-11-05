@@ -29,5 +29,4 @@ class InvalidConfiguration extends \RuntimeException implements \WPDesk\ShopMagi
 			)
 		);
 	}
-
 }

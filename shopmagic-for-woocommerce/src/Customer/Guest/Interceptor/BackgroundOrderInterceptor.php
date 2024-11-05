@@ -54,7 +54,7 @@ class BackgroundOrderInterceptor implements HookProvider, LoggerAwareInterface {
 	 * @throws \Exception
 	 */
 	private function get_orders( int $page ): array {
-		$query  = new \WC_Order_Query(
+		$query = new \WC_Order_Query(
 			[
 				'limit'    => self::LIMIT,
 				'page'     => $page,
@@ -95,7 +95,7 @@ class BackgroundOrderInterceptor implements HookProvider, LoggerAwareInterface {
 						'order_id' => $order->get_id(),
 					]
 				);
-			} catch ( \InvalidArgumentException|InterceptionFailure $e ) {
+			} catch ( \InvalidArgumentException | InterceptionFailure $e ) {
 				$this->logger->error(
 					'Guest extraction for order #{order_id} was impossible. Reason: {reason}',
 					[
@@ -148,5 +148,4 @@ class BackgroundOrderInterceptor implements HookProvider, LoggerAwareInterface {
 			}
 		}
 	}
-
 }

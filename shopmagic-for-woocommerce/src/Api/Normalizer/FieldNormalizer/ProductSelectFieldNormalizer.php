@@ -17,7 +17,7 @@ class ProductSelectFieldNormalizer extends JsonSchemaFieldNormalizer {
 		return array_merge(
 			parent::normalize( $object ),
 			[
-				"type"         => 'array',
+				'type'         => 'array',
 				'items'        => [
 					'type' => 'number',
 				],

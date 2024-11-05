@@ -18,17 +18,13 @@ final class PreSubmitData implements HookProvider, Conditional {
 	/** @var string */
 	private const SHOPMAGIC_PRESUBMIT = 'shopmagic-presubmit';
 
-	/** @var CustomerProvider */
-	private $customer_interceptor;
+	private CustomerProvider $customer_interceptor;
 
-	/** @var CustomerSessionTracker */
-	private $tracker;
+	private CustomerSessionTracker $tracker;
 
-	/** @var PluginBag */
-	private $plugin_bag;
+	private PluginBag $plugin_bag;
 
-	/** @var GuestManager */
-	private $guest_manager;
+	private GuestManager $guest_manager;
 
 	public function __construct(
 		CustomerProvider $customer_interceptor,
@@ -116,19 +112,20 @@ final class PreSubmitData implements HookProvider, Conditional {
 				'#billing_email',
 				'.automatewoo-capture-guest-email',
 				'input[name="billing_email"]',
+				'.wc-block-components-address-form__email input',
 			]
 		);
 	}
 
-	/**
-	 * @return mixed[]
-	 */
+	/** @return string[] */
 	public function get_checkout_capture_fields(): array {
 		return apply_filters(
 			'shopmagic/core/presubmit/checkout_capture_fields',
 			[
 				'billing_first_name',
 				'billing_last_name',
+				'first_name',
+				'last_name',
 				'billing_company',
 				'billing_phone',
 				'billing_country',
@@ -137,13 +134,25 @@ final class PreSubmitData implements HookProvider, Conditional {
 				'billing_city',
 				'billing_state',
 				'billing_postcode',
+				'company',
+				'phone',
+				'country',
+				'address_1',
+				'address_2',
+				'city',
+				'state',
+				'postcode',
 			]
 		);
 	}
 
 	public function ajax_capture_email(): void {
-		$email           = sanitize_email( $_REQUEST['email'] );
-		$checkout_fields = $_REQUEST['checkout_fields'];
+		if ( ! isset( $_REQUEST['email'], $_REQUEST['checkout_fields'] ) ) {
+			wp_send_json_error();
+		}
+
+		$email           = sanitize_email( wp_unslash( $_REQUEST['email'] ) );
+		$checkout_fields = wp_unslash( $_REQUEST['checkout_fields'] );
 
 		$this->tracker->set_user_email( $email );
 
@@ -195,8 +204,11 @@ final class PreSubmitData implements HookProvider, Conditional {
 				return 'first_name';
 			case 'billing_last_name':
 				return 'last_name';
-			default:
+			case 'first_name':
+			case 'last_name':
 				return $field_name;
+			default:
+				return 'billing_' . str_replace( 'billing_', '', $field_name );
 		}
 	}
 
@@ -204,12 +216,16 @@ final class PreSubmitData implements HookProvider, Conditional {
 	 * Capture an additional field from the checkout page
 	 */
 	public function ajax_capture_checkout_field(): void {
+		if ( ! isset( $_REQUEST['field_name'], $_REQUEST['field_value'] ) ) {
+			wp_send_json_error();
+		}
+
 		if ( ! $this->customer_interceptor->is_customer_provided() ) {
 			wp_send_json_success();
 		}
 
 		$field_name  = sanitize_key( $_REQUEST['field_name'] );
-		$field_value = stripslashes( sanitize_text_field( $_REQUEST['field_value'] ) );
+		$field_value = sanitize_text_field( wp_unslash( $_REQUEST['field_value'] ) );
 
 		$field_name = $this->normalize_field_name_key( $field_name );
 

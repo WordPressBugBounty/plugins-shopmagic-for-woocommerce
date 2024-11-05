@@ -140,5 +140,4 @@ class Groups {
 
 		return self::SHOP;
 	}
-
 }

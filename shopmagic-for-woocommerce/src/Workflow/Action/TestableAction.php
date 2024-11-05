@@ -11,5 +11,4 @@ use WPDesk\ShopMagic\Workflow\Placeholder\PlaceholderProcessor;
 interface TestableAction {
 
 	public function execute_test( FieldValuesBag $field_values_bag, DataLayer $resources, PlaceholderProcessor $processor ): void;
-
 }

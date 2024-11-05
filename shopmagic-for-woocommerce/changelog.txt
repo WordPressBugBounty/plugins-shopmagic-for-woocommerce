@@ -1,4 +1,4 @@
-## [Unreleased]
+## [4.3.7] - 2024-11-05
 ### Fixed
 - Capturing guest data before checkout submission now works with WooCommerce Checkout Blocks.
 

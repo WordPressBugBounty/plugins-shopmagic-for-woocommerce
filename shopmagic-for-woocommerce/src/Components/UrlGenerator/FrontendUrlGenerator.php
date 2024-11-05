@@ -32,5 +32,4 @@ class FrontendUrlGenerator implements UrlGenerator {
 
 		return $url;
 	}
-
 }

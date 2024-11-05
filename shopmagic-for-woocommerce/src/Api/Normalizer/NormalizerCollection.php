@@ -31,5 +31,4 @@ class NormalizerCollection implements Normalizer {
 	public function supports_normalization( object $object ): bool {
 		return true;
 	}
-
 }

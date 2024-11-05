@@ -29,6 +29,7 @@ abstract class Placeholder implements
 	use DataReceiverAsProtectedField;
 	use StandardWooCommerceDataProviderAccessors;
 	use LoggerAwareTrait;
+
 	/**
 	 * Shortcode for the placeholder. Have to be unique. Can be in any format but
 	 * most placeholder should use groupname.name-of-the-placeholder format.
@@ -71,5 +72,4 @@ abstract class Placeholder implements
 	 * @param string[] $parameters
 	 */
 	abstract public function value( array $parameters ): string;
-
 }

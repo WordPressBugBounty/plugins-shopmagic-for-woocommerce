@@ -7,10 +7,13 @@ final class GuestMeta {
 
 	/** @var int */
 	public $guest_id;
+
 	/** @var string */
 	public $meta_key;
+
 	/** @var string */
 	public $meta_value;
+
 	/** @var int|null */
 	private $meta_id;
 
@@ -18,14 +21,14 @@ final class GuestMeta {
 		string $meta_key = null,
 		string $meta_value = null
 	) {
-		$this->meta_key = $meta_key;
+		$this->meta_key   = $meta_key;
 		$this->meta_value = $meta_value;
 	}
 
 	/**
 	 * This method allows us to easily use array_unique on collections of GuestMeta.
 	 */
-	public function __toString() {
+	public function __toString(): string {
 		return $this->meta_key . ': ' . $this->meta_value;
 	}
 
@@ -33,7 +36,7 @@ final class GuestMeta {
 		return $this->meta_id;
 	}
 
-	public function set_meta_id( int $meta_id ): void {
+	public function set_meta_id( ?int $meta_id ): void {
 		$this->meta_id = $meta_id;
 	}
 
@@ -72,5 +75,4 @@ final class GuestMeta {
 	public function set_last_inserted_id( int $id ): void {
 		$this->meta_id = $id;
 	}
-
 }

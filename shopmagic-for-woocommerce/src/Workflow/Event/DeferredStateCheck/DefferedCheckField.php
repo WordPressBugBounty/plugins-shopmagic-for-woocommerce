@@ -31,11 +31,15 @@ final class DefferedCheckField extends CheckboxField {
 	}
 
 	public function get_sanitizer(): Sanitizer {
-		return new class implements Sanitizer {
+		return new class() implements Sanitizer {
 
 			public function sanitize( $value ) {
-				if ($value === 'yes') return true;
-				if ($value === 'no') return false;
+				if ( $value === 'yes' ) {
+					return true;
+				}
+				if ( $value === 'no' ) {
+					return false;
+				}
 				return (bool) $value;
 			}
 		};
@@ -43,7 +47,7 @@ final class DefferedCheckField extends CheckboxField {
 
 	public function get_validator(): Validator {
 		$validator      = parent::get_validator();
-		$fast_validator = new class implements Validator {
+		$fast_validator = new class() implements Validator {
 
 			public function is_valid( $value ): bool {
 				return in_array( $value, [ 'yes', 'no', 1, 0, true, false ] );

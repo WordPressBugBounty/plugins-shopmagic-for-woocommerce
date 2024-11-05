@@ -13,8 +13,7 @@ use WPDesk\ShopMagic\Database\DatabaseTable;
  */
 class GuestManager extends \WPDesk\ShopMagic\Components\Database\Abstraction\ObjectManager {
 
-	/** @var GuestMetaManager */
-	private $meta_manager;
+	private GuestMetaManager $meta_manager;
 
 	public function __construct(
 		ObjectRepository $repository,
@@ -36,7 +35,9 @@ class GuestManager extends \WPDesk\ShopMagic\Components\Database\Abstraction\Obj
 		$success = parent::save( $item );
 
 		$this->meta_manager->delete_by_where( [ 'guest_id' => $item->get_raw_id() ] );
+		// All metadata is deleted beforehand, so remove ID.
 		foreach ( $item->get_meta() as $m ) {
+			$m->set_meta_id( null );
 			$m->set_guest_id( $item->get_raw_id() );
 			$this->meta_manager->save( $m );
 		}

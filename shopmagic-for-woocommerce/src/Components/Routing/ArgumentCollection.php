@@ -20,5 +20,4 @@ class ArgumentCollection {
 
 		return $result;
 	}
-
 }

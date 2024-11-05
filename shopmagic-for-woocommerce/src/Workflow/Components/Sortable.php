@@ -13,5 +13,4 @@ interface Sortable {
 	 * @param T $b
 	 */
 	public function compare( object $a, object $b ): int;
-
 }

@@ -235,7 +235,6 @@ final class Plugin extends AbstractPlugin implements HookableCollection, Activat
 				foreach ( $this->container->get( 'hookable.plugins_loaded' ) as $item ) {
 					$item->hooks();
 				}
-
 			}
 		);
 

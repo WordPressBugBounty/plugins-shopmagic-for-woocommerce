@@ -27,9 +27,9 @@ final class GeneralSettings extends FieldSettingsTab {
 	/** @todo Remove wrapper container in 4.0 */
 	public static function get_settings_persistence(): PersistentContainer {
 		$wrapping_container = new WrappingPersistentContainer(
-			new JsonSerializedOptionsContainer('shopmagic_general_settings')
+			new JsonSerializedOptionsContainer( 'shopmagic_general_settings' )
 		);
-		$wrapping_container->wrapContainer(new WordpressOptionsContainer());
+		$wrapping_container->wrapContainer( new WordpressOptionsContainer() );
 
 		return $wrapping_container;
 	}

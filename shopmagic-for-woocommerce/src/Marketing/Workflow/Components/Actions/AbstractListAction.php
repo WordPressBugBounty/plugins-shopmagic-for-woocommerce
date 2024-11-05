@@ -63,15 +63,18 @@ abstract class AbstractListAction extends Action {
 	 * @return mixed[]
 	 */
 	public function get_fields(): array {
-		return array_merge( parent::get_fields(), [
-			( new SelectField() )
-				->set_label( esc_html__( 'List', 'shopmagic-for-woocommerce' ) )
-				->set_options( $this->list_repository->get_as_select_options() )
-				->set_name( self::PARAM_LIST ),
-			( new InputTextField() )
-				->set_label( esc_html__( 'Email', 'shopmagic-for-woocommerce' ) )
-				->set_placeholder( esc_html__( 'E-mail or a placeholder with an e-mail', 'shopmagic-for-woocommerce' ) )
-				->set_name( self::PARAM_EMAIL ),
-		] );
+		return array_merge(
+			parent::get_fields(),
+			[
+				( new SelectField() )
+					->set_label( esc_html__( 'List', 'shopmagic-for-woocommerce' ) )
+					->set_options( $this->list_repository->get_as_select_options() )
+					->set_name( self::PARAM_LIST ),
+				( new InputTextField() )
+					->set_label( esc_html__( 'Email', 'shopmagic-for-woocommerce' ) )
+					->set_placeholder( esc_html__( 'E-mail or a placeholder with an e-mail', 'shopmagic-for-woocommerce' ) )
+					->set_name( self::PARAM_EMAIL ),
+			]
+		);
 	}
 }

@@ -25,12 +25,12 @@ class SubscriptionManager extends ObjectManager {
 	}
 
 	public function save( object $item ): bool {
-		$result =  parent::save( $item );
+		$result = parent::save( $item );
 
 		if ( $item->is_active() ) {
-			do_action('shopmagic/core/event/manual/optin', $item );
+			do_action( 'shopmagic/core/event/manual/optin', $item );
 		} else {
-			do_action('shopmagic/core/event/manual/optout', $item );
+			do_action( 'shopmagic/core/event/manual/optout', $item );
 		}
 
 		return $result;

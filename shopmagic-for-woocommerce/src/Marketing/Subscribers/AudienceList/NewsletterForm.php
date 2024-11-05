@@ -63,5 +63,4 @@ class NewsletterForm {
 	public function set_agreement( string $agreement ): void {
 		$this->agreement = $agreement;
 	}
-
 }

@@ -111,7 +111,7 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 			$updated          = $this->wpdb->update(
 				DatabaseTable::guest(),
 				$guest_data,
-				[ 'id' => $guest->get_raw_id(), ],
+				[ 'id' => $guest->get_raw_id() ],
 				[ '%s', '%s', '%s', '%s' ],
 				[ '%d' ]
 			);
@@ -312,5 +312,4 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 			)
 		);
 	}
-
 }

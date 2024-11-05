@@ -114,5 +114,4 @@ class WorkflowAutomationNormalizer implements Normalizer {
 	public function supports_normalization( object $object ): bool {
 		return $object instanceof Automation;
 	}
-
 }

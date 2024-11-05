@@ -11,5 +11,4 @@ abstract class CustomerBasedPlaceholder extends Placeholder {
 	public function get_required_data_domains(): array {
 		return [ Customer::class ];
 	}
-
 }

@@ -1,81 +1,152 @@
-jQuery(document).ready(function ($) {
-	if (typeof shopmagic_presubmit_params === 'undefined') {
-		return false;
-	}
+(($) => {
+  if (typeof shopmagic_presubmit_params === 'undefined') {
+    return false;
+  }
 
-	var params = shopmagic_presubmit_params;
+  const {
+    email_capture_selectors: emailFields,
+    checkout_capture_selectors: checkoutFields,
+    language,
+    capture_email_url: captureEmailUrl,
+    capture_checkout_field_url: captureCheckoutFieldUrl,
+  } = shopmagic_presubmit_params;
 
-	var email = '';
-	var $checkout_form = $('form.checkout');
-	var email_fields = params.email_capture_selectors;
-	var checkout_fields = params.checkout_capture_selectors;
-	var checkout_fields_data = {};
-	var language = params.language;
-	var capture_email_xhr;
+  class CheckoutStrategy {
+    constructor() {
+      this.email = '';
+      this.checkoutFieldsData = Object.fromEntries(checkoutFields.map(field => [field, '']));
+      this.captureEmailXhr = null;
+    }
 
-	$.each(checkout_fields, function (i, field_name) {
-		checkout_fields_data[field_name] = '';
-	});
+    init() {
+      throw new Error('init method must be implemented');
+    }
 
-	function captureEmail() {
-		if (!$(this).val() || email === $(this).val()) {
-			return;
-		}
+    captureEmail(newEmail) {
+      if (!newEmail || this.email === newEmail) {
+        return;
+      }
 
-		email = $(this).val();
+      this.email = newEmail;
 
-		var data = {
-			email: email,
-			language: language,
-			checkout_fields: getCheckoutFieldValues()
-		};
+      const data = {
+        email: this.email,
+        language,
+        checkout_fields: this.getCheckoutFieldValues()
+      };
 
-		if (capture_email_xhr) {
-			capture_email_xhr.abort();
-		}
+      if (this.captureEmailXhr) {
+        this.captureEmailXhr.abort();
+      }
 
-		capture_email_xhr = $.post(params.capture_email_url, data, function (response) {
-		});
-	}
+      this.captureEmailXhr = $.post(captureEmailUrl, data);
+    }
 
-	function captureCheckoutField() {
-		var field_name = $(this).attr('name');
-		var field_value = $(this).val();
+    captureCheckoutField(fieldName, fieldValue) {
+      if (!fieldName || !checkoutFields.includes(fieldName)) {
+        return;
+      }
 
-		if (!field_name || checkout_fields.indexOf(field_name) === -1) {
-			return;
-		}
+      if (!fieldValue || this.checkoutFieldsData[fieldName] === fieldValue) {
+        return;
+      }
 
-		// Don't capture if the field is empty or hasn't changed
-		if (!field_value || checkout_fields_data[field_name] === field_value) {
-			return;
-		}
+      this.checkoutFieldsData[fieldName] = fieldValue;
 
-		checkout_fields_data[field_name] = field_value;
+      $.post(captureCheckoutFieldUrl, {
+        field_name: fieldName,
+        field_value: fieldValue
+      });
+    }
 
-		$.post(params.capture_checkout_field_url, {
-			field_name: field_name,
-			field_value: field_value
-		});
-	}
+    getCheckoutFieldValues() {
+      throw new Error('getCheckoutFieldValues method must be implemented');
+    }
+  }
 
-	/**
-	 * Get the current values for checkout fields.
-	 *
-	 * @return object
-	 */
-	function getCheckoutFieldValues() {
-		var fields = {};
+  class LegacyCheckoutStrategy extends CheckoutStrategy {
+    constructor() {
+      super();
+      this.$checkoutForm = $('form.checkout');
+    }
 
-		$.each(checkout_fields, function (i, field_name) {
-			fields[field_name] = $('form.woocommerce-checkout [name="' + field_name + '"]').val();
-		});
+    init() {
+      $(document).on('blur change', emailFields.join(', '), (e) => this.captureEmail(e.target.value));
+      this.$checkoutForm.on('change', 'select', (e) => this.captureCheckoutField(e.target.name, e.target.value));
+      this.$checkoutForm.on('blur change', '.input-text', (e) => this.captureCheckoutField(e.target.name, e.target.value));
+    }
 
-		return fields;
-	}
+    getCheckoutFieldValues() {
+      return Object.fromEntries(
+        checkoutFields.map(
+          fieldName => [
+            fieldName,
+            this.$checkoutForm.find(`[name="${fieldName}"]`).val()
+          ]
+        )
+      );
+    }
+  }
 
+  class BlockCheckoutStrategy extends CheckoutStrategy {
+    init() {
+      $(document).on('blur change', emailFields.join(', '), (e) => this.captureEmail(e.target.value));
+      $(document).on(
+        'blur change',
+        '[class*="wc-block-components-address-form__"] input, [class*="wc-block-components-address-form__"] select',
+        (e) => {
+          const fieldName = this.getFieldNameFromClass(e.target);
+          this.captureCheckoutField(fieldName, e.target.value);
+        }
+      );
+    }
 
-	$(document).on('blur change', email_fields.join(', '), captureEmail);
-	$checkout_form.on('change', 'select', captureCheckoutField);
-	$checkout_form.on('blur change', '.input-text', captureCheckoutField);
-});
+    /**
+     * @param {HTMLElement} element
+     */
+    getFieldNameFromClass(element) {
+      const containerElement = element.closest('[class*="wc-block-components-address-form__"');
+      if (!containerElement) {
+        return element.name;
+      }
+
+      const nameFromClass = [...containerElement.classList]
+        .find(className => className.startsWith('wc-block-components-address-form__'))
+        .replace('wc-block-components-address-form__', '');
+
+      return nameFromClass || element.name;
+    }
+
+    getCheckoutFieldValues() {
+      return Object.fromEntries(
+        checkoutFields.map(
+          fieldName => [
+            fieldName,
+            $(`[class*="wc-block-components-address-form__${fieldName}"] input, [class*="wc-block-components-address-form__${fieldName}"] select`).val()
+          ]
+        )
+      );
+    }
+  }
+
+  class CheckoutContext {
+    constructor() {
+      this.strategy = this.detectCheckoutType();
+    }
+
+    detectCheckoutType() {
+      return $('.wc-block-checkout').length > 0
+        ? new BlockCheckoutStrategy()
+        : new LegacyCheckoutStrategy();
+    }
+
+    init() {
+      this.strategy.init();
+    }
+  }
+
+  $(document).on('init_checkout', () => {
+    const checkoutContext = new CheckoutContext();
+    checkoutContext.init();
+  })
+})(jQuery);

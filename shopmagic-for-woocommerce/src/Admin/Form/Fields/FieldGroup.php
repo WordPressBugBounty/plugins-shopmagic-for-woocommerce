@@ -30,5 +30,4 @@ final class FieldGroup extends BasicField {
 	public function should_override_form_template(): bool {
 		return true;
 	}
-
 }

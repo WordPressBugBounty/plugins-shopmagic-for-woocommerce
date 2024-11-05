@@ -34,10 +34,13 @@ class OrderGuestInterceptor implements GuestInterceptor {
 
 	public function intercept( object $provider ): Guest {
 		if ( ! $provider instanceof \WC_Order ) {
-			throw new \InvalidArgumentException( sprintf( 'Expected argument of type %s. Passed: %s',
-				\WC_Order::class,
-				get_class( $provider )
-			) );
+			throw new \InvalidArgumentException(
+				sprintf(
+					'Expected argument of type %s. Passed: %s',
+					\WC_Order::class,
+					get_class( $provider )
+				)
+			);
 		}
 
 		if ( $provider->get_user_id() !== 0 ) {

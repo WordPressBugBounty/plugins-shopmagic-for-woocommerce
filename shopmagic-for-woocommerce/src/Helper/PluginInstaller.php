@@ -9,7 +9,7 @@ final class PluginInstaller {
 	/** @var string */
 	private $plugin_slug;
 
-	public function __construct(string $plugin_slug) {
+	public function __construct( string $plugin_slug ) {
 		$this->plugin_slug = $plugin_slug;
 	}
 
@@ -23,7 +23,7 @@ final class PluginInstaller {
 		$api = plugins_api(
 			'plugin_information',
 			[
-				'slug' => explode( '/', $this->plugin_slug )[0],
+				'slug'   => explode( '/', $this->plugin_slug )[0],
 				'fields' => [ 'sections' => false ],
 			]
 		);

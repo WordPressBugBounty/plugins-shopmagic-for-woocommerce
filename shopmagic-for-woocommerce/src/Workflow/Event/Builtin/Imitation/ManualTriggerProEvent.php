@@ -34,9 +34,8 @@ final class ManualTriggerProEvent extends ImitationCommonEvent {
 		$description = ob_get_clean();
 		return [
 			( new ProItemInfoField() )
-				->set_name('manual-actions-ad')
-				->set_description( $description )
+				->set_name( 'manual-actions-ad' )
+				->set_description( $description ),
 		];
 	}
-
 }

@@ -19,6 +19,7 @@ class RecordEmailSending implements HookProvider, Conditional {
 
 	/** @var TrackedEmailObjectManager */
 	private $manager;
+
 	/**
 	 * @var TrackingInjection
 	 */
@@ -66,6 +67,6 @@ class RecordEmailSending implements HookProvider, Conditional {
 
 	/** This extension is enabled by default, thus we check if it's not disabled. */
 	public static function is_needed(): bool {
-		return ! in_array( GeneralSettings::get_option( 'enable_email_tracking' ), [ '', false ] );
+		return filter_var( GeneralSettings::get_option( 'enable_email_tracking', true ), \FILTER_VALIDATE_BOOL ) !== false;
 	}
 }

@@ -87,8 +87,10 @@ final class EventBefore {
 			$schedule       = $event->get_schedule();
 			$scheduled_date = $schedule->get_date();
 			if ( $scheduled_date !== null ) {
-				$scheduled_utc = ( new \DateTime( 'now',
-					new \DateTimeZone( 'UTC' ) ) )->setTimestamp( $scheduled_date->getTimestamp() );
+				$scheduled_utc = ( new \DateTime(
+					'now',
+					new \DateTimeZone( 'UTC' )
+				) )->setTimestamp( $scheduled_date->getTimestamp() );
 				$queue_hour    = $scheduled_utc->format( 'G' ) * 60 * 60 + $scheduled_utc->format( 'i' ) * 60;
 			}
 

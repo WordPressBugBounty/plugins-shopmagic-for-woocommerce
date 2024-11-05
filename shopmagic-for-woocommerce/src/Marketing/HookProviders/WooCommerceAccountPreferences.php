@@ -18,8 +18,10 @@ final class WooCommerceAccountPreferences implements HookProvider, Conditional {
 	use HookTrait;
 
 	private const CUSTOMER_LOGOUT = 'customer-logout';
+
 	/** @var CustomerRepository */
 	private $customer_repository;
+
 	/** @var CommunicationPreferencesRenderer */
 	private $renderer;
 
@@ -85,7 +87,12 @@ final class WooCommerceAccountPreferences implements HookProvider, Conditional {
 	private function nav_menu_content(): void {
 		$customer = $this->customer_repository->find( get_current_user_id() );
 
-		echo $this->renderer->render( $customer, [ 'success' => null, 'obfuscate' => false ] );
+		echo $this->renderer->render(
+			$customer,
+			[
+				'success'   => null,
+				'obfuscate' => false,
+			]
+		);
 	}
-
 }

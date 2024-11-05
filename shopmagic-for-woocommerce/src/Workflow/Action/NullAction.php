@@ -12,6 +12,7 @@ use WPDesk\ShopMagic\Workflow\FieldValuesBag;
  * NullObject pattern. When no action is found this class is used.
  */
 class NullAction extends Action {
+
 	/** @var string|null */
 	private $missing_id;
 

@@ -48,5 +48,4 @@ class HttpProblemException extends \RuntimeException implements \WPDesk\ShopMagi
 			[ 'Content-Type' => 'application/problem+json' ]
 		);
 	}
-
 }

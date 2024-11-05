@@ -14,5 +14,4 @@ trait GuestInOrderContextTrait {
 	private function order_has_guest( \WC_Abstract_Order $order ): bool {
 		return $order->get_user_id() === 0;
 	}
-
 }

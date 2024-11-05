@@ -36,14 +36,16 @@ final class SingleListSubscriberHydrator implements ObjectDehydrator, ObjectHydr
 		int $list_id
 	): SingleListSubscriber {
 		$persistence = new CommunicationListPersistence( $list_id );
-		$type = $persistence->get_fallback( CommunicationListPersistence::FIELD_TYPE_KEY, AudienceList::TYPE_OPTIN );
+		$type        = $persistence->get_fallback( CommunicationListPersistence::FIELD_TYPE_KEY, AudienceList::TYPE_OPTIN );
 
-		return $this->denormalize( [
-			'list_id' => $list_id,
-			'email'   => $email,
-			'active'  => true,
-			'type'    => $type === 'opt_in',
-		] );
+		return $this->denormalize(
+			[
+				'list_id' => $list_id,
+				'email'   => $email,
+				'active'  => true,
+				'type'    => $type === 'opt_in',
+			]
+		);
 	}
 
 	public function supports_denormalization( array $data ): bool {

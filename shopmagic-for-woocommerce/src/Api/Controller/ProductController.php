@@ -11,11 +11,16 @@ class ProductController {
 	public function index( string $include ): \WP_REST_Response {
 		$products = array_map(
 			[ $this, 'format_product_option' ],
-			wc_get_products( [
-				'include' => array_map( static function ( $id ) {
-					return absint( $id );
-				}, explode( ',', $include ) ),
-			] )
+			wc_get_products(
+				[
+					'include' => array_map(
+						static function ( $id ) {
+							return absint( $id );
+						},
+						explode( ',', $include )
+					),
+				]
+			)
 		);
 
 		return new \WP_REST_Response( $products );
@@ -49,5 +54,4 @@ class ProductController {
 			'label' => rawurldecode( wp_strip_all_tags( $formatted_name ) ),
 		];
 	}
-
 }

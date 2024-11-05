@@ -152,5 +152,4 @@ final class WooCommerceMailTemplate implements MailTemplate, LoggerAwareInterfac
 			return '<style type="text/css">' . $css . '</style>' . $html;
 		}
 	}
-
 }

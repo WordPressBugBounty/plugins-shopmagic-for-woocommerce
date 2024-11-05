@@ -16,7 +16,7 @@ final class ProductSelectOneToManyType extends SelectOneToManyType {
 	 * @inheritDoc
 	 */
 	protected function get_select_field() {
-		return ( new class extends ProductSelect {
+		return ( new class() extends ProductSelect {
 			public function has_serializer(): bool {
 				return false;
 			}

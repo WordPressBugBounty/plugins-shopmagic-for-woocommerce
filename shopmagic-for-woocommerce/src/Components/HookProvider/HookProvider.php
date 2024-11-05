@@ -9,5 +9,4 @@ use ShopMagicVendor\WPDesk\PluginBuilder\Plugin\Hookable;
 interface HookProvider extends Hookable {
 
 	public function hooks(): void;
-
 }

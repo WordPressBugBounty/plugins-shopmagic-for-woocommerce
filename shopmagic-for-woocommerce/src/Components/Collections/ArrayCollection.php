@@ -49,11 +49,11 @@ final class ArrayCollection implements Collection, \ArrayAccess {
 	}
 
 	public function unique(): Collection {
-		return new static( array_unique( $this->storage ) );
+		return new self( array_unique( $this->storage ) );
 	}
 
 	public function map( \Closure $func ): Collection {
-		return new static( array_map( $func, $this->storage, array_keys( $this->storage ) ) );
+		return new self( array_map( $func, $this->storage, array_keys( $this->storage ) ) );
 	}
 
 	public function is_empty(): bool {
@@ -79,11 +79,11 @@ final class ArrayCollection implements Collection, \ArrayAccess {
 	}
 
 	public function filter( \Closure $func ): Collection {
-		return new static( array_filter( $this->storage, $func ) );
+		return new self( array_filter( $this->storage, $func ) );
 	}
 
 	public function slice( int $offset, ?int $length = null ): Collection {
-		return new static( array_slice( $this->storage, $offset, $length, true ) );
+		return new self( array_slice( $this->storage, $offset, $length, true ) );
 	}
 
 	public function get( $key ) {

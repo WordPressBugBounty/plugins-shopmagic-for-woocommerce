@@ -71,9 +71,13 @@ class LazyObjectCollection implements Collection {
 			$this->initialize();
 		}
 
-		return new ArrayCollection( array_map( $func,
-			$this->object_collection,
-			array_keys( $this->object_collection ) ) );
+		return new ArrayCollection(
+			array_map(
+				$func,
+				$this->object_collection,
+				array_keys( $this->object_collection )
+			)
+		);
 	}
 
 
@@ -148,9 +152,9 @@ class LazyObjectCollection implements Collection {
 	}
 
 	public function set( $key, $value ): void {
-//		if ( $this->initialized === true ) {
-//			throw new \LogicException('You cant add elements to collection after initialization.');
-//		}
+		// if ( $this->initialized === true ) {
+		// throw new \LogicException('You cant add elements to collection after initialization.');
+		// }
 		$this->object_collection[ $key ] = $value;
 	}
 }

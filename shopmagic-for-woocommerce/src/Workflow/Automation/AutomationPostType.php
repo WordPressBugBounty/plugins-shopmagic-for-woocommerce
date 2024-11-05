@@ -67,5 +67,4 @@ final class AutomationPostType implements HookProvider {
 
 		register_post_type( self::TYPE, $args );
 	}
-
 }

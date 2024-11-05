@@ -46,9 +46,9 @@ abstract class Event implements
 	 */
 	abstract public function set_from_json( array $serialized_json ): void;
 
-	//abstract public function denormalize( array $data ): void;
+	// abstract public function denormalize( array $data ): void;
 	//
-	//abstract public function normalize(): array;
+	// abstract public function normalize(): array;
 
 	/**
 	 * @deprecated 3.0 Event should be normalized explicitly when needed.
@@ -134,5 +134,4 @@ abstract class Event implements
 	public function update_fields_data( ContainerInterface $data ): void {
 		$this->set_parameters( FieldValuesBag::from_container( $data ) );
 	}
-
 }

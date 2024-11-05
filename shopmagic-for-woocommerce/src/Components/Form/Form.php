@@ -9,19 +9,21 @@ use ShopMagicVendor\WPDesk\Forms\Field;
 use WPDesk\ShopMagic\Helper\StableSort;
 
 class Form {
+
 	/** @var \ArrayObject<string, mixed> */
 	private $updated_data;
+
 	/** @var Field[] */
 	private $fields;
 
 	public function __construct( array $fields ) {
-		$this->fields = $fields;
+		$this->fields       = $fields;
 		$this->updated_data = new \ArrayObject();
 	}
 
 	public function is_valid(): bool {
 		foreach ( $this->fields as $field ) {
-			$field_value = $this->updated_data[ $field->get_name() ] ?? $field->get_default_value();
+			$field_value     = $this->updated_data[ $field->get_name() ] ?? $field->get_default_value();
 			$field_validator = $field->get_validator();
 			if ( ! $field_validator->is_valid( $field_value ) ) {
 				return \false;

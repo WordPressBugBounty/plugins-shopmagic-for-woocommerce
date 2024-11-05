@@ -136,5 +136,4 @@ final class ExternalPluginsAccess {
 	public function add_template_resolver( Resolver $resolver ): void {
 		$this->resolver->add_resolver( $resolver );
 	}
-
 }

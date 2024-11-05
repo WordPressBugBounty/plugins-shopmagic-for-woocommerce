@@ -23,7 +23,7 @@ class RecipeConverter {
 
 	public function to_automation( array $decoded ): Automation {
 		$as_automation = new Automation();
-		$as_automation->set_status( "draft" );
+		$as_automation->set_status( 'draft' );
 		$as_automation->set_name( $decoded['name'] );
 		$as_automation->set_description( $decoded['description'] );
 

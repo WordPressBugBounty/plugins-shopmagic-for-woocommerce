@@ -1,6 +1,3 @@
-<?php
-
-?>
 <svg width="200" height="50" viewBox="0 0 2114 552" fill="none" xmlns="http://www.w3.org/2000/svg">
 	<path
 		d="M674.18 262.134L645.455 267.117C641.938 255.784 631.972 250.117 615.558 250.117C608.133 250.117 602.075 251.582 597.385 254.513C592.695 257.445 590.351 261.45 590.351 266.531C590.351 273.175 595.236 278.255 605.006 281.773L639.3 293.497C652.392 298.382 661.869 304.342 667.732 311.377C673.789 318.411 676.818 327.107 676.818 337.464C676.818 352.119 671.444 363.453 660.697 371.464C649.95 379.476 635.783 383.482 618.196 383.482C601 383.482 587.029 379.769 576.281 372.344C565.534 364.723 559.086 354.269 556.936 340.981L585.661 336.584C587.029 342.642 590.644 347.527 596.506 351.24C602.368 354.952 609.794 356.809 618.782 356.809C627.185 356.809 634.024 355.148 639.3 351.826C644.771 348.504 647.507 344.01 647.507 338.343C647.507 331.113 641.352 325.251 629.041 320.756L595.04 309.325C583.121 305.221 574.425 299.945 568.954 293.497C563.678 287.049 561.04 278.842 561.04 268.876C561.04 254.22 566.218 242.984 576.574 235.168C586.931 227.352 600.707 223.444 617.903 223.444C633.34 223.444 646.041 226.961 656.007 233.996C665.973 240.835 672.031 250.214 674.18 262.134Z"
@@ -30,40 +27,42 @@
 		d="M2113.74 271.514L2082.97 280.6C2079.06 272.393 2073.29 265.945 2065.67 261.255C2058.05 256.37 2049.36 253.927 2039.59 253.927C2025.91 253.927 2014.38 258.715 2005 268.29C1995.82 277.865 1991.22 289.589 1991.22 303.463C1991.22 317.337 1995.82 329.159 2005 338.929C2014.38 348.309 2025.91 352.998 2039.59 352.998C2049.36 352.998 2058.05 350.654 2065.67 345.964C2073.29 341.079 2079.06 334.532 2082.97 326.325L2113.74 335.412C2107.69 350.067 2098.01 361.792 2084.73 370.585C2071.63 379.183 2056.59 383.482 2039.59 383.482C2016.72 383.482 1997.67 375.861 1982.43 360.619C1967.19 345.378 1959.57 326.325 1959.57 303.463C1959.57 280.6 1967.19 261.548 1982.43 246.306C1997.67 231.065 2016.72 223.444 2039.59 223.444C2056.59 223.444 2071.63 227.84 2084.73 236.634C2098.01 245.232 2107.69 256.858 2113.74 271.514Z"
 		fill="black"/>
 	<rect x="7.6387" y="10.96" width="287.458" height="386.504" rx="73.2775"
-		  transform="matrix(0.938191 0.346117 0 1 31.4116 41.4374)" stroke="#272726" stroke-width="16.2839"
-		  stroke-linecap="round" stroke-linejoin="bevel"/>
+			transform="matrix(0.938191 0.346117 0 1 31.4116 41.4374)" stroke="#272726" stroke-width="16.2839"
+			stroke-linecap="round" stroke-linejoin="bevel"/>
 	<rect x="7.6387" y="10.96" width="287.458" height="386.504" rx="73.2775"
-		  transform="matrix(0.938191 0.346117 0 1 90.0337 19.2685)" stroke="#272726" stroke-width="16.2839"
-		  stroke-linecap="round" stroke-linejoin="bevel"/>
+			transform="matrix(0.938191 0.346117 0 1 90.0337 19.2685)" stroke="#272726" stroke-width="16.2839"
+			stroke-linecap="round" stroke-linejoin="bevel"/>
 	<rect x="7.6387" y="10.96" width="287.458" height="386.504" rx="73.2775"
-		  transform="matrix(0.938191 0.346117 0 1 144.399 -2.64389)" stroke="#272726" stroke-width="16.2839"
-		  stroke-linecap="round" stroke-linejoin="bevel"/>
+			transform="matrix(0.938191 0.346117 0 1 144.399 -2.64389)" stroke="#272726" stroke-width="16.2839"
+			stroke-linecap="round" stroke-linejoin="bevel"/>
 	<g clip-path="url(#clip0_415_318)">
 		<path d="M126.129 434.095L63.0569 329.569L390.756 197.111L126.129 434.095Z" fill="#CBFB0E" stroke="#272726"
-			  stroke-width="2.05649" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+				stroke-width="2.05649" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 		<path d="M88.9092 339.651L126.129 434.095L390.756 197.111L88.9092 339.651Z" fill="#9ABE08" stroke="#272726"
-			  stroke-width="2.05649" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+				stroke-width="2.05649" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 		<path d="M88.9092 339.651L148.964 377.713L390.756 197.111L88.9092 339.651Z" fill="white" stroke="#272726"
-			  stroke-width="2.05649" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+				stroke-width="2.05649" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 		<path d="M63.0569 329.569L12.5143 317.358L390.756 197.111L63.0569 329.569Z" fill="white" stroke="#272726"
-			  stroke-width="2.05649" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+				stroke-width="2.05649" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 	</g>
 	<path fill-rule="evenodd" clip-rule="evenodd"
-		  d="M159.582 494.093L239.52 523.584C281.708 539.148 315.907 515.312 315.907 470.345V230.396C315.907 185.429 281.708 136.359 239.521 120.796L159.582 91.3048V107.589L239.521 137.08C273.27 149.531 300.63 188.786 300.63 224.76V464.709C300.63 500.682 273.27 519.751 239.52 507.3L159.582 477.809V494.093Z"
-		  fill="#272726"/>
+			d="M159.582 494.093L239.52 523.584C281.708 539.148 315.907 515.312 315.907 470.345V230.396C315.907 185.429 281.708 136.359 239.521 120.796L159.582 91.3048V107.589L239.521 137.08C273.27 149.531 300.63 188.786 300.63 224.76V464.709C300.63 500.682 273.27 519.751 239.52 507.3L159.582 477.809V494.093Z"
+			fill="#272726"/>
 	<path fill-rule="evenodd" clip-rule="evenodd"
-		  d="M218.204 471.924L298.142 501.415C340.33 516.978 374.529 493.142 374.529 448.176V208.226C374.529 163.26 340.33 114.19 298.142 98.6263L218.204 69.1355V85.4194L298.142 114.91C331.892 127.361 359.252 166.617 359.252 202.59V442.54C359.252 478.513 331.892 497.582 298.142 485.131L218.204 455.64V471.924Z"
-		  fill="#272726"/>
+			d="M218.204 471.924L298.142 501.415C340.33 516.978 374.529 493.142 374.529 448.176V208.226C374.529 163.26 340.33 114.19 298.142 98.6263L218.204 69.1355V85.4194L298.142 114.91C331.892 127.361 359.252 166.617 359.252 202.59V442.54C359.252 478.513 331.892 497.582 298.142 485.131L218.204 455.64V471.924Z"
+			fill="#272726"/>
 	<defs>
 		<clipPath id="clip0_415_318">
 			<rect width="397.327" height="201.92" fill="white"
-				  transform="matrix(-0.989498 0.144543 0.144543 0.989498 393.154 193.893)"/>
+					transform="matrix(-0.989498 0.144543 0.144543 0.989498 393.154 193.893)"/>
 		</clipPath>
 	</defs>
 </svg>
 
-<p style="font-size: 1.5rem"><?php
-	echo esc_html__( 'Great news from ShopMagic!', 'shopmagic-for-woocommerce' ); ?></p>
+<p style="font-size: 1.5rem">
+<?php
+	echo esc_html__( 'Great news from ShopMagic!', 'shopmagic-for-woocommerce' );
+?></p>
 <p>
 	<strong>
 		<?php
@@ -71,7 +70,8 @@
 			'Advanced email tracking,
 		better audience segmentation management,
 		improved performance and brand-new user interface on top of it.',
-			'shopmagic-for-woocommerce' );
+			'shopmagic-for-woocommerce'
+		);
 		?>
 	</strong>
 </p>
@@ -96,6 +96,9 @@
 	?>
 </p>
 
-<a href="https://downloads.wordpress.org/plugin/shopmagic-for-woocommerce.3.0.0-beta.1.zip"><?php
-	echo esc_html__( 'Download', 'shopmagic-for-woocommerce' ); ?> ShopMagic
+<a href="https://downloads.wordpress.org/plugin/shopmagic-for-woocommerce.3.0.0-beta.1.zip">
+<?php
+	echo esc_html__( 'Download', 'shopmagic-for-woocommerce' );
+?>
+ShopMagic
 	3.0.0-beta</a>

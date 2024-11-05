@@ -41,9 +41,12 @@ class FieldsCollection extends BasicField {
 
 	public function get_fields(): array {
 		$fields = $this->fields;
-		StableSort::uasort( $fields, static function ( Field $a, Field $b ) {
-			return $a->get_priority() <=> $b->get_priority();
-		} );
+		StableSort::uasort(
+			$fields,
+			static function ( Field $a, Field $b ) {
+				return $a->get_priority() <=> $b->get_priority();
+			}
+		);
 
 		return $fields;
 	}

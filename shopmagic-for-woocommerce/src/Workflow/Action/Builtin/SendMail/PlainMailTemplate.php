@@ -12,5 +12,4 @@ final class PlainMailTemplate implements MailTemplate {
 	public function wrap_content( string $html_content, array $args = [] ): string {
 		return $html_content;
 	}
-
 }

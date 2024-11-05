@@ -45,9 +45,9 @@ class SubscriberHydrator implements ObjectHydrator, ObjectDehydrator {
 			'type'    => $object->get_type(),
 			'created' => $object->get_created()->format( \DateTimeInterface::ATOM ),
 			'updated' => $object->get_updated()->format( \DateTimeInterface::ATOM ),
-			//'_links'  => [
-			//	'list' => [ 'href' => RestRequestUtil::get_url( '/lists/' . $list->get_id() ) ],
-			//],
+			// '_links'  => [
+			// 'list' => [ 'href' => RestRequestUtil::get_url( '/lists/' . $list->get_id() ) ],
+			// ],
 		];
 	}
 

@@ -18,6 +18,7 @@ abstract class UserCommonEvent extends Event implements CustomerAwareInterface {
 
 	/** @var int */
 	protected $user_id;
+
 	/** @var Customer */
 	protected $customer;
 
@@ -40,9 +41,15 @@ abstract class UserCommonEvent extends Event implements CustomerAwareInterface {
 				$this->resources->set( Customer::class, $this->customer_repository->find( $user_id ) );
 				return;
 			} catch ( CustomerNotFound $e ) {
-				throw new ReferenceNoLongerAvailableException( esc_html__( sprintf( 'User %s no longer exists.',
-					$serialized_json['user_id'] ),
-					'shopmagic-for-woocommerce' ) );
+				throw new ReferenceNoLongerAvailableException(
+					esc_html__(
+						sprintf(
+							'User %s no longer exists.',
+							$serialized_json['user_id']
+						),
+						'shopmagic-for-woocommerce'
+					)
+				);
 			}
 		}
 

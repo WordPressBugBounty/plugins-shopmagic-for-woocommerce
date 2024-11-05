@@ -26,14 +26,18 @@ class RecipesController {
 		$recipe_files = (array) scandir( $lang_path );
 		sort( $recipe_files, SORT_NATURAL );
 		$recipes = ( new ArrayCollection( $recipe_files ) )
-			->filter( static function ( string $filename ) use ( $lang_path ) {
-				return is_file( $lang_path . '/' . $filename );
-			} )
-			->map( static function ( string $filename ) use ( $lang_path, $converter ): Automation {
-				$decoded = json_decode( file_get_contents( $lang_path . '/' . $filename ), true );
+			->filter(
+				static function ( string $filename ) use ( $lang_path ) {
+					return is_file( $lang_path . '/' . $filename );
+				}
+			)
+			->map(
+				static function ( string $filename ) use ( $lang_path, $converter ): Automation {
+					$decoded = json_decode( file_get_contents( $lang_path . '/' . $filename ), true );
 
-				return $converter->to_automation( $decoded );
-			} )
+					return $converter->to_automation( $decoded );
+				}
+			)
 			->map( \Closure::fromCallable( [ $normalizer, 'normalize' ] ) )
 			->to_array();
 
@@ -48,5 +52,4 @@ class RecipesController {
 
 		return $locale;
 	}
-
 }

@@ -103,5 +103,4 @@ final class Settings extends FieldSettingsTab {
 				->set_name( 'wc_settings_tab_mailchimp_info_country' ),
 		];
 	}
-
 }

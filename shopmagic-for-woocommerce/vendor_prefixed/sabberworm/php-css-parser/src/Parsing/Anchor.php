@@ -2,6 +2,9 @@
 
 namespace ShopMagicVendor\Sabberworm\CSS\Parsing;
 
+/**
+ * @internal since 8.7.0
+ */
 class Anchor
 {
     /**

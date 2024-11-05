@@ -46,5 +46,4 @@ abstract class Filter implements
 	public function get_description(): string {
 		return '';
 	}
-
 }

@@ -27,5 +27,4 @@ final class CustomerOptedIn extends OptCommonEvent {
 			2
 		);
 	}
-
 }

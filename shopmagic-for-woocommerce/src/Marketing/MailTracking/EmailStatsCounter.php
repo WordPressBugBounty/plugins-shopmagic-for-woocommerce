@@ -7,19 +7,21 @@ namespace WPDesk\ShopMagic\Marketing\MailTracking;
 class EmailStatsCounter {
 
 	private $opens = 0;
+
 	private $clicks = 0;
+
 	private $sent = 0;
 
 	public function increase_open() {
-		$this->opens ++;
+		++$this->opens;
 	}
 
 	public function increase_click() {
-		$this->clicks ++;
+		++$this->clicks;
 	}
 
 	public function increase_sent() {
-		$this->sent ++;
+		++$this->sent;
 	}
 
 	public function get_opens(): int {

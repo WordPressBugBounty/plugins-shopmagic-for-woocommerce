@@ -29,5 +29,4 @@ final class OrderFailed extends OrderCommonEvent {
 			2
 		);
 	}
-
 }

@@ -11,5 +11,4 @@ interface ControllerResolver {
 	 * @return callable
 	 */
 	public function get_controller( $controller ): callable;
-
 }

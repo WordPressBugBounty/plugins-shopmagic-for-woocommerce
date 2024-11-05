@@ -28,5 +28,4 @@ interface Module extends ContainerAwareInterface {
 	public function initialize(): void;
 
 	public function get_name(): string;
-
 }

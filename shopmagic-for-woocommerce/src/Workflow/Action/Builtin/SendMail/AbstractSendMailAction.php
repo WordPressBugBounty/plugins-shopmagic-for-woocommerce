@@ -41,11 +41,13 @@ abstract class AbstractSendMailAction extends Action implements TestableAction {
 	private const   SUPPORTED_MIMES      = [ 'application/pdf' ];
 
 	private const EMAIL = 'email';
+
 	/**
 	 * @var Postmark Integration with Postmark Streams service.
 	 *               Adds additional fields and integrates with PostMark plugin.
 	 */
 	protected $postmark_integration;
+
 	/** @var Mailer */
 	private $mailer;
 
@@ -133,7 +135,8 @@ abstract class AbstractSendMailAction extends Action implements TestableAction {
 		}
 
 		try {
-			$event = apply_filters( 'shopmagic/core/action/send_mail/sending',
+			$event = apply_filters(
+				'shopmagic/core/action/send_mail/sending',
 				new EmailSending(
 					$mail,
 					$this->resources->get( Automation::class ),
@@ -213,10 +216,10 @@ abstract class AbstractSendMailAction extends Action implements TestableAction {
 				}
 
 				if ( \function_exists( 'mime_content_type' ) && \in_array(
-						mime_content_type( $attachment_path ),
-						self::SUPPORTED_MIMES,
-						true
-					) ) {
+					mime_content_type( $attachment_path ),
+					self::SUPPORTED_MIMES,
+					true
+				) ) {
 					return true;
 				}
 

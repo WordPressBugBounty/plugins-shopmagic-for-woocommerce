@@ -151,5 +151,4 @@ class AudienceList {
 	public function set_language( string $language ): void {
 		$this->language = $language;
 	}
-
 }

@@ -13,8 +13,8 @@ class NullFilter extends Filter {
 	/** @var string|null */
 	private $missing_id;
 
-	public function __construct(string $missing_id = null) {
-		$this->missing_id = $missing_id;
+	public function __construct( string $missing_id = null ) {
+		$this->missing_id  = $missing_id;
 		$this->fields_data = new FieldValuesBag();
 	}
 
@@ -26,10 +26,9 @@ class NullFilter extends Filter {
 	}
 
 	public function get_id(): string {
-		if ( $this->missing_id === null) {
+		if ( $this->missing_id === null ) {
 			return 'non_existing_filter';
 		}
-
 
 		return $this->missing_id;
 	}

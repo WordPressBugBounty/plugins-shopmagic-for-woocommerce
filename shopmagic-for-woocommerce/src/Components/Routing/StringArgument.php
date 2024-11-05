@@ -37,5 +37,4 @@ class StringArgument extends Argument {
 
 		return $this;
 	}
-
 }

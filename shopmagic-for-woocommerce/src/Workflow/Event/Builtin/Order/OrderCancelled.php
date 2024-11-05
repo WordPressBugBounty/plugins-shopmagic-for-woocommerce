@@ -30,5 +30,4 @@ final class OrderCancelled extends OrderCommonEvent {
 			2
 		);
 	}
-
 }

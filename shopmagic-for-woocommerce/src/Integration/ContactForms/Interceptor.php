@@ -78,7 +78,7 @@ abstract class Interceptor implements CustomerProvider, Hookable {
 			$guest = $this->guest_factory->from_email( $email );
 
 			return $guest;
-//			$this->guest_repository->save( $guest );
+			// $this->guest_repository->save( $guest );
 		}
 	}
 }

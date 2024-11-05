@@ -35,8 +35,8 @@ final class MembershipsProEvent extends ImitationCommonEvent {
 
 		return [
 			( new ProItemInfoField() )
-				->set_name('membership-ad')
-				->set_description( $description )
+				->set_name( 'membership-ad' )
+				->set_description( $description ),
 		];
 	}
 }

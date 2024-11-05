@@ -93,14 +93,14 @@ final class FrontendListSubscription implements HookProvider {
 			wp_safe_redirect(
 				add_query_arg( [ 'error' => '1' ], wp_get_referer() )
 			);
-			//wp_send_json_error( esc_html__( 'Please, enter a valid email address!', 'shopmagic-for-woocommerce' ) );
+			// wp_send_json_error( esc_html__( 'Please, enter a valid email address!', 'shopmagic-for-woocommerce' ) );
 		}
 
 		if ( $this->subscriber_repository->is_subscribed_to_list( $email, $list_id ) ) {
 			wp_safe_redirect(
 				add_query_arg( [ 'error' => '1' ], wp_get_referer() )
 			);
-			//wp_send_json_error( esc_html__( 'You are already subscribed.', 'shopmagic-for-woocommerce' ) );
+			// wp_send_json_error( esc_html__( 'You are already subscribed.', 'shopmagic-for-woocommerce' ) );
 		}
 
 		$customer = $this->retrieve_customer( $email, $name );
@@ -124,13 +124,13 @@ final class FrontendListSubscription implements HookProvider {
 			wp_safe_redirect(
 				add_query_arg( [ 'error' => '1' ], wp_get_referer() )
 			);
-			//wp_send_json_error( esc_html__( 'An error occurred during sign up.', 'shopmagic-for-woocommerce' ) );
+			// wp_send_json_error( esc_html__( 'An error occurred during sign up.', 'shopmagic-for-woocommerce' ) );
 		}
 
 		wp_safe_redirect(
 			add_query_arg( [ 'error' => '0' ], wp_get_referer() )
 		);
-		//wp_send_json_success( esc_html__( 'You have been successfully subscribed!', 'shopmagic-for-woocommerce' ) );
+		// wp_send_json_success( esc_html__( 'You have been successfully subscribed!', 'shopmagic-for-woocommerce' ) );
 	}
 
 	private function try_signup_customer(): void {
@@ -183,5 +183,4 @@ final class FrontendListSubscription implements HookProvider {
 			return $guest;
 		}
 	}
-
 }

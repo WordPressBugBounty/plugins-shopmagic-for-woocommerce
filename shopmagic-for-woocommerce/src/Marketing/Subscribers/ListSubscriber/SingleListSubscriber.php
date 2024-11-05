@@ -104,5 +104,4 @@ class SingleListSubscriber {
 	public function set_last_inserted_id( int $id ): void {
 		$this->id = $id;
 	}
-
 }

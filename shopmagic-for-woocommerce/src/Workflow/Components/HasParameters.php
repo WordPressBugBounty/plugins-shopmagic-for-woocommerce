@@ -38,5 +38,4 @@ interface HasParameters extends FieldsDataReceiver, FieldProvider {
 	public function get_parameters(): FieldValuesBag;
 
 	public function set_parameters( FieldValuesBag $parameters ): void;
-
 }

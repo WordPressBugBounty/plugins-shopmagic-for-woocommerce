@@ -66,8 +66,10 @@ abstract class PostObjectManager implements DAO\ObjectPersister {
 		}
 		if ( ! $this->can_modify() ) {
 			throw new InsufficientPermission(
-				__( 'You are not allowed to modify this post. Check your permissions.',
-					'shopmagic-for-woocommerce' )
+				__(
+					'You are not allowed to modify this post. Check your permissions.',
+					'shopmagic-for-woocommerce'
+				)
 			);
 		}
 		if ( $this->is_expected_post_type( $item ) ) {
@@ -94,8 +96,8 @@ abstract class PostObjectManager implements DAO\ObjectPersister {
 		$expected_post_type = $this->expected_post_type();
 
 		return $item->get_id() !== null &&
-		       $expected_post_type !== null &&
-		       get_post( $item->get_id() )->post_type !== $expected_post_type;
+				$expected_post_type !== null &&
+				get_post( $item->get_id() )->post_type !== $expected_post_type;
 	}
 
 	protected function expected_post_type(): ?string {

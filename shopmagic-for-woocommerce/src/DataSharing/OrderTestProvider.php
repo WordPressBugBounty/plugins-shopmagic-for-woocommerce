@@ -9,6 +9,7 @@ use WPDesk\ShopMagic\Customer\CustomerFactory;
 use WPDesk\ShopMagic\Workflow\Event\DataLayer;
 
 class OrderTestProvider implements DataProvider {
+
 	/** @var CustomerFactory */
 	private $customer_factory;
 
@@ -29,7 +30,8 @@ class OrderTestProvider implements DataProvider {
 			$data_layer->set( \WP_User::class, $order->get_user() );
 			$data_layer->set(
 				Customer::class,
-				$this->customer_factory->create_from_user_and_order( $order->get_user(), $order ) );
+				$this->customer_factory->create_from_user_and_order( $order->get_user(), $order )
+			);
 		}
 
 		return $data_layer;
@@ -38,11 +40,11 @@ class OrderTestProvider implements DataProvider {
 	private function get_order(): \WC_Order {
 		[ $order ] = wc_get_orders(
 			[
-				'limit' => 1,
+				'limit'   => 1,
 				'orderby' => 'date_created',
-				'order' => 'DESC',
-				'type' => 'shop_order',
-				'status' => array_filter(
+				'order'   => 'DESC',
+				'type'    => 'shop_order',
+				'status'  => array_filter(
 					array_keys( wc_get_order_statuses() ),
 					static function ( string $status ): bool {
 						return 'wc-refunded' !== $status;

@@ -79,8 +79,10 @@ final class AddToListAction extends AbstractListAction {
 			throw new CannotModifyList(
 				sprintf(
 				// translators: %1$s Customer email, %2$s Marketing List name.
-					esc_html__( 'Customer email %1$s is already subscribed to this list: %2$s.',
-						'shopmagic-for-woocommerce' ),
+					esc_html__(
+						'Customer email %1$s is already subscribed to this list: %2$s.',
+						'shopmagic-for-woocommerce'
+					),
 					$email,
 					$list_name
 				)
@@ -89,10 +91,13 @@ final class AddToListAction extends AbstractListAction {
 
 		if ( $this->fields_data->has( 'doubleoptin' ) ) {
 			if (
-				in_array( $this->fields_data->get( 'doubleoptin' ), [
-					CheckboxField::VALUE_TRUE,
-					'1',
-				] ) &&
+				in_array(
+					$this->fields_data->get( 'doubleoptin' ),
+					[
+						CheckboxField::VALUE_TRUE,
+						'1',
+					]
+				) &&
 				$this->resources->has( Customer::class )
 			) {
 				$target_list = $this->marketing_list_repository->find( $list_id );
@@ -104,7 +109,6 @@ final class AddToListAction extends AbstractListAction {
 
 				return true;
 			}
-
 		}
 
 		$customer_opt->set_active( true );

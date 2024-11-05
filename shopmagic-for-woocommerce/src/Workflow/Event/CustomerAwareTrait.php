@@ -13,5 +13,4 @@ trait CustomerAwareTrait {
 	public function set_customer_repository( CustomerRepository $customer_repository ): void {
 		$this->customer_repository = $customer_repository;
 	}
-
 }

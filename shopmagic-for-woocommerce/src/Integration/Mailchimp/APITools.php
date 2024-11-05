@@ -83,10 +83,13 @@ final class APITools extends MailChimp implements MailchimpApi {
 	 * @return array<string, mixed[]>
 	 */
 	private function prepare_basic_params( string $email, string $first_name, string $last_name, string $double_optin ): array {
-		$member_status = \in_array( strtolower( $double_optin ), [
-			'on',
-			self::YES,
-		] ) ? 'pending' : 'subscribed';
+		$member_status = \in_array(
+			strtolower( $double_optin ),
+			[
+				'on',
+				self::YES,
+			]
+		) ? 'pending' : 'subscribed';
 
 		return [
 			'email_address'    => $email,
@@ -137,10 +140,14 @@ final class APITools extends MailChimp implements MailchimpApi {
 		$billing_fname = $order->billing_first_name;
 
 		// Last name depends on the further information settings.
-		$billing_lname = ( in_array( $mailchimp_further_information[ self::LNAME ], [
-			self::YES,
-			true,
-		], true ) ? $order->billing_last_name : '' );
+		$billing_lname = ( in_array(
+			$mailchimp_further_information[ self::LNAME ],
+			[
+				self::YES,
+				true,
+			],
+			true
+		) ? $order->billing_last_name : '' );
 
 		$billing_address = $order->billing_address_1 . ' ' . $order->billing_address_2;
 		$billing_city    = $order->billing_city;
@@ -153,10 +160,14 @@ final class APITools extends MailChimp implements MailchimpApi {
 			foreach ( self::MAILCHIMP_NEW_MERGEFIELDS as $tag => $name ) {
 
 				// If information checked on the settings.
-				if ( in_array( $mailchimp_further_information[ $tag ], [
-					self::YES,
-					true,
-				], true ) ) {
+				if ( in_array(
+					$mailchimp_further_information[ $tag ],
+					[
+						self::YES,
+						true,
+					],
+					true
+				) ) {
 					$mailchimp_add_mergefield_params = [
 						'tag'  => $tag,
 						'name' => $name,

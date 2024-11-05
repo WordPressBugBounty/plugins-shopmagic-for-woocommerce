@@ -70,7 +70,7 @@ class GeneralAdminPage implements \WPDesk\ShopMagic\Admin\AdminPage {
 				$this->render();
 			}
 		);
-		if (WordPressPluggableHelper::is_plugin_active('shopmagic-abandoned-carts/shopmagic-abandoned-carts.php')) {
+		if ( WordPressPluggableHelper::is_plugin_active( 'shopmagic-abandoned-carts/shopmagic-abandoned-carts.php' ) ) {
 			add_submenu_page(
 				self::MENU_SLUG,
 				__( 'Carts', 'shopmagic-for-woocommerce' ),

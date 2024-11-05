@@ -29,5 +29,4 @@ final class OrderRefunded extends OrderCommonEvent {
 			2
 		);
 	}
-
 }

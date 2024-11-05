@@ -37,7 +37,7 @@ function shopmagic_admin_notice_getstarted(): void {
 
 add_action(
 	'admin_notices',
-	function() use ( $pro_is_active ): void {
+	function () use ( $pro_is_active ): void {
 		$user_id        = get_current_user_id();
 		$current_screen = get_current_screen();
 		$notice_name    = 'pro';
@@ -75,7 +75,7 @@ add_action(
 
 			<p>
 				<a href="<?php echo esc_url( $base_url . $delayed_actions_slug ); ?>/?utm_source=pro-notice&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=delayed-actions"
-				   target="blank"><?php esc_html_e( 'Delayed Actions', 'shopmagic-for-woocommerce' ); ?></a> | <a
+					target="blank"><?php esc_html_e( 'Delayed Actions', 'shopmagic-for-woocommerce' ); ?></a> | <a
 						href="<?php echo esc_url( $base_url . $review_requests_slug ); ?>/?utm_source=pro-notice&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=review-requests"
 						target="blank"><?php esc_html_e( 'Review Requests', 'shopmagic-for-woocommerce' ); ?></a> | <a
 						href="<?php echo esc_url( $base_url . $customer_coupons_slug ); ?>/?utm_source=pro-notice&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=customer-coupons"

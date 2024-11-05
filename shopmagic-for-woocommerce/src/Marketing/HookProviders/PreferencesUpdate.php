@@ -20,6 +20,7 @@ final class PreferencesUpdate implements HookProvider {
 	 * @var string
 	 */
 	private const EMAIL = 'email';
+
 	/** @var SubscriptionManager */
 	private $subscription_manager;
 

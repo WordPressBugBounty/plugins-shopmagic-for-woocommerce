@@ -14,11 +14,10 @@ final class ItemNotExists extends \OutOfBoundsException implements ShopMagicExce
 	public static function resource_not_found( string $resource_type, string $needle ): self {
 		return new ItemNotExists(
 			sprintf(
-				__("There is no %s named '%s'. Make sure all required extensions are enabled.", 'shopmagic-for-woocommerce' ),
-				(new \ReflectionClass($resource_type))->getShortName(),
+				__( "There is no %1\$s named '%2\$s'. Make sure all required extensions are enabled.", 'shopmagic-for-woocommerce' ),
+				( new \ReflectionClass( $resource_type ) )->getShortName(),
 				$needle
 			)
 		);
 	}
-
 }

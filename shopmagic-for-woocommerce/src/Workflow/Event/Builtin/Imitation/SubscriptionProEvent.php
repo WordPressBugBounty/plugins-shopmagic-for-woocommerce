@@ -34,8 +34,8 @@ final class SubscriptionProEvent extends ImitationCommonEvent {
 
 		return [
 			( new ProItemInfoField() )
-				->set_name('subscription-ad')
-				->set_description( $description )
+				->set_name( 'subscription-ad' )
+				->set_description( $description ),
 		];
 	}
 }

@@ -17,7 +17,7 @@ final class OrderPaymentUrl extends WooCommerceOrderBasedPlaceholder {
 
 	public function get_description(): string {
 		return esc_html__( 'Display payment link for current order.', 'shopmagic-for-woocommerce' ) . '<br>' .
-		       $this->utm_builder->get_description();
+				$this->utm_builder->get_description();
 	}
 
 	public function get_slug(): string {

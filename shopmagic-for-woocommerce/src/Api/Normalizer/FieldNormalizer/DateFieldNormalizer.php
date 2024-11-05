@@ -11,7 +11,7 @@ class DateFieldNormalizer extends JsonSchemaFieldNormalizer {
 		return array_merge(
 			parent::normalize( $object ),
 			[
-				'format' => 'date-time'
+				'format' => 'date-time',
 			]
 		);
 	}
@@ -19,5 +19,4 @@ class DateFieldNormalizer extends JsonSchemaFieldNormalizer {
 	public function supports_normalization( object $object ): bool {
 		return $object instanceof DatePickerField;
 	}
-
 }

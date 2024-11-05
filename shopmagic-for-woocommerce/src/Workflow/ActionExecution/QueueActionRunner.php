@@ -75,7 +75,8 @@ final class QueueActionRunner implements HookProvider {
 			try {
 				$automation = $this->repository->find( (int) $automation_serialized['id'] );
 			} catch ( AutomationNotFound $e ) {
-				$this->logger->error( 'Automation #{id} could not be located in database.',
+				$this->logger->error(
+					'Automation #{id} could not be located in database.',
 					[ 'id' => $automation_serialized['id'] ]
 				);
 
@@ -114,5 +115,4 @@ final class QueueActionRunner implements HookProvider {
 			add_action( 'wp_loaded', $run );
 		}
 	}
-
 }

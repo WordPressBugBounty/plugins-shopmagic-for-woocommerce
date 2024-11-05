@@ -78,16 +78,19 @@ class PostMetaContainer implements PersistentContainer {
 	}
 
 	public function get_all() {
-		return array_map( static function ( $item ) {
-			if ( $item === 'yes' ) {
-				return true;
-			}
+		return array_map(
+			static function ( $item ) {
+				if ( $item === 'yes' ) {
+					return true;
+				}
 
-			if ( $item === 'no' ) {
-				return false;
-			}
+				if ( $item === 'no' ) {
+					return false;
+				}
 
-			return $item;
-		}, $this->data );
+				return $item;
+			},
+			$this->data
+		);
 	}
 }

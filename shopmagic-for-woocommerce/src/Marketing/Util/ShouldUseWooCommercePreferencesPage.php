@@ -14,5 +14,4 @@ class ShouldUseWooCommercePreferencesPage {
 
 		return (bool) apply_filters( 'shopmagic/core/communication_type/account_page_show', true );
 	}
-
 }

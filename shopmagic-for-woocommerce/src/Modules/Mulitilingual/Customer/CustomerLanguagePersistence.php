@@ -84,10 +84,12 @@ final class CustomerLanguagePersistence implements HookProvider, Conditional {
 	 */
 	private function parse_preferred_browser_languages( string $accepted_languages ): Collection {
 		return ( new ArrayCollection( explode( ',', $accepted_languages ) ) )
-			->map( static function ( string $language ): Language {
-				// We are only interested about the language code, not value qualifier
-				return new Language( explode( ';', $language )[0] );
-			} );
+			->map(
+				static function ( string $language ): Language {
+					// We are only interested about the language code, not value qualifier
+					return new Language( explode( ';', $language )[0] );
+				}
+			);
 	}
 
 	/**

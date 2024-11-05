@@ -10,6 +10,7 @@ namespace WPDesk\ShopMagic\Workflow\Components;
  *
  * Use hacky way of accessing private property for backward compatibility when action is
  * used as decorator and wrapped action is hold in `$this::$action` property.
+ *
  * @see shopmagic-delayed-actions
  */
 trait ComponentIdTrait {
@@ -19,9 +20,13 @@ trait ComponentIdTrait {
 
 	public function get_id(): string {
 		if ( property_exists( $this, 'action' ) ) {
-			return \Closure::bind(function () {
-				return $this->action->get_id();
-			}, $this, $this)();
+			return \Closure::bind(
+				function () {
+					return $this->action->get_id();
+				},
+				$this,
+				$this
+			)();
 		}
 
 		return $this->id;
@@ -29,13 +34,16 @@ trait ComponentIdTrait {
 
 	public function set_id( $id ): void {
 		if ( property_exists( $this, 'action' ) ) {
-			\Closure::bind(function ($id) {
-				return $this->action->set_id($id);
-			}, $this, $this)((string) $id);
+			\Closure::bind(
+				function ( $id ) {
+					return $this->action->set_id( $id );
+				},
+				$this,
+				$this
+			)( (string) $id );
 			return;
 		}
 
 		$this->id = (string) $id;
 	}
-
 }

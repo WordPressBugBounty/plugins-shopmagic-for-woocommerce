@@ -15,14 +15,15 @@ class InvalidArgumentException extends \InvalidArgumentException implements
 	 */
 	public static function invalid_object( string $expected, $actual ): self {
 		return new self(
-			sprintf( "Instance of %s required, but %s provided",
+			sprintf(
+				'Instance of %s required, but %s provided',
 				$expected,
-				is_object( $actual ) ? get_class( $actual ) : $actual )
+				is_object( $actual ) ? get_class( $actual ) : $actual
+			)
 		);
 	}
 
 	public static function invalid_payload( string $target_class ): self {
-		return new self( sprintf( "Data provided to hydrate class %s are invalid", $target_class ) );
+		return new self( sprintf( 'Data provided to hydrate class %s are invalid', $target_class ) );
 	}
-
 }

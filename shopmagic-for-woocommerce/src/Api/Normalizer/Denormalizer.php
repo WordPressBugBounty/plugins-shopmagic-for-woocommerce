@@ -16,5 +16,4 @@ interface Denormalizer {
 	public function denormalize( array $payload ): object;
 
 	public function supports_denormalization( array $data ): bool;
-
 }

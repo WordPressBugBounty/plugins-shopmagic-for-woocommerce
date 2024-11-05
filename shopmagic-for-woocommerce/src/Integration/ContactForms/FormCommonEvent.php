@@ -63,7 +63,7 @@ abstract class FormCommonEvent extends Event implements CustomerAwareInterface {
 
 	/** @return \ShopMagicVendor\WPDesk\Forms\Field[] */
 	final public function get_fields(): array {
-		$options = $this->get_forms_as_options();
+		$options      = $this->get_forms_as_options();
 		$select_field = ( new SelectField() )
 			->set_name( self::FIELD_ID_FORM )
 			->set_label( __( 'Contact Form:', 'shopmagic-for-woocommerce' ) )
@@ -100,5 +100,4 @@ abstract class FormCommonEvent extends Event implements CustomerAwareInterface {
 			);
 		}
 	}
-
 }

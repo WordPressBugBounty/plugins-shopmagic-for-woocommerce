@@ -8,5 +8,4 @@ use WPDesk\ShopMagic\Workflow\Automation\Automation;
 interface LanguageMatcher {
 
 	public function matches( Automation $automation, Language $language ): bool;
-
 }

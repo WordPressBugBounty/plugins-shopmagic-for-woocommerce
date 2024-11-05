@@ -17,7 +17,7 @@ final class DeleteFromListAction extends AbstractListAction {
 	}
 
 	public function get_description(): string {
-		return esc_html__('Remove client from marketing list by email.', 'shopmagic-for-woocommerce');
+		return esc_html__( 'Remove client from marketing list by email.', 'shopmagic-for-woocommerce' );
 	}
 
 	protected function do_list_action( string $email, int $list_id, string $list_name ): bool {

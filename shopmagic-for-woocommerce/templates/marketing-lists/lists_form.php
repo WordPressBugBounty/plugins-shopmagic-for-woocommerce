@@ -15,15 +15,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$form_id = uniqid("shopmagic-form-{$list_id}-");
+$form_id = uniqid( "shopmagic-form-{$list_id}-" );
 ?>
 
 <div class="shopmagic-form">
 	<form enctype="application/x-www-form-urlencoded"
-		  id="<?php echo esc_attr( $form_id ); ?>"
-		  action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
-		  method="post"
-		  target="_self">
+			id="<?php echo esc_attr( $form_id ); ?>"
+			action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
+			method="post"
+			target="_self">
 		<?php wp_nonce_field( $action ); ?>
 		<input type="hidden" name="action" value="<?php echo esc_attr( $action ); ?>">
 		<input type="hidden" name="list_id" value="<?php echo esc_attr( $list_id ); ?>">
@@ -33,25 +33,25 @@ $form_id = uniqid("shopmagic-form-{$list_id}-");
 		<?php if ( $show_name ) : ?>
 			<p class="shopmagic-form-field shopmagic-form-field-name">
 					<label class="shopmagic-label <?php echo ( ! $show_labels ) ? 'sr-only' : ''; ?>"
-						   for="shopmagic-name-<?php echo esc_attr( $list_id ); ?>"><?php esc_html_e( 'First name', 'shopmagic-for-woocommerce' ); ?>
+							for="shopmagic-name-<?php echo esc_attr( $list_id ); ?>"><?php esc_html_e( 'First name', 'shopmagic-for-woocommerce' ); ?>
 						</label>
 
 				<input id="shopmagic-name-<?php echo esc_attr( $list_id ); ?>" class="shopmagic-input shopmagic-input-name"
-					   type="text"
-					   name="name"
-					   placeholder="<?php esc_html_e( 'First name', 'shopmagic-for-woocommerce' ); ?>">
+						type="text"
+						name="name"
+						placeholder="<?php esc_html_e( 'First name', 'shopmagic-for-woocommerce' ); ?>">
 			</p>
 		<?php endif; ?>
 
 		<p class="shopmagic-form-field shopmagic-form-field-email">
 				<label class="shopmagic-label <?php echo ( ! $show_labels ) ? 'sr-only' : ''; ?>"
-					   for="shopmagic-email-<?php echo esc_attr( $list_id ); ?>"><?php esc_html_e( 'Email', 'shopmagic-for-woocommerce' ); ?>
+						for="shopmagic-email-<?php echo esc_attr( $list_id ); ?>"><?php esc_html_e( 'Email', 'shopmagic-for-woocommerce' ); ?>
 					<span class="shopmagic-required required">*</span></label>
 
 			<input id="shopmagic-email-<?php echo esc_attr( $list_id ); ?>" class="shopmagic-input shopmagic-input-email"
-				   type="email"
-				   name="email"
-				   placeholder="<?php esc_attr_e( 'Email', 'shopmagic-for-woocommerce' ); ?>" required>
+					type="email"
+					name="email"
+					placeholder="<?php esc_attr_e( 'Email', 'shopmagic-for-woocommerce' ); ?>" required>
 		</p>
 
 		<?php if ( ! empty( $agreement ) ) { ?>
@@ -65,7 +65,7 @@ $form_id = uniqid("shopmagic-form-{$list_id}-");
 
 		<p class="shopmagic-form-field shopmagic-form-field-submit">
 			<input class="shopmagic-submit" type="submit"
-				   value="<?php esc_attr_e( 'Sign up', 'shopmagic-for-woocommerce' ); ?>"/>
+					value="<?php esc_attr_e( 'Sign up', 'shopmagic-for-woocommerce' ); ?>"/>
 		</p>
 
 		<p id="shopmagic-message-<?php echo esc_attr( $list_id ); ?>" class="shopmagic-message hide"></p>
@@ -75,7 +75,7 @@ $form_id = uniqid("shopmagic-form-{$list_id}-");
 		(function () {
 			const interval = setInterval(() => {
 				if ('ShopMagic' in window) {
-					window.ShopMagic.shortcodeForm("#<?php echo esc_attr($form_id); ?>")
+					window.ShopMagic.shortcodeForm("#<?php echo esc_attr( $form_id ); ?>")
 					clearInterval(interval)
 				}
 			}, 1000)

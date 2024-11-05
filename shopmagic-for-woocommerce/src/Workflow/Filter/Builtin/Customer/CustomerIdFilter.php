@@ -18,7 +18,7 @@ final class CustomerIdFilter extends CustomerFilter {
 	}
 
 	public function get_description(): string {
-		return esc_html__('Run automation if customer ID matches the rule.', 'shopmagic-for-woocommerce');
+		return esc_html__( 'Run automation if customer ID matches the rule.', 'shopmagic-for-woocommerce' );
 	}
 
 	public function passed(): bool {
@@ -36,5 +36,4 @@ final class CustomerIdFilter extends CustomerFilter {
 	protected function get_type(): ComparisonType {
 		return new IntegerType();
 	}
-
 }

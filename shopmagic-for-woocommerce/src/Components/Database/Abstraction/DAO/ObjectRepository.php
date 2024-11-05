@@ -43,5 +43,5 @@ interface ObjectRepository {
 	 */
 	public function find_one_by( array $criteria, ?array $order = null );
 
-	//public function count( array $criteria ): int;
+	// public function count( array $criteria ): int;
 }

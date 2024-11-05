@@ -28,5 +28,4 @@ final class CommunicationListRepository {
 
 		return $options;
 	}
-
-	}
+}

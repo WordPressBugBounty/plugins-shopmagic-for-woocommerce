@@ -5,6 +5,7 @@ namespace WPDesk\ShopMagic\Helper;
 
 /**
  * Introduced for backward compatibility
+ *
  * @deprecated 3.0.9
  * @codeCoverageIgnore
  */

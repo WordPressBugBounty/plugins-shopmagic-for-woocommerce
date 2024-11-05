@@ -32,19 +32,21 @@ class OutcomeRepository extends ObjectRepository {
 	public function find_by( array $criteria, array $order = [], int $offset = 0, ?int $limit = null ): Collection {
 		$outcomes = parent::find_by( $criteria, $order, $offset, $limit );
 
-		return $outcomes->map( function ( Outcome $outcome ) {
-			try {
-				$outcome->set_note(
-					$this->meta_repository->find_one_by(
-						[ 'execution_id' => $outcome->get_id() ]
-					)
-				);
-			} catch ( CannotProvideItemException $e ) {
-				// This outcome doesn't have any notes associated.
-			}
+		return $outcomes->map(
+			function ( Outcome $outcome ) {
+				try {
+						$outcome->set_note(
+							$this->meta_repository->find_one_by(
+								[ 'execution_id' => $outcome->get_id() ]
+							)
+						);
+				} catch ( CannotProvideItemException $e ) {
+					// This outcome doesn't have any notes associated.
+				}
 
-			return $outcome;
-		} );
+				return $outcome;
+			}
+		);
 	}
 
 	protected function get_name(): string {
@@ -58,7 +60,8 @@ class OutcomeRepository extends ObjectRepository {
 	): int {
 		$newer_than = WordPressFormatHelper::datetime_as_mysql( time() - $in_days * DAY_IN_SECONDS );
 		$table      = DatabaseTable::automation_outcome();
-		$statement  = $this->wpdb->prepare( "
+		$statement  = $this->wpdb->prepare(
+			"
 		SELECT COUNT(*) FROM {$table} WHERE automation_id = %d AND customer_id = '%s' AND created >= '%s'
 		",
 			$automation_id,

@@ -13,11 +13,13 @@ class AudienceListObjectManager extends PostObjectManager {
 
 	public function do_save( object $item ): bool {
 		if ( $item->get_id() !== null ) {
-			wp_update_post( [
-				'ID'          => $item->get_id(),
-				'post_title'  => $item->get_name(),
-				'post_status' => $item->get_status(),
-			] );
+			wp_update_post(
+				[
+					'ID'          => $item->get_id(),
+					'post_title'  => $item->get_name(),
+					'post_status' => $item->get_status(),
+				]
+			);
 		} else {
 			$id = wp_insert_post(
 				[

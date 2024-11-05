@@ -43,7 +43,6 @@ class RoutesConfigurator implements \IteratorAggregate {
 			}
 		}
 
-
 		if ( $this->authorize ) {
 			foreach ( $this->routes as $route ) {
 				// Don't overwrite authorization, if it's defined per route

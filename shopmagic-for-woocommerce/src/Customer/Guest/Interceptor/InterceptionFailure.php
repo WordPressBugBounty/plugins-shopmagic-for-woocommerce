@@ -34,5 +34,4 @@ class InterceptionFailure extends \RuntimeException implements \WPDesk\ShopMagic
 			)
 		);
 	}
-
 }

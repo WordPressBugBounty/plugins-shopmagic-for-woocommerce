@@ -25,7 +25,7 @@ final class OutcomeLogger implements LoggerInterface {
 		LoggerInterface $logger,
 		OutcomeMetaManager $outcome_manager
 	) {
-		$this->logger       = $logger;
+		$this->logger          = $logger;
 		$this->outcome_manager = $outcome_manager;
 	}
 
@@ -46,16 +46,15 @@ final class OutcomeLogger implements LoggerInterface {
 		$this->logger->log( $level, $message, $context );
 	}
 
-	private function should_log_to_database(string $level): bool {
+	private function should_log_to_database( string $level ): bool {
 		if ( empty( $this->execution_id ) ) {
 			return false;
 		}
 
-		if ( \in_array( $level, [ LogLevel::DEBUG, LogLevel::INFO, LogLevel::NOTICE, LogLevel::WARNING  ], true ) ) {
+		if ( \in_array( $level, [ LogLevel::DEBUG, LogLevel::INFO, LogLevel::NOTICE, LogLevel::WARNING ], true ) ) {
 			return false;
 		}
 
 		return true;
 	}
 }
-

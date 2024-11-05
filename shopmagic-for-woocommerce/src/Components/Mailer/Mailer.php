@@ -2,7 +2,6 @@
 
 namespace WPDesk\ShopMagic\Components\Mailer;
 
-
 /**
  * Object-oriented wp_mail wrapper.
  */

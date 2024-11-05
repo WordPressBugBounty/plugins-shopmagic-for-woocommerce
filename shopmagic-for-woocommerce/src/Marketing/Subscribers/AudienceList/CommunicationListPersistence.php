@@ -22,5 +22,4 @@ final class CommunicationListPersistence extends PostMetaContainer {
 
 	/** @var string */
 	public const FIELD_CHECKBOX_DESCRIPTION_KEY = 'checkout_description';
-
 }

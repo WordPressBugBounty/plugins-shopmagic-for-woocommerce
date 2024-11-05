@@ -24,5 +24,4 @@ class AutowireDefinitionHelper extends \ShopMagicVendor\DI\Definition\Helper\Aut
 
 		return $definition;
 	}
-
 }

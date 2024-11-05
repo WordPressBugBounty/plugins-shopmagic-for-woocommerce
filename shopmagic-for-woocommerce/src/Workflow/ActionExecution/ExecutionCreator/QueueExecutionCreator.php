@@ -41,9 +41,9 @@ final class QueueExecutionCreator implements ExecutionCreator {
 		OutcomeLogger $outcome_logger,
 		Queue $queue
 	) {
-		$this->queue_client = $queue;
-		$this->processor    = $processor;
-		$this->outcome_saver = $outcome_saver;
+		$this->queue_client   = $queue;
+		$this->processor      = $processor;
+		$this->outcome_saver  = $outcome_saver;
 		$this->outcome_logger = $outcome_logger;
 	}
 

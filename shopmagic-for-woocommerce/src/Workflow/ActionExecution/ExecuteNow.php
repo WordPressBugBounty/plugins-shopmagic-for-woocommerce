@@ -73,8 +73,12 @@ final class ExecuteNow implements ExecutionStrategy, LoggerAwareInterface {
 				]
 			);
 
-			throw new ActionDisabledAfterStatusRecheckException( esc_html__( 'Order linked to Event has changed status again and is no longer consistent with this event',
-				'shopmagic-for-woocommerce' ) );
+			throw new ActionDisabledAfterStatusRecheckException(
+				esc_html__(
+					'Order linked to Event has changed status again and is no longer consistent with this event',
+					'shopmagic-for-woocommerce'
+				)
+			);
 		}
 
 		$this->processor->set_data_layer( $event->get_provided_data() );

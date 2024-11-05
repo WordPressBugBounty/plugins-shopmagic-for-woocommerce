@@ -66,5 +66,4 @@ final class FiltersValidator extends WorkflowValidator {
 
 		return parent::valid( $resources );
 	}
-
 }

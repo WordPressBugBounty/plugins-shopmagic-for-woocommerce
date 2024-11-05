@@ -58,11 +58,11 @@ final class SubscriptionFormShortcode implements HookProvider {
 
 	/**
 	 * @param array{
-	 *	id: string,
-	 *	name?: string,
-	 *	labels?: string,
-	 *	doubleOptin?: string,
-	 *	agreement?: string
+	 *  id: string,
+	 *  name?: string,
+	 *  labels?: string,
+	 *  doubleOptin?: string,
+	 *  agreement?: string
 	 * } $params
 	 */
 	private function render_form( $params ): string {
@@ -104,11 +104,11 @@ final class SubscriptionFormShortcode implements HookProvider {
 	 *
 	 * @param NewsletterForm $shortcode
 	 * @param array{
-	 *	id: string,
-	 *	name?: string,
-	 *	labels?: string,
-	 *	doubleOptin?: string,
-	 *	agreement?: string
+	 *  id: string,
+	 *  name?: string,
+	 *  labels?: string,
+	 *  doubleOptin?: string,
+	 *  agreement?: string
 	 * } $parameters
 	 *
 	 * @return NewsletterForm
@@ -180,5 +180,4 @@ final class SubscriptionFormShortcode implements HookProvider {
 		);
 		wp_set_script_translations( self::ASSETS_HANDLE, 'shopmagic-for-woocommerce' );
 	}
-
 }

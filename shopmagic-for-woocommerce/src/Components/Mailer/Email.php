@@ -105,5 +105,4 @@ class Email {
 	public function get_header( string $header ): string {
 		return $this->headers[ $header ] ?? '';
 	}
-
 }

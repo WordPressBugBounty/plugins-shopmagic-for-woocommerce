@@ -34,5 +34,4 @@ class ActionFieldNormalizer extends JsonSchemaFieldNormalizer {
 	public function supports_normalization( object $object ): bool {
 		return $object instanceof ActionField;
 	}
-
 }

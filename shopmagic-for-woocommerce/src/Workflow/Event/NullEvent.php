@@ -3,7 +3,6 @@ declare( strict_types=1 );
 
 namespace WPDesk\ShopMagic\Workflow\Event;
 
-
 use WPDesk\ShopMagic\Workflow\FieldValuesBag;
 
 /**

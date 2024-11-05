@@ -69,7 +69,7 @@ $polish_language_version = get_locale() === 'pl_PL';
 		</p>
 		<p>
 		<?php
-		echo sprintf(
+		printf(
 			wp_kses( __( 'Start by creating a new <a href="%1$s">Automation →</a> or choose one of the <a href="%2$s">ready-to-use Recipes</a>.', 'shopmagic-for-woocommerce' ), [ 'a' => [ 'href' => [] ] ] ),
 			esc_url( admin_url( 'post-new.php?post_type=shopmagic_automation' ) ),
 			esc_url( admin_url( 'edit.php?post_type=shopmagic_automation#recipes_tab' ) )

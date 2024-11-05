@@ -37,4 +37,3 @@ class RecipeDataProvider implements \WPDesk_Tracker_Data_Provider {
 		];
 	}
 }
-

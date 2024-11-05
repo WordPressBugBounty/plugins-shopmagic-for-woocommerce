@@ -69,7 +69,7 @@ class RequestToCriteria {
 		$criteria = [];
 		foreach ( $this->where_whitelist as $property => $allowed_values ) {
 			if ( isset( $filters[ $property ] ) &&
-			     $this->filter_is_allowed( $filters[ $property ], $allowed_values )
+				$this->filter_is_allowed( $filters[ $property ], $allowed_values )
 			) {
 				$criteria[ $property ] = $filters[ $property ];
 			}
@@ -97,5 +97,4 @@ class RequestToCriteria {
 	private function get_offset( int $page, int $page_size ): int {
 		return ( $page - 1 ) * $page_size;
 	}
-
 }

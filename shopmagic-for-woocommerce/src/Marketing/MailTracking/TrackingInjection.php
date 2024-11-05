@@ -9,6 +9,7 @@ use WPDesk\ShopMagic\Components\UrlGenerator\FrontendUrlGenerator;
 
 class TrackingInjection {
 	private const HTML_LINK_PATTERN = '/(<a[^>]*href=["\'])([^"\']*)/';
+
 	/** @var FrontendUrlGenerator */
 	private $url_generator;
 
@@ -19,9 +20,9 @@ class TrackingInjection {
 	public function inject_tracking_pixel( TrackedEmail $tracked_email, Email $email ): Email {
 		// Append the tracking url
 		$tracking_pixel = '<img border=0 width=1 alt="" height=1 src="' . add_query_arg(
-				[ 'c' => $tracked_email->get_message_id() ],
-				$this->url_generator->generate( 'track/sm-open' )
-			) . '" />';
+			[ 'c' => $tracked_email->get_message_id() ],
+			$this->url_generator->generate( 'track/sm-open' )
+		) . '" />';
 
 		$linebreak = uniqid(); // Hack to keep linebreaks untouched during modifications
 		$email     = $email->message( str_replace( "\n", $linebreak, $email->message ) );
@@ -37,33 +38,35 @@ class TrackingInjection {
 	}
 
 	public function inject_link_tracker( TrackedEmail $tracked_email, Email $email ): Email {
-		return $email->message( preg_replace_callback(
-			self::HTML_LINK_PATTERN,
-			function ( $matches ) use ( $tracked_email ) {
-				[ $original, $html, $uri ] = $matches;
+		return $email->message(
+			preg_replace_callback(
+				self::HTML_LINK_PATTERN,
+				function ( $matches ) use ( $tracked_email ) {
+					[ $original, $html, $uri ] = $matches;
 
-				if ( empty( $uri ) ) {
-					return $original;
-				}
+					if ( empty( $uri ) ) {
+						return $original;
+					}
 
-				$uri = $this->validate_uri( $uri );
+					$uri = $this->validate_uri( $uri );
 
-				if ( is_null( $uri ) ) {
-					return $original;
-				}
+					if ( is_null( $uri ) ) {
+						return $original;
+					}
 
-				$rawurlencode = rawurlencode( $uri );
+					$rawurlencode = rawurlencode( $uri );
 
-				return $html . add_query_arg(
+					return $html . add_query_arg(
 						[
 							'l' => $rawurlencode,
 							'c' => $tracked_email->get_message_id(),
 						],
 						$this->url_generator->generate( 'track/sm-click' )
 					);
-			},
-			$email->message
-		) );
+				},
+				$email->message
+			)
+		);
 	}
 
 	private function validate_uri( string $uri ): ?string {

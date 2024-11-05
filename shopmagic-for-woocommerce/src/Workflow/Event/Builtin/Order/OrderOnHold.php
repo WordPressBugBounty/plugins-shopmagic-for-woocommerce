@@ -29,5 +29,4 @@ final class OrderOnHold extends OrderCommonEvent {
 			2
 		);
 	}
-
 }

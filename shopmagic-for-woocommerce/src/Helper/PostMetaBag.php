@@ -54,5 +54,4 @@ class PostMetaBag extends ParameterBag {
 
 		return $new_value !== $old_value;
 	}
-
 }

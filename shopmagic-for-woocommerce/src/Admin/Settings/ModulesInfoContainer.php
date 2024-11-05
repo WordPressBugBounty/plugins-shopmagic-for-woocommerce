@@ -77,7 +77,7 @@ class ModulesInfoContainer implements PersistentContainer {
 
 	private function is_module_active( string $module_slug ): bool {
 		return $this->wrapper_container->has( $module_slug ) &&
-		       (int) $this->wrapper_container->get( $module_slug ) === self::INTERNAL_MODULE_ENABLED;
+				(int) $this->wrapper_container->get( $module_slug ) === self::INTERNAL_MODULE_ENABLED;
 	}
 
 	/**
@@ -85,14 +85,18 @@ class ModulesInfoContainer implements PersistentContainer {
 	 */
 	public function get_active_modules(): array {
 		$shopmagic_extensions = ( new ArrayCollection( array_keys( get_plugins() ) ) )
-			->filter( static function ( string $plugin ) {
-				return str_contains( $plugin, 'shopmagic-' ) && WordPressPluggableHelper::is_plugin_active( $plugin );
-			} )
-			->map( static function ( string $plugin ) {
-				$plugin_base = explode( '/', $plugin );
+			->filter(
+				static function ( string $plugin ) {
+					return str_contains( $plugin, 'shopmagic-' ) && WordPressPluggableHelper::is_plugin_active( $plugin );
+				}
+			)
+			->map(
+				static function ( string $plugin ) {
+					$plugin_base = explode( '/', $plugin );
 
-				return $plugin_base[0];
-			} );
+					return $plugin_base[0];
+				}
+			);
 
 		if ( $this->is_module_active( 'multilingual-module' ) ) {
 			$shopmagic_extensions[] = 'multilingual-module';

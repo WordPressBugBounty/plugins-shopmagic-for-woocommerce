@@ -67,5 +67,4 @@ class PluginBag {
 	public function get_migrations_path(): string {
 		return $this->plugin_info->get_plugin_dir() . '/migrations';
 	}
-
 }

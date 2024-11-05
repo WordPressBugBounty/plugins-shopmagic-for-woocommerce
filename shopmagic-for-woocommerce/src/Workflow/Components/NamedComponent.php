@@ -29,5 +29,4 @@ interface NamedComponent {
 	 * It is fine to return an empty string, if you don't want to present any description.
 	 */
 	public function get_description(): string;
-
 }

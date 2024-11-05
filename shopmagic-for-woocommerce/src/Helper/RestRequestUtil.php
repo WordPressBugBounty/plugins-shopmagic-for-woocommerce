@@ -19,10 +19,9 @@ class RestRequestUtil {
 			return false;
 		}
 
-		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
+		$rest_prefix = trailingslashit( rest_get_url_prefix() );
 
 		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		return ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) );
 	}
-
 }

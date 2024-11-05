@@ -44,15 +44,17 @@ class GuestRepository extends ObjectRepository {
 	public function find_by( array $criteria, array $order = [], int $offset = 0, ?int $limit = null ): Collection {
 		$guest_collection = parent::find_by( $criteria, $order, $offset, $limit );
 
-		return $guest_collection->map( function ( Guest $guest ) {
-			$guest->set_meta(
-				$this->meta_repository->find_by(
-					[ 'guest_id' => $guest->get_raw_id() ]
-				)
-			);
+		return $guest_collection->map(
+			function ( Guest $guest ) {
+				$guest->set_meta(
+					$this->meta_repository->find_by(
+						[ 'guest_id' => $guest->get_raw_id() ]
+					)
+				);
 
-			return $guest;
-		} );
+				return $guest;
+			}
+		);
 	}
 
 	/**
