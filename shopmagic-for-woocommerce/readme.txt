@@ -4,9 +4,9 @@ Tags: customize woocommerce emails, follow up emails, woocommerce email customiz
 Author URL: https://shopmagic.app/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=author-url&utm_content=home
 Donate link: https://shopmagic.app/
 Requires at least: 6.3
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 4.3.7
+Stable tag: 4.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -405,8 +405,8 @@ You can also choose one from the list below based on your needs.
 
 == Changelog ==
 
-= 4.3.7 - 2024-11-05 =
-* Capturing guest data before checkout submission now works with WooCommerce Checkout Blocks.
+= 4.3.8 - 2024-11-13 =
+* Added support for WordPress 6.7
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

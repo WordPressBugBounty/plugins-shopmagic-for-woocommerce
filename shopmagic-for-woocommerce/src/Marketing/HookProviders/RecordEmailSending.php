@@ -67,6 +67,6 @@ class RecordEmailSending implements HookProvider, Conditional {
 
 	/** This extension is enabled by default, thus we check if it's not disabled. */
 	public static function is_needed(): bool {
-		return filter_var( GeneralSettings::get_option( 'enable_email_tracking', true ), \FILTER_VALIDATE_BOOL ) !== false;
+		return filter_var( GeneralSettings::get_option( 'enable_email_tracking', true ), \FILTER_VALIDATE_BOOLEAN ) !== false;
 	}
 }
