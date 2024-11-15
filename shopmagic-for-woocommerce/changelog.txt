@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.3.9] - 2024-11-15
+### Fixed
+- Fix translations missing on non-english websites.
+
 ## [4.3.8] - 2024-11-13
 ### Added
 - Support for WordPress 6.7
