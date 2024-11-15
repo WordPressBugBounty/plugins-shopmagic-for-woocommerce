@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.3.10] - 2024-11-15
+### Fixed
+- Fix translations missing on non-english websites.
+
 ## [4.3.9] - 2024-11-15
 ### Fixed
 - Fix translations missing on non-english websites.
