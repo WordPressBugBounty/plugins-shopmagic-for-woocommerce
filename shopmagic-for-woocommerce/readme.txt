@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 4.3.10
+Stable tag: 4.3.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -405,8 +405,8 @@ You can also choose one from the list below based on your needs.
 
 == Changelog ==
 
-= 4.3.10 - 2024-11-15 =
-* Fix translations missing on non-english websites.
+= 4.3.11 - 2024-11-19 =
+* Improve WP 6.7 integration with i18n functions.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

@@ -25,6 +25,7 @@ abstract class AbstractMigrationsRepository implements MigrationsRepository
         $this->comparator = $comparator;
         $this->migrations_source = $migrations_source;
     }
+    /** @param class-string<AbstractMigration> $migration_class_name */
     public function register_migration(string $migration_class_name): void
     {
         $migration = $this->version_factory->create_version($migration_class_name);

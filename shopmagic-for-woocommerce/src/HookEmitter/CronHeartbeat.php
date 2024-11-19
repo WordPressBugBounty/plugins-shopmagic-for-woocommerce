@@ -19,9 +19,7 @@ final class CronHeartbeat implements Hookable {
 	/** @var string */
 	private const DISPLAY = 'display';
 
-	/**
-	 * @return array<string, array<string, mixed>>
-	 */
+	/** @return array<string, array{interval: int, display: string}> */
 	private function get_workers(): array {
 		return [
 			'shopmagic/core/cron/one_minute'      => [
@@ -67,6 +65,22 @@ final class CronHeartbeat implements Hookable {
 		];
 	}
 
+	/** @return string[] */
+	private function get_cron_hooks(): array {
+		return [
+			'shopmagic/core/cron/one_minute',
+			'shopmagic/core/cron/two_minutes',
+			'shopmagic/core/cron/five_minutes',
+			'shopmagic/core/cron/fifteen_minutes',
+			'shopmagic/core/cron/thirty_minutes',
+			'shopmagic/core/cron/hourly',
+			'shopmagic/core/cron/four_hours',
+			'shopmagic/core/cron/daily',
+			'shopmagic/core/cron/two_days',
+			'shopmagic/core/cron/weekly',
+		];
+	}
+
 	public function hooks(): void {
 		add_filter(
 			'cron_schedules',
@@ -75,7 +89,7 @@ final class CronHeartbeat implements Hookable {
 			},
 			100
 		);
-		foreach ( array_keys( $this->get_workers() ) as $hook ) {
+		foreach ( $this->get_cron_hooks() as $hook ) {
 			add_action(
 				$hook,
 				function () {

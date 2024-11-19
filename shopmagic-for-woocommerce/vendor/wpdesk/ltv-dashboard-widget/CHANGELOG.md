@@ -1,3 +1,7 @@
+## 1.5.8 - 2024-11-18
+### Fixed
+- Possible preemptive execution of translation function, when main library class is instantiated directly before `init` hook.
+
 ## 1.5.7 - 2024-10-14
 ### Fixed
 - Error notice in strnatcmp function when priority is null.

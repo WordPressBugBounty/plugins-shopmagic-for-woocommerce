@@ -30,7 +30,7 @@ final class GlobFinder implements MigrationFinder
         foreach ($files as $file) {
             require_once $file;
             $real_file = realpath($file);
-            if (!$real_file) {
+            if ($real_file === \false) {
                 continue;
             }
             $included_files[] = $real_file;

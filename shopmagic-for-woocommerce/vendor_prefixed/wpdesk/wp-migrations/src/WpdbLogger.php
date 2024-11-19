@@ -16,9 +16,9 @@ class WpdbLogger implements \ShopMagicVendor\Psr\Log\LoggerInterface
     {
         $this->log_name = $log_name;
     }
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
-        if (empty($this->log)) {
+        if (count($this->log) === 0) {
             $this->log = json_decode(get_option($this->log_name, '[]'));
         }
         $this->log[] = date('Y-m-d G:i:s') . sprintf(': %s', $message);

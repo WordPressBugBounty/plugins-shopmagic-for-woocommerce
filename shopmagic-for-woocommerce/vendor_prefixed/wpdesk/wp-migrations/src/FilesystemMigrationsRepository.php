@@ -20,7 +20,7 @@ final class FilesystemMigrationsRepository extends AbstractMigrationsRepository
         parent::__construct($migration_directories, $version_factory, $comparator);
         $this->migration_finder = $migration_finder;
     }
-    /** @param string[] $migrations */
+    /** @param class-string<AbstractMigration>[] $migrations */
     private function register_migrations(array $migrations): void
     {
         foreach ($migrations as $migration) {

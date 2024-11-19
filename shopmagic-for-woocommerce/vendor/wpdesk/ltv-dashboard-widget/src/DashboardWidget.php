@@ -65,10 +65,13 @@ final class DashboardWidget {
 
 
     public function __construct() {
-        $this->widget_title        = __( 'Grow your business with WP Desk', 'wpdesk_ltv_dashboard_widget' );
         $this->cache_timeout       = ( 24 * 60 * 60 );
         $this->cache_retry_timeout = ( 6 * 60 * 60 );
         $this->locale              = get_user_locale();
+    }
+
+    private static function get_default_widget_title(): string {
+        return __( 'Grow your business with WP Desk', 'wpdesk_ltv_dashboard_widget' );
     }
 
     public function set_widget_title( string $title ) {
@@ -113,7 +116,7 @@ final class DashboardWidget {
     public function add_widget() {
         wp_add_dashboard_widget(
             self::ID,
-            $this->widget_title,
+            $this->widget_title ?: self::get_default_widget_title(),
             [ $this, 'widget_output' ],
             null,
             null,

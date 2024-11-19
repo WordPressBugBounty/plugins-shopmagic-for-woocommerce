@@ -54,7 +54,7 @@ class WpdbMigrator implements Migrator
         if ($last_migration === \false) {
             return \false;
         }
-        if ($this->comparator->compare($last_migration->get_version(), $this->get_current_version())) {
+        if ($this->comparator->compare($last_migration->get_version(), $this->get_current_version()) > 0) {
             return \true;
         }
         return \false;
@@ -83,7 +83,12 @@ class WpdbMigrator implements Migrator
         foreach ($this->migrations_repository->get_migrations() as $migration) {
             if ($this->comparator->compare($migration->get_version(), $this->get_current_version()) > 0) {
                 $this->logger->info(sprintf('DB update %s:%s', $current_version, $migration->get_version()));
-                $success = $migration->get_migration()->up();
+                $success = null;
+                if ($migration->get_migration()->is_needed()) {
+                    $success = $migration->get_migration()->up();
+                } else {
+                    $success = \true;
+                }
                 if ($success) {
                     $this->logger->info(sprintf('DB update %s:%s -> ', $current_version, $migration->get_version()) . 'OK');
                     update_option($this->option_name, (string) $migration->get_version(), \true);

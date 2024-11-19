@@ -1,5 +1,6 @@
 <?php
 
+// phpcs:disable WordPress.PHP.DiscouragedPHPFunctions
 namespace ShopMagicVendor\WPDesk\Forms\Serializer;
 
 use ShopMagicVendor\WPDesk\Forms\Serializer;

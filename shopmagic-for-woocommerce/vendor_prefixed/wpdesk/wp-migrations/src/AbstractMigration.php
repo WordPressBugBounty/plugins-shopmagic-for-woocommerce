@@ -16,7 +16,13 @@ abstract class AbstractMigration
         $this->logger = $logger;
     }
     abstract public function up(): bool;
-    public function down(): void
+    /**
+     * Allow to skip migration if it is not needed. Tracking of migration version just by wp_options
+     * value may be subject to random issues, so as a backup, this method can be used to avoid
+     * errornous migrations like creating alredy exising columns.
+     */
+    public function is_needed(): bool
     {
+        return \true;
     }
 }
