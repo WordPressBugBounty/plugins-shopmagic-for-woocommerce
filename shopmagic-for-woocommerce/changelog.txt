@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.3.12] - 2024-11-21 
+### Added
+- Support for WooCommerce 9.5
+
 ## [4.3.11] - 2024-11-19
 ### Fixed
 - Improve WP 6.7 integration with i18n functions.
