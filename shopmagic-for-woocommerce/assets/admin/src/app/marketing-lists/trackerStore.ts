@@ -1,42 +1,38 @@
 import { defineStore } from "pinia";
 import useSWRV from "@/_utils/swrv";
-import { computed, ref, watchEffect } from "vue";
-import useSwrvState from "@/composables/useSwrvState";
+import type { Query } from "@/_utils";
+import { ref } from "vue";
+import { appendSearchParams } from "@/composables/useSearchParams";
 
 export const useTrackerStore = defineStore("tracker", () => {
-  const loading = ref(false);
   const perAutomation = ref([]);
+  const automationsUrl = ref("/automations/stats");
+  const clientsUrl = ref("/clients/stats");
 
-  const automations = computed(() => {
-    const { data } = useSWRV("/automations/stats");
+  const { data: automations } = useSWRV(automationsUrl);
+  const { data: customers } = useSWRV(clientsUrl);
 
-    return data.value;
-  });
+  function fetchAutomations(query?: Query) {
+    if (query) {
+      automationsUrl.value = appendSearchParams("/automations/stats/", query);
+    } else {
+      automationsUrl.value = "/automations/stats/";
+    }
+  }
 
-  const customers = computed(() => {
-    const { data } = useSWRV("/clients/stats");
-
-    return data.value;
-  });
-
-  function getAutomationStats() {
-    loading.value = true;
-    const { data: automationStats, error, isValidating } = useSWRV("/automations/stats");
-    const { isAwating } = useSwrvState(automationStats, error, isValidating);
-
-    watchEffect(() => {
-      if (!isAwating.value) {
-        perAutomation.value = automationStats.value;
-        loading.value = false;
-      }
-    });
+  function fetchCustomers(query?: Query) {
+    if (query) {
+      clientsUrl.value = appendSearchParams("/clients/stats/", query);
+    } else {
+      clientsUrl.value = "/clients/stats/";
+    }
   }
 
   return {
     automations,
     customers,
     perAutomation,
-    getAutomationStats,
-    loading,
+    fetchAutomations,
+    fetchCustomers,
   };
 });

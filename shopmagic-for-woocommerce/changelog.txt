@@ -1,6 +1,11 @@
 # ShopMagic Changelog
 
-## [4.3.12] - 2024-11-21 
+## [4.3.13] - 2024-12-18
+### Fixed
+- Fixed email styling shift when email tracking is enabled.
+- On admin page view fixed pagination for the tracked emails. Now you can properly view all of your leads and their performance.
+
+## [4.3.12] - 2024-11-21
 ### Added
 - Support for WooCommerce 9.5
 

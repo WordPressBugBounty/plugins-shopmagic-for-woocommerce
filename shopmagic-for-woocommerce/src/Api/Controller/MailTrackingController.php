@@ -55,57 +55,62 @@ class MailTrackingController {
 		$page      = $request->get_param( 'page' );
 		$page_size = $request->get_param( 'pageSize' );
 
-		return new \WP_REST_Response(
-			$this->repository->find_all()
-					->filter(
-						function ( TrackedEmail $email ) {
-							return $email->get_automation_id() !== 0;
+		$all_statistics = $this->repository->find_all()
+				->filter(
+					function ( TrackedEmail $email ) {
+						return $email->get_automation_id() !== 0;
+					}
+				)
+				->reduce(
+					function ( ArrayCollection $carry, TrackedEmail $email ): ArrayCollection {
+						if ( ! isset( $carry[ $email->get_automation_id() ] ) ) {
+								$carry[ $email->get_automation_id() ] = new EmailStatsCounter();
 						}
-					)
-							->reduce(
-								function ( ArrayCollection $carry, TrackedEmail $email ): ArrayCollection {
-									if ( ! isset( $carry[ $email->get_automation_id() ] ) ) {
-											$carry[ $email->get_automation_id() ] = new EmailStatsCounter();
-									}
 
-									$per_automation = $carry[ $email->get_automation_id() ];
-									$per_automation->increase_sent();
-									if ( $email->get_opened_at() !== null ) {
-											$per_automation->increase_open();
-									}
+						$per_automation = $carry[ $email->get_automation_id() ];
+						$per_automation->increase_sent();
+						if ( $email->get_opened_at() !== null ) {
+								$per_automation->increase_open();
+						}
 
-									if ( $email->get_clicked_at() !== null ) {
-										$per_automation->increase_click();
-									}
+						if ( $email->get_clicked_at() !== null ) {
+							$per_automation->increase_click();
+						}
 
-									$carry[ $email->get_automation_id() ] = $per_automation;
+						$carry[ $email->get_automation_id() ] = $per_automation;
 
-									return $carry;
-								},
-								new ArrayCollection()
-							)
-							->slice( ( $page - 1 ) * $page_size, $page_size )
-							->map(
-								function ( EmailStatsCounter $counter, $automation_id ) use ( $repository ) {
-									try {
-											$automation_object = $repository->find( $automation_id );
-											$automation_name   = $automation_object->get_name();
-									} catch ( AutomationNotFound $e ) {
-											$automation_name = null;
-									}
+						return $carry;
+					},
+					new ArrayCollection()
+				);
 
-									return [
-										'automation' => [
-											'id'   => $automation_id,
-											'name' => $automation_name,
-										],
-										'count'      => $counter->get_sent(),
-										'openRate'   => $counter->get_open_rate(),
-										'clickRate'  => $counter->get_click_rate(),
-									];
+		return new \WP_REST_Response(
+			[
+				'total' => count( $all_statistics ),
+				'items' => $all_statistics
+					->slice( ( $page - 1 ) * $page_size, $page_size )
+						->map(
+							function ( EmailStatsCounter $counter, $automation_id ) use ( $repository ) {
+								try {
+										$automation_object = $repository->find( $automation_id );
+										$automation_name   = $automation_object->get_name();
+								} catch ( AutomationNotFound $e ) {
+										$automation_name = null;
 								}
-							)
-							->to_array()
+
+								return [
+									'automation' => [
+										'id'   => $automation_id,
+										'name' => $automation_name,
+									],
+									'count'      => $counter->get_sent(),
+									'openRate'   => $counter->get_open_rate(),
+									'clickRate'  => $counter->get_click_rate(),
+								];
+							}
+						)
+							->to_array(),
+			]
 		);
 	}
 
@@ -113,44 +118,47 @@ class MailTrackingController {
 		$page      = $request->get_param( 'page' );
 		$page_size = $request->get_param( 'pageSize' );
 
+		$all_statistics = $this->repository->find_all()
+				->reduce(
+					function ( ArrayCollection $carry, TrackedEmail $email ) {
+						if ( ! isset( $carry[ $email->get_recipient_email() ] ) ) {
+								$carry[ $email->get_recipient_email() ] = new EmailStatsCounter();
+						}
+
+						$per_customer = $carry[ $email->get_recipient_email() ];
+						$per_customer->increase_sent();
+						if ( $email->get_opened_at() !== null ) {
+								$per_customer->increase_open();
+						}
+
+						if ( $email->get_clicked_at() !== null ) {
+							$per_customer->increase_click();
+						}
+
+						$carry[ $email->get_recipient_email() ] = $per_customer;
+
+						return $carry;
+					},
+					new ArrayCollection()
+				);
+
 		return new \WP_REST_Response(
-			$this->repository->find_all()
-					->reduce(
-						function ( ArrayCollection $carry, TrackedEmail $email ) {
-							if ( ! isset( $carry[ $email->get_recipient_email() ] ) ) {
-									$carry[ $email->get_recipient_email() ] = new EmailStatsCounter();
-							}
-
-							$per_customer = $carry[ $email->get_recipient_email() ];
-							$per_customer->increase_sent();
-							if ( $email->get_opened_at() !== null ) {
-									$per_customer->increase_open();
-							}
-
-							if ( $email->get_clicked_at() !== null ) {
-								$per_customer->increase_click();
-							}
-
-							$carry[ $email->get_recipient_email() ] = $per_customer;
-
-							return $carry;
-						},
-						new ArrayCollection()
-					)
-							->slice( ( $page - 1 ) * $page_size, $page_size )
-							->map(
-								function ( EmailStatsCounter $counter, string $customer_email ) {
-									return [
-										'customer'  => [
-											'email' => $customer_email,
-										],
-										'count'     => $counter->get_sent(),
-										'openRate'  => $counter->get_open_rate(),
-										'clickRate' => $counter->get_click_rate(),
-									];
-								}
-							)
-							->to_array()
+			[
+				'total' => count( $all_statistics ),
+				'items' => $all_statistics->slice( ( $page - 1 ) * $page_size, $page_size )
+					->map(
+						function ( EmailStatsCounter $counter, string $customer_email ) {
+							return [
+								'customer'  => [
+									'email' => $customer_email,
+								],
+								'count'     => $counter->get_sent(),
+								'openRate'  => $counter->get_open_rate(),
+								'clickRate' => $counter->get_click_rate(),
+							];
+						}
+					)->to_array(),
+			]
 		);
 	}
 }

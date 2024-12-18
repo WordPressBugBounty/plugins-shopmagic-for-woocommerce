@@ -19,10 +19,13 @@ class TrackingInjection {
 
 	public function inject_tracking_pixel( TrackedEmail $tracked_email, Email $email ): Email {
 		// Append the tracking url
-		$tracking_pixel = '<img border=0 width=1 alt="" height=1 src="' . add_query_arg(
-			[ 'c' => $tracked_email->get_message_id() ],
-			$this->url_generator->generate( 'track/sm-open' )
-		) . '" />';
+		$tracking_pixel = sprintf(
+			'<img alt="" border="0" width="1" height="1" src="%s" style="height:1px;width:1px;border-width:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" />',
+			add_query_arg(
+				[ 'c' => $tracked_email->get_message_id() ],
+				$this->url_generator->generate( 'track/sm-open' )
+			)
+		);
 
 		$linebreak = uniqid(); // Hack to keep linebreaks untouched during modifications
 		$email     = $email->message( str_replace( "\n", $linebreak, $email->message ) );

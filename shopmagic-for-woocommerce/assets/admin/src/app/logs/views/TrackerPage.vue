@@ -22,21 +22,23 @@ const tableFilters = reactive<Filters>({
     <NTabPane :tab="__('Per Automation', 'shopmagic-for-woocommerce')" name="automation">
       <DataTable
         :columns="trackerPerAutomation"
-        :data="automations || []"
+        :data="automations?.items || []"
         :error="null"
         :filters="tableFilters"
         :loading="automations === undefined"
-        :total-count="automations?.length || 0"
+        :total-count="automations?.total || 0"
+        @update:data="store.fetchAutomations"
       />
     </NTabPane>
     <NTabPane :tab="__('Per Customer', 'shopmagic-for-woocommerce')" name="customer">
       <DataTable
         :columns="trackerPerCustomer"
-        :data="customers || []"
+        :data="customers?.items || []"
         :error="null"
         :filters="tableFilters"
         :loading="customers === undefined"
-        :total-count="customers?.length || 0"
+        :total-count="customers?.total || 0"
+        @update:data="store.fetchCustomers"
       />
     </NTabPane>
   </NTabs>
