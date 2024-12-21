@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 4.3.13
+Stable tag: 4.3.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -404,6 +404,9 @@ You can also choose one from the list below based on your needs.
 37. Read the documentation about how to customize emails and email marketing in WooCommerce.
 
 == Changelog ==
+
+= 4.3.14 - 2024-12-21 =
+* Added support for WooCommerce 9.6
 
 = 4.3.13 - 2024-12-18 =
 * Fixed email styling shift when email tracking is enabled.

@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.3.14] - 2024-12-21 
+### Added
+- Support for WooCommerce 9.6
+
 ## [4.3.13] - 2024-12-18
 ### Fixed
 - Fixed email styling shift when email tracking is enabled.
