@@ -129,7 +129,6 @@ final class CurrentCustomer implements Hookable, CustomerProvider, Conditional {
 	}
 
 	private function get_raw_tracking_data(): string {
-		// @phpstan-ignore instanceof.alwaysTrue
 		if ( function_exists( 'WC' ) && WC()->session instanceof \WC_Session ) {
 			$raw_data = WC()->session->get( self::SESSION_TRACKING_DATA_KEY );
 			if ( ! empty( $raw_data ) ) {
@@ -289,7 +288,6 @@ final class CurrentCustomer implements Hookable, CustomerProvider, Conditional {
 	 */
 	public function remember_tracking_key(): void {
 		$encoded_tracking_data = $this->encode_tracking_data();
-		// @phpstan-ignore instanceof.alwaysTrue
 		if ( WC()->session instanceof \WC_Session ) {
 			WC()->session->set( self::SESSION_TRACKING_DATA_KEY, $encoded_tracking_data );
 		}

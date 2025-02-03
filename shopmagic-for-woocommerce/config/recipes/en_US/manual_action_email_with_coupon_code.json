@@ -20,5 +20,8 @@
 	  "_action_title": "One-time manual special offer email with coupon code",
 	  "_action": "shopmagic_sendemail_action"
 	}
-  ]
+  ],
+	"meta": {
+		"requires": {"shopmagic-manual-actions": "ShopMagic Manual Actions"}
+	}
 }

@@ -28,5 +28,10 @@
 	  "_action_title": "Thank you email for 5 star review",
 	  "_action": "shopmagic_sendemail_action"
 	}
-  ]
+  ],
+	"meta": {
+		"requires": {
+			"shopmagic-reviews": "ShopMagic Review Request"
+		}
+	}
 }

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wpdesk/shopmagic-for-woocommerce',
-        'pretty_version' => '4.3.14',
-        'version' => '4.3.14.0',
-        'reference' => 'c83b90c76953923ba3a743a421d7ad470b74ef38',
+        'pretty_version' => '4.3.15',
+        'version' => '4.3.15.0',
+        'reference' => '1b894f3e9d5d673b99d13c888e0e9f3f55ba9cd2',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -77,9 +77,9 @@
             'dev_requirement' => false,
         ),
         'woocommerce/action-scheduler' => array(
-            'pretty_version' => '3.9.0',
-            'version' => '3.9.0.0',
-            'reference' => '90b98e6fe97d455679b1d288f050cad8f6f79771',
+            'pretty_version' => '3.9.1',
+            'version' => '3.9.1.0',
+            'reference' => 'd73b5f83cd42832fa137e03687bad3e312298d29',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../woocommerce/action-scheduler',
             'aliases' => array(),
@@ -95,9 +95,9 @@
             'dev_requirement' => false,
         ),
         'wpdesk/shopmagic-for-woocommerce' => array(
-            'pretty_version' => '4.3.14',
-            'version' => '4.3.14.0',
-            'reference' => 'c83b90c76953923ba3a743a421d7ad470b74ef38',
+            'pretty_version' => '4.3.15',
+            'version' => '4.3.15.0',
+            'reference' => '1b894f3e9d5d673b99d13c888e0e9f3f55ba9cd2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

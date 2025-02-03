@@ -42,12 +42,13 @@ abstract class UserCommonEvent extends Event implements CustomerAwareInterface {
 				return;
 			} catch ( CustomerNotFound $e ) {
 				throw new ReferenceNoLongerAvailableException(
-					esc_html__(
-						sprintf(
+					sprintf(
+						// translators: %s - user ID
+						esc_html__(
 							'User %s no longer exists.',
-							$serialized_json['user_id']
+							'shopmagic-for-woocommerce'
 						),
-						'shopmagic-for-woocommerce'
+						esc_html( $serialized_json['user_id'] )
 					)
 				);
 			}

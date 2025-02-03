@@ -29,5 +29,8 @@
          "_action_title":"E-mail powitalny. Automatyzacja na pierwsze zam\u00f3wienie z produktami oznaczonymi jako cross-sells",
          "_action":"shopmagic_sendemail_action"
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-advanced-filters": "ShopMagic Zaawansowane Filtry"}
+	}
 }

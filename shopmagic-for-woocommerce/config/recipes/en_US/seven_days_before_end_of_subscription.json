@@ -1,6 +1,6 @@
 {
   "name": "7 days before the end of subscription email",
-  "description": "Automation which reminds about the end of subscription. It is sent 7 days before the end of subscription, but you can change and adjust this time period to your needs.",
+  "description": "Automation which reminds about the end of subscription. It is sent 7 days before the end of subscription, but you can change and adjust this time period to your needs",
   "event": {
 	"slug": "subscription_before_end_event",
 	"data": {
@@ -21,5 +21,8 @@
 	  "_action_title": "7 days before the end of subscription email",
 	  "_action": "shopmagic_sendemail_action"
 	}
-  ]
+  ],
+	"meta": {
+		"requires": {"shopmagic-woocommerce-subscriptions": "ShopMagic WooCommerce Subscriptions"}
+	}
 }

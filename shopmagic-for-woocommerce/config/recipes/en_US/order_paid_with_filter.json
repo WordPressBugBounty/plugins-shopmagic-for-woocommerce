@@ -30,5 +30,8 @@
 	  "_action_title": "Order Paid with Order - Items filter and order details placeholder",
 	  "_action": "shopmagic_sendemail_action"
 	}
-  ]
+  ],
+	"meta": {
+		"requires": {"shopmagic-advanced-filters": "ShopMagic Advanced Filters"}
+	}
 }

@@ -49,7 +49,7 @@ abstract class ObjectRepository implements DAO\ObjectRepository {
 			$this->get_name(),
 			$this->build_primary_key_value_for_prepare( $this->get_primary_key() )
 		);
-		$result = $this->wpdb->get_row( $this->wpdb->prepare( $sql, $id ), ARRAY_A );
+		$result = $this->wpdb->get_row( $this->wpdb->prepare( $sql, $id ), ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- false positive
 
 		if ( is_array( $result ) ) {
 			return $this->denormalizer->denormalize( $result );
@@ -131,7 +131,9 @@ abstract class ObjectRepository implements DAO\ObjectRepository {
 			}
 		}
 
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- false positive
 		return $this->wpdb->prepare( ' ' . implode( ' AND ', $where_clauses ), $where_values );
+		// phpcs:enable
 	}
 
 	/**

@@ -75,7 +75,7 @@ class SubscribersController {
 
 		return new \WP_REST_Response(
 			[
-				'title' => esc_html__( 'Currently, audience can be exported only as CSV.' ),
+				'title' => esc_html__( 'Currently, audience can be exported only as CSV.', 'shopmagic-for-woocommerce' ),
 				'code'  => \WP_Http::NOT_IMPLEMENTED,
 			],
 			\WP_Http::NOT_IMPLEMENTED
@@ -145,7 +145,7 @@ class SubscribersController {
 
 		return new \WP_REST_Response(
 			[
-				'title' => esc_html__( 'Currently, audience can be imported only from CSV.' ),
+				'title' => esc_html__( 'Currently, audience can be imported only from CSV.', 'shopmagic-for-woocommerce' ),
 				'code'  => \WP_Http::NOT_IMPLEMENTED,
 			],
 			\WP_Http::NOT_IMPLEMENTED
@@ -192,9 +192,9 @@ class SubscribersController {
 			$success = $subscriber_service->subscribe( $email, $id );
 
 			if ( $success ) {
-				$imported += 1;
+				++$imported;
 			} else {
-				$errors += 1;
+				++$errors;
 			}
 		}
 

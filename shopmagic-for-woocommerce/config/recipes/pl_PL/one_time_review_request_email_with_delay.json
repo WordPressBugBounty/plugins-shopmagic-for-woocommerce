@@ -36,5 +36,8 @@
          "_action_variable_string":"",
          "_action_delayed_offset_time":604800
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-advanced-filters": "ShopMagic Zaawansowane Filtry", "shopmagic-delayed-actions": "ShopMagic Opóźnione Akcje"}
+	}
 }

@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace WPDesk\ShopMagic\Tracker\Provider;
 
-use WPDesk\ShopMagic\Recipe\Recipe;
-
 /**
  * Provides info about recipe usage.
  */

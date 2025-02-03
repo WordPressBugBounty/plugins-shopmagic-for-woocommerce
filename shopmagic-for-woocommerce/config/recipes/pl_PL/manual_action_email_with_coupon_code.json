@@ -22,5 +22,8 @@
          "_action_title":"Manualna automatyzacja z ofert\u0105 specjaln\u0105 oraz kuponem rabatowym.",
          "_action":"shopmagic_sendemail_action"
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-manual-actions": "ShopMagic Manual Actions"}
+	}
 }

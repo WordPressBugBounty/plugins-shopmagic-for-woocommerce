@@ -45,7 +45,7 @@ class TrackerNotices implements HookProvider {
 		ob_start();
 		?>
 		<?php printf( esc_html__( 'Hey %s,', 'shopmagic-for-woocommerce' ), esc_html( $username ) ); ?><br/>
-		<?php _e( 'We need your help to improve <strong>ShopMagic</strong>, so it\'s more useful for you and the rest of our <strong>80,000+ users</strong>. By collecting data on how you use our plugins, you will help us a lot. We will not collect any sensitive data, so you can feel safe.', 'shopmagic-for-woocommerce' ); ?>
+		<?php echo wp_kses_post( __( 'We need your help to improve <strong>ShopMagic</strong>, so it\'s more useful for you and the rest of our <strong>80,000+ users</strong>. By collecting data on how you use our plugins, you will help us a lot. We will not collect any sensitive data, so you can feel safe.', 'shopmagic-for-woocommerce' ) ); ?>
 		<a href="<?php echo esc_url( self::USAGE_DATA_URL ); ?>" target="_blank"><?php esc_html_e( 'Find out more &raquo;', 'shopmagic-for-woocommerce' ); ?></a><br/>
 		<?php esc_html_e( 'Thank you! ~ Mac @ ShopMagic Team', 'shopmagic-for-woocommerce' ); ?>
 		<?php

@@ -18,6 +18,7 @@ use ShopMagicVendor\WPDesk\View\Resolver\DirResolver;
 use WPDesk\ShopMagic\Admin;
 use WPDesk\ShopMagic\Api\Controller\AutomationController;
 use WPDesk\ShopMagic\Api\Controller\LogController;
+use WPDesk\ShopMagic\Api\Controller\RecipesController;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\ActionFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\CheckboxFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\DateFieldNormalizer;
@@ -32,6 +33,7 @@ use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\SelectFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\TextFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\TimeFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\NormalizerCollection;
+use WPDesk\ShopMagic\Api\Normalizer\RecipeAutomationNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\SubscriberHydrator;
 use WPDesk\ShopMagic\Api\Normalizer\WorkflowAutomationDenormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\WorkflowAutomationNormalizer;
@@ -61,6 +63,7 @@ use WPDesk\ShopMagic\Customer\Guest\Interceptor\GuestOrderIntegration;
 use WPDesk\ShopMagic\Customer\Guest\Interceptor\GuestOrderUpdate;
 use WPDesk\ShopMagic\Customer\Guest\Interceptor\GuestProductIntegration;
 use WPDesk\ShopMagic\Customer\Guest\Interceptor\OrderGuestInterceptor;
+use WPDesk\ShopMagic\Customer\Guest\Interceptor\OnCustomerEmailChange;
 use WPDesk\ShopMagic\Customer\HookProvider\MergeGuestUserOnRegistration;
 use WPDesk\ShopMagic\Customer\Interceptor\CompositeCustomerProvider;
 use WPDesk\ShopMagic\Customer\Interceptor\RegisteredCustomerProvider;
@@ -132,6 +135,7 @@ use WPDesk\ShopMagic\Workflow\Queue\Queue;
 use WPDesk\ShopMagic\Workflow\Validator\FailingLanguageValidator;
 use WPDesk\ShopMagic\Workflow\WorkflowInitializer;
 use function ShopMagicVendor\DI\create;
+use function ShopMagicVendor\DI\string;
 use function ShopMagicVendor\DI\factory;
 use function ShopMagicVendor\DI\get;
 
@@ -162,6 +166,7 @@ return [
 		autowire( PreferencesUpdate::class ),
 		autowire( ListsOnCheckout::class ),
 		autowire( CustomerSessionTracker::class ),
+		autowire( OnCustomerEmailChange::class ),
 		autowire( GuestOrderIntegration::class )
 		->constructor( get( OrderGuestInterceptor::class ) ),
 		get( GuestOrderUpdate::class ),
@@ -422,6 +427,9 @@ return [
 		);
 	},
 
+	RecipesController::class                       => autowire()
+		->constructorParameter( 'recipes_dir', fn () => __DIR__ . '/recipes' ),
+
 	AutomationController::class                    => autowire()
 		->constructorParameter(
 			'repository',
@@ -429,6 +437,9 @@ return [
 		)
 		->method( 'set_normalizer', get( WorkflowAutomationNormalizer::class ) )
 		->method( 'set_denormalizer', get( WorkflowAutomationDenormalizer::class ) ),
+
+	RecipeAutomationNormalizer::class            => autowire()
+		->constructor( get( AutomationRepository::class ), get( RestUrlGenerator::class ) ),
 
 	WorkflowAutomationNormalizer::class            => autowire()
 		->constructor( get( AutomationRepository::class ), get( RestUrlGenerator::class ) ),

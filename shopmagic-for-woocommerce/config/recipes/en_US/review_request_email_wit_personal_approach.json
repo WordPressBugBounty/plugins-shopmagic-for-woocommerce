@@ -20,5 +20,8 @@
 	  "_action_title": "Instant Review Request for smaller stores with personal approach",
 	  "_action": "shopmagic_sendemail_action"
 	}
-  ]
+  ],
+	"meta": {
+		"requires": {"shopmagic-reviews": "ShopMagic Review Request"}
+	}
 }

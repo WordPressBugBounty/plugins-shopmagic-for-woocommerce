@@ -76,7 +76,11 @@ abstract class OrderCommonEvent extends Event implements CustomerAwareInterface 
 		}
 		$this->logger->warning(
 			'There is no customer associated with order #{id}.',
-			[ 'id' => $order->get_id() ]
+			[
+				'id'    => $order->get_id(),
+				'user'  => $order->get_customer_id(),
+				'email' => $order->get_billing_email(),
+			]
 		);
 		return new NullCustomer();
 	}

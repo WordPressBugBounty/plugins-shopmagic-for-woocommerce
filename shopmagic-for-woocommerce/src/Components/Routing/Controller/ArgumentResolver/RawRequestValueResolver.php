@@ -11,7 +11,7 @@ class RawRequestValueResolver implements \WPDesk\ShopMagic\Components\Routing\Co
 	}
 
 	public function resolve( \WP_REST_Request $request, \ReflectionParameter $parameter ) {
-		$value = $_REQUEST[ $parameter->getName() ] ?? null;
+		$value = isset( $_REQUEST[ $parameter->getName() ] ) ? wp_unslash( $_REQUEST[ $parameter->getName() ] ) : null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitization must be handled by controller.
 
 		if ( $value === null ) {
 			return null;

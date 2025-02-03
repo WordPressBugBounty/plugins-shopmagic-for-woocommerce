@@ -59,7 +59,8 @@ abstract class OptCommonEvent extends UserCommonEvent implements ManualGlobalEve
 			$this->logger->error(
 				'Error during setting a customer from list subscriber. {error}',
 				[
-					'error' => $e->getMessage(),
+					'error'      => $e->getMessage(),
+					'subscriber' => $subscriber->get_email(),
 				]
 			);
 

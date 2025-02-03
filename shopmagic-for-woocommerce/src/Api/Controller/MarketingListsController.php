@@ -104,7 +104,7 @@ class MarketingListsController {
 
 			return new \WP_REST_Response(
 				[
-					'title'  => esc_html__( 'List could not be created' ),
+					'title'  => esc_html__( 'List could not be created', 'shopmagic-for-woocommerce' ),
 					'code'   => \WP_Http::UNPROCESSABLE_ENTITY,
 					'detail' => $e->getMessage(),
 				],

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * ShopMagic's Admin Alerts and Popups
  *
@@ -24,12 +24,12 @@ function shopmagic_admin_notice_getstarted(): void {
 
 	if ( ! get_user_meta( $user_id, 'shopmagic_ignore_notice_' . $notice_name ) ) {
 
-		echo '<div class="notice notice-success is-dismissible shopmagic-getting-started-notice" data-notice-name="' . $notice_name . '">';
+		echo '<div class="notice notice-success is-dismissible shopmagic-getting-started-notice" data-notice-name="' . esc_attr( $notice_name ) . '">';
 		echo '<p>';
-		echo esc_html__( 'Thank you for installing ShopMagic for WooCommerce!', 'shopmagic-for-woocommmerce' );
-		echo ' <a href="' . admin_url( 'edit.php?post_type=shopmagic_automation&page=shopmagic_welcome_page' ) . '" target="_blank">' . esc_html__( 'Learn how to get started', 'shopmagic-for-woocommerce' ) . '</a> ';
+		echo esc_html__( 'Thank you for installing ShopMagic for WooCommerce!', 'shopmagic-for-woocommerce' );
+		echo ' <a href="' . esc_url( admin_url( 'edit.php?post_type=shopmagic_automation&page=shopmagic_welcome_page' ) ) . '" target="_blank">' . esc_html__( 'Learn how to get started', 'shopmagic-for-woocommerce' ) . '</a> ';
 		echo esc_html__( 'or', 'shopmagic-for-woocommerce' );
-		echo ' <a href="' . admin_url( 'post-new.php?post_type=shopmagic_automation' ) . '" target="_blank">' . esc_html__( 'create your first automation', 'shopmagic-for-woocommerce' ) . '</a> &rarr;';
+		echo ' <a href="' . esc_url( admin_url( 'post-new.php?post_type=shopmagic_automation' ) ) . '" target="_blank">' . esc_html__( 'create your first automation', 'shopmagic-for-woocommerce' ) . '</a> &rarr;';
 		echo '</p>';
 		echo '</div>';
 	}
@@ -99,7 +99,7 @@ add_action( 'wp_ajax_shopmagic_notice_dismiss', 'shopmagic_get_started_notice_di
 function shopmagic_get_started_notice_dismiss(): void {
 
 	if ( isset( $_POST['notice_name'] ) ) {
-		$notice_name = $_POST['notice_name'];
+		$notice_name = wp_unslash( $_POST['notice_name'] );
 		$user_id     = get_current_user_id();
 
 		update_user_meta( $user_id, 'shopmagic_ignore_notice_' . $notice_name, time() );

@@ -36,7 +36,6 @@ class WcSessionPersistence implements SessionPersistence {
 	}
 
 	private function can_handle(): bool {
-		// @phpstan-ignore instanceof.alwaysTrue
 		return function_exists( 'WC' ) && WC()->session instanceof \WC_Session;
 	}
 }

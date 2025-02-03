@@ -3,6 +3,9 @@ declare( strict_types=1 );
 
 namespace WPDesk\ShopMagic\Customer;
 
+/**
+ * Can search for users, which were converted from guest.
+ */
 class ConvertedUsersFinder {
 
 	/** @var \WP_User_Query */

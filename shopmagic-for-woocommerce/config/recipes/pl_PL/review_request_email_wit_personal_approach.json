@@ -22,5 +22,8 @@
          "_action_title":"Przyk\u0142adowa automatyzacja z pro\u015bb\u0105 o recenzj\u0119 dla mniejszych sklep\u00f3w z bardziej osobistym podej\u015bciem do klienta.",
          "_action":"shopmagic_sendemail_action"
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-reviews": "ShopMagic Review Request"}
+	}
 }

@@ -23,7 +23,7 @@ class HttpProblemException extends \RuntimeException implements \WPDesk\ShopMagi
 	 * @param \Throwable|null $previous
 	 */
 	public function __construct( array $problem, $code = \WP_Http::BAD_REQUEST, ?\Throwable $previous = null ) {
-		if ( ! isset( $problem['title'] ) ) { // @phpstan-ignore-line We have to manually check if parameter meets requirement
+		if ( ! isset( $problem['title'] ) ) {
 			throw new \InvalidArgumentException( 'HTTP Problem exception is missing "title" in `$problem` parameter' );
 		}
 		parent::__construct( $problem['title'], $code, $previous );

@@ -22,5 +22,8 @@
          "_action_title":"Odzyskiwanie porzuconego koszyka z 3-dniow\u0105 pauz\u0105 dla tego samego klienta",
          "_action":"shopmagic_sendemail_action"
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-abandoned-carts": "ShopMagic Porzucone Koszyki"}
+	}
 }

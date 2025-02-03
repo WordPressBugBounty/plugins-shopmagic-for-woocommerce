@@ -8,7 +8,7 @@
       }
    },
    "filters":[
-      
+
    ],
    "actions":[
       {
@@ -28,5 +28,8 @@
          "_action_variable_string":"",
          "_action_delayed_offset_time":3600
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-delayed-actions": "ShopMagic Opóźnione Akcje"}
+	}
 }

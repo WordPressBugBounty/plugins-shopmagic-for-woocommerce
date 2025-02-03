@@ -38,7 +38,7 @@ class WorkflowAutomationDenormalizer implements Denormalizer {
 			throw new InvalidArgumentException(
 				empty( $this->errors )
 					?
-					esc_html__( '', 'shopmagic-for-woocommerce' )
+					'Automation denormalization failed.'
 					:
 					implode( '\n', $this->errors )
 			);

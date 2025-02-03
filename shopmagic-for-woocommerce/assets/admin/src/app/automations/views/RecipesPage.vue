@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import type { DataTableColumns } from "naive-ui";
-import { NButton, NH1, NP, NText, useMessage } from "naive-ui";
+import { NButton, NH1, NP, NA, NText, useMessage } from "naive-ui";
 import { type Recipe, useRecipesStore } from "@/stores/recipes";
 import { h } from "vue";
+import RecipeDescription from "../components/RecipeDescription.vue";
 import DataTable from "@/components/Table/DataTable.vue";
-import { __ } from "@/plugins/i18n";
+import { __, _n } from "@/plugins/i18n";
+import { canUseRecipe } from "../utils/recipe";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 
@@ -28,31 +30,45 @@ function createRecipe(name: string) {
     });
 }
 
+const RecipeButton = ( recipe: Recipe ) => {
+  if (canUseRecipe(recipe) === false) {
+    return h(
+      NButton,
+      {
+        tertiary: true,
+        type: "error",
+        disabled: true
+      },
+      { default: () => __("Missing plugins", "shopmagic-for-woocommerce") },
+    )
+  }
+  return h(
+    NButton,
+    {
+      tertiary: true,
+      type: "info",
+      onClick: () => createRecipe(recipe.name),
+    },
+    { default: () => __("Use recipe", "shopmagic-for-woocommerce") },
+  )
+
+}
+
 const columns: DataTableColumns<Recipe> = [
   {
     key: "recipe",
     title: () => __("Recipe", "shopmagic-for-woocommerce"),
-    render: ({ name, description }) =>
-      h("div", [h(NText, { strong: true }, { default: () => name }), h(NP, () => description)]),
+    render: (recipe) => h(RecipeDescription, {recipe}),
   },
   {
     key: "action",
     title: () => __("Action", "shopmagic-for-woocommerce"),
-    render: ({ name }) =>
-      h(
-        NButton,
-        {
-          tertiary: true,
-          type: "info",
-          onClick: () => createRecipe(name),
-        },
-        { default: () => __("Use recipe", "shopmagic-for-woocommerce") },
-      ),
-    width: 150,
+    render: RecipeButton,
+    width: 180,
   },
 ];
-</script>
 
+</script>
 <template>
   <NH1>{{ __("Recipes", "shopmagic-for-woocommerce") }}</NH1>
   <DataTable

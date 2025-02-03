@@ -30,5 +30,10 @@
          "_action_title":"Email z podzi\u0119kowaniem za 5-gwiazdkow\u0105 recenzj\u0119 z kuponem",
          "_action":"shopmagic_sendemail_action"
       }
-   ]
+   ],
+	"meta": {
+		"requires": {
+			"shopmagic-reviews": "ShopMagic Review Request"
+		}
+	}
 }

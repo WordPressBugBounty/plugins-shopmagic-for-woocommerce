@@ -84,7 +84,7 @@ if ( $success === true ) {
 					if ( $persistence->has( CommunicationListPersistence::FIELD_CHECKBOX_LABEL_KEY ) && ! empty( $persistence->get( CommunicationListPersistence::FIELD_CHECKBOX_LABEL_KEY ) ) ) {
 						echo wp_kses_post( $persistence->get( CommunicationListPersistence::FIELD_CHECKBOX_LABEL_KEY ) );
 					} else {
-						printf( esc_html__( 'Communication list #%d', 'shopmagic-for-woocommerce' ), $list_status->get_id() );
+						printf( esc_html__( 'Communication list #%d', 'shopmagic-for-woocommerce' ), esc_html( $list_status->get_id() ) );
 					}
 					?>
 				</span>

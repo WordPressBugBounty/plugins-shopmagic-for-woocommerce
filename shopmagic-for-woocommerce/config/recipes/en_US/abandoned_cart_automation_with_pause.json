@@ -20,5 +20,8 @@
 	  "_action_title": "Abandoned Cart with 3 day pause for the same customer",
 	  "_action": "shopmagic_sendemail_action"
 	}
-  ]
+  ],
+	"meta": {
+		"requires": {"shopmagic-abandoned-carts": "ShopMagic Abandoned Carts"}
+	}
 }

@@ -37,6 +37,7 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 			return $this->identity_map[ $id ];
 		}
 
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- false positive.
 		$guest_data = $this->wpdb->get_row(
 			$this->wpdb->prepare(
 				$this->select_sql() . ' WHERE id = %d LIMIT 1',
@@ -44,6 +45,7 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 			),
 			ARRAY_A
 		);
+		// phpcs:enable
 
 		if ( ! $guest_data ) {
 			throw EntityNotFound::with_id( $id );
@@ -68,6 +70,7 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 			}
 		}
 
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- false positive.
 		$guest_data = $this->wpdb->get_row(
 			$this->wpdb->prepare(
 				$this->select_sql() . ' WHERE email LIKE %s LIMIT 1',
@@ -75,6 +78,7 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 			),
 			ARRAY_A
 		);
+		// phpcs:enable
 
 		if ( ! $guest_data ) {
 			throw EntityNotFound::failing_criteria( [ 'email' => $email ] );
@@ -256,6 +260,7 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 	 * @return Collection<string, GuestMeta>
 	 */
 	private function load_guest_meta( Guest $guest ): Collection {
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- false positive.
 		$raw_meta = $this->wpdb->get_results(
 			$this->wpdb->prepare(
 				'SELECT meta_id, guest_id, meta_key, meta_value FROM %1$s WHERE guest_id = %2$d',
@@ -264,6 +269,7 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 			),
 			ARRAY_A
 		);
+		// phpcs:enable
 
 		return $this->get_metadata_collection( $raw_meta );
 	}
@@ -301,6 +307,7 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 	}
 
 	private function has_meta( int $id, string $meta_key ): bool {
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- false positive.
 		return ! is_null(
 			$this->wpdb->get_row(
 				$this->wpdb->prepare(
@@ -311,5 +318,6 @@ class GuestDataAccess implements ObjectRepository, ObjectPersister {
 				)
 			)
 		);
+		// phpcs:enable
 	}
 }

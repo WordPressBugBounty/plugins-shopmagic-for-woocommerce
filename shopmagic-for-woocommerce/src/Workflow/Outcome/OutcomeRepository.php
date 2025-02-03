@@ -58,6 +58,7 @@ class OutcomeRepository extends ObjectRepository {
 		string $customer_id,
 		int $in_days
 	): int {
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- false positive.
 		$newer_than = WordPressFormatHelper::datetime_as_mysql( time() - $in_days * DAY_IN_SECONDS );
 		$table      = DatabaseTable::automation_outcome();
 		$statement  = $this->wpdb->prepare(
@@ -70,5 +71,6 @@ class OutcomeRepository extends ObjectRepository {
 		);
 
 		return (int) $this->wpdb->get_var( $statement );
+		// phpcs:enable
 	}
 }

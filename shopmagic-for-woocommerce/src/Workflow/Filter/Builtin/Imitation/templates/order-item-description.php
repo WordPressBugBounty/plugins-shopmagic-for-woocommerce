@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /** Small template for pro event description. */
 
 $url = ( get_locale() === 'pl_PL' ) ? // phpcs:ignore Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine

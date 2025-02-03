@@ -39,7 +39,7 @@ final class Postmark {
 				->set_name( self::FIELD_NAME_STREAM )
 				->set_label( __( 'Postmark message stream', 'shopmagic-for-woocommerce' ) )
 				->set_placeholder( __( 'outbound', 'shopmagic-for-woocommerce' ) )
-				->set_description( __( "Optional - Default is 'outbound' if blank.", 'shopmagic -for- woocommerce' ) );
+				->set_description( __( "Optional - Default is 'outbound' if blank.", 'shopmagic-for-woocommerce' ) );
 		}
 
 		return $fields;

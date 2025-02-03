@@ -23,5 +23,8 @@
          "_action_title":"Email wysy\u0142any na 7 dni przed ko\u0144cem subskrypcji",
          "_action":"shopmagic_sendemail_action"
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-woocommerce-subscriptions": "ShopMagic dla WooCommerce Subscriptions"}
+	}
 }

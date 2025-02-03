@@ -32,5 +32,8 @@
          "_action_title":"Automatyzacja dla op\u0142aconych zam\u00f3wie\u0144 z filtrem produkt\u00f3w i z wykorzystaniem placeholdera {{order.details}}",
          "_action":"shopmagic_sendemail_action"
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-advanced-filters": "ShopMagic Zaawansowane Filtry"}
+	}
 }

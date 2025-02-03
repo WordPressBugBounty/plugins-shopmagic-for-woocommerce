@@ -1,6 +1,6 @@
 {
    "name":"Welcome email. First order with cross-sell placeholder",
-   "description":"Welcome email which activates for the first customer's order and contains products marked as cross-sells",
+   "description":"Welcome email which activates for the first customer's order and contains products marked as cross-sells.",
    "event":{
       "slug":"shopmagic_order_new_event",
       "data":[
@@ -29,5 +29,8 @@
          "_action_title":"Welcome email. First order with cross-sell placeholder",
 		 "_action":"shopmagic_sendemail_action"
       }
-   ]
+   ],
+	"meta": {
+		"requires": {"shopmagic-advanced-filters": "ShopMagic Advanced Filters"}
+	}
 }

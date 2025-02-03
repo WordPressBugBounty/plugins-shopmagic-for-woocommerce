@@ -52,7 +52,7 @@ final class SelectOneToOneType extends AbstractType {
 	 */
 	public function get_conditions(): array {
 		return [
-			self::IS => __( self::IS, 'shopmagic-for-woocommerce' ),
+			self::IS => __( 'is', 'shopmagic-for-woocommerce' ),
 			'is_not' => __( 'is not', 'shopmagic-for-woocommerce' ),
 		];
 	}

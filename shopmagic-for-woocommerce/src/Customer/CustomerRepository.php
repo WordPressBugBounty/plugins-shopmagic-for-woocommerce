@@ -77,7 +77,7 @@ final class CustomerRepository implements ObjectRepository {
 		try {
 			return $this->find_one_by( [ 'email' => $email ] );
 		} catch ( \Exception $e ) {
-			throw new CustomerNotFound( 'Couldn\'t find matching email in sites\' users and guests.' );
+			throw new CustomerNotFound( sprintf( 'Couldn\'t find matching email in sites\' users and guests. Tried: "%s".', esc_html( $email ) ) );
 		}
 	}
 

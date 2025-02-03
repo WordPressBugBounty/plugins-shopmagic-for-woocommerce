@@ -30,5 +30,8 @@
 	  "_action_title": "Order Completed with Order - Items filter",
 	  "_action": "shopmagic_sendemail_action"
 	}
-  ]
+  ],
+	"meta": {
+		"requires": {"shopmagic-advanced-filters": "ShopMagic Advanced Filters"}
+	}
 }

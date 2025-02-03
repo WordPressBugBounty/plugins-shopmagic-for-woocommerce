@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace WPDesk\ShopMagic\Customer\Guest;
 
 use WPDesk\ShopMagic\Components\Collections\ArrayCollection;
+use WPDesk\ShopMagic\Customer\Customer;
 
 /**
  * @final
@@ -61,6 +62,23 @@ class GuestFactory {
 		}
 
 		$guest->set_meta( new ArrayCollection( array_unique( $guest->get_meta()->to_array() ) ) );
+
+		return $guest;
+	}
+
+	/**
+	 * Create a fresh guest entity from customer object.
+	 */
+	public function from_customer( Customer $customer ): Guest {
+		$guest = new Guest();
+		$guest->set_email( $customer->get_email() );
+		$guest->set_tracking_key( GuestHydrator::generate_tracking_key() );
+
+		$guest->add_meta( 'username', $customer->get_username() );
+		$guest->add_meta( 'first_name', $customer->get_first_name() );
+		$guest->add_meta( 'last_name', $customer->get_last_name() );
+		$guest->add_meta( 'billing_phone', $customer->get_phone() );
+		$guest->add_meta( 'shopmagic_user_language', $customer->get_language() );
 
 		return $guest;
 	}

@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace WPDesk\ShopMagic\Recipe;
 
-use WPDesk\ShopMagic\Workflow\Automation\Automation;
 use WPDesk\ShopMagic\Workflow\Automation\AutomationFiltersGroup;
 use WPDesk\ShopMagic\Workflow\Extensions\ExtensionsSet;
 use WPDesk\ShopMagic\Workflow\FieldValuesBag;
@@ -21,8 +20,8 @@ class RecipeConverter {
 		$this->extensions = $extensions;
 	}
 
-	public function to_automation( array $decoded ): Automation {
-		$as_automation = new Automation();
+	public function to_automation( array $decoded ): RecipeAutomation {
+		$as_automation = new RecipeAutomation();
 		$as_automation->set_status( 'draft' );
 		$as_automation->set_name( $decoded['name'] );
 		$as_automation->set_description( $decoded['description'] );
@@ -67,6 +66,8 @@ class RecipeConverter {
 		}
 
 		$as_automation->set_recipe( true );
+
+		$as_automation->set_meta( $decoded['meta'] ?? [] );
 
 		return $as_automation;
 	}

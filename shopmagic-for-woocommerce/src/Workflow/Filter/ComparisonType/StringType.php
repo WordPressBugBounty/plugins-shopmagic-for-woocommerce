@@ -104,9 +104,9 @@ final class StringType extends AbstractType {
 	 */
 	public function get_conditions(): array {
 		return [
-			self::CONTAINS => esc_html__( self::CONTAINS, 'shopmagic-for-woocommerce' ),
+			self::CONTAINS => esc_html__( 'contains', 'shopmagic-for-woocommerce' ),
 			'not_contains' => esc_html__( 'does not contain', 'shopmagic-for-woocommerce' ),
-			self::IS       => esc_html__( self::IS, 'shopmagic-for-woocommerce' ),
+			self::IS       => esc_html__( 'is', 'shopmagic-for-woocommerce' ),
 			'is_not'       => esc_html__( 'is not', 'shopmagic-for-woocommerce' ),
 			'starts_with'  => esc_html__( 'starts with', 'shopmagic-for-woocommerce' ),
 			'ends_with'    => esc_html__( 'ends with', 'shopmagic-for-woocommerce' ),
