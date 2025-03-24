@@ -5,7 +5,6 @@ namespace WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Shop;
 
 use WPDesk\ShopMagic\Workflow\Placeholder\Placeholder;
 
-
 final class ShopDescription extends Placeholder {
 
 	public function get_slug(): string {

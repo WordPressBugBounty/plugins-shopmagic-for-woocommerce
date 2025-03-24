@@ -62,9 +62,10 @@ class OutcomeRepository extends ObjectRepository {
 		$newer_than = WordPressFormatHelper::datetime_as_mysql( time() - $in_days * DAY_IN_SECONDS );
 		$table      = DatabaseTable::automation_outcome();
 		$statement  = $this->wpdb->prepare(
-			"
-		SELECT COUNT(*) FROM {$table} WHERE automation_id = %d AND customer_id = '%s' AND created >= '%s'
-		",
+			'
+		SELECT COUNT(*) FROM %i WHERE automation_id = %d AND customer_id = %s AND created >= %s
+		',
+			$table,
 			$automation_id,
 			$customer_id,
 			$newer_than

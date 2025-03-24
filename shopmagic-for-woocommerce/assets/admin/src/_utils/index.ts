@@ -101,5 +101,5 @@ export function toMap<TObject extends KeyedItem>(array: TObject[]): Map<TObject[
 
 export const useMessageOptions = {
   duration: 15000,
-  closable: true
-}
+  closable: true,
+};

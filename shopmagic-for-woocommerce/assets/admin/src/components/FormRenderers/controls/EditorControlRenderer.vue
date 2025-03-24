@@ -61,10 +61,11 @@
         entity_encoding: 'raw',
         file_picker_callback: filePickerCb,
         promotion: false,
+        license_key: 'gpl',
       }"
       :model-value="control.data"
       class="w-full"
-      tinymce-script-src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.3.2/tinymce.min.js"
+      tinymce-script-src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.6.0/tinymce.min.js"
       @update:modelValue="onChange"
     />
   </FieldWrapper>

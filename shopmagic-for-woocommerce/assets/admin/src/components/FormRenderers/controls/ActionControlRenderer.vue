@@ -12,9 +12,12 @@ import { useMessageOptions } from "@/_utils";
 
 const props = defineProps(rendererProps<ControlElement>());
 
-const { control, controlWrapper } = useVanillaControl(useJsonFormsControl(props), (t) => t || undefined);
+const { control, controlWrapper } = useVanillaControl(
+  useJsonFormsControl(props),
+  (t) => t || undefined,
+);
 
-const message = useMessage()
+const message = useMessage();
 
 function handleAction() {
   useFetch(control.value.schema.presentation.callback, {
@@ -31,10 +34,13 @@ function handleAction() {
   })
     .post()
     .json()
-    .then(({data, response}) => {
-      if ( response.value.status === 204 ) {
-        message.success(__('Action performed successfully', 'shopmagic-for-woocommerce'), useMessageOptions);
-      } else if ( response.value.status >= 200 && response.value.status < 300 ) {
+    .then(({ data, response }) => {
+      if (response.value.status === 204) {
+        message.success(
+          __("Action performed successfully", "shopmagic-for-woocommerce"),
+          useMessageOptions,
+        );
+      } else if (response.value.status >= 200 && response.value.status < 300) {
         message.success(data.value.message, useMessageOptions);
       } else {
         message.error(data.value.message, useMessageOptions);

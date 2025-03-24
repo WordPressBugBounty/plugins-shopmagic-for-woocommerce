@@ -7,6 +7,7 @@ import {
   NLayoutHeader,
   NMenu,
   NMessageProvider,
+  NDialogProvider,
 } from "naive-ui";
 import ShopMagicIcon from "@/components/ShopMagicIcon.vue";
 import { menu } from "@/data/menu";
@@ -14,7 +15,7 @@ import { menu } from "@/data/menu";
 function nodeProps(options: MenuOption) {
   if (options.key !== "pro") return {};
   return {
-    class: ["bg-[#50C878]", "rounded"],
+    class: ["bg-[#50C878]", "rounded-sm"],
   };
 }
 
@@ -27,33 +28,38 @@ const themeOverrides: GlobalThemeOverrides = {
   },
   Card: {
     borderRadius: "12px",
-  }
+  },
+  Layout: {
+    color: "#0000",
+  },
 };
 </script>
 <template>
   <NConfigProvider :theme-overrides="themeOverrides">
-    <NMessageProvider :max="2" placement="bottom-right">
-      <NLayout class="bg-transparent">
-        <NLayoutHeader bordered class="flex justify-between items-center px-4 shadow-sm">
-          <RouterLink :to="{ name: 'dashboard' }" class="w-[175px] py-1.5">
-            <ShopMagicIcon />
-          </RouterLink>
-          <NMenu
-            :dropdown-props="{ size: 'large', trigger: 'click' }"
-            :node-props="nodeProps"
-            :options="menu"
-            :responsive="false"
-            dropdown-placement="bottom-start"
-            mode="horizontal"
-          />
-        </NLayoutHeader>
-        <NLayout class="bg-transparent">
-          <NLayoutContent class="bg-transparent" content-style="padding: 16px">
-            <RouterView />
-          </NLayoutContent>
+    <NDialogProvider>
+      <NMessageProvider :max="2" placement="bottom-right">
+        <NLayout>
+          <NLayoutHeader bordered class="flex justify-between items-center px-4 shadow-xs">
+            <RouterLink :to="{ name: 'dashboard' }" class="w-[175px] py-1.5">
+              <ShopMagicIcon />
+            </RouterLink>
+            <NMenu
+              :dropdown-props="{ size: 'large', trigger: 'click' }"
+              :node-props="nodeProps"
+              :options="menu"
+              :responsive="false"
+              dropdown-placement="bottom-start"
+              mode="horizontal"
+            />
+          </NLayoutHeader>
+          <NLayout>
+            <NLayoutContent content-style="padding: 16px">
+              <RouterView />
+            </NLayoutContent>
+          </NLayout>
         </NLayout>
-      </NLayout>
-    </NMessageProvider>
+      </NMessageProvider>
+    </NDialogProvider>
   </NConfigProvider>
 </template>
 

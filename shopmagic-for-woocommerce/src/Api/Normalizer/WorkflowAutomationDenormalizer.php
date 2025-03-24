@@ -48,13 +48,13 @@ class WorkflowAutomationDenormalizer implements Denormalizer {
 
 		// Required properties
 		$event = $this->extensions->get_event( $payload['event']['name'] );
-		$event->update_fields_data( new FieldValuesBag( $payload['event']['settings'] ) );
+		$event->update_fields_data( new FieldValuesBag( $payload['event']['settings'] ?? [] ) );
 		$automation->set_event( $event );
 
 		$actions = [];
 		foreach ( $payload['actions'] ?? [] as $action ) {
 			$action_object = $this->extensions->get_action( $action['name'] );
-			$action_object->update_fields_data( new FieldValuesBag( $action['settings'] ) );
+			$action_object->update_fields_data( new FieldValuesBag( $action['settings'] ?? [] ) );
 			$actions[] = $action_object;
 		}
 		$automation->set_actions( $actions );

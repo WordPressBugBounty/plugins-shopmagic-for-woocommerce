@@ -10,8 +10,6 @@ class RecipeDataProvider implements \WPDesk_Tracker_Data_Provider {
 	public function get_data(): array {
 		global $wpdb;
 
-		$meta_name = 'shopmagic_source_recipe';
-
 		$results = $wpdb->get_results(
 			"
 			SELECT
@@ -20,7 +18,7 @@ class RecipeDataProvider implements \WPDesk_Tracker_Data_Provider {
 			FROM
 				{$wpdb->postmeta}
 			WHERE
-				meta_key = '{$meta_name}'
+				meta_key = 'shopmagic_source_recipe'
 			GROUP BY
 				meta_value",
 			ARRAY_A

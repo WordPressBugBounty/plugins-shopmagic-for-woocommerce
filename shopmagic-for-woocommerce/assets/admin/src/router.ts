@@ -33,6 +33,9 @@ function setPageTitle(page: string) {
     case "automations":
       pageTitle = __("Automations", "shopmagic-for-woocommerce");
       break;
+    case "generateAutomation":
+      pageTitle = __("ShopWizard", "shopmagic-for-woocommerce");
+      break;
     case "recipes":
       pageTitle = __("Automation Recipes", "shopmagic-for-woocommerce");
       break;
@@ -83,8 +86,58 @@ function setPageTitle(page: string) {
   document.title = `${pageTitle} - ShopMagic`;
 }
 
+function highlightActiveMenuItem(page: string) {
+  const menuItems = document.querySelectorAll("#toplevel_page_shopmagic-admin .wp-submenu li");
+  menuItems.forEach((item) => {
+    item.classList.remove("current");
+  });
+
+  // This is mapping of WP menu from PHP. We need to keep numeric order, as there is no identifiers.
+  const wordPressMenuItems = [
+    "hidden",
+    "dashboard",
+    "automations",
+    "lists",
+    "outcomes",
+    "carts",
+    "guests",
+    "settings",
+    "welcome",
+  ] as const;
+
+  const subpageToPage = (p: string) => {
+    switch (p) {
+      case "automation":
+      case "automations":
+      case "generateAutomation":
+      case "manual-run":
+      case "recipes":
+        return "automations";
+      case "outcomes":
+      case "tracker":
+      case "queue":
+        return "outcomes";
+      case "lists":
+      case "marketing-list":
+      case "transfer":
+      case "subscribers":
+        return "lists";
+      default:
+        return p;
+    }
+  };
+
+  const menuItem = menuItems[wordPressMenuItems.indexOf(subpageToPage(page))];
+
+  if (menuItem) {
+    menuItem.classList.add("current");
+  }
+}
+
 router.afterEach((to) => {
   setPageTitle(to.name);
+
+  highlightActiveMenuItem(to.name);
 });
 
 export default router;

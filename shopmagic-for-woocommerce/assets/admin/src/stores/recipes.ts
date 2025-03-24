@@ -21,7 +21,9 @@ type LegacyRecipe = {
   };
   actions: Record<string, string>[];
 };
-export type Recipe = (Automation & { description: string, meta: Record<string, string> }) | LegacyRecipe;
+export type Recipe =
+  | (Automation & { description: string; meta: Record<string, string> })
+  | LegacyRecipe;
 
 export const useRecipesStore = defineStore("recipes", () => {
   const { data: recipes, error, isValidating } = useSWRV<Recipe[]>("/automations/recipes");

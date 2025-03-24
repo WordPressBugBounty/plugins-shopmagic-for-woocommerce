@@ -42,7 +42,7 @@ onChange((_, prev) => {
 
 function updateData({ data /** errors */ }) {
   store.$patch((state) => {
-    if ( data instanceof Array ) {
+    if (data instanceof Array) {
       // Somehow sometimes data is passes as Array proxy, not an object.
       state.automation.event.settings = Object.assign({}, data);
     } else {
@@ -63,7 +63,7 @@ const { search, matches, renderLabel, renderTag } = useFuzzySearch(props.events)
       :placeholder="__('Select event', 'shopmagic-for-woocommerce')"
       :render-label="renderLabel"
       :render-tag="renderTag"
-      :input-props="{name: '_event'}"
+      :input-props="{ name: '_event' }"
       filterable
       remote
       @search="search"

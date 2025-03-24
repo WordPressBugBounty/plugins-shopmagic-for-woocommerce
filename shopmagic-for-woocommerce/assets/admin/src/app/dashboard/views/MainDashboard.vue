@@ -117,9 +117,9 @@ function chevronIcon() {
 }
 </script>
 <template>
-  <NLayout class="bg-transparent">
-    <NLayout class="bg-transparent" content-style="margin-bottom: 24px;" has-sider>
-      <NLayoutContent class="bg-transparent" content-style="padding-right: 24px">
+  <NLayout>
+    <NLayout content-style="margin-bottom: 24px;" has-sider>
+      <NLayoutContent content-style="padding-right: 24px">
         <NGrid :cols="3" :x-gap="24" :y-gap="24">
           <NGridItem :span="3">
             <NCard>
@@ -263,7 +263,7 @@ function chevronIcon() {
           </NGridItem>
         </NGrid>
       </NLayoutContent>
-      <NLayoutSider :width="320" class="bg-transparent">
+      <NLayoutSider :width="320">
         <NSpace :size="24" vertical>
           <ShadyCard :title="__('Knowledge base', 'shopmagic-for-woocommerce')" size="small">
             <ul>
@@ -290,7 +290,7 @@ function chevronIcon() {
         </NSpace>
       </NLayoutSider>
     </NLayout>
-    <NLayoutFooter class="bg-transparent">
+    <NLayoutFooter>
       <NGrid :cols="12" :x-gap="24" :y-gap="32">
         <NGridItem :span="3">
           <ShadyCard :title="__('Quick links', 'shopmagic-for-woocommerce')">

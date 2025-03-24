@@ -111,7 +111,9 @@ abstract class ObjectRepository implements DAO\ObjectRepository {
 			$sql .= sprintf( ' LIMIT %d OFFSET %d', $limit, $offset );
 		}
 
-		return new LazyObjectCollection( $this->wpdb->get_results( $sql, ARRAY_A ), $this->denormalizer );
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		return new LazyObjectCollection( $this->wpdb->get_results( $sql, \ARRAY_A ), $this->denormalizer );
+		// phpcs:enable
 	}
 
 	protected function where_array_to_sql( array $where ): string {
@@ -179,7 +181,9 @@ abstract class ObjectRepository implements DAO\ObjectRepository {
 		$where_sql = $this->where_array_to_sql( $criteria );
 		$order_sql = $order ? $this->order_array_to_sql( $order ) : '';
 		$sql       = sprintf( 'SELECT * FROM %s WHERE %s %s LIMIT 1', $this->get_name(), $where_sql, $order_sql );
-		$result    = $this->wpdb->get_row( $sql, ARRAY_A );
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		$result = $this->wpdb->get_row( $sql, ARRAY_A );
+		// phpcs:enable
 
 		if ( ! empty( $result ) ) {
 			return $this->denormalizer->denormalize( $result );
@@ -198,6 +202,8 @@ abstract class ObjectRepository implements DAO\ObjectRepository {
 		$where_sql = $this->where_array_to_sql( $where );
 		$sql       = sprintf( 'SELECT COUNT(*) FROM %s WHERE %s', $this->get_name(), $where_sql );
 
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 		return (int) $this->wpdb->get_var( $sql );
+		// phpcs:enable
 	}
 }

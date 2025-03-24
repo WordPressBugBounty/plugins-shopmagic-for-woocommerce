@@ -60,7 +60,7 @@ const { search, renderLabel, renderTag, matches } = useFuzzySearch(filters);
       :placeholder="__('Select filter', 'shopmagic-for-woocommerce')"
       :render-label="renderLabel"
       :render-tag="renderTag"
-      :input-props="{name: `_filter-${props.groupId}-${props.id}`}"
+      :input-props="{ name: `_filter-${props.groupId}-${props.id}` }"
       class="max-w-[320px] basis-1/2 grow"
       filterable
       @search="search"
@@ -71,6 +71,7 @@ const { search, renderLabel, renderTag, matches } = useFuzzySearch(filters);
       </template>
     </NSelect>
     <JsonForm
+      class="filter-form"
       v-if="typeof currentFilter?.settings !== 'undefined'"
       :data="filterValues"
       :schema="currentFilter.settings"
@@ -80,10 +81,26 @@ const { search, renderLabel, renderTag, matches } = useFuzzySearch(filters);
     <NButton class="ml-auto" tertiary type="info" @click="insertFilter(groupId)">
       {{ __("And", "shopmagic-for-woocommerce") }}
     </NButton>
-    <NButton data-e2e-component="remove-filter" tertiary type="error" @click="emit('remove', props.id)">
+    <NButton
+      data-e2e-component="remove-filter"
+      tertiary
+      type="error"
+      @click="emit('remove', props.id)"
+    >
       <NIcon>
         <CloseOutline />
       </NIcon>
     </NButton>
   </div>
 </template>
+<style scoped>
+.filter-form {
+  & :deep(.n-form-item.n-form-item--top-labelled) {
+    grid-template-areas: "blank" "feedback";
+    grid-template-rows: 1fr;
+  }
+  & :deep(.n-form-item.n-form-item--top-labelled .n-form-item-label) {
+    display: none;
+  }
+}
+</style>

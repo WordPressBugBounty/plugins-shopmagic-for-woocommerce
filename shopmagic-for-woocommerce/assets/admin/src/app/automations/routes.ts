@@ -25,7 +25,16 @@ const routes = [
               path: "/automations/:id/manual/run",
               name: "manual-run",
               component: async () => import("./views/ManualPreview.vue"),
-              props: true
+              props: true,
+            },
+          ]
+        : []),
+      ...(window.ShopMagic.proEnabled === "1"
+        ? [
+            {
+              path: "/automations/generate",
+              name: "generateAutomation",
+              component: async () => import("./views/GenerateAutomation.vue"),
             },
           ]
         : []),

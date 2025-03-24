@@ -87,6 +87,7 @@ final class WooCommerceAccountPreferences implements HookProvider, Conditional {
 	private function nav_menu_content(): void {
 		$customer = $this->customer_repository->find( get_current_user_id() );
 
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $this->renderer->render(
 			$customer,
 			[
@@ -94,5 +95,6 @@ final class WooCommerceAccountPreferences implements HookProvider, Conditional {
 				'obfuscate' => false,
 			]
 		);
+		// phpcs:enable
 	}
 }

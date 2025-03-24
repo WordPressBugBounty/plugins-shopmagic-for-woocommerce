@@ -36,3 +36,15 @@ table.sm-product-grid {
 	margin-right: 6%;
 	font-size: 14px;
 }
+
+ul.shopmagic-order-items {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.shopmagic-order-items li {
+	margin-bottom: 4px;
+	padding-left: 1em;
+	border-bottom: 1px solid #ccc;
+}

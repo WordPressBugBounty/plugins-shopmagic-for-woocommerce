@@ -106,6 +106,8 @@ final class Admin {
 			[
 				'pluginUrl'                => $this->plugin_bag->get_url(),
 				'baseUrl'                  => $this->url_generator->generate(),
+				'homeUrl'                  => home_url(),
+				'locale'                   => get_locale(),
 				'nonce'                    => wp_create_nonce( 'wp_rest' ),
 				'user'                     => [
 					'name'   => wp_get_current_user()->first_name,

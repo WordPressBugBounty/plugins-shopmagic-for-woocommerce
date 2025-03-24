@@ -44,7 +44,7 @@ final class PreferencesUpdate implements HookProvider {
 
 				return sanitize_text_field( $field );
 			},
-			$_POST['shopmagic_optin'] ?? []
+			isset( $_POST['shopmagic_optin'] ) ? wp_unslash( $_POST['shopmagic_optin'] ) : []
 		);
 		$email          = isset( $_POST[ self::EMAIL ] ) ? sanitize_email( wp_unslash( $_POST[ self::EMAIL ] ) ) : '';
 		$this->save_opt_changes( $email, $sanitized_post );

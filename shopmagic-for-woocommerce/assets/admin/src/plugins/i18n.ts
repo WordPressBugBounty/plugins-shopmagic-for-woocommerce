@@ -6,7 +6,12 @@ export const i18n = {
       return wp.i18n.__(text, domain || options.domain || "default");
     };
 
-    app.config.globalProperties._n = (singular: string, plural: string, count: number, domain?: string) => {
+    app.config.globalProperties._n = (
+      singular: string,
+      plural: string,
+      count: number,
+      domain?: string,
+    ) => {
       return wp.i18n._n(singular, plural, count, domain || options.domain || "default");
     };
 

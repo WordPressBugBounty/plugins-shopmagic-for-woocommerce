@@ -22,7 +22,7 @@ final class WooCommerceCookies {
 	}
 
 	public static function get( string $name ): string {
-		return isset( $_COOKIE[ $name ] ) ? (string) $_COOKIE[ $name ] : '';
+		return isset( $_COOKIE[ $name ] ) ? (string) $_COOKIE[ $name ] : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 	}
 
 	public static function clear( string $name ): void {

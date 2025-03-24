@@ -237,7 +237,7 @@ const menu: MenuOption[] = [
             h(
               "a",
               {
-                class: "!text-white",
+                class: "text-white!",
                 href: "https://shopmagic.app/?utm_source=plugin&utm_medium=pro-button&utm_campaign=upgrade-pro",
               },
               {

@@ -1,6 +1,18 @@
 <script lang="ts" setup>
-import { NButton, NH1, NInput, NSelect, useMessage } from "naive-ui";
-import { reactive, ref, h } from "vue";
+import {
+  NButton,
+  NH1,
+  NInput,
+  NSelect,
+  useMessage,
+  useDialog,
+  NIcon,
+  NText,
+  NSpace,
+  NTooltip,
+} from "naive-ui";
+import { CloseCircleOutline } from "@vicons/ionicons5";
+import { reactive, ref, h, computed } from "vue";
 import DataTable from "@/components/Table/DataTable.vue";
 import { automationTableColumns } from "../data/table";
 import { useAutomationResourcesStore } from "../resourceStore";
@@ -122,22 +134,54 @@ function importAutomation() {
   });
 }
 
-function navigate() {
-  router.push({
-    name: "automation",
-    params: { id: "new" },
-  });
-}
+const isPro = window.ShopMagic.proEnabled === "1";
+
+const showShopWizardTooltip = ref(localStorage.getItem("hideShopWizardTooltip") !== "1");
+
+const hideShopWizardTooltip = () => {
+  localStorage.setItem("hideShopWizardTooltip", "1");
+  showShopWizardTooltip.value = false;
+};
 </script>
 <template>
   <div class="flex items-center gap-4">
     <NH1 class="m-0">{{ __("Automations", "shopmagic-for-woocommerce") }}</NH1>
-    <NButton type="primary" @click="navigate">
+    <NButton type="primary" @click="router.push({ name: 'automation', params: { id: 'new' } })">
       {{ __("Add new", "shopmagic-for-woocommerce") }}
     </NButton>
     <NButton @click="showImport = !showImport">
       {{ __("Import", "shopmagic-for-woocommerce") }}
     </NButton>
+    <NTooltip
+      v-if="isPro"
+      :show="showShopWizardTooltip"
+      placement="right"
+      :style="{ backgroundColor: 'rgb(72,146,97)', maxWidth: '400px' }"
+      :arrowStyle="{ backgroundColor: 'rgb(72,146,97)' }"
+    >
+      <template #trigger>
+        <NButton @click="router.push({ name: 'generateAutomation' })">
+          {{ __("ShopWizard", "shopmagic-for-woocommerce") }}
+        </NButton>
+      </template>
+      <div class="flex items-center">
+        <p style="margin: 0">
+          {{
+            __(
+              "A powerful assistant that allows you to create complex automations with ease.",
+              "shopmagic-for-woocommerce",
+            )
+          }}
+        </p>
+        <NButton @click="hideShopWizardTooltip" quaternary color="#fff" size="small">
+          <template #icon>
+            <NIcon>
+              <CloseCircleOutline />
+            </NIcon>
+          </template>
+        </NButton>
+      </div>
+    </NTooltip>
   </div>
   <div v-if="showImport" class="my-6 mx-auto w-[560px]">
     <p class="text-center">

@@ -27,7 +27,7 @@ const rule = ref({});
 if (props.required) {
   rule.value = {
     required: props.required,
-    trigger: ["blur"],
+    trigger: ["blur-sm"],
     validator: (rule) => !!(rule?.required && props.data),
   };
 }

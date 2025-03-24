@@ -14,18 +14,23 @@ use WPDesk\ShopMagic\Workflow\Queue\Queue;
 
 class StatisticsController {
 	public function outcomes(): \WP_REST_Response {
+		/** @var \wpdb */
 		global $wpdb;
 		$table_name = DatabaseTable::automation_outcome();
 		$cutoff     = ( new \DateTime() )->sub( new \DateInterval( 'P30D' ) )->format( WordPressFormatHelper::MYSQL_DATE_FORMAT );
 		$outcome    = $wpdb->get_results(
-			"
+			$wpdb->prepare(
+				'
 			SELECT
 			    count(*) as count,
 			    DATE(created) as date
-			FROM $table_name
+			FROM %i
 			WHERE success = 1
-			AND created > '$cutoff'
-			GROUP BY DATE(created)",
+			AND created > %s
+			GROUP BY DATE(created)',
+				$table_name,
+				$cutoff
+			),
 			ARRAY_A
 		);
 
@@ -62,23 +67,31 @@ class StatisticsController {
 		$emails_table = DatabaseTable::tracked_emails();
 		$cutoff       = ( new \DateTime() )->sub( new \DateInterval( 'P30D' ) )->format( WordPressFormatHelper::MYSQL_DATE_FORMAT );
 		$mails        = $wpdb->get_results(
-			"
+			$wpdb->prepare(
+				'
 			select count(*) as mails,
 			       count(opened_at) as opened,
 			       DATE(dispatched_at) as date
-			from $emails_table
-			WHERE dispatched_at > '$cutoff'
-			group by date(dispatched_at)",
+			from %i
+			WHERE dispatched_at > %s
+			group by date(dispatched_at)',
+				$emails_table,
+				$cutoff
+			),
 			ARRAY_A
 		);
 		$click_table  = DatabaseTable::tracked_emails_clicks();
 		$clicks       = $wpdb->get_results(
-			"
+			$wpdb->prepare(
+				'
 			select count(*) as clicks,
 			       DATE(clicked_at) as date
-			from $click_table
-			WHERE clicked_at > '$cutoff'
-			GROUP BY DATE(clicked_at)",
+			from %i
+			WHERE clicked_at > %s
+			GROUP BY DATE(clicked_at)',
+				$click_table,
+				$cutoff
+			),
 			ARRAY_A
 		);
 

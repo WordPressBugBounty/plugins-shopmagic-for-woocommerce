@@ -99,7 +99,7 @@ add_action( 'wp_ajax_shopmagic_notice_dismiss', 'shopmagic_get_started_notice_di
 function shopmagic_get_started_notice_dismiss(): void {
 
 	if ( isset( $_POST['notice_name'] ) ) {
-		$notice_name = wp_unslash( $_POST['notice_name'] );
+		$notice_name = sanitize_text_field( wp_unslash( $_POST['notice_name'] ) );
 		$user_id     = get_current_user_id();
 
 		update_user_meta( $user_id, 'shopmagic_ignore_notice_' . $notice_name, time() );

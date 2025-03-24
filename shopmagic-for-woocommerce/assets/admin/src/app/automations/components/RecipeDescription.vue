@@ -17,7 +17,7 @@ const getExtensionUrl = (extension: string) => {
       break;
   }
   return `https://shopmagic.app/products/${extension}/?utm_campaign=shopmagic-upgrade&utm_source=plugin&utm_medium=recipe`;
-}
+};
 </script>
 <template>
   <NText strong>
@@ -28,12 +28,12 @@ const getExtensionUrl = (extension: string) => {
   </NP>
   <NP v-if="canUseRecipe(recipe) === false">
     {{
-    _n(
-      "This recipe requires extension",
-      "This recipe requires extensions",
-      recipe.meta.requires?.length || 0,
-      "shopmagic-for-woocommerce"
-    )
+      _n(
+        "This recipe requires extension",
+        "This recipe requires extensions",
+        recipe.meta.requires?.length || 0,
+        "shopmagic-for-woocommerce",
+      )
     }}:
     <template v-for="(extension, key, index) in recipe.meta.requires" :key="extension">
       <NA :href="getExtensionUrl(key)">{{ extension }}</NA>

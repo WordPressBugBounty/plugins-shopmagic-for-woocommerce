@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { NH1 } from "naive-ui";
 
-const isPro = window.ShopMagic.proEnabled === '1';
+const isPro = window.ShopMagic.proEnabled === "1";
 
 function getImage(name: string) {
   if (navigator.language === "pl-PL") {

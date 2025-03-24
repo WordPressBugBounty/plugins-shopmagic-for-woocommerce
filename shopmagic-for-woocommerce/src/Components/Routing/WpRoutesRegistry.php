@@ -99,20 +99,20 @@ class WpRoutesRegistry implements \WPDesk\ShopMagic\Components\HookProvider\Hook
 
 			if ( empty( $path ) ) {
 				if ( isset( $_SERVER['PATH_INFO'] ) ) {
-					$path = $_SERVER['PATH_INFO'];
+					$path = $_SERVER['PATH_INFO']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 				} else {
 					$path = '/';
 				}
 			}
 			// Mimic WordPress rest request creation.
-			$request = new \WP_REST_Request( $_SERVER['REQUEST_METHOD'], $path );
+			$request = new \WP_REST_Request( $_SERVER['REQUEST_METHOD'], $path ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
+			// phpcs:disable WordPress.Security.NonceVerification.Missing
 			$request->set_query_params( wp_unslash( $_GET ) );
 			$request->set_body_params( wp_unslash( $_POST ) );
 			$request->set_file_params( $_FILES );
-			// $request->set_headers( $this->get_headers( wp_unslash( $_SERVER ) ) );
-			// $request->set_body( self::get_raw_data() );
 			$arguments = $this->argument_resolver->get_arguments( $request, $controller );
+			// phpcs:enable
 
 			$response = ( $controller )( ...$arguments );
 			if ( ! $response instanceof \WP_HTTP_Response ) {
@@ -136,7 +136,7 @@ class WpRoutesRegistry implements \WPDesk\ShopMagic\Components\HookProvider\Hook
 				die;
 			}
 
-			echo $response->get_data();
+			echo $response->get_data(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			die;
 		}
 	}

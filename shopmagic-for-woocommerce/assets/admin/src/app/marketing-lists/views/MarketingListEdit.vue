@@ -118,7 +118,7 @@ function deleteAutomation() {
       />
     </NLayoutHeader>
     <NLayout has-sider>
-      <NLayoutContent class="bg-gray-200">
+      <NLayoutContent class="bg-gray-200!">
         <EditGroup>
           <EditableCard :title="__('Settings', 'shopmagic-for-woocommerce')">
             <JsonForm

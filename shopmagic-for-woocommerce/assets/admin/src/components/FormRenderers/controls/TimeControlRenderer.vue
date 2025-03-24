@@ -3,7 +3,7 @@
     <NTimePicker
       :id="control.id + '-input'"
       :disabled="!control.enabled"
-      :placeholder="control.schema.examples[0]"
+      :placeholder="control.schema?.examples?.[0] ?? ''"
       :value="time"
       class="w-full"
       type="time"

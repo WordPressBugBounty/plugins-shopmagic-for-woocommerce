@@ -47,6 +47,7 @@ final class SignUpCustomerOnSubmit implements HookProvider {
 	}
 
 	private function save_checkout_optins( $order_id ): void {
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- checked by woocommerce hook
 		if ( ! isset( $_POST['shopmagic_optin'] ) ) {
 			return;
 		}
@@ -65,6 +66,7 @@ final class SignUpCustomerOnSubmit implements HookProvider {
 				$this->subscriber_service->subscribe( $order->get_billing_email(), $type->get_id() );
 			}
 		}
+		// phpcs:enable
 	}
 
 	private function save_checkout_optouts( $order_id ): void {

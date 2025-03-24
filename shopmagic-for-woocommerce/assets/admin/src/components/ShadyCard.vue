@@ -2,7 +2,7 @@
 import { NCard } from "naive-ui";
 </script>
 <template>
-  <NCard class="shadow" v-bind="$props">
+  <NCard class="shadow-sm" v-bind="$props">
     <template #cover>
       <slot name="cover" />
     </template>

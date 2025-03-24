@@ -24,13 +24,9 @@
 <script lang="ts">
 import type { Layout } from "@jsonforms/core";
 import { defineComponent } from "vue";
-import {
-  DispatchRenderer,
-  rendererProps,
-  type RendererProps,
-  useJsonFormsLayout,
-} from "@jsonforms/vue";
+import { rendererProps, type RendererProps, useJsonFormsLayout } from "@jsonforms/vue";
 import { useVanillaLayout } from "../util";
+import DispatchRenderer from "../DispatchRenderer.vue";
 
 export default defineComponent({
   name: "LayoutRenderer",

@@ -18,13 +18,13 @@ const showStack = ref(false);
   </NButton>
   <div class="block">
     <NText class="w-full" v-show="showStack" code>
-        <ul v-for="(value, key) in context" :key="key">
-          <li>
-            <pre class="whitespace-pre-line">
+      <ul v-for="(value, key) in context" :key="key">
+        <li>
+          <pre class="whitespace-pre-line">
               <b>{{ key }}</b>:<br/>{{ value }}
             </pre>
-          </li>
-        </ul>
+        </li>
+      </ul>
     </NText>
   </div>
 </template>

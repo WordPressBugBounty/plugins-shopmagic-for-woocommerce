@@ -152,7 +152,7 @@ final class PreSubmitData implements HookProvider, Conditional {
 		}
 
 		$email           = sanitize_email( wp_unslash( $_REQUEST['email'] ) );
-		$checkout_fields = wp_unslash( $_REQUEST['checkout_fields'] );
+		$checkout_fields = wp_unslash( $_REQUEST['checkout_fields'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		$this->tracker->set_user_email( $email );
 

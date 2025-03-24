@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 4.3.15
+Stable tag: 4.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -405,9 +405,14 @@ You can also choose one from the list below based on your needs.
 
 == Changelog ==
 
-= 4.3.15 - 2025-02-03 =
-* When customer email changes after purchase, update the email so automation can be sent correctly.
-* Add clear distinction to recipes, which cannot be used on missing PRO plugins.
+= 4.4.0 - 2025-03-24
+* New integration: MailerLite - connect your WooCommerce store with MailerLite email marketing platform
+* New integration: ActiveCampaign - seamlessly integrate your store with ActiveCampaign marketing automation
+* AI-powered automation generator - create automations with natural language prompts (PRO feature)
+* New placeholders:
+	*  {{ order.products_ordered }}  - display ordered products information
+	*  {{ order.quantity_products }}  - show quantity of products in an order
+	*  {{ shop.admin_email }}  - display store admin email
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

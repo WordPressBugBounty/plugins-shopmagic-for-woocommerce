@@ -6,11 +6,15 @@ namespace WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer;
 
 use WPDesk\ShopMagic\Admin\Form\FieldsCollection;
 use WPDesk\ShopMagic\Api\Normalizer\InvalidArgumentException;
+use WPDesk\ShopMagic\Api\Normalizer\Normalizer;
 use WPDesk\ShopMagic\Api\Normalizer\NormalizerCollection;
 
-class JsonSchemaNormalizer extends JsonSchemaFieldNormalizer {
+/**
+ * @implements Normalizer<FieldsCollection>
+ */
+class JsonSchemaNormalizer implements Normalizer {
 
-	/** @var \WPDesk\ShopMagic\Api\Normalizer\NormalizerCollection */
+	/** @var NormalizerCollection */
 	private $normalizers;
 
 	public function __construct( NormalizerCollection $normalizer ) {
@@ -22,25 +26,31 @@ class JsonSchemaNormalizer extends JsonSchemaFieldNormalizer {
 			throw InvalidArgumentException::invalid_object( FieldsCollection::class, $object );
 		}
 
-		return array_merge(
-			parent::normalize( $object ),
-			[
-				'type'       => 'object',
-				'properties' => array_map(
-					function ( $field ) {
-						if ( $this->supports_normalization( $field ) ) {
-							return $this->normalize( $field );
-						}
+		$properties = array_map(
+			function ( $field ) {
+				if ( $this->supports_normalization( $field ) ) {
+					return $this->normalize( $field );
+				}
 
-						return $this->normalizers->normalize( $field );
-					},
-					$object->get_fields()
-				) ?: new \stdClass(),
-				'required'   => array_keys(
-					$object->get_required_fields()
-				),
-			]
+				return $this->normalizers->normalize( $field );
+			},
+			$object->get_fields()
 		);
+
+		if ( empty( $properties ) ) {
+			return [
+				'type' => 'null',
+			];
+		}
+
+		return [
+			'type'         => 'object',
+			'properties'   => $properties,
+			'required'     => array_keys( $object->get_required_fields() ),
+			'presentation' => [
+				'position' => $object->get_priority(),
+			],
+		];
 	}
 
 	public function supports_normalization( object $object ): bool {

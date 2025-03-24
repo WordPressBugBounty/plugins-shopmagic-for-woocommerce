@@ -4,6 +4,7 @@ declare( strict_types=1 );
 
 use ShopMagicVendor\Getresponse\Sdk\Client\GetresponseClient;
 use ShopMagicVendor\Getresponse\Sdk\GetresponseClientFactory;
+use ShopMagicVendor\MailerLite\MailerLite;
 use ShopMagicVendor\Psr\Container\ContainerInterface;
 use ShopMagicVendor\Psr\Log\LoggerInterface;
 use ShopMagicVendor\Psr\Log\LogLevel;
@@ -12,8 +13,8 @@ use ShopMagicVendor\WPDesk\Logger\SimpleLoggerFactory;
 use ShopMagicVendor\WPDesk\Migrations\Migrator;
 use ShopMagicVendor\WPDesk\Migrations\WpdbMigrator;
 use ShopMagicVendor\WPDesk\Notice\AjaxHandler;
-use ShopMagicVendor\WPDesk\View\Renderer\SimplePhpRenderer;
 use ShopMagicVendor\WPDesk\View\Renderer\Renderer;
+use ShopMagicVendor\WPDesk\View\Renderer\SimplePhpRenderer;
 use ShopMagicVendor\WPDesk\View\Resolver\DirResolver;
 use WPDesk\ShopMagic\Admin;
 use WPDesk\ShopMagic\Api\Controller\AutomationController;
@@ -62,8 +63,8 @@ use WPDesk\ShopMagic\Customer\Guest\Interceptor\CommentGuestInterceptor;
 use WPDesk\ShopMagic\Customer\Guest\Interceptor\GuestOrderIntegration;
 use WPDesk\ShopMagic\Customer\Guest\Interceptor\GuestOrderUpdate;
 use WPDesk\ShopMagic\Customer\Guest\Interceptor\GuestProductIntegration;
-use WPDesk\ShopMagic\Customer\Guest\Interceptor\OrderGuestInterceptor;
 use WPDesk\ShopMagic\Customer\Guest\Interceptor\OnCustomerEmailChange;
+use WPDesk\ShopMagic\Customer\Guest\Interceptor\OrderGuestInterceptor;
 use WPDesk\ShopMagic\Customer\HookProvider\MergeGuestUserOnRegistration;
 use WPDesk\ShopMagic\Customer\Interceptor\CompositeCustomerProvider;
 use WPDesk\ShopMagic\Customer\Interceptor\RegisteredCustomerProvider;
@@ -85,11 +86,15 @@ use WPDesk\ShopMagic\Helper\TemplateResolver;
 use WPDesk\ShopMagic\Helper\WordPressPluggableHelper;
 use WPDesk\ShopMagic\HookEmitter;
 use WPDesk\ShopMagic\Integration;
+use WPDesk\ShopMagic\Integration\ActiveCampaign\ActiveCampaign;
+use WPDesk\ShopMagic\Integration\ActiveCampaign\Api\ActiveCampaignApi;
+use WPDesk\ShopMagic\Integration\ActiveCampaign\Api\ApiMissingCredentials;
 use WPDesk\ShopMagic\Integration\ExternalPluginsAccess;
 use WPDesk\ShopMagic\Integration\Mailchimp\APITools;
 use WPDesk\ShopMagic\Integration\Mailchimp\MailchimpApi;
 use WPDesk\ShopMagic\Integration\Mailchimp\MissingKeyApi;
 use WPDesk\ShopMagic\Integration\Mailchimp\Settings;
+use WPDesk\ShopMagic\Integration\MailerLite\Api\MailerLiteApi;
 use WPDesk\ShopMagic\Marketing\HookProviders\ConfirmedSubscriptionSaver;
 use WPDesk\ShopMagic\Marketing\HookProviders\FrontendListSubscription;
 use WPDesk\ShopMagic\Marketing\HookProviders\ListsOnCheckout;
@@ -134,8 +139,8 @@ use WPDesk\ShopMagic\Workflow\Queue\ActionSchedulerQueue;
 use WPDesk\ShopMagic\Workflow\Queue\Queue;
 use WPDesk\ShopMagic\Workflow\Validator\FailingLanguageValidator;
 use WPDesk\ShopMagic\Workflow\WorkflowInitializer;
+
 use function ShopMagicVendor\DI\create;
-use function ShopMagicVendor\DI\string;
 use function ShopMagicVendor\DI\factory;
 use function ShopMagicVendor\DI\get;
 
@@ -479,6 +484,8 @@ return [
 			get( Admin\Settings\ModulesSettings::class ),
 			get( Integration\Mailchimp\Settings::class ),
 			get( Integration\GetResponse\Settings::class ),
+			get( Integration\MailerLite\Settings::class ),
+			get( Integration\ActiveCampaign\Settings::class ),
 		]
 	),
 	\WPDesk\ShopMagic\Marketing\Subscribers\PreferencesRoute::class => autowire()
@@ -512,7 +519,7 @@ return [
 			]
 		),
 
-	SessionPersistence::class                      => autowire( CompositeSessionPersistence::class )
+	SessionPersistence::class => autowire( CompositeSessionPersistence::class )
 		->constructorParameter(
 			'persistence',
 			[
@@ -521,12 +528,35 @@ return [
 			]
 		),
 
-	Integration\GetResponse\Settings::class        => static function () {
+	Integration\GetResponse\Settings::class => static function () {
 		return new Integration\GetResponse\Settings(
 			new JsonSerializedOptionsContainer( 'shopmagic_getresponse_settings' )
 		);
 	},
-	GetresponseClient::class                       => static function ( ContainerInterface $c ) {
+	GetresponseClient::class                => static function ( ContainerInterface $c ) {
 		return GetresponseClientFactory::createWithApiKey( $c->get( Integration\GetResponse\Settings::class )->get( 'api_key' ) );
+	},
+
+	Integration\MailerLite\Settings::class => static function () {
+		return new Integration\MailerLite\Settings(
+			new JsonSerializedOptionsContainer( 'shopmagic_mailerlite_settings' )
+		);
+	},
+	MailerLite::class => static function ( ContainerInterface $c ) {
+		return new MailerLite( [ 'api_key' => $c->get( Integration\MailerLite\Settings::class )->get( 'api_token', '' ) ] );
+	},
+
+	Integration\ActiveCampaign\Settings::class => static function () {
+		return new Integration\ActiveCampaign\Settings(
+			new JsonSerializedOptionsContainer( 'shopmagic_activecampaign_settings' )
+		);
+	},
+	ActiveCampaign::class => static function ( ContainerInterface $c ) {
+		$settings = $c->get( Integration\ActiveCampaign\Settings::class );
+
+		return new ActiveCampaign(
+			$settings->get( 'api_key', '' ),
+			$settings->get( 'api_url', '' )
+		);
 	},
 ];

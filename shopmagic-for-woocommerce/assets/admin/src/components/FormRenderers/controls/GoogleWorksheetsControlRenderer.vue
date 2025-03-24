@@ -105,7 +105,7 @@ async function populateHeaderRows(useRealLabels: boolean) {
   if (useRealLabels && (worksheetRef.value === null || spreadsheetRef.value === null)) {
     message.warning(
       __("Please select a spreadsheet and a worksheet first", "shopmagic-for-woocommerce"),
-      useMessageOptions
+      useMessageOptions,
     );
     return;
   }
@@ -168,8 +168,8 @@ onMounted(() => {
 });
 
 const documentation = sprintf(
-  __('Enter the Spreadsheet ID according to our %1$s.', 'shopmagic-for-woocommerce'),
-  `<a class="text-blue-300 hover:text-blue-400" href="https://docs.shopmagic.app/article/1118-how-to-use-shopmagic-with-google-sheets" target="_blank">${__('documentation', 'shopmagic-for-woocommerce')}</a>`,
+  __("Enter the Spreadsheet ID according to our %1$s.", "shopmagic-for-woocommerce"),
+  `<a class="text-blue-300 hover:text-blue-400" href="https://docs.shopmagic.app/article/1118-how-to-use-shopmagic-with-google-sheets" target="_blank">${__("documentation", "shopmagic-for-woocommerce")}</a>`,
 );
 </script>
 <template>
@@ -179,15 +179,20 @@ const documentation = sprintf(
     :label="groupSchema.properties['spreadsheet'].title"
   >
     <div class="flex flex-auto gap-x-4">
-    <NInput :loading="loadingRef" :placeholder="__('Paste Spreadsheet ID', 'shopmagic-for-woocommerce')" v-model:value="spreadsheetRef" @update:value="getWorksheets"/>
-    <NTooltip :width="250" trigger="click">
-      <template #trigger>
-        <NButton text>
-          <template #icon> <InformationCircleOutline /> </template>
-        </NButton>
-      </template>
-      <NP class="text-white" v-html="documentation"></NP>
-    </NTooltip>
+      <NInput
+        :loading="loadingRef"
+        :placeholder="__('Paste Spreadsheet ID', 'shopmagic-for-woocommerce')"
+        v-model:value="spreadsheetRef"
+        @update:value="getWorksheets"
+      />
+      <NTooltip :width="250" trigger="click">
+        <template #trigger>
+          <NButton text>
+            <template #icon> <InformationCircleOutline /> </template>
+          </NButton>
+        </template>
+        <NP class="text-white" v-html="documentation"></NP>
+      </NTooltip>
     </div>
   </FieldWrapper>
   <FieldWrapper :label="groupSchema.properties['spreadsheet_tab'].title">

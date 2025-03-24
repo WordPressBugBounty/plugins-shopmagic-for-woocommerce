@@ -1,51 +1,30 @@
-<template>
-  <control-wrapper
-    :applied-options="appliedOptions"
-    :is-focused="isFocused"
-    :styles="styles"
-    v-bind="controlWrapper"
-  >
-    <input
-      :id="control.id + '-input'"
-      :autofocus="appliedOptions.focus"
-      :class="styles.control.input"
-      :disabled="!control.enabled"
-      :placeholder="appliedOptions.placeholder"
-      :step="step"
-      :value="control.data"
-      type="number"
-      @blur="isFocused = false"
-      @change="onChange"
-      @focus="isFocused = true"
-    />
-  </control-wrapper>
-</template>
-
-<script lang="ts">
+<script setup lang="ts">
+import { NInputNumber } from "naive-ui";
+import { computed } from "vue";
 import type { ControlElement } from "@jsonforms/core";
-import { defineComponent } from "vue";
 import { rendererProps, type RendererProps, useJsonFormsControl } from "@jsonforms/vue";
-import { default as ControlWrapper } from "./ControlWrapper.vue";
 import { useVanillaControl } from "../util";
+import FieldWrapper from "./FieldWrapper.vue";
 
-export default defineComponent({
-  name: "NumberControlRenderer",
-  components: {
-    ControlWrapper,
-  },
-  props: {
-    ...rendererProps<ControlElement>(),
-  },
-  setup(props: RendererProps<ControlElement>) {
-    return useVanillaControl(useJsonFormsControl(props), (target) =>
-      target.value === "" ? undefined : Number(target.value),
-    );
-  },
-  computed: {
-    step(): number {
-      const options: any = this.appliedOptions;
-      return options.step ?? 0.1;
-    },
-  },
-});
+const props = defineProps(rendererProps<ControlElement>());
+
+const { control, controlWrapper, onChange } = useVanillaControl(useJsonFormsControl(props));
 </script>
+<template>
+  <FieldWrapper v-bind="controlWrapper">
+    <NInputNumber
+      :id="control.id + '-input'"
+      :default-value="control.schema.default"
+      :disabled="!control.enabled"
+      :placeholder="control.schema?.examples?.[0] ?? ''"
+      :readonly="control.schema.readOnly"
+      :value="control.data"
+      @update:value="onChange"
+    />
+  </FieldWrapper>
+</template>
+<style scoped>
+.n-input-number {
+  width: 100%;
+}
+</style>

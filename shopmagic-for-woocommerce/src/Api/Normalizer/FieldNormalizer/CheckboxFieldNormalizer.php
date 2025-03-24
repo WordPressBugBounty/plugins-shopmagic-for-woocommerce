@@ -18,6 +18,10 @@ class CheckboxFieldNormalizer extends JsonSchemaFieldNormalizer {
 			parent::normalize( $object ),
 			[
 				'type'           => [ 'boolean', 'string' ],
+				'oneOf'          => [
+					[ 'const' => '' ],
+					[ 'type' => 'boolean' ],
+				],
 				'extendedCoerce' => true,
 			]
 		);

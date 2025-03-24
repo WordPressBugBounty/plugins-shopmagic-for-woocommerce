@@ -4,8 +4,10 @@ declare( strict_types=1 );
 
 namespace WPDesk\ShopMagic\Workflow\Extensions\Builtin;
 
+use WPDesk\ShopMagic\Integration\ActiveCampaign\AddActiveCampaignContact;
 use WPDesk\ShopMagic\Integration\GetResponse\AddGetResponseContact;
 use WPDesk\ShopMagic\Integration\Mailchimp\AddToMailChimpListAction;
+use WPDesk\ShopMagic\Integration\MailerLite\AddMailerLiteSubscriber;
 use WPDesk\ShopMagic\Marketing\Workflow\Components\Actions\AddToListAction;
 use WPDesk\ShopMagic\Marketing\Workflow\Components\Actions\DeleteFromListAction;
 use WPDesk\ShopMagic\Marketing\Workflow\Components\Filters\CustomerListFilter;
@@ -36,6 +38,8 @@ final class CoreExtension extends AbstractExtension {
 			DeleteFromListAction::class,
 			AddToMailChimpListAction::class,
 			AddGetResponseContact::class,
+			AddMailerLiteSubscriber::class,
+			AddActiveCampaignContact::class,
 		];
 	}
 
@@ -75,6 +79,7 @@ final class CoreExtension extends AbstractExtension {
 			Post\PostTitle::class,
 
 			Shop\ShopDescription::class,
+			Shop\AdminEmail::class,
 			Shop\ShopTitle::class,
 			Shop\ShopUrl::class,
 		];

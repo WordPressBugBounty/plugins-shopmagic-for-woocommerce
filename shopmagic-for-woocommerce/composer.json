@@ -12,7 +12,8 @@
 			"dealerdirect/phpcodesniffer-composer-installer": true,
 			"wpdesk/wp-wpdesk-composer": true,
 			"wpdesk/wp-codeception": true,
-			"phpstan/extension-installer": true
+			"phpstan/extension-installer": true,
+			"php-http/discovery": true
 		},
 		"archive-format": "zip"
 	},
@@ -23,16 +24,21 @@
 		"getresponse/sdk-php-client": "^2.0",
 		"woocommerce/action-scheduler": "^3.5.3",
 		"wpdesk/ltv-dashboard-widget": "^1.4",
-		"wpdesk/wp-wpdesk-helper-override": "^1.1.0"
+		"wpdesk/wp-wpdesk-helper-override": "^1.1.0",
+		"guzzlehttp/psr7": "^2.7"
 	},
 	"require-dev": {
 		"10up/wp_mock": "*",
 		"composer/composer": "^2.2.18",
 		"getresponse/sdk-php": "^3.0",
 		"league/csv": "^9.6.2",
+		"mailerlite/mailerlite-php": "^1.0",
 		"monolog/monolog": "^2.8",
 		"pelago/emogrifier": "^6",
 		"php-di/php-di": "^6.3.5",
+		"php-http/curl-client": "^2.3",
+		"php-http/guzzle7-adapter": "^1.1",
+		"php-http/message": "^1.16",
 		"phpunit/phpunit": "^7.5.20 | ^8",
 		"psr/container": "^1.1.1",
 		"psr/log": "^1.1.4",

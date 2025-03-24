@@ -26,7 +26,9 @@ class SelectFieldNormalizer extends JsonSchemaFieldNormalizer {
 
 		return array_merge(
 			parent::normalize( $object ),
-			[ 'oneOf' => $options ]
+			[
+				'anyOf' => array_merge( $options, [ [ 'type' => 'string' ] ] ),
+			],
 		);
 	}
 

@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   loading: false,
   totalCount: 0,
   checkedRowKeys: () => [],
-  error: null
+  error: null,
 });
 
 const pageSize = ref(20);

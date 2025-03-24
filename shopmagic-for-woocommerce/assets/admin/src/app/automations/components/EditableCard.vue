@@ -3,7 +3,7 @@ import { NCard } from "naive-ui";
 </script>
 
 <template>
-  <NCard class="shadow" hoverable>
+  <NCard class="shadow-sm" hoverable>
     <slot></slot>
     <template #action>
       <slot name="below" />

@@ -30,17 +30,17 @@ function createRecipe(name: string) {
     });
 }
 
-const RecipeButton = ( recipe: Recipe ) => {
+const RecipeButton = (recipe: Recipe) => {
   if (canUseRecipe(recipe) === false) {
     return h(
       NButton,
       {
         tertiary: true,
         type: "error",
-        disabled: true
+        disabled: true,
       },
       { default: () => __("Missing plugins", "shopmagic-for-woocommerce") },
-    )
+    );
   }
   return h(
     NButton,
@@ -50,15 +50,14 @@ const RecipeButton = ( recipe: Recipe ) => {
       onClick: () => createRecipe(recipe.name),
     },
     { default: () => __("Use recipe", "shopmagic-for-woocommerce") },
-  )
-
-}
+  );
+};
 
 const columns: DataTableColumns<Recipe> = [
   {
     key: "recipe",
     title: () => __("Recipe", "shopmagic-for-woocommerce"),
-    render: (recipe) => h(RecipeDescription, {recipe}),
+    render: (recipe) => h(RecipeDescription, { recipe }),
   },
   {
     key: "action",
@@ -67,7 +66,6 @@ const columns: DataTableColumns<Recipe> = [
     width: 180,
   },
 ];
-
 </script>
 <template>
   <NH1>{{ __("Recipes", "shopmagic-for-woocommerce") }}</NH1>

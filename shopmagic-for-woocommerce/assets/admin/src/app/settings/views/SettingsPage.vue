@@ -57,7 +57,7 @@ async function saveSettings() {
   <div class="flex gap-4">
     <NH1>{{ __("Settings", "shopmagic-for-woocommerce") }}</NH1>
   </div>
-  <NLayout class="bg-transparent" has-sider>
+  <NLayout has-sider>
     <NLayoutSider>
       <NSpace v-if="loading" class="my-2" justify="center" vertical>
         <NSkeleton
@@ -71,7 +71,7 @@ async function saveSettings() {
       </NSpace>
       <NMenu v-else :default-value="currentTab" :options="asMenuItems" />
     </NLayoutSider>
-    <NLayout class="bg-gray-50" content-style="padding: 1rem 2rem">
+    <NLayout class="bg-gray-50!" content-style="padding: 1rem 2rem">
       <NSpace v-if="loading" vertical>
         <NSkeleton v-for="i in 8" :key="i" :sharp="false" height="32px" text width="65%" />
       </NSpace>

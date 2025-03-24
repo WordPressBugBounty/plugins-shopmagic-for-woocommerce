@@ -61,7 +61,7 @@ export const useQueueStore = defineStore("queue", () => {
     error,
     getQueue,
     cancelQueue,
-    cancelAll
+    cancelAll,
   };
 });
 

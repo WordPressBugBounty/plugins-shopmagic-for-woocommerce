@@ -75,7 +75,7 @@ final class WooCommerceMailTemplate implements MailTemplate, LoggerAwareInterfac
 				'email_heading' => $this->heading_value,
 			]
 		);
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		if ( null !== $this->unsubscribe_url ) {
 			$append_unsubscribe_link = function ( $content ): string {
@@ -100,7 +100,7 @@ final class WooCommerceMailTemplate implements MailTemplate, LoggerAwareInterfac
 	 * Prints given WooCommerce template.
 	 */
 	private function print_template_part( string $file, array $args = [] ): void {
-		extract( $args, EXTR_SKIP );
+		extract( $args, EXTR_SKIP ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 
 		$template_name = 'emails/' . $file;
 

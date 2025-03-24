@@ -37,7 +37,7 @@ function switchStyle({ checked }: { focused: boolean; checked: boolean }): CSSPr
         :value="name"
         class="min-w-[520px]"
         :input-props="{
-          name: 'automation-name'
+          name: 'automation-name',
         }"
         @update:value="$emit('update:name', $event)"
       />

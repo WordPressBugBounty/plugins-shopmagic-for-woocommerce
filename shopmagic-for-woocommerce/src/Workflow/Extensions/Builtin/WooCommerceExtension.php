@@ -98,6 +98,7 @@ final class WooCommerceExtension extends AbstractExtension {
 			new Order\OrderCrossSells( $this->renderer, $utm_builder ),
 			new Order\OrderProductsOrdered( $this->renderer, $utm_builder ),
 			new Order\OrderRelatedProducts( $this->renderer, $utm_builder ),
+			new Order\OrderQuantityProducts( $this->renderer, $utm_builder ),
 			Order\OrderAdminUrl::class,
 			Order\OrderDateCompleted::class,
 			Order\OrderDateCreated::class,
