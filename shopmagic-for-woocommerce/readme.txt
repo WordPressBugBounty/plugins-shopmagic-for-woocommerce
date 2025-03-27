@@ -4,9 +4,9 @@ Tags: customize woocommerce emails, follow up emails, woocommerce email customiz
 Author URL: https://shopmagic.app/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=author-url&utm_content=home
 Donate link: https://shopmagic.app/
 Requires at least: 6.3
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.4.0
+Stable tag: 4.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,7 @@ Use the best email marketing customizer for WordPress and WooCommerce ⭐!
 
 ### Some of the ShopMagic email marketing features supported out-of-the-box
 
+- [**AI-powered interface**](https://shopmagic.app/blog/woocommerce-email-marketing-automation/) - Create email automations using prompts and save time learning the interface (PRO feature)!
 - **Ready-to-use WooCommerce email marketing recipes** - Pre-made email automation templates
 - **WooCommerce follow-up emails** – Send automatic emails to customers who buy specific products, asking for a review or suggesting other products.
 - **Email automation for specific WooCommerce order statuses** - Send automated emails with links to the ordered products, or to the Google Reviews.
@@ -107,6 +108,8 @@ Time for action. The final step of every automation. In other words, what will h
 = Customize with WooCommerce email shortcodes (placeholders) =
 
 ShopMagic supports a variety of WooCommerce email placeholders. This can help you personalize your emails with customers' data or increase conversions with direct links (e.g. pointing to an unfinished order).
+
+> With the PRO version, you can **create automations using a single prompt to AI**. This saves you time by eliminating the need to think through the configuration steps. Want to learn more? [See here](https://shopmagic.app/blog/woocommerce-email-marketing-automation/)
 
 ★★★★★
 
@@ -336,16 +339,16 @@ You can also use the ShopMagic PRO containing additional extensions to boost you
 
 **These are paid add-ons for [ShopMagic PRO](https://shopmagic.app/).**
 
-- [**Delayed Actions**](https://shopmagic.app/products/shopmagic-delayed-actions/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=delayed-actions&utm_content=add-on-delayed-actions) – Create post-purchase emails, i.e. with a 1-week delay or anniversary email 365 days after the initial purchase. Delay WooCommerce emails by minutes, hours, days, or weeks.
-- [**Review Requests**](https://shopmagic.app/products/shopmagic-review-requests/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=review-requests&utm_content=add-on-review-requests) – Adds review requests with direct links to products purchased for customers to review.
-- [**Personalized Coupons**](https://shopmagic.app/products/shopmagic-customer-coupons/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=advanced-filters&utm_content=add-on-advanced-filters) – Adds the ability to create personalized coupon codes for customers and send them automatically.
-- [**Advanced Filters**](https://shopmagic.app/products/shopmagic-advanced-filters/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=delayed-actions&utm_content=add-on-delayed-actions) – Ability to segment your customers with advanced filters, for example, order total, product category, payment or shipping method, and more.
-- [**Manual Actions**](https://shopmagic.app/products/shopmagic-manual-actions/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=manual-actions&utm_content=add-on-manual-actions) – Manually trigger one-time emails. Perfect for newsletters, product announcements, or any other emails that you want to trigger by yourself.
-- [**WooCommerce Subscriptions Integration**](https://shopmagic.app/products/woocommerce-subscriptions/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=woocommerce-subscriptions-integration&utm_content=add-on-woocommerce-subscriptions) – Allows creating automations based on subscription events, such as payments or status changes.
-- [**WooCommerce Memberships Integration**](https://shopmagic.app/products/shopmagic-woocommerce-memberships/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=woocommerce-memberships-integration&utm_content=add-on-woocommerce-memberships) – Allows creating automations based on membership events, such as status changes or before expiry.
+- [**Delayed Actions**](https://shopmagic.app/products/shopmagic-delayed-actions/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=delayed-actions&utm_content=add-on-delayed-actions) – Create post-purchase emails, i.e. with a 1-week delay or anniversary email 365 days after the initial purchase. Delay WooCommerce emails by minutes, hours, days, or weeks.
+- [**Review Requests**](https://shopmagic.app/products/shopmagic-review-requests/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=review-requests&utm_content=add-on-review-requests) – Adds review requests with direct links to products purchased for customers to review.
+- [**Personalized Coupons**](https://shopmagic.app/products/shopmagic-customer-coupons/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=advanced-filters&utm_content=add-on-advanced-filters) – Adds the ability to create personalized coupon codes for customers and send them automatically.
+- [**Advanced Filters**](https://shopmagic.app/products/shopmagic-advanced-filters/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=delayed-actions&utm_content=add-on-delayed-actions) – Ability to segment your customers with advanced filters, for example, order total, product category, payment or shipping method, and more.
+- [**Manual Actions**](https://shopmagic.app/products/shopmagic-manual-actions/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=manual-actions&utm_content=add-on-manual-actions) – Manually trigger one-time emails. Perfect for newsletters, product announcements, or any other emails that you want to trigger by yourself.
+- [**WooCommerce Subscriptions Integration**](https://shopmagic.app/products/woocommerce-subscriptions/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=woocommerce-subscriptions-integration&utm_content=add-on-woocommerce-subscriptions) – Allows creating automations based on subscription events, such as payments or status changes.
+- [**WooCommerce Memberships Integration**](https://shopmagic.app/products/shopmagic-woocommerce-memberships/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=woocommerce-memberships-integration&utm_content=add-on-woocommerce-memberships) – Allows creating automations based on membership events, such as status changes or before expiry.
 - [**WooCommerce Bookings Integration**](https://shopmagic.app/products/shopmagic-woocommerce-bookings/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=woocommerce-bookings-integration&utm_content=add-on-woocommerce-bookings) - Let you crate automation based on booking events like status changes or before expiry.
 - [**Gravity Forms**](https://shopmagic.app/products/shopmagic-gravity-forms/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=gravity-forms&utm_content=add-on-gravity-forms) - Let you create automation based on user or customer form submission. You may use the forms to gather feedback in WordPress or information from WooCommerce customers and send the data to [Google Sheets](https://shopmagic.app/products/woocommerce-google-sheets-integration/).
-- [**Post to Slack**](https://shopmagic.app/products/shopmagic-slack/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=post-to-slack&utm_content=add-on-slack) – Allows you and your team to stay up to date with what’s happening in your store right in Slack.
+- [**Post to Slack**](https://shopmagic.app/products/shopmagic-slack/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=post-to-slack&utm_content=add-on-slack) – Allows you and your team to stay up to date with what’s happening in your store right in Slack.
 
 = Do you have more free plugins for WooCommerce? =
 
@@ -404,6 +407,9 @@ You can also choose one from the list below based on your needs.
 37. Read the documentation about how to customize emails and email marketing in WooCommerce.
 
 == Changelog ==
+
+= 4.4.1 - 2025-03-27
+* Added support for WordPress 6.8
 
 = 4.4.0 - 2025-03-24
 * New integration: MailerLite - connect your WooCommerce store with MailerLite email marketing platform

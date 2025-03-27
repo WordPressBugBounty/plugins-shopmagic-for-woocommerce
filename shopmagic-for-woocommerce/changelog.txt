@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.4.1] - 2025-03-27
+### Added
+* Added support for WordPress 6.8
+
 ## [4.4.0] - 2025-03-24
 ### Added
 * New integration: MailerLite - connect your WooCommerce store with MailerLite email marketing platform
