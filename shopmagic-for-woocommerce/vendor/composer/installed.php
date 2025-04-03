@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wpdesk/shopmagic-for-woocommerce',
-        'pretty_version' => '4.4.1',
-        'version' => '4.4.1.0',
-        'reference' => '2fb745b82d27202c13548714ef68d8020e0e66b2',
+        'pretty_version' => '4.5.0',
+        'version' => '4.5.0.0',
+        'reference' => '8a61abf596a62cb5a9d7196565dec975f8b7dbf0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -95,9 +95,9 @@
             'dev_requirement' => false,
         ),
         'wpdesk/shopmagic-for-woocommerce' => array(
-            'pretty_version' => '4.4.1',
-            'version' => '4.4.1.0',
-            'reference' => '2fb745b82d27202c13548714ef68d8020e0e66b2',
+            'pretty_version' => '4.5.0',
+            'version' => '4.5.0.0',
+            'reference' => '8a61abf596a62cb5a9d7196565dec975f8b7dbf0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

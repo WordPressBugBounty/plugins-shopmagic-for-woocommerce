@@ -134,8 +134,6 @@ function importAutomation() {
   });
 }
 
-const isPro = window.ShopMagic.proEnabled === "1";
-
 const showShopWizardTooltip = ref(localStorage.getItem("hideShopWizardTooltip") !== "1");
 
 const hideShopWizardTooltip = () => {
@@ -153,7 +151,6 @@ const hideShopWizardTooltip = () => {
       {{ __("Import", "shopmagic-for-woocommerce") }}
     </NButton>
     <NTooltip
-      v-if="isPro"
       :show="showShopWizardTooltip"
       placement="right"
       :style="{ backgroundColor: 'rgb(72,146,97)', maxWidth: '400px' }"

@@ -29,15 +29,11 @@ const routes = [
             },
           ]
         : []),
-      ...(window.ShopMagic.proEnabled === "1"
-        ? [
             {
               path: "/automations/generate",
               name: "generateAutomation",
               component: async () => import("./views/GenerateAutomation.vue"),
             },
-          ]
-        : []),
     ],
   },
 ];

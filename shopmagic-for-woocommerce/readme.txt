@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.4.1
+Stable tag: 4.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,7 +44,7 @@ Use the best email marketing customizer for WordPress and WooCommerce ⭐!
 
 ### Some of the ShopMagic email marketing features supported out-of-the-box
 
-- [**AI-powered interface**](https://shopmagic.app/blog/woocommerce-email-marketing-automation/) - Create email automations using prompts and save time learning the interface (PRO feature)!
+- [**AI-powered interface**](https://shopmagic.app/blog/woocommerce-email-marketing-automation/) - Create email automations using prompts and save time learning the interface!
 - **Ready-to-use WooCommerce email marketing recipes** - Pre-made email automation templates
 - **WooCommerce follow-up emails** – Send automatic emails to customers who buy specific products, asking for a review or suggesting other products.
 - **Email automation for specific WooCommerce order statuses** - Send automated emails with links to the ordered products, or to the Google Reviews.
@@ -109,7 +109,7 @@ Time for action. The final step of every automation. In other words, what will h
 
 ShopMagic supports a variety of WooCommerce email placeholders. This can help you personalize your emails with customers' data or increase conversions with direct links (e.g. pointing to an unfinished order).
 
-> With the PRO version, you can **create automations using a single prompt to AI**. This saves you time by eliminating the need to think through the configuration steps. Want to learn more? [See here](https://shopmagic.app/blog/woocommerce-email-marketing-automation/)
+> You can **create automations using a single prompt to our assistant**. This saves you time by eliminating the need to think through the configuration steps. Want to learn more? [See here](https://shopmagic.app/blog/woocommerce-email-marketing-automation/)
 
 ★★★★★
 
@@ -408,17 +408,8 @@ You can also choose one from the list below based on your needs.
 
 == Changelog ==
 
-= 4.4.1 - 2025-03-27
-* Added support for WordPress 6.8
-
-= 4.4.0 - 2025-03-24
-* New integration: MailerLite - connect your WooCommerce store with MailerLite email marketing platform
-* New integration: ActiveCampaign - seamlessly integrate your store with ActiveCampaign marketing automation
-* AI-powered automation generator - create automations with natural language prompts (PRO feature)
-* New placeholders:
-	*  {{ order.products_ordered }}  - display ordered products information
-	*  {{ order.quantity_products }}  - show quantity of products in an order
-	*  {{ shop.admin_email }}  - display store admin email
+= 4.5.0 - 2025-04-03
+* We are rolling our ShopWizard assistant to each user! Give it a try and describe and automation or two you'd really want to create 🚀.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

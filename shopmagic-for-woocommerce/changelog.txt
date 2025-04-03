@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.5.0] - 2025-04-03
+### Added
+* We are rolling our ShopWizard assistant to each user! Give it a try and describe and automation or two you'd really want to create 🚀.
+
 ## [4.4.1] - 2025-03-27
 ### Added
 * Added support for WordPress 6.8
