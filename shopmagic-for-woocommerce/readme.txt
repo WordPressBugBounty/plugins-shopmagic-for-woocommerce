@@ -4,9 +4,9 @@ Tags: customize woocommerce emails, follow up emails, woocommerce email customiz
 Author URL: https://shopmagic.app/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=author-url&utm_content=home
 Donate link: https://shopmagic.app/
 Requires at least: 6.3
-Tested up to: 6.8
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 4.5.0
+Stable tag: 4.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -407,6 +407,9 @@ You can also choose one from the list below based on your needs.
 37. Read the documentation about how to customize emails and email marketing in WooCommerce.
 
 == Changelog ==
+
+= 4.5.1 - 2025-04-07 =
+* Added support for WooCommerce 9.8
 
 = 4.5.0 - 2025-04-03
 * We are rolling our ShopWizard assistant to each user! Give it a try and describe and automation or two you'd really want to create 🚀.
