@@ -1924,6 +1924,7 @@ class ComposerStaticInita2731da1452a2f72bfc6f9166ff62cbc
         'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\JsonSchemaFieldNormalizer' => __DIR__ . '/../..' . '/src/Api/Normalizer/FieldNormalizer/JsonSchemaFieldNormalizer.php',
         'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\JsonSchemaNormalizer' => __DIR__ . '/../..' . '/src/Api/Normalizer/FieldNormalizer/JsonSchemaNormalizer.php',
         'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\ModuleFieldNormalizer' => __DIR__ . '/../..' . '/src/Api/Normalizer/FieldNormalizer/ModuleFieldNormalizer.php',
+        'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\MultipleInputTextFieldNormalizer' => __DIR__ . '/../..' . '/src/Api/Normalizer/FieldNormalizer/MultipleInputTextFieldNormalizer.php',
         'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\MultipleSelectFieldNormalizer' => __DIR__ . '/../..' . '/src/Api/Normalizer/FieldNormalizer/MultipleSelectFieldNormalizer.php',
         'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\NoValueFieldNormalizer' => __DIR__ . '/../..' . '/src/Api/Normalizer/FieldNormalizer/NoValueFieldNormalizer.php',
         'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\ParagraphFieldNormalizer' => __DIR__ . '/../..' . '/src/Api/Normalizer/FieldNormalizer/ParagraphFieldNormalizer.php',

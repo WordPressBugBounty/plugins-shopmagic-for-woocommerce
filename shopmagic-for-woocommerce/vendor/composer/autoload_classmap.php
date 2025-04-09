@@ -1861,6 +1861,7 @@ return array(
     'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\JsonSchemaFieldNormalizer' => $baseDir . '/src/Api/Normalizer/FieldNormalizer/JsonSchemaFieldNormalizer.php',
     'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\JsonSchemaNormalizer' => $baseDir . '/src/Api/Normalizer/FieldNormalizer/JsonSchemaNormalizer.php',
     'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\ModuleFieldNormalizer' => $baseDir . '/src/Api/Normalizer/FieldNormalizer/ModuleFieldNormalizer.php',
+    'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\MultipleInputTextFieldNormalizer' => $baseDir . '/src/Api/Normalizer/FieldNormalizer/MultipleInputTextFieldNormalizer.php',
     'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\MultipleSelectFieldNormalizer' => $baseDir . '/src/Api/Normalizer/FieldNormalizer/MultipleSelectFieldNormalizer.php',
     'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\NoValueFieldNormalizer' => $baseDir . '/src/Api/Normalizer/FieldNormalizer/NoValueFieldNormalizer.php',
     'WPDesk\\ShopMagic\\Api\\Normalizer\\FieldNormalizer\\ParagraphFieldNormalizer' => $baseDir . '/src/Api/Normalizer/FieldNormalizer/ParagraphFieldNormalizer.php',

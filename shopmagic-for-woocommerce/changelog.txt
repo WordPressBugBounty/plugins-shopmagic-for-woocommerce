@@ -1,6 +1,10 @@
 # ShopMagic Changelog
 
-## [4.5.1] - 2025-04-07 
+## [4.5.2] - 2025-04-09
+### Added
+- Added support for WordPress 6.8
+
+## [4.5.1] - 2025-04-07
 ### Added
 - Support for WooCommerce 9.8
 

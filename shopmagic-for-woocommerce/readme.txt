@@ -3,10 +3,10 @@ Contributors: wpdesk,dyszczo,bartj
 Tags: customize woocommerce emails, follow up emails, woocommerce email customizer, woocommerce abandoned cart, woocommerce mailchimp
 Author URL: https://shopmagic.app/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=author-url&utm_content=home
 Donate link: https://shopmagic.app/
-Requires at least: 6.3
-Tested up to: 6.7
+Requires at least: 6.4
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.5.1
+Stable tag: 4.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -408,11 +408,8 @@ You can also choose one from the list below based on your needs.
 
 == Changelog ==
 
-= 4.5.1 - 2025-04-07 =
-* Added support for WooCommerce 9.8
-
-= 4.5.0 - 2025-04-03
-* We are rolling our ShopWizard assistant to each user! Give it a try and describe and automation or two you'd really want to create 🚀.
+= 4.5.2 - 2025-04-09 =
+* Added support for WordPress 6.8
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

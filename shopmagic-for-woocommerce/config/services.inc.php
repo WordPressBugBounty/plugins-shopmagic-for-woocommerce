@@ -32,6 +32,7 @@ use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\ParagraphFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\ProductSelectFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\SelectFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\TextFieldNormalizer;
+use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\MultipleInputTextFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\FieldNormalizer\TimeFieldNormalizer;
 use WPDesk\ShopMagic\Api\Normalizer\NormalizerCollection;
 use WPDesk\ShopMagic\Api\Normalizer\RecipeAutomationNormalizer;
@@ -427,6 +428,7 @@ return [
 				new TimeFieldNormalizer(),
 				new DateFieldNormalizer(),
 				new TextFieldNormalizer(),
+				new MultipleInputTextFieldNormalizer(),
 				new JsonSchemaFieldNormalizer()
 			)
 		);

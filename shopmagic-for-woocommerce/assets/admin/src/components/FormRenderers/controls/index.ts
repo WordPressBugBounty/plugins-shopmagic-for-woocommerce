@@ -31,6 +31,7 @@ import ManualActionControlRenderer from "./ManualActionControlRenderer.vue";
 import PluginModuleRenderer from "./PluginModuleRenderer.vue";
 import ButtonControlRenderer from "./ButtonControlRenderer.vue";
 import RawHtmlControlRenderer from "./RawHtmlControlRenderer.vue";
+import MultipleInputControlRenderer from "./MultipleInputControlRenderer.vue";
 import ProductArrayRenderer from "./ProductArrayRenderer.vue";
 
 export const controlRenderers: JsonFormsRendererRegistryEntry[] = [
@@ -41,6 +42,10 @@ export const controlRenderers: JsonFormsRendererRegistryEntry[] = [
   {
     renderer: NumberControlRenderer,
     tester: rankWith(1, isNumberControl),
+  },
+  {
+    renderer: MultipleInputControlRenderer,
+    tester: rankWith(2, schemaTypeIs("object")),
   },
   {
     renderer: SelectControlRenderer,
