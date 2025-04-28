@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.5.2
+Stable tag: 4.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -218,6 +218,7 @@ Core functionalities of ShopMagic are free forever. However, we developed some a
 - [**WooCommerce Bookings Integration**](https://shopmagic.app/products/shopmagic-woocommerce-bookings/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=woocommerce-bookings-integration&utm_content=add-on-woocommerce-bookings) - Let you crate automation based on booking events like status changes or before expiry.
 - [**Gravity Forms**](https://shopmagic.app/products/shopmagic-gravity-forms/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=gravity-forms&utm_content=add-on-gravity-forms) - Let you create automation based on user or customer form submission. You may use the forms to gather feedback in WordPress or information from WooCommerce customers and send the data to [Google Sheets](https://shopmagic.app/products/woocommerce-google-sheets-integration/).
 - [**Post to Slack**](https://shopmagic.app/products/shopmagic-slack/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=post-to-slack&utm_content=add-on-slack) – Allows you and your team to stay up to date with what’s happening in your store right in Slack.
+- [**Webhooks**](https://shopmagic.app/products/shopmagic-webhooks/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=webhooks&utm_content=webhooks) - allows using WooCommerce webhooks to integrate ShopMagic automations with external services or systems via REST API.
 
 **Upgrade to ShopMagic PRO**
 
@@ -349,6 +350,7 @@ You can also use the ShopMagic PRO containing additional extensions to boost you
 - [**WooCommerce Bookings Integration**](https://shopmagic.app/products/shopmagic-woocommerce-bookings/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=woocommerce-bookings-integration&utm_content=add-on-woocommerce-bookings) - Let you crate automation based on booking events like status changes or before expiry.
 - [**Gravity Forms**](https://shopmagic.app/products/shopmagic-gravity-forms/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=gravity-forms&utm_content=add-on-gravity-forms) - Let you create automation based on user or customer form submission. You may use the forms to gather feedback in WordPress or information from WooCommerce customers and send the data to [Google Sheets](https://shopmagic.app/products/woocommerce-google-sheets-integration/).
 - [**Post to Slack**](https://shopmagic.app/products/shopmagic-slack/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=post-to-slack&utm_content=add-on-slack) – Allows you and your team to stay up to date with what’s happening in your store right in Slack.
+- [**Webhooks**](https://shopmagic.app/products/shopmagic-webhooks/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=webhooks&utm_content=webhooks) - allows using WooCommerce webhooks to integrate ShopMagic automations with external services or systems via REST API.
 
 = Do you have more free plugins for WooCommerce? =
 
@@ -408,8 +410,11 @@ You can also choose one from the list below based on your needs.
 
 == Changelog ==
 
-= 4.5.2 - 2025-04-09 =
-* Added support for WordPress 6.8
+= 4.5.3 - 2025-04-28 =
+* Added filtering by customer ID with multiple, comma-separated IDs.
+* Fixed manual actions fronted processing persists after changing the page.
+* Fixed the rare issue of saving a new marketing list failure.
+* Removed double slashes from assets URLs.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

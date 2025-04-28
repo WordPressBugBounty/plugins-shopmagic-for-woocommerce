@@ -5,7 +5,9 @@ namespace WPDesk\ShopMagic\Workflow\Filter\Builtin\Customer;
 
 use WPDesk\ShopMagic\Workflow\Filter\Builtin\CustomerFilter;
 use WPDesk\ShopMagic\Workflow\Filter\ComparisonType\ComparisonType;
+use WPDesk\ShopMagic\Workflow\Filter\ComparisonType\CompoundType;
 use WPDesk\ShopMagic\Workflow\Filter\ComparisonType\IntegerType;
+use WPDesk\ShopMagic\Workflow\Filter\ComparisonType\StringArrayType;
 
 
 final class CustomerIdFilter extends CustomerFilter {
@@ -34,6 +36,6 @@ final class CustomerIdFilter extends CustomerFilter {
 	}
 
 	protected function get_type(): ComparisonType {
-		return new IntegerType();
+		return new CompoundType( new IntegerType(), new StringArrayType() );
 	}
 }

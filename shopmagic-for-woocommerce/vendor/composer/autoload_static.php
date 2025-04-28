@@ -2296,6 +2296,7 @@ class ComposerStaticInita2731da1452a2f72bfc6f9166ff62cbc
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\AbstractType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/AbstractType.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\BoolType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/BoolType.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\ComparisonType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/ComparisonType.php',
+        'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\CompoundType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/CompoundType.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\DateType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/DateType.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\FloatType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/FloatType.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\IntegerType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/IntegerType.php',

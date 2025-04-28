@@ -57,7 +57,7 @@ final class PreSubmitData implements HookProvider, Conditional {
 
 				wp_register_script(
 					self::SHOPMAGIC_PRESUBMIT,
-					$this->plugin_bag->get_assets_url() . '/js/presubmit.js',
+					$this->plugin_bag->get_assets_url() . 'js/presubmit.js',
 					[ 'jquery' ],
 					SHOPMAGIC_VERSION,
 					true

@@ -13,7 +13,7 @@ import {
 } from "naive-ui";
 import { Checkmark, CloseOutline } from "@vicons/ionicons5";
 import { get } from "@/_utils";
-import { computed, ref, watchEffect } from "vue";
+import { computed, ref, watchEffect, onUnmounted } from "vue";
 import ShadyCard from "@/components/ShadyCard.vue";
 import EditGroup from "../components/EditGroup.vue";
 import { useAutomationResourcesStore } from "../resourceStore";
@@ -30,6 +30,9 @@ const { getAction } = useAutomationResourcesStore();
 const props = defineProps<{
   id: number;
 }>();
+
+const controller = new AbortController();
+const isUnmounted = ref(false);
 
 const STATES = {
   NOT_INITIALIZED: "notInitialized",
@@ -80,7 +83,7 @@ watchEffect(() => {
       /**
        * With ShopMagic Manual Actions 1.7.0 there's a new endpoint to count matches which envelopes data
        * and collects errors. Check if we are able to use it.
-       */
+      */
       async function determineApiMatchEndpoint() {
         const { response } = await useWpFetch(`/automations/${props.id}/manual/match`).head();
         if (response.value.ok) {
@@ -91,11 +94,15 @@ watchEffect(() => {
       }
       const apiEndpoint = await determineApiMatchEndpoint();
       do {
-        // TODO: abort controller when user leaves page
+        if (isUnmounted.value) break;
         await fetchPreviewRuns(apiEndpoint);
-      } while (page.value <= maxPages.value);
+      } while (page.value <= maxPages.value && !isUnmounted.value);
     })
-    .then(() => (matchesLoading.value = false));
+    .then(() => {
+      if (!isUnmounted.value) {
+          matchesLoading.value = false
+      }
+    });
 });
 
 watchEffect(() => {
@@ -113,20 +120,30 @@ async function fetchPreviewRuns(apiMatchEndpoint: string) {
         page_size: BATCH_SIZE,
         page: page.value + i,
       }),
+      { signal: controller.signal },
     );
   });
-  const result = await Promise.all(promises);
-  page.value += batchSize;
-  if (apiMatchEndpoint.endsWith(`automations/${props.id}/manual/match`)) {
-    for (const { data: matches, errors: matchErrors } of result) {
-      matchingItems.value.push(...matches);
-      matchingErrors.value.push(...matchErrors);
-      processed.value++;
+  try {
+    const result = await Promise.all(promises);
+    page.value += batchSize;
+
+    if (apiMatchEndpoint.endsWith(`automations/${props.id}/manual/match`)) {
+      for (const { data: matches, errors: matchErrors } of result) {
+        matchingItems.value.push(...matches);
+        matchingErrors.value.push(...matchErrors);
+        processed.value++;
+      }
+    } else {
+      for (const matches of result) {
+        matchingItems.value.push(...matches);
+        processed.value++;
+      }
     }
-  } else {
-    for (const matches of result) {
-      matchingItems.value.push(...matches);
-      processed.value++;
+  } catch (error: any) {
+    if (error.name === 'AbortError') {
+      console.log('Fetch aborted');
+    } else {
+      console.error('Error fetching preview runs:', error);
     }
   }
 }
@@ -163,6 +180,11 @@ async function dispatchAutomations() {
     return;
   });
 }
+
+onUnmounted(() => {
+  isUnmounted.value = true;
+  controller.abort();
+});
 </script>
 <template>
   <EditGroup>

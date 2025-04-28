@@ -2233,6 +2233,7 @@ return array(
     'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\AbstractType' => $baseDir . '/src/Workflow/Filter/ComparisonType/AbstractType.php',
     'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\BoolType' => $baseDir . '/src/Workflow/Filter/ComparisonType/BoolType.php',
     'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\ComparisonType' => $baseDir . '/src/Workflow/Filter/ComparisonType/ComparisonType.php',
+    'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\CompoundType' => $baseDir . '/src/Workflow/Filter/ComparisonType/CompoundType.php',
     'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\DateType' => $baseDir . '/src/Workflow/Filter/ComparisonType/DateType.php',
     'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\FloatType' => $baseDir . '/src/Workflow/Filter/ComparisonType/FloatType.php',
     'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\IntegerType' => $baseDir . '/src/Workflow/Filter/ComparisonType/IntegerType.php',

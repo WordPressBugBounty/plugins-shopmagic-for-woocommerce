@@ -101,7 +101,7 @@ class MarketingListNormalizer implements Normalizer, Denormalizer {
 
 		if ( isset( $payload['shortcode'] ) ) {
 			$form = new NewsletterForm();
-			$form->set_agreement( $payload['shortcode']['agreement'] );
+			$form->set_agreement( (string) $payload['shortcode']['agreement'] );
 			$form->set_show_name( $payload['shortcode']['name'] );
 			$form->set_show_labels( $payload['shortcode']['labels'] );
 			$form->set_double_opt_in( $payload['shortcode']['double_optin'] );

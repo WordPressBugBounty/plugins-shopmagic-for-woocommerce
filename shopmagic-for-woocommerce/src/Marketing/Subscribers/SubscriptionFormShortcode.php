@@ -136,7 +136,7 @@ final class SubscriptionFormShortcode implements HookProvider {
 		}
 
 		if ( isset( $parameters['agreement'] ) ) {
-			$shortcode->set_agreement( $parameters['agreement'] );
+			$shortcode->set_agreement( (string) $parameters['agreement'] );
 		}
 
 		return $shortcode;
@@ -167,7 +167,7 @@ final class SubscriptionFormShortcode implements HookProvider {
 	private function register_scripts() {
 		wp_register_style(
 			self::ASSETS_HANDLE,
-			$this->plugin_bag->get_assets_url() . '/css/frontend.css',
+			$this->plugin_bag->get_assets_url() . 'css/frontend.css',
 			[],
 			$this->plugin_bag->get_version()
 		);
