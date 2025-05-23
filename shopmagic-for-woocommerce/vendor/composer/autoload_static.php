@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita2731da1452a2f72bfc6f9166ff62cbc
+class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -1698,6 +1698,7 @@ class ComposerStaticInita2731da1452a2f72bfc6f9166ff62cbc
         'ShopMagicVendor\\WPDesk\\Forms\\Field\\SubmitField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/SubmitField.php',
         'ShopMagicVendor\\WPDesk\\Forms\\Field\\TextAreaField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/TextAreaField.php',
         'ShopMagicVendor\\WPDesk\\Forms\\Field\\TimepickerField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/TimepickerField.php',
+        'ShopMagicVendor\\WPDesk\\Forms\\Field\\ToggleField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/ToggleField.php',
         'ShopMagicVendor\\WPDesk\\Forms\\Field\\Traits\\HtmlAttributes' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/Traits/HtmlAttributes.php',
         'ShopMagicVendor\\WPDesk\\Forms\\Field\\WPEditorField' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/WPEditorField.php',
         'ShopMagicVendor\\WPDesk\\Forms\\Field\\WooSelect' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-forms/src/Field/WooSelect.php',
@@ -2439,9 +2440,9 @@ class ComposerStaticInita2731da1452a2f72bfc6f9166ff62cbc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita2731da1452a2f72bfc6f9166ff62cbc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita2731da1452a2f72bfc6f9166ff62cbc::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInita2731da1452a2f72bfc6f9166ff62cbc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd::$classMap;
 
         }, null, ClassLoader::class);
     }

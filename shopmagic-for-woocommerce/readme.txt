@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.5.3
+Stable tag: 4.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -410,11 +410,8 @@ You can also choose one from the list below based on your needs.
 
 == Changelog ==
 
-= 4.5.3 - 2025-04-28 =
-* Added filtering by customer ID with multiple, comma-separated IDs.
-* Fixed manual actions fronted processing persists after changing the page.
-* Fixed the rare issue of saving a new marketing list failure.
-* Removed double slashes from assets URLs.
+= 4.5.4 - 2025-05-23 =
+* Changed internal links.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

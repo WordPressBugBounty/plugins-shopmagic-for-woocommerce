@@ -113,7 +113,7 @@ final class TwoWeeksNotice {
 		$actions   = [];
 		$actions[] = sprintf(
 			'<a target="_blank" href="%1$s">%2$s</a>',
-			esc_url( 'https://wpde.sk/sm-rate' ),
+			esc_url( 'https://wpdesk.link/sm-rate' ),
 			esc_html__( 'Ok, you deserved it', 'shopmagic-for-woocommerce' )
 		);
 		$actions[] = sprintf(

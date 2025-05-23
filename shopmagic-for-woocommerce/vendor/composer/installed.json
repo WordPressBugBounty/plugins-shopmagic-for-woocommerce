@@ -53,17 +53,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.7.0",
-            "version_normalized": "2.7.0.0",
+            "version": "2.7.1",
+            "version_normalized": "2.7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201"
+                "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
-                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c2270caaabe631b3b44c85f99e5a04bbb8060d16",
+                "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "time": "2024-07-18T11:15:46+00:00",
+            "time": "2025-03-27T12:30:47+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -152,7 +152,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.7.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.7.1"
             },
             "funding": [
                 {
@@ -386,17 +386,17 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.9.1",
-            "version_normalized": "3.9.1.0",
+            "version": "3.9.2",
+            "version_normalized": "3.9.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "d73b5f83cd42832fa137e03687bad3e312298d29"
+                "reference": "efbb7953f72a433086335b249292f280dd43ddfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/d73b5f83cd42832fa137e03687bad3e312298d29",
-                "reference": "d73b5f83cd42832fa137e03687bad3e312298d29",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/efbb7953f72a433086335b249292f280dd43ddfe",
+                "reference": "efbb7953f72a433086335b249292f280dd43ddfe",
                 "shasum": ""
             },
             "require": {
@@ -408,7 +408,7 @@
                 "wp-cli/wp-cli": "~2.5.0",
                 "yoast/phpunit-polyfills": "^2.0"
             },
-            "time": "2025-01-21T11:39:08+00:00",
+            "time": "2025-02-03T09:09:30+00:00",
             "type": "wordpress-plugin",
             "extra": {
                 "scripts-description": {
@@ -426,23 +426,23 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.9.1"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.9.2"
             },
             "install-path": "../woocommerce/action-scheduler"
         },
         {
             "name": "wpdesk/ltv-dashboard-widget",
-            "version": "1.5.8",
-            "version_normalized": "1.5.8.0",
+            "version": "1.5.9",
+            "version_normalized": "1.5.9.0",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.wpdesk.dev:wpdesk/library/ltv-dashboard-widget.git",
-                "reference": "08d80388c2dbdd519f7c7326c84930335d4d428e"
+                "reference": "5f210da5b0ad7bdd17eafaf45e74eb8a2e4b0749"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.wpdesk.dev/api/v4/projects/847/packages/composer/archives/wpdesk/ltv-dashboard-widget.zip?sha=08d80388c2dbdd519f7c7326c84930335d4d428e",
-                "reference": "08d80388c2dbdd519f7c7326c84930335d4d428e",
+                "url": "https://gitlab.wpdesk.dev/api/v4/projects/847/packages/composer/archives/wpdesk/ltv-dashboard-widget.zip?sha=5f210da5b0ad7bdd17eafaf45e74eb8a2e4b0749",
+                "reference": "5f210da5b0ad7bdd17eafaf45e74eb8a2e4b0749",
                 "shasum": ""
             },
             "require": {

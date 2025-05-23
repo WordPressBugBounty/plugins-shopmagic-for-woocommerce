@@ -1635,6 +1635,7 @@ return array(
     'ShopMagicVendor\\WPDesk\\Forms\\Field\\SubmitField' => $baseDir . '/vendor_prefixed/wpdesk/wp-forms/src/Field/SubmitField.php',
     'ShopMagicVendor\\WPDesk\\Forms\\Field\\TextAreaField' => $baseDir . '/vendor_prefixed/wpdesk/wp-forms/src/Field/TextAreaField.php',
     'ShopMagicVendor\\WPDesk\\Forms\\Field\\TimepickerField' => $baseDir . '/vendor_prefixed/wpdesk/wp-forms/src/Field/TimepickerField.php',
+    'ShopMagicVendor\\WPDesk\\Forms\\Field\\ToggleField' => $baseDir . '/vendor_prefixed/wpdesk/wp-forms/src/Field/ToggleField.php',
     'ShopMagicVendor\\WPDesk\\Forms\\Field\\Traits\\HtmlAttributes' => $baseDir . '/vendor_prefixed/wpdesk/wp-forms/src/Field/Traits/HtmlAttributes.php',
     'ShopMagicVendor\\WPDesk\\Forms\\Field\\WPEditorField' => $baseDir . '/vendor_prefixed/wpdesk/wp-forms/src/Field/WPEditorField.php',
     'ShopMagicVendor\\WPDesk\\Forms\\Field\\WooSelect' => $baseDir . '/vendor_prefixed/wpdesk/wp-forms/src/Field/WooSelect.php',
