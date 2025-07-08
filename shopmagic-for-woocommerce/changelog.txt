@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.5.5] - 2025-07-07
+### Fixed
+- Fixed the issue with displaying Google Sheets fields when the extension is active.
+
 ## [4.5.4] - 2025-05-23
 ### Changed
 - Changed internal links.

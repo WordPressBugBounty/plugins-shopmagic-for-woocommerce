@@ -45,6 +45,7 @@ class JsonSchemaNormalizer implements Normalizer {
 
 		return [
 			'type'         => 'object',
+			'format'       => $object->get_type(),
 			'properties'   => $properties,
 			'required'     => array_keys( $object->get_required_fields() ),
 			'presentation' => [

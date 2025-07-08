@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.5.4
+Stable tag: 4.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -368,6 +368,10 @@ You can also choose one from the list below based on your needs.
 * [**Flexible Quantity**](https://wordpress.org/plugins/flexible-quantity-measurement-price-calculator-for-woocommerce/) - choose new units of measure for WooCommerce products.
 * [**Flexible Refund**](https://wordpress.org/plugins/flexible-refund-and-return-order-for-woocommerce/) - let customers send refunds, returns, and warranty requests in WooCommerce.
 
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/9e5fbe4a-d687-4b4c-830f-afefd6dceb6d)
+
 == Screenshots ==
 
 1. Create WooCommerce and WordPress email automation - plugin dashboard.
@@ -409,6 +413,9 @@ You can also choose one from the list below based on your needs.
 37. Read the documentation about how to customize emails and email marketing in WooCommerce.
 
 == Changelog ==
+
+= 4.5.5 - 2025-07-07 =
+* Fixed the issue with displaying Google Sheets fields when the extension is active.
 
 = 4.5.4 - 2025-05-23 =
 * Changed internal links.

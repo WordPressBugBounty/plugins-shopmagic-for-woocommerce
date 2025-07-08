@@ -21,7 +21,7 @@ class JsonSchemaFieldNormalizer implements Normalizer {
 		$type = $this->get_type( $object );
 		return array_filter(
 			[
-				'type'         => $this->get_type( $object ),
+				'type'         => $type,
 				'title'        => $object->get_label(),
 				'description'  => $object->get_description(),
 				'format'       => $type === $object->get_type() ? null : $object->get_type(),
