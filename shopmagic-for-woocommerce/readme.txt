@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.5.5
+Stable tag: 4.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -252,24 +252,17 @@ The ShopMagic API makes it possible for developers to extend ShopMagic by:
 - WooCommerce abandoned cart plugin free
 - Email marketing in WordPress and WooCommerce for free
 - AutomateWoo free alternative
-
-**Download it for free and take your WooCommerce email marketing to the next level and save lots of time!**
-
-### Help us improve ShopMagic!
-
-We work on improving ShopMagic.
-
-If you have any feature requests or ideas on how to improve ShopMagic, [please send us your idea →](https://shopmagic.app/ideas/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=please-send-us-your-idea&utm_content=ideas)
-
-### Compatibility
-
-Although ShopMagic doesn&#39;t offer an option to change the email&#39;s layout visually, it fully supports WooCommerce email templates designed in other email customizers like [Kadence WooCommerce Email Designer](https://wordpress.org/plugins/kadence-woocommerce-email-designer/).
+- Compatible with [Kadence WooCommerce Email Designer](https://wordpress.org/plugins/kadence-woocommerce-email-designer)
 
 == Installation ==
 1. Install either via the WordPress.org plugin directory, or by uploading the files to your server.
 2. Activate the plugin through the "Plugins" menu in WordPress
 3. Go to WooCommerce &rarr; Automations in your WordPress admin area and add a automation
 4. Choose an event and an action for automation based on your preferences.
+
+== Data use policy ==
+
+Learn about [Use of Data Policy by WP Desk Plugins](https://shopmagic.app/use-of-data-collected-by-wp-desk-plugins/?utm_source=wporg&utm_medium=link&utm_campaign=data-use-policy)
 
 == Frequently Asked Questions ==
 
@@ -414,11 +407,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 4.5.6 - 2025-08-06 =
+* Added support for WooCommerce 10.1.
+
 = 4.5.5 - 2025-07-07 =
 * Fixed the issue with displaying Google Sheets fields when the extension is active.
-
-= 4.5.4 - 2025-05-23 =
-* Changed internal links.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

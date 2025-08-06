@@ -6,6 +6,7 @@ namespace WPDesk\ShopMagic\Helper;
 
 use ShopMagicVendor\WPDesk\Persistence\FallbackFromGetTrait;
 use ShopMagicVendor\WPDesk\Persistence\PersistentContainer;
+use WPDesk\ShopMagic\Workflow\ValueNotFound;
 
 class PostMetaContainer implements PersistentContainer {
 	use FallbackFromGetTrait;
@@ -70,7 +71,7 @@ class PostMetaContainer implements PersistentContainer {
 			return $this->data[ $id ];
 		}
 
-		throw new \RuntimeException( \sprintf( 'Element %s not exists for resource %d!', $id, $this->post_id ) );
+		throw new ValueNotFound( \sprintf( 'Element %s not exists for resource %d!', $id, $this->post_id ) );
 	}
 
 	public function delete( string $id ) {

@@ -4,11 +4,14 @@ namespace ShopMagicVendor\Sabberworm\CSS\CSSList;
 
 use ShopMagicVendor\Sabberworm\CSS\Comment\Comment;
 use ShopMagicVendor\Sabberworm\CSS\Comment\Commentable;
+use ShopMagicVendor\Sabberworm\CSS\CSSElement;
 use ShopMagicVendor\Sabberworm\CSS\OutputFormat;
 use ShopMagicVendor\Sabberworm\CSS\Parsing\ParserState;
 use ShopMagicVendor\Sabberworm\CSS\Parsing\SourceException;
 use ShopMagicVendor\Sabberworm\CSS\Parsing\UnexpectedEOFException;
 use ShopMagicVendor\Sabberworm\CSS\Parsing\UnexpectedTokenException;
+use ShopMagicVendor\Sabberworm\CSS\Position\Position;
+use ShopMagicVendor\Sabberworm\CSS\Position\Positionable;
 use ShopMagicVendor\Sabberworm\CSS\Property\AtRule;
 use ShopMagicVendor\Sabberworm\CSS\Property\Charset;
 use ShopMagicVendor\Sabberworm\CSS\Property\CSSNamespace;
@@ -28,8 +31,9 @@ use ShopMagicVendor\Sabberworm\CSS\Value\Value;
  *
  * It can also contain `Import` and `Charset` objects stemming from at-rules.
  */
-abstract class CSSList implements Renderable, Commentable
+abstract class CSSList implements Commentable, CSSElement, Positionable
 {
+    use Position;
     /**
      * @var array<array-key, Comment>
      *
@@ -43,19 +47,13 @@ abstract class CSSList implements Renderable, Commentable
      */
     protected $aContents;
     /**
-     * @var int
-     *
-     * @internal since 8.8.0
-     */
-    protected $iLineNo;
-    /**
      * @param int $iLineNo
      */
     public function __construct($iLineNo = 0)
     {
         $this->aComments = [];
         $this->aContents = [];
-        $this->iLineNo = $iLineNo;
+        $this->setPosition($iLineNo);
     }
     /**
      * @return void
@@ -232,13 +230,6 @@ abstract class CSSList implements Renderable, Commentable
     private static function identifierIs($sIdentifier, $sMatch)
     {
         return strcasecmp($sIdentifier, $sMatch) === 0 ?: preg_match("/^(-\\w+-)?{$sMatch}\$/i", $sIdentifier) === 1;
-    }
-    /**
-     * @return int
-     */
-    public function getLineNo()
-    {
-        return $this->iLineNo;
     }
     /**
      * Prepends an item to the list of contents.
