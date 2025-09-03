@@ -91,23 +91,7 @@ const opens = computed(() => Object.values(emails.value?.plot || {}).map(({ open
 
 const { data: posts } = originalSWRV("https://shopmagic.app/wp-json/wp/v2/posts?per_page=3");
 
-const apiKey = "0e51628719d28d86f341edcbc4acdba9c463fafc";
-const siteId = "5e305c242c7d3a7e9ae6db3e";
-const gettingStartedCollection = "5e96112c2c7d3a7e9aeaede9";
-const { data: docs } = useFetch(
-  `https://docsapi.helpscout.net/v1/collections/${gettingStartedCollection}/articles?pageSize=3`,
-  {
-    beforeFetch: ({ options }) => {
-      options.headers = {
-        ...options.headers,
-        Authorization: `Basic ${btoa(apiKey + ":X")}`,
-      };
-      return {
-        options,
-      };
-    },
-  },
-).json();
+const { data: docs } = useFetch('https://api.shopmagic.app/v1/docs').json();
 
 const user = inject(userKey);
 const articles = computed(() => docs.value?.articles.items);

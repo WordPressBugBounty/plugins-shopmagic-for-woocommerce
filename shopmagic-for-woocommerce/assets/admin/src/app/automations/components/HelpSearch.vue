@@ -3,29 +3,15 @@ import { NA, NInput } from "naive-ui";
 import { useDebounceFn, useFetch } from "@vueuse/core";
 import { ref } from "vue";
 
-const apiKey = "0e51628719d28d86f341edcbc4acdba9c463fafc";
-const siteId = "5e305c242c7d3a7e9ae6db3e";
 const debouncedSearch = useDebounceFn((query: string) => {
   useFetch(
-    `https://docsapi.helpscout.net/v1/search/articles?query=${query}&siteId=${siteId}&status=published&visibility=public`,
-    {
-      beforeFetch: ({ options }) => {
-        options.headers = {
-          ...options.headers,
-          Authorization: `Basic ${btoa(apiKey + ":X")}`,
-        };
-        return {
-          options,
-        };
-      },
-    },
+    `https://api.shopmagic.app/v1/docs?query=${query}`,
   )
     .json()
     .then(({ data }) => {
       articles.value = data.value?.articles.items;
     });
 }, 600);
-const gettingStartedCollection = "5e96112c2c7d3a7e9aeaede9";
 const articles = ref([]);
 </script>
 <template>

@@ -9,6 +9,7 @@ use WPDesk\ShopMagic\Helper\PluginBag;
 use WPDesk\ShopMagic\Marketing\Subscribers\AudienceList\AudienceListRepository;
 use WPDesk\ShopMagic\Marketing\Subscribers\AudienceList\NewsletterForm;
 use WPDesk\ShopMagic\Marketing\Subscribers\ListSubscriber\SubscriberObjectRepository;
+use ShopMagicVendor\Psr\Log\LoggerInterface;
 
 
 /**
@@ -22,9 +23,6 @@ final class SubscriptionFormShortcode implements HookProvider {
 	private const ASSETS_HANDLE = 'shopmagic-form';
 	private const SHORTCODE     = 'shopmagic_form';
 
-	/** @var SubscriberObjectRepository */
-	private $subscriber_repository;
-
 	/** @var Renderer */
 	private $renderer;
 
@@ -34,16 +32,18 @@ final class SubscriptionFormShortcode implements HookProvider {
 	/** @var AudienceListRepository */
 	private $repository;
 
+	private LoggerInterface $logger;
+
 	public function __construct(
 		AudienceListRepository $repository,
-		SubscriberObjectRepository $subscriber_repository,
 		PluginBag $plugin_bag,
-		Renderer $renderer
+		Renderer $renderer,
+		LoggerInterface $logger
 	) {
-		$this->subscriber_repository = $subscriber_repository;
 		$this->repository            = $repository;
 		$this->plugin_bag            = $plugin_bag;
 		$this->renderer              = $renderer;
+		$this->logger                = $logger;
 	}
 
 	public function hooks(): void {
@@ -69,15 +69,7 @@ final class SubscriptionFormShortcode implements HookProvider {
 		try {
 			$list = $this->repository->find( (int) $params['id'] );
 		} catch ( \Throwable $e ) {
-			return '';
-		}
-
-		if (
-			$this->subscriber_repository->is_subscribed_to_list(
-				$this->get_user_email(),
-				$list->get_id()
-			)
-		) {
+			$this->logger->error( 'Could not find audience list with id: ' . $params['id'] );
 			return '';
 		}
 

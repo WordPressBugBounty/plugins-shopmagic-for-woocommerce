@@ -10,6 +10,7 @@ use WPDesk\ShopMagic\Components\HookProvider\HookProvider;
 use WPDesk\ShopMagic\Customer\CustomerProvider;
 use WPDesk\ShopMagic\Customer\Guest\Guest;
 use WPDesk\ShopMagic\Customer\Guest\GuestManager;
+use WPDesk\ShopMagic\Exception\CannotProvideCustomerException;
 use WPDesk\ShopMagic\Helper\PluginBag;
 use WPDesk\ShopMagic\Helper\WordPressPluggableHelper;
 
@@ -176,7 +177,13 @@ final class PreSubmitData implements HookProvider, Conditional {
 			}
 		}
 
-		$customer = $this->customer_interceptor->get_customer();
+		try {
+			$customer = $this->customer_interceptor->get_customer();
+		} catch ( CannotProvideCustomerException $e ) {
+			// We don't have the customer, but it is fine.
+			wp_send_json_success();
+
+		}
 
 		if ( $customer instanceof Guest ) {
 			$this->guest_manager->save( $customer );
@@ -233,7 +240,12 @@ final class PreSubmitData implements HookProvider, Conditional {
 			$this->tracker->set_meta( $field_name, $field_value );
 		}
 
-		$customer = $this->customer_interceptor->get_customer();
+		try {
+			$customer = $this->customer_interceptor->get_customer();
+		} catch ( CannotProvideCustomerException $e ) {
+			// We don't have the customer, but it is fine.
+			wp_send_json_success();
+		}
 
 		if ( $customer instanceof Guest ) {
 			$this->guest_manager->save( $customer );
