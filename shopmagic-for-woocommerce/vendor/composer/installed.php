@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wpdesk/shopmagic-for-woocommerce',
-        'pretty_version' => '4.5.7',
-        'version' => '4.5.7.0',
-        'reference' => 'af17b3e8158a1cdf73c823b7989467012425da50',
+        'pretty_version' => '4.5.8',
+        'version' => '4.5.8.0',
+        'reference' => 'ce4efcfa0191798e04d3f5c9b2a7824a9f707bd2',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
-            'pretty_version' => '2.7.1',
-            'version' => '2.7.1.0',
-            'reference' => 'c2270caaabe631b3b44c85f99e5a04bbb8060d16',
+            'pretty_version' => '2.8.0',
+            'version' => '2.8.0.0',
+            'reference' => '21dc724a0583619cd1652f673303492272778051',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
@@ -95,9 +95,9 @@
             'dev_requirement' => false,
         ),
         'wpdesk/shopmagic-for-woocommerce' => array(
-            'pretty_version' => '4.5.7',
-            'version' => '4.5.7.0',
-            'reference' => 'af17b3e8158a1cdf73c823b7989467012425da50',
+            'pretty_version' => '4.5.8',
+            'version' => '4.5.8.0',
+            'reference' => 'ce4efcfa0191798e04d3f5c9b2a7824a9f707bd2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

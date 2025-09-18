@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.5.7
+Stable tag: 4.5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -407,14 +407,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 4.5.8 - 2025-09-18 =
+* Fixed timezone in date when adding a new subscriber to MailerLite list.
+
 = 4.5.7 - 2025-09-02 =
 * Do not hide the form for users who have already submitted it.
-
-= 4.5.6 - 2025-08-06 =
-* Added support for WooCommerce 10.1.
-
-= 4.5.5 - 2025-07-07 =
-* Fixed the issue with displaying Google Sheets fields when the extension is active.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

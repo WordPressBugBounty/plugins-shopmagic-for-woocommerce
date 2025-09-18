@@ -106,7 +106,7 @@ final class AddMailerLiteSubscriber extends Action {
 				'last_name' => $this->placeholder_processor->process( $this->fields_data->get( 'last_name' ) ),
 			],
 			'status'        => 'active',
-			'subscribed_at' => wp_date( 'Y-m-d H:i:s' ),
+			'subscribed_at' => wp_date( 'Y-m-d H:i:s', null, new \DateTimeZone( 'UTC' ) ),
 		];
 
 		return $this->mailer_lite->create_subscriber( $subscriber );
