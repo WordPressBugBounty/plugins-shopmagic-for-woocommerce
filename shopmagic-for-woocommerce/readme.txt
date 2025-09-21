@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.5.8
+Stable tag: 4.5.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -406,6 +406,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 37. Read the documentation about how to customize emails and email marketing in WooCommerce.
 
 == Changelog ==
+
+= 4.5.9 - 2025-09-21 =
+* Added support for WooCommerce 10.2
 
 = 4.5.8 - 2025-09-18 =
 * Fixed timezone in date when adding a new subscriber to MailerLite list.

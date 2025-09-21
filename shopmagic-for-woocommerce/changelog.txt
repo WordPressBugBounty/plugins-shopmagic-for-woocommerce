@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.5.9] - 2025-09-21 
+### Added
+- Support for WooCommerce 10.2
+
 ## [4.5.8] - 2025-09-18
 ### Fixed
 - Fixed timezone in date when adding a new subscriber to MailerLite list.
