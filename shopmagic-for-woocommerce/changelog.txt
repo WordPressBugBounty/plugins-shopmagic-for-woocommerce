@@ -1,6 +1,11 @@
 # ShopMagic Changelog
 
-## [4.5.9] - 2025-09-21 
+## [4.6.0] - 2025-10-02
+### Added
+- Added option to target custom post types in Post Published and Post Updated events.
+- Added a handful of post-related placeholders, e.g. post.author, post.type
+
+## [4.5.9] - 2025-09-21
 ### Added
 - Support for WooCommerce 10.2
 

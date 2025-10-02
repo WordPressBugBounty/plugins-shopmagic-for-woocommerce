@@ -77,6 +77,13 @@ final class CoreExtension extends AbstractExtension {
 			Post\PostId::class,
 			Post\PostLink::class,
 			Post\PostTitle::class,
+			Post\PostAuthor::class,
+			Post\PostDate::class,
+			Post\PostExcerpt::class,
+			Post\PostModifiedDate::class,
+			Post\PostSlug::class,
+			Post\PostStatus::class,
+			Post\PostType::class,
 
 			Shop\ShopDescription::class,
 			Shop\AdminEmail::class,
