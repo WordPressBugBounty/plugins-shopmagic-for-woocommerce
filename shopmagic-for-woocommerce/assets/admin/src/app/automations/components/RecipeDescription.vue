@@ -10,13 +10,13 @@ defineProps<{
 const getExtensionUrl = (extension: string) => {
   switch (extension) {
     case "shopmagic-reviews":
-      extension = "shopmagic-review-requests";
+      extension = "shopmagic-review-requests-recipe";
       break;
     case "shopmagic-woocommerce-subscriptions":
-      extension = "woocommerce-subscriptions";
+      extension = "shopmagic-woocommerce-subscriptions-recipe";
       break;
   }
-  return `https://shopmagic.app/products/${extension}/?utm_campaign=shopmagic-upgrade&utm_source=plugin&utm_medium=recipe`;
+  return `https://shopmagic.app/sk/${extension}/`;
 };
 </script>
 <template>

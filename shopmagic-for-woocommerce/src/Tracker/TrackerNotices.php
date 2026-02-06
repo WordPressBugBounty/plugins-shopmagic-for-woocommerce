@@ -9,7 +9,7 @@ use WPDesk\ShopMagic\Components\HookProvider\HookProvider;
  */
 class TrackerNotices implements HookProvider {
 
-	const USAGE_DATA_URL = 'https://docs.shopmagic.app/article/1045-usage-data?utm_source=settings&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=read-more';
+	const USAGE_DATA_URL = 'https://shopmagic.app/sk/shopmagic-for-woocommerce-usage-data';
 
 	public function hooks(): void {
 		add_filter( 'wpdesk_tracker_notice_screens', [ $this, 'screens_where_notice_show' ] );

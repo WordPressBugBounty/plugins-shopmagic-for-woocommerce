@@ -25,7 +25,7 @@ final class AutomationFiltersGroup implements FilterLogic, \IteratorAggregate {
 	 * @param Filter[][] $filters Filters matrix. Outer array is for OR conditionals.
 	 *                            [$or_condition_index][$and_condition_index] = Filter instance
 	 */
-	public function __construct( array $filters = [], LoggerInterface $logger = null ) {
+	public function __construct( array $filters = [], ?LoggerInterface $logger = null ) {
 		$this->filters = array_values( $filters );
 		$this->logger  = $logger ?? new NullLogger();
 	}

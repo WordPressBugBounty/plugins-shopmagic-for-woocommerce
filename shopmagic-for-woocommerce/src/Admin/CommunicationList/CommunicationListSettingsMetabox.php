@@ -33,7 +33,7 @@ class CommunicationListSettingsMetabox {
 							'shopmagic-for-woocommerce'
 						) .
 						sprintf(
-							' <a href="https://docs.shopmagic.app/" target="_blank">%s</a> &rarr;',
+							' <a href="https://shopmagic.app/sk/shopmagic-for-woocommerce-cls-docs" target="_blank">%s</a> &rarr;',
 							esc_html__( 'Learn more', 'shopmagic-for-woocommerce' )
 						)
 					),

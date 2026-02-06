@@ -40,7 +40,7 @@ final class WooCommerceMailTemplate implements MailTemplate, LoggerAwareInterfac
 
 	public function __construct(
 		string $heading_value,
-		string $unsubscribe_url = null,
+		?string $unsubscribe_url = null,
 		?Renderer $renderer = null
 	) {
 		$this->heading_value   = $heading_value;

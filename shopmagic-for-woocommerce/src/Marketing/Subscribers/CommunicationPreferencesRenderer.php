@@ -8,29 +8,31 @@ use WPDesk\ShopMagic\Customer\Customer;
 use WPDesk\ShopMagic\Marketing\Subscribers\ListSubscriber\SubscriberObjectRepository;
 use WPDesk\ShopMagic\Marketing\Subscribers\ListSubscriber\SingleListSubscriber;
 use WPDesk\ShopMagic\Marketing\Util\EmailObsufcator;
+use WPDesk\ShopMagic\Marketing\Util\EmailHasher;
 
 /**
  * Helper class responsible for rendering communication preferences page.
  */
 class CommunicationPreferencesRenderer {
 
-	/** @var Renderer */
-	private $renderer;
+	private Renderer $renderer;
 
-	/** @var EmailObsufcator */
-	private $obfuscator;
+	private EmailObsufcator $obfuscator;
 
-	/** @var SubscriberObjectRepository */
-	private $subscribers_repository;
+	private SubscriberObjectRepository $subscribers_repository;
+
+	private EmailHasher $email_hasher;
 
 	public function __construct(
 		Renderer $renderer,
 		EmailObsufcator $obfuscator,
-		SubscriberObjectRepository $subscribers_repository
+		SubscriberObjectRepository $subscribers_repository,
+		EmailHasher $email_hasher
 	) {
 		$this->renderer               = $renderer;
 		$this->obfuscator             = $obfuscator;
 		$this->subscribers_repository = $subscribers_repository;
+		$this->email_hasher           = $email_hasher;
 	}
 
 	public function render_wrap_start(): string {
@@ -70,6 +72,7 @@ class CommunicationPreferencesRenderer {
 				'email'         => $customer->get_email(),
 				'email_display' => $email,
 				'action'        => PreferencesRoute::get_slug(),
+				'hash'          => $this->email_hasher->hash( $customer->get_email() ),
 				'signed_ups'    => array_filter(
 					iterator_to_array(
 						$this->subscribers_repository->find_by(

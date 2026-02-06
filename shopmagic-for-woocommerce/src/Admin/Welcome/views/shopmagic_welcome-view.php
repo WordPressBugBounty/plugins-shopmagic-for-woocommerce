@@ -195,7 +195,7 @@ $polish_language_version = get_locale() === 'pl_PL';
 		</div>
 
 		<?php
-		$url = $polish_language_version ? 'https://www.wpdesk.pl/sklep/shopmagic/' : 'https://shopmagic.app/pricing/';
+		$url = $polish_language_version ? 'https://www.wpdesk.pl/sk/shopmagic-welcome-view-pl/' : 'https://shopmagic.app/sk/shopmagic-welcome-view-en/';
 		?>
 		<br>
 		<div class="aligncenter margin-y-2">

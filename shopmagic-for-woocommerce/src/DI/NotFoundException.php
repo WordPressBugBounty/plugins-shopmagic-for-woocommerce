@@ -8,7 +8,7 @@ class NotFoundException extends \RuntimeException implements \ShopMagicVendor\Ps
 
 	protected static $template = 'There is no entry found in the container for the identifier "{id}".';
 
-	public static function fromPrevious( $id, \Exception $prev = null ) {
+	public static function fromPrevious( $id, ?\Exception $prev = null ) {
 		$message = \strtr(
 			static::$template,
 			[

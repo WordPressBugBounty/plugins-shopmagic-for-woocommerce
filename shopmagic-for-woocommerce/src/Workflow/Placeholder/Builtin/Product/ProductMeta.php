@@ -32,7 +32,7 @@ final class ProductMeta extends WooCommerceProductBasedPlaceholder {
 	public function get_description(): string {
 		return esc_html__( 'Display meta value from product meta.', 'shopmagic-for-woocommerce' ) . ' ' .
 				esc_html__( 'You can find more about using this placeholder in ', 'shopmagic-for-woocommerce' ) .
-				'<a target="_blank" href="https://docs.shopmagic.app/article/1163-meta-placeholders">' . esc_html__( 'documentation', 'shopmagic-for-woocommerce' ) . '</a>.';
+				'<a target="_blank" href="https://shopmagic.app/sk/shopmagic-for-woocommerce-meta-placeholders">' . esc_html__( 'documentation', 'shopmagic-for-woocommerce' ) . '</a>.';
 	}
 
 	public function value( array $parameters ): string {

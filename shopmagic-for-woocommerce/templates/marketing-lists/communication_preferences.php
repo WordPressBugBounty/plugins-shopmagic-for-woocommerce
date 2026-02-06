@@ -7,6 +7,7 @@
  * @var string                                                             $email
  * @var string                                                             $email_display
  * @var ?bool                                                              $success
+ * @var string                                                             $hash
  */
 
 use WPDesk\ShopMagic\Marketing\Subscribers\AudienceList\CommunicationListPersistence;
@@ -55,6 +56,8 @@ if ( $success === true ) {
 		action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 	<input type="hidden" name="action" value="<?php echo esc_attr( $action ); ?>"/>
 	<input type="hidden" name="email" value="<?php echo esc_attr( $email ); ?>"/>
+	<input type="hidden" name="hash" value="<?php echo esc_attr( $hash ); ?>"/>
+	<?php wp_nonce_field( \WPDesk\ShopMagic\Marketing\HookProviders\PreferencesUpdate::NONCE_ACTION, \WPDesk\ShopMagic\Marketing\HookProviders\PreferencesUpdate::NONCE_NAME ); ?>
 
 	<p class="shopmagic-optin form-row">
 		<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">

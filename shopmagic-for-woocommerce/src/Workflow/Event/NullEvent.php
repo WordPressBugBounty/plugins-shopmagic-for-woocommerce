@@ -13,7 +13,7 @@ class NullEvent extends Event {
 	/** @var string|null */
 	private $missing_id;
 
-	public function __construct( string $missing_id = null ) {
+	public function __construct( ?string $missing_id = null ) {
 		$this->missing_id  = $missing_id;
 		$this->fields_data = new FieldValuesBag();
 	}

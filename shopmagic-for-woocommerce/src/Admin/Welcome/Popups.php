@@ -57,32 +57,32 @@ add_action(
 
 			<?php
 			if ( get_locale() === 'pl_PL' ) {
-				$base_url              = 'https://www.wpdesk.pl/sklep/shopmagic';
-				$delayed_actions_slug  = '';
-				$review_requests_slug  = '';
-				$customer_coupons_slug = '';
-				$manual_actions_slug   = '';
-				$advanced_filters_slug = '';
+				$base_url              = 'https://www.wpdesk.pl/sk/';
+				$delayed_actions_slug  = 'shopmagic-popup-delayed-actions-pl';
+				$review_requests_slug  = 'shopmagic-popup-review-requests-pl';
+				$customer_coupons_slug = 'shopmagic-popup-customer-coupons-pl';
+				$manual_actions_slug   = 'shopmagic-popup-manual-actions-pl';
+				$advanced_filters_slug = 'shopmagic-popup-advanced-filters-pl';
 			} else {
-				$base_url              = 'https://shopmagic.app/products/';
-				$delayed_actions_slug  = 'shopmagic-delayed-actions';
-				$review_requests_slug  = 'shopmagic-review-requests';
-				$customer_coupons_slug = 'shopmagic-customer-coupons';
-				$manual_actions_slug   = 'shopmagic-manual-actions';
-				$advanced_filters_slug = 'shopmagic-advanced-filters';
+				$base_url              = 'https://shopmagic.app/sk/';
+				$delayed_actions_slug  = 'shopmagic-popup-delayed-actions-en';
+				$review_requests_slug  = 'shopmagic-popup-review-requests-en';
+				$customer_coupons_slug = 'shopmagic-popup-customer-coupons-en';
+				$manual_actions_slug   = 'shopmagic-popup-manual-actions-en';
+				$advanced_filters_slug = 'shopmagic-popup-advanced-filters-en';
 			}
 			?>
 
 			<p>
-				<a href="<?php echo esc_url( $base_url . $delayed_actions_slug ); ?>/?utm_source=pro-notice&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=delayed-actions"
+				<a href="<?php echo esc_url( $base_url . $delayed_actions_slug ); ?>"
 					target="blank"><?php esc_html_e( 'Delayed Actions', 'shopmagic-for-woocommerce' ); ?></a> | <a
-						href="<?php echo esc_url( $base_url . $review_requests_slug ); ?>/?utm_source=pro-notice&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=review-requests"
+						href="<?php echo esc_url( $base_url . $review_requests_slug ); ?>"
 						target="blank"><?php esc_html_e( 'Review Requests', 'shopmagic-for-woocommerce' ); ?></a> | <a
-						href="<?php echo esc_url( $base_url . $customer_coupons_slug ); ?>/?utm_source=pro-notice&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=customer-coupons"
+						href="<?php echo esc_url( $base_url . $customer_coupons_slug ); ?>"
 						target="blank"><?php esc_html_e( 'Customer Coupons', 'shopmagic-for-woocommerce' ); ?></a> | <a
-						href="<?php echo esc_url( $base_url . $manual_actions_slug ); ?>/?utm_source=pro-notice&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=add-to-mailing-list"
+						href="<?php echo esc_url( $base_url . $manual_actions_slug ); ?>"
 						target="blank"><?php esc_html_e( 'Manual Emails', 'shopmagic-for-woocommerce' ); ?></a> | <a
-						href="<?php echo esc_url( $base_url ); ?>/?utm_source=pro-notice&utm_medium=link&utm_campaign=shopmagic-notice&utm_content=and-more"
+						href="<?php echo esc_url( $base_url . $advanced_filters_slug ); ?>"
 						target="blank"><?php esc_html_e( 'and more...', 'shopmagic-for-woocommerce' ); ?></a></p>
 		</div>
 			<?php

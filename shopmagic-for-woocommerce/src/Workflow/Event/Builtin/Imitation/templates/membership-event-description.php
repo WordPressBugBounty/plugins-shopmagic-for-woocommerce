@@ -53,8 +53,8 @@
 
 <?php
 $product_link = ( get_locale() === 'pl_PL' ) ? // phpcs:ignore Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine
-	'https://www.wpdesk.pl/sklep/shopmagic/?utm_source=woocommerce-memberships&utm_medium=notice&utm_campaign=e08' :
-	'https://shopmagic.app/products/shopmagic-woocommerce-memberships/?utm_source=woocommerce-memberships&utm_medium=notice&utm_campaign=e08';
+	'https://www.wpdesk.pl/sk/shopmagic-for-woocommerce-membership-evnt-pl' :
+	'https://shopmagic.app/sk/shopmagic-for-woocommerce-membership-evnt-en';
 ?>
 <p><a class="button button-primary button-large" href="<?php echo esc_attr( $product_link ); ?>" target="_blank"><?php esc_html_e( 'Get WooCommerce Memberships integration', 'shopmagic-for-woocommerce' ); ?> &rarr;</a>
 </p>

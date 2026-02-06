@@ -22,7 +22,7 @@ final class NonExistingFilterFailure extends WorkflowValidator {
 		$this->logger = $logger;
 	}
 
-	public function valid( DataLayer $resources = null ): bool {
+	public function valid( ?DataLayer $resources = null ): bool {
 		$resources = $resources ?? $this->resources;
 		if ( $resources === null ) {
 			return false;

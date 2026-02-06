@@ -2,8 +2,8 @@
 /** Small template for pro event description. */
 
 $url = ( get_locale() === 'pl_PL' ) ? // phpcs:ignore Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine
-	'https://www.wpdesk.pl/sklep/shopmagic/?utm_source=advanced-filters&utm_medium=notice&utm_campaign=e08' :
-	'https://shopmagic.app/products/shopmagic-advanced-filters/?utm_source=advanced-filters&utm_medium=notice&utm_campaign=e08';
+	'https://www.wpdesk.pl/sk/shopmagic-for-woocommerce-order-item-pl' :
+	'https://shopmagic.app/sk/shopmagic-for-woocommerce-order-item-en';
 ?>
 <div>
 	<p>

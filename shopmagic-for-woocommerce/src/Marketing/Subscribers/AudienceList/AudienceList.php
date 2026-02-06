@@ -38,7 +38,7 @@ class AudienceList {
 	/** @var string */
 	private $language;
 
-	public function __construct( int $id = null ) {
+	public function __construct( ?int $id = null ) {
 		$this->id              = $id;
 		$this->newsletter_form = new NewsletterForm();
 	}

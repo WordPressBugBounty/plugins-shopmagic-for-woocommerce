@@ -24,7 +24,7 @@ final class OrderMeta extends WooCommerceOrderBasedPlaceholder {
 				'Display any meta value associated with current order. You can find more about using this placeholder in %1$sdocumentation%2$s.',
 				'shopmagic-for-woocommerce'
 			),
-			'<a target="_blank" href="https://docs.shopmagic.app/article/1163-meta-placeholders">',
+			'<a target="_blank" href="https://shopmagic.app/sk/shopmagic-for-woocommerce-meta-placeholders">',
 			'</a>'
 		);
 	}

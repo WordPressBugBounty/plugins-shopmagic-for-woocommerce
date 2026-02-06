@@ -238,7 +238,7 @@ const menu: MenuOption[] = [
               "a",
               {
                 class: "text-white!",
-                href: "https://shopmagic.app/?utm_source=plugin&utm_medium=pro-button&utm_campaign=upgrade-pro",
+                href: "https://shopmagic.app/sk/shopmagic-pro-nav",
               },
               {
                 default: () => __("Upgrade to PRO", "shopmagic-for-woocommerce"),

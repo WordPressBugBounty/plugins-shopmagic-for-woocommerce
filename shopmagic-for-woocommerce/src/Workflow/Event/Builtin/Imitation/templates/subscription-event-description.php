@@ -53,8 +53,8 @@
 
 <?php
 $product_link = ( get_locale() === 'pl_PL' ) ? // phpcs:ignore Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine
-	'https://www.wpdesk.pl/sklep/shopmagic/?utm_source=woocommerce-subscriptions&utm_medium=notice&utm_campaign=e08' :
-	'https://shopmagic.app/products/woocommerce-subscriptions/?utm_source=woocommerce-subscriptions&utm_medium=notice&utm_campaign=e08';
+	'https://www.wpdesk.pl/sk/shopmagic-for-woocommerce-sub-evnt-pl' :
+	'https://shopmagic.app/sk/shopmagic-for-woocommerce-sub-evnt-en';
 ?>
 <p><a class="button button-primary button-large" href="<?php echo esc_attr( $product_link ); ?>" target="_blank">
 		<?php esc_html_e( 'Get WooCommerce Subscriptions integration &rarr;', 'shopmagic-for-woocommerce' ); ?></a>

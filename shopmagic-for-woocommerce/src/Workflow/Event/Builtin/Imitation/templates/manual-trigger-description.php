@@ -25,8 +25,8 @@
 
 <?php
 $product_link = ( get_locale() === 'pl_PL' ) ? // phpcs:ignore Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine
-	'https://www.wpdesk.pl/sklep/shopmagic/?utm_source=manual-actions&utm_medium=notice&utm_campaign=e08' :
-	'https://shopmagic.app/products/shopmagic-manual-actions/?utm_source=manual-actions&utm_medium=notice&utm_campaign=e08';
+	'https://www.wpdesk.pl/sk/shopmagic-for-woocommerce-manual-pl' :
+	'https://shopmagic.app/sk/shopmagic-for-woocommerce-manual-en';
 ?>
 <p>
 	<a class="button button-primary button-large" href="<?php echo esc_attr( $product_link ); ?>" target="_blank"><?php esc_html_e( 'Get Manual Actions with ShopMagic PRO', 'shopmagic-for-woocommerce' ); ?> &rarr;</a>

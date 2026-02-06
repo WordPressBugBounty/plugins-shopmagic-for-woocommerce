@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
+class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -13,18 +13,18 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
     );
 
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'WPDesk\\ShopMagic\\migrations\\' => 28,
             'WPDesk\\ShopMagic\\' => 17,
             'WPDesk\\Dashboard\\' => 17,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
         ),
-        'G' => 
+        'G' =>
         array (
             'GuzzleHttp\\Psr7\\' => 16,
             'Getresponse\\Sdk\\Client\\Test\\' => 28,
@@ -33,36 +33,36 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
     );
 
     public static $prefixDirsPsr4 = array (
-        'WPDesk\\ShopMagic\\migrations\\' => 
+        'WPDesk\\ShopMagic\\migrations\\' =>
         array (
             0 => __DIR__ . '/../..' . '/migrations',
         ),
-        'WPDesk\\ShopMagic\\' => 
+        'WPDesk\\ShopMagic\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'WPDesk\\Dashboard\\' => 
+        'WPDesk\\Dashboard\\' =>
         array (
             0 => __DIR__ . '/..' . '/wpdesk/ltv-dashboard-widget/src',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Psr\\Http\\Message\\' => 
+        'Psr\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'GuzzleHttp\\Psr7\\' => 
+        'GuzzleHttp\\Psr7\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'Getresponse\\Sdk\\Client\\Test\\' => 
+        'Getresponse\\Sdk\\Client\\Test\\' =>
         array (
             0 => __DIR__ . '/..' . '/getresponse/sdk-php-client/tests',
         ),
-        'Getresponse\\Sdk\\Client\\' => 
+        'Getresponse\\Sdk\\Client\\' =>
         array (
             0 => __DIR__ . '/..' . '/getresponse/sdk-php-client/src',
         ),
@@ -243,64 +243,64 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
         'ShopMagicVendor\\Brick\\Math\\Internal\\Calculator\\GmpCalculator' => __DIR__ . '/../..' . '/vendor_prefixed/brick/math/src/Internal/Calculator/GmpCalculator.php',
         'ShopMagicVendor\\Brick\\Math\\Internal\\Calculator\\NativeCalculator' => __DIR__ . '/../..' . '/vendor_prefixed/brick/math/src/Internal/Calculator/NativeCalculator.php',
         'ShopMagicVendor\\Brick\\Math\\RoundingMode' => __DIR__ . '/../..' . '/vendor_prefixed/brick/math/src/RoundingMode.php',
-        'ShopMagicVendor\\DI\\Annotation\\Inject' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Annotation/Inject.php',
-        'ShopMagicVendor\\DI\\Annotation\\Injectable' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Annotation/Injectable.php',
-        'ShopMagicVendor\\DI\\CompiledContainer' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/CompiledContainer.php',
-        'ShopMagicVendor\\DI\\Compiler\\Compiler' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Compiler/Compiler.php',
-        'ShopMagicVendor\\DI\\Compiler\\ObjectCreationCompiler' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Compiler/ObjectCreationCompiler.php',
-        'ShopMagicVendor\\DI\\Compiler\\RequestedEntryHolder' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Compiler/RequestedEntryHolder.php',
-        'ShopMagicVendor\\DI\\Container' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Container.php',
-        'ShopMagicVendor\\DI\\ContainerBuilder' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/ContainerBuilder.php',
-        'ShopMagicVendor\\DI\\Definition\\ArrayDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/ArrayDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\ArrayDefinitionExtension' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/ArrayDefinitionExtension.php',
-        'ShopMagicVendor\\DI\\Definition\\AutowireDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/AutowireDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\DecoratorDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/DecoratorDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\Definition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Definition.php',
-        'ShopMagicVendor\\DI\\Definition\\Dumper\\ObjectDefinitionDumper' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Dumper/ObjectDefinitionDumper.php',
-        'ShopMagicVendor\\DI\\Definition\\EnvironmentVariableDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/EnvironmentVariableDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\Exception\\InvalidAnnotation' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Exception/InvalidAnnotation.php',
-        'ShopMagicVendor\\DI\\Definition\\Exception\\InvalidDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Exception/InvalidDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\ExtendsPreviousDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/ExtendsPreviousDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\FactoryDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/FactoryDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\Helper\\AutowireDefinitionHelper' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Helper/AutowireDefinitionHelper.php',
-        'ShopMagicVendor\\DI\\Definition\\Helper\\CreateDefinitionHelper' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Helper/CreateDefinitionHelper.php',
-        'ShopMagicVendor\\DI\\Definition\\Helper\\DefinitionHelper' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Helper/DefinitionHelper.php',
-        'ShopMagicVendor\\DI\\Definition\\Helper\\FactoryDefinitionHelper' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Helper/FactoryDefinitionHelper.php',
-        'ShopMagicVendor\\DI\\Definition\\InstanceDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/InstanceDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\ObjectDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/ObjectDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\ObjectDefinition\\MethodInjection' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/ObjectDefinition/MethodInjection.php',
-        'ShopMagicVendor\\DI\\Definition\\ObjectDefinition\\PropertyInjection' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/ObjectDefinition/PropertyInjection.php',
-        'ShopMagicVendor\\DI\\Definition\\Reference' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Reference.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\ArrayResolver' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/ArrayResolver.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\DecoratorResolver' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/DecoratorResolver.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\DefinitionResolver' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/DefinitionResolver.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\EnvironmentVariableResolver' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/EnvironmentVariableResolver.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\FactoryResolver' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/FactoryResolver.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\InstanceInjector' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/InstanceInjector.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\ObjectCreator' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/ObjectCreator.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\ParameterResolver' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/ParameterResolver.php',
-        'ShopMagicVendor\\DI\\Definition\\Resolver\\ResolverDispatcher' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Resolver/ResolverDispatcher.php',
-        'ShopMagicVendor\\DI\\Definition\\SelfResolvingDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/SelfResolvingDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\AnnotationBasedAutowiring' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/AnnotationBasedAutowiring.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\Autowiring' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/Autowiring.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\DefinitionArray' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/DefinitionArray.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\DefinitionFile' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/DefinitionFile.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\DefinitionNormalizer' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/DefinitionNormalizer.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\DefinitionSource' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/DefinitionSource.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\MutableDefinitionSource' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/MutableDefinitionSource.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\NoAutowiring' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/NoAutowiring.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\ReflectionBasedAutowiring' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/ReflectionBasedAutowiring.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\SourceCache' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/SourceCache.php',
-        'ShopMagicVendor\\DI\\Definition\\Source\\SourceChain' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/Source/SourceChain.php',
-        'ShopMagicVendor\\DI\\Definition\\StringDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/StringDefinition.php',
-        'ShopMagicVendor\\DI\\Definition\\ValueDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Definition/ValueDefinition.php',
-        'ShopMagicVendor\\DI\\DependencyException' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/DependencyException.php',
-        'ShopMagicVendor\\DI\\FactoryInterface' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/FactoryInterface.php',
-        'ShopMagicVendor\\DI\\Factory\\RequestedEntry' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Factory/RequestedEntry.php',
-        'ShopMagicVendor\\DI\\Invoker\\DefinitionParameterResolver' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Invoker/DefinitionParameterResolver.php',
-        'ShopMagicVendor\\DI\\Invoker\\FactoryParameterResolver' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Invoker/FactoryParameterResolver.php',
-        'ShopMagicVendor\\DI\\NotFoundException' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/NotFoundException.php',
-        'ShopMagicVendor\\DI\\Proxy\\ProxyFactory' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/php-di/src/Proxy/ProxyFactory.php',
+        'ShopMagicVendor\\DI\\Annotation\\Inject' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Annotation/Inject.php',
+        'ShopMagicVendor\\DI\\Annotation\\Injectable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Annotation/Injectable.php',
+        'ShopMagicVendor\\DI\\CompiledContainer' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/CompiledContainer.php',
+        'ShopMagicVendor\\DI\\Compiler\\Compiler' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Compiler/Compiler.php',
+        'ShopMagicVendor\\DI\\Compiler\\ObjectCreationCompiler' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Compiler/ObjectCreationCompiler.php',
+        'ShopMagicVendor\\DI\\Compiler\\RequestedEntryHolder' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Compiler/RequestedEntryHolder.php',
+        'ShopMagicVendor\\DI\\Container' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Container.php',
+        'ShopMagicVendor\\DI\\ContainerBuilder' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/ContainerBuilder.php',
+        'ShopMagicVendor\\DI\\Definition\\ArrayDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/ArrayDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\ArrayDefinitionExtension' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/ArrayDefinitionExtension.php',
+        'ShopMagicVendor\\DI\\Definition\\AutowireDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/AutowireDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\DecoratorDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/DecoratorDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\Definition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Definition.php',
+        'ShopMagicVendor\\DI\\Definition\\Dumper\\ObjectDefinitionDumper' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Dumper/ObjectDefinitionDumper.php',
+        'ShopMagicVendor\\DI\\Definition\\EnvironmentVariableDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/EnvironmentVariableDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\Exception\\InvalidAnnotation' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Exception/InvalidAnnotation.php',
+        'ShopMagicVendor\\DI\\Definition\\Exception\\InvalidDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Exception/InvalidDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\ExtendsPreviousDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/ExtendsPreviousDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\FactoryDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/FactoryDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\Helper\\AutowireDefinitionHelper' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Helper/AutowireDefinitionHelper.php',
+        'ShopMagicVendor\\DI\\Definition\\Helper\\CreateDefinitionHelper' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Helper/CreateDefinitionHelper.php',
+        'ShopMagicVendor\\DI\\Definition\\Helper\\DefinitionHelper' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Helper/DefinitionHelper.php',
+        'ShopMagicVendor\\DI\\Definition\\Helper\\FactoryDefinitionHelper' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Helper/FactoryDefinitionHelper.php',
+        'ShopMagicVendor\\DI\\Definition\\InstanceDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/InstanceDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\ObjectDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/ObjectDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\ObjectDefinition\\MethodInjection' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/ObjectDefinition/MethodInjection.php',
+        'ShopMagicVendor\\DI\\Definition\\ObjectDefinition\\PropertyInjection' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/ObjectDefinition/PropertyInjection.php',
+        'ShopMagicVendor\\DI\\Definition\\Reference' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Reference.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\ArrayResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/ArrayResolver.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\DecoratorResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/DecoratorResolver.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\DefinitionResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/DefinitionResolver.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\EnvironmentVariableResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/EnvironmentVariableResolver.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\FactoryResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/FactoryResolver.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\InstanceInjector' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/InstanceInjector.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\ObjectCreator' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/ObjectCreator.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\ParameterResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/ParameterResolver.php',
+        'ShopMagicVendor\\DI\\Definition\\Resolver\\ResolverDispatcher' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Resolver/ResolverDispatcher.php',
+        'ShopMagicVendor\\DI\\Definition\\SelfResolvingDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/SelfResolvingDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\AnnotationBasedAutowiring' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/AnnotationBasedAutowiring.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\Autowiring' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/Autowiring.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\DefinitionArray' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/DefinitionArray.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\DefinitionFile' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/DefinitionFile.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\DefinitionNormalizer' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/DefinitionNormalizer.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\DefinitionSource' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/DefinitionSource.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\MutableDefinitionSource' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/MutableDefinitionSource.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\NoAutowiring' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/NoAutowiring.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\ReflectionBasedAutowiring' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/ReflectionBasedAutowiring.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\SourceCache' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/SourceCache.php',
+        'ShopMagicVendor\\DI\\Definition\\Source\\SourceChain' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/Source/SourceChain.php',
+        'ShopMagicVendor\\DI\\Definition\\StringDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/StringDefinition.php',
+        'ShopMagicVendor\\DI\\Definition\\ValueDefinition' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Definition/ValueDefinition.php',
+        'ShopMagicVendor\\DI\\DependencyException' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/DependencyException.php',
+        'ShopMagicVendor\\DI\\FactoryInterface' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/FactoryInterface.php',
+        'ShopMagicVendor\\DI\\Factory\\RequestedEntry' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Factory/RequestedEntry.php',
+        'ShopMagicVendor\\DI\\Invoker\\DefinitionParameterResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Invoker/DefinitionParameterResolver.php',
+        'ShopMagicVendor\\DI\\Invoker\\FactoryParameterResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Invoker/FactoryParameterResolver.php',
+        'ShopMagicVendor\\DI\\NotFoundException' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/NotFoundException.php',
+        'ShopMagicVendor\\DI\\Proxy\\ProxyFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/php-di/src/Proxy/ProxyFactory.php',
         'ShopMagicVendor\\Getresponse\\Sdk\\Authentication\\ApiKey' => __DIR__ . '/../..' . '/vendor_prefixed/getresponse/sdk-php/src/Authentication/ApiKey.php',
         'ShopMagicVendor\\Getresponse\\Sdk\\Authentication\\OAuth' => __DIR__ . '/../..' . '/vendor_prefixed/getresponse/sdk-php/src/Authentication/OAuth.php',
         'ShopMagicVendor\\Getresponse\\Sdk\\Client\\Authentication\\AuthenticationProvider' => __DIR__ . '/../..' . '/vendor_prefixed/getresponse/sdk-php-client/src/Authentication/AuthenticationProvider.php',
@@ -1249,14 +1249,22 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
         'ShopMagicVendor\\League\\Csv\\XMLConverter' => __DIR__ . '/../..' . '/vendor_prefixed/league/csv/src/XMLConverter.php',
         'ShopMagicVendor\\MailerLite\\Common\\Constants' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Common/Constants.php',
         'ShopMagicVendor\\MailerLite\\Common\\HttpLayer' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Common/HttpLayer.php',
+        'ShopMagicVendor\\MailerLite\\Common\\HttpLayerPsr' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Common/HttpLayerPsr.php',
+        'ShopMagicVendor\\MailerLite\\Common\\HttpLayerPsrBridge' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Common/HttpLayerPsrBridge.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\AbstractEndpoint' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/AbstractEndpoint.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Automation' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Automation.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Batch' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Batch.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Campaign' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Campaign.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\CampaignLanguage' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/CampaignLanguage.php',
+        'ShopMagicVendor\\MailerLite\\Endpoints\\Cart' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Cart.php',
+        'ShopMagicVendor\\MailerLite\\Endpoints\\CartItem' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/CartItem.php',
+        'ShopMagicVendor\\MailerLite\\Endpoints\\Customer' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Customer.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Field' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Field.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Form' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Form.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Group' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Group.php',
+        'ShopMagicVendor\\MailerLite\\Endpoints\\Import' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Import.php',
+        'ShopMagicVendor\\MailerLite\\Endpoints\\Order' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Order.php',
+        'ShopMagicVendor\\MailerLite\\Endpoints\\Product' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Product.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Segment' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Segment.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Subscriber' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Subscriber.php',
         'ShopMagicVendor\\MailerLite\\Endpoints\\Timezone' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Endpoints/Timezone.php',
@@ -1266,6 +1274,19 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
         'ShopMagicVendor\\MailerLite\\Exceptions\\MailerLiteValidationException' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Exceptions/MailerLiteValidationException.php',
         'ShopMagicVendor\\MailerLite\\Helpers\\BuildUri' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Helpers/BuildUri.php',
         'ShopMagicVendor\\MailerLite\\Helpers\\HttpErrorHelper' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Helpers/HttpErrorHelper.php',
+        'ShopMagicVendor\\MailerLite\\Http\\Adapters\\GuzzleClientAdapter' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/Adapters/GuzzleClientAdapter.php',
+        'ShopMagicVendor\\MailerLite\\Http\\Adapters\\Psr17FactoryAggregate' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/Adapters/Psr17FactoryAggregate.php',
+        'ShopMagicVendor\\MailerLite\\Http\\ClientInterface' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/ClientInterface.php',
+        'ShopMagicVendor\\MailerLite\\Http\\Exceptions\\Forbidden' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/Exceptions/Forbidden.php',
+        'ShopMagicVendor\\MailerLite\\Http\\Exceptions\\HttpException' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/Exceptions/HttpException.php',
+        'ShopMagicVendor\\MailerLite\\Http\\Exceptions\\NotFound' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/Exceptions/NotFound.php',
+        'ShopMagicVendor\\MailerLite\\Http\\Exceptions\\ServerError' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/Exceptions/ServerError.php',
+        'ShopMagicVendor\\MailerLite\\Http\\Exceptions\\TooManyRequests' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/Exceptions/TooManyRequests.php',
+        'ShopMagicVendor\\MailerLite\\Http\\Exceptions\\Unauthorized' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/Exceptions/Unauthorized.php',
+        'ShopMagicVendor\\MailerLite\\Http\\HttpErrorMapper' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/HttpErrorMapper.php',
+        'ShopMagicVendor\\MailerLite\\Http\\RequestFactoryInterface' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/RequestFactoryInterface.php',
+        'ShopMagicVendor\\MailerLite\\Http\\RetryingClient' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/RetryingClient.php',
+        'ShopMagicVendor\\MailerLite\\Http\\StreamFactoryInterface' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/Http/StreamFactoryInterface.php',
         'ShopMagicVendor\\MailerLite\\MailerLite' => __DIR__ . '/../..' . '/vendor_prefixed/mailerlite/mailerlite-php/src/MailerLite.php',
         'ShopMagicVendor\\Monolog\\Attribute\\AsMonologProcessor' => __DIR__ . '/../..' . '/vendor_prefixed/monolog/monolog/src/Monolog/Attribute/AsMonologProcessor.php',
         'ShopMagicVendor\\Monolog\\DateTimeImmutable' => __DIR__ . '/../..' . '/vendor_prefixed/monolog/monolog/src/Monolog/DateTimeImmutable.php',
@@ -1396,7 +1417,6 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
         'ShopMagicVendor\\PhpDocReader\\PhpDocReader' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/phpdoc-reader/src/PhpDocReader/PhpDocReader.php',
         'ShopMagicVendor\\PhpDocReader\\PhpParser\\TokenParser' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/phpdoc-reader/src/PhpDocReader/PhpParser/TokenParser.php',
         'ShopMagicVendor\\PhpDocReader\\PhpParser\\UseStatementParser' => __DIR__ . '/../..' . '/vendor_prefixed/php-di/phpdoc-reader/src/PhpDocReader/PhpParser/UseStatementParser.php',
-        'ShopMagicVendor\\Psr\\Clock\\ClockInterface' => __DIR__ . '/../..' . '/vendor_prefixed/psr/clock/src/ClockInterface.php',
         'ShopMagicVendor\\Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/../..' . '/vendor_prefixed/psr/container/src/ContainerExceptionInterface.php',
         'ShopMagicVendor\\Psr\\Container\\ContainerInterface' => __DIR__ . '/../..' . '/vendor_prefixed/psr/container/src/ContainerInterface.php',
         'ShopMagicVendor\\Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/../..' . '/vendor_prefixed/psr/container/src/NotFoundExceptionInterface.php',
@@ -1431,9 +1451,6 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
         'ShopMagicVendor\\Psr\\Log\\Test\\DummyTest' => __DIR__ . '/../..' . '/vendor_prefixed/psr/log/Psr/Log/Test/DummyTest.php',
         'ShopMagicVendor\\Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/../..' . '/vendor_prefixed/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'ShopMagicVendor\\Psr\\Log\\Test\\TestLogger' => __DIR__ . '/../..' . '/vendor_prefixed/psr/log/Psr/Log/Test/TestLogger.php',
-        'ShopMagicVendor\\Psr\\SimpleCache\\CacheException' => __DIR__ . '/../..' . '/vendor_prefixed/psr/simple-cache/src/CacheException.php',
-        'ShopMagicVendor\\Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/../..' . '/vendor_prefixed/psr/simple-cache/src/CacheInterface.php',
-        'ShopMagicVendor\\Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/../..' . '/vendor_prefixed/psr/simple-cache/src/InvalidArgumentException.php',
         'ShopMagicVendor\\Ramsey\\Collection\\AbstractArray' => __DIR__ . '/../..' . '/vendor_prefixed/ramsey/collection/src/AbstractArray.php',
         'ShopMagicVendor\\Ramsey\\Collection\\AbstractCollection' => __DIR__ . '/../..' . '/vendor_prefixed/ramsey/collection/src/AbstractCollection.php',
         'ShopMagicVendor\\Ramsey\\Collection\\AbstractSet' => __DIR__ . '/../..' . '/vendor_prefixed/ramsey/collection/src/AbstractSet.php',
@@ -2261,6 +2278,7 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
         'WPDesk\\ShopMagic\\Workflow\\Event\\Builtin\\Order\\OrderRefunded' => __DIR__ . '/../..' . '/src/Workflow/Event/Builtin/Order/OrderRefunded.php',
         'WPDesk\\ShopMagic\\Workflow\\Event\\Builtin\\Order\\OrderStatusChanged' => __DIR__ . '/../..' . '/src/Workflow/Event/Builtin/Order/OrderStatusChanged.php',
         'WPDesk\\ShopMagic\\Workflow\\Event\\Builtin\\PostCommonEvent' => __DIR__ . '/../..' . '/src/Workflow/Event/Builtin/PostCommonEvent.php',
+        'WPDesk\\ShopMagic\\Workflow\\Event\\Builtin\\Post\\PostDeleted' => __DIR__ . '/../..' . '/src/Workflow/Event/Builtin/Post/PostDeleted.php',
         'WPDesk\\ShopMagic\\Workflow\\Event\\Builtin\\Post\\PostPublished' => __DIR__ . '/../..' . '/src/Workflow/Event/Builtin/Post/PostPublished.php',
         'WPDesk\\ShopMagic\\Workflow\\Event\\Builtin\\Post\\PostUpdated' => __DIR__ . '/../..' . '/src/Workflow/Event/Builtin/Post/PostUpdated.php',
         'WPDesk\\ShopMagic\\Workflow\\Event\\Builtin\\UserCommonEvent' => __DIR__ . '/../..' . '/src/Workflow/Event/Builtin/UserCommonEvent.php',
@@ -2297,6 +2315,8 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
         'WPDesk\\ShopMagic\\Workflow\\Filter\\Builtin\\Order\\OrderItems' => __DIR__ . '/../..' . '/src/Workflow/Filter/Builtin/Order/OrderItems.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\Builtin\\Order\\OrderNoteContent' => __DIR__ . '/../..' . '/src/Workflow/Filter/Builtin/Order/OrderNoteContent.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\Builtin\\Order\\OrderNoteType' => __DIR__ . '/../..' . '/src/Workflow/Filter/Builtin/Order/OrderNoteType.php',
+        'WPDesk\\ShopMagic\\Workflow\\Filter\\Builtin\\PostFilter' => __DIR__ . '/../..' . '/src/Workflow/Filter/Builtin/PostFilter.php',
+        'WPDesk\\ShopMagic\\Workflow\\Filter\\Builtin\\Post\\PostStatusFilter' => __DIR__ . '/../..' . '/src/Workflow/Filter/Builtin/Post/PostStatusFilter.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\AbstractType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/AbstractType.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\BoolType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/BoolType.php',
         'WPDesk\\ShopMagic\\Workflow\\Filter\\ComparisonType\\ComparisonType' => __DIR__ . '/../..' . '/src/Workflow/Filter/ComparisonType/ComparisonType.php',
@@ -2450,9 +2470,9 @@ class ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitb51d787c892f5e61e43e7558e98ebebd::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitbe44473efadbf70f686af6ebf09203a5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitbe44473efadbf70f686af6ebf09203a5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitbe44473efadbf70f686af6ebf09203a5::$classMap;
 
         }, null, ClassLoader::class);
     }

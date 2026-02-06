@@ -39,7 +39,7 @@ class AudienceListRepository implements ObjectRepository {
 		return $this->find_by( [] );
 	}
 
-	public function find_by( array $criteria, array $order = [], int $offset = 0, int $limit = null ): Collection {
+	public function find_by( array $criteria, array $order = [], int $offset = 0, ?int $limit = null ): Collection {
 		$args  = array_merge(
 			[
 				'post_status' => 'any',

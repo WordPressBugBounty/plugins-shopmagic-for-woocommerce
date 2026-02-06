@@ -29,7 +29,7 @@ class AutomationReconstitutionFactory {
 
 	public function with_post(
 		\WP_Post $automation_post,
-		ContainerInterface $meta = null
+		?ContainerInterface $meta = null
 	): Automation {
 		$automation = new Automation( $automation_post->ID );
 		if ( ! $automation->exists() ) {

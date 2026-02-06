@@ -1,5 +1,44 @@
 # ShopMagic Changelog
 
+## [4.7.7] - 2026-01-26
+### Changed
+- Readme update
+
+## [4.7.6] - 2026-01-21
+### Added
+- Support for WooCommerce 10.5
+
+## [4.7.5] - 2026-01-15
+### Fixed
+- Improved compatibility with recent PHP versions >= 8.4.
+
+## [4.7.4] - 2025-12-29
+### Changed
+- Readme update.
+
+## [4.7.3] - 2025-12-15
+### Fixed
+- Fixed vulnerability in communication preferences update page.
+
+## [4.7.2] - 2025-12-09
+### Changed
+- Readme update.
+
+## [4.7.1] - 2025-12-04
+### Added
+- Added support for WordPress 6.9.
+
+## [4.7.0] - 2025-11-17
+### Added
+- Added action Post - Deleted for deleted posts and other post types.
+- Added filter Post - Status
+### Fixed
+- Fixed error with previous version breaking existing Post group active automations.
+
+## [4.6.1] - 2025-10-14
+### Changed
+- Plugin links
+
 ## [4.6.0] - 2025-10-02
 ### Added
 - Added option to target custom post types in Post Published and Post Updated events.
@@ -425,7 +464,7 @@
 - Simplified `shopmagic_form` shortcode parameters.
 - Lessened ShopMagic's impact on website performance - the plugin already has been lightweight, but now it's improved.
 - Dropped strict requirement to use WooCommerce. Although, ShopMagic still works perfectly with WooCommerce, you don't need to install it to enable ShopMagic. This may be useful for small blog websites, which want to notify subscribers about new articles.
-- Introduced numerous breaking changes in codebase. Migrate your custom extension along with [our migration guide](https://docs.shopmagic.app/search?query=migration+guide)
+- Introduced numerous breaking changes in codebase. Migrate your custom extension along with [our migration guide](https://shopmagic.app/sk/shopmagic-migration-guide-changelog)
 - Bumped WooCommerce compatibility version
 - Bumped WordPress compatibility version
 ### Removed
@@ -507,7 +546,7 @@
 
 ## [2.37.0] - 2022-03-02
 ### Added
-- Rewritten current lists into Marketing Lists. [Read the blog post](https://shopmagic.app/blog/shopmagic-2-37-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-37-is-here)
+- Rewritten current lists into Marketing Lists. [Read the blog post](https://shopmagic.app/sk/shopmagic-2-37)
 - Possibility to export and import emails of customers signed on lists.
 - Form with shortcode for signing up on lists.
 - Double opt-in for marketing lists.
@@ -526,7 +565,7 @@
 
 ## [2.36.0] - 2022-02-01
 ### Added
-- Compatibility with ShopMagic Abandoned Carts 2.0. [Read the blog post](https://shopmagic.app/blog/shopmagic-2-36-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-36-is-here)
+- Compatibility with ShopMagic Abandoned Carts 2.0. [Read the blog post](https://shopmagic.app/sk/shopmagic-2-36)
 - Possibility to send a test automation message without orders in store
 - Possibility to remove Guests from admin table
 - Possibility to clear old Outcomes from the database
@@ -540,7 +579,7 @@
 
 ## [2.35.0] - 2022-01-18
 ### Added
-- Released ShopMagic Advanced Filters 2.0 with support for automation-related filters and some new filters. [Read the blog post](https://shopmagic.app/blog/shopmagic-2-35-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-35-is-here)
+- Released ShopMagic Advanced Filters 2.0 with support for automation-related filters and some new filters. [Read the blog post](https://shopmagic.app/sk/shopmagic-2-35)
 ### Improved
 - Distinguish between filters in admin view.
 ### Changed
@@ -552,23 +591,23 @@
 
 ## [2.34.0] - 2021-12-27
 ### Added
-- Improved integration with ShopMagic Delayed Actions 3.0. [Read the blog post](https://shopmagic.app/blog/shopmagic-2-34-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-34-is-here)
+- Improved integration with ShopMagic Delayed Actions 3.0. [Read the blog post](https://shopmagic.app/sk/shopmagic-2-34)
 - Simple documentation to each placeholder.
 - Parameter `$template_dir` to `shopmagic/core/placeholder/products_ordered/templates`.
-- WordPress' filter for dynamic attachments. [See more in documentation.](https://docs.shopmagic.app/article/1180-dynamic-email-attachments).
+- WordPress' filter for dynamic attachments. [See more in documentation.](https://shopmagic.app/sk/1180-dynamic-email-attachments).
 ### Deprecated
 - `OutocomeReposistory` class.
 
 ## [2.33.0] - 2021-11-08
 ### Added
-- Support for Google Sheets plugin as a free extension. [Read the blog post](https://shopmagic.app/blog/shopmagic-2-33-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-33-is-here).
+- Support for Google Sheets plugin as a free extension. [Read the blog post](https://shopmagic.app/sk/shopmagic-2-33).
 ### Fixed
 - Mailchimp action always marked as failed in Outcomes.
 - Issue with automation view related to attachments field in email action.
 
 ## [2.32.0] - 2021-10-20
 ### Added
-- Support for WPML multilingual plugin as a free extension. [Read the blog post](https://shopmagic.app/blog/shopmagic-2-32-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-32-is-here).
+- Support for WPML multilingual plugin as a free extension. [Read the blog post](https://shopmagic.app/sk/shopmagic-2-32).
 ### Fixed
 - Fatal error due to lack of function related to attachments on server setup.
 
@@ -595,7 +634,7 @@
 
 ## [2.30.0] - 2021-09-15
 ### Added
-- "From" name and address email settings. [Read the blog post](https://shopmagic.app/blog/shopmagic-2-30-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-30-is-here)
+- "From" name and address email settings. [Read the blog post](https://shopmagic.app/sk/post-shopmagic-2-30)
 - Possibility to attach PDF files to emails.
 - Possibility to duplicate, export, and import automations.
 - New placeholder `order.order_number`.
@@ -608,14 +647,14 @@
 
 ## [2.29.0] - 2021-09-01
 ### Added
-- New addon for ShopMagic! Contact Form 7 integration. [Read the blog post](https://shopmagic.app/blog/shopmagic-2-29-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-29-is-here)
+- New addon for ShopMagic! Contact Form 7 integration. [Read the blog post](https://shopmagic.app/sk/shopmagic-2-29-is-here)
 - Notices about the pro version.
 ### Fixed
 - A couple of bugs, i.e., the communication page in account showing 404 error, creating the communication page before `wp_loaded`.
 
 ## [2.28.0] - 2021-08-09
 ### Added
-- New filtering option in admin view for automation outcomes: [Filter by status](https://shopmagic.app/blog/shopmagic-2-28-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-28-is-here)
+- New filtering option in admin view for automation outcomes: [Filter by status](https://shopmagic.app/sk/shopmagic-2-28-is-here/)
 ### Fixed
 - Date-based placeholders returning date in English.
 - Compatibility with WordPress <5.3.
@@ -634,7 +673,7 @@
 
 ## [2.27.0] - 2021-07-19
 ### Added
-- [UTM parameters in placeholders:](https://shopmagic.app/blog/shopmagic-2-27-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-27-is-here)
+- [UTM parameters in placeholders:](https://shopmagic.app/sk/shopmagic-2-27-is-here)
 ### Fixed
 - Communication page not creating on plugin install/update.
 ### Changed
@@ -649,7 +688,7 @@
 
 ## [2.26.0] - 2021-06-23
 ### Added
-- New [placeholders:](https://shopmagic.app/blog/shopmagic-2-26-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-26-is-here) `order.related_products`, `order.cross_sells`.
+- New [placeholders:](https://shopmagic.app/sk/shopmagic-2-26-is-here/) `order.related_products`, `order.cross_sells`.
 - Bulk action 'remove' for outcomes logs.
 - New recipe with a new cross-sells placeholder.
 ### Fixed
@@ -662,7 +701,7 @@
 
 ## [2.25.0] - 2021-05-26
 ### Added
-- New placeholders [read the blog post](https://shopmagic.app/blog/shopmagic-2-25-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-25-is-here):
+- New placeholders [read the blog post](https://shopmagic.app/sk/shopmagic-2-25-is-here/):
     - `order.payment_method`
     - `order.shipping_method`
     - `shop.title`
@@ -691,7 +730,7 @@
 
 ## [2.23.0] - 2021-03-10
 ### Added
-- Recipes [read the blog post](https://shopmagic.app/blog/shopmagic-2-23-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-23-is-here).
+- Recipes [read the blog post](https://shopmagic.app/sk/shopmagic-2-23-is-here).
 - Support for asynchronous job queue in manual actions.
 - New hooks:
     - `shopmagic/core/action/before_execution`
@@ -710,7 +749,7 @@
 
 ## [2.22.0] - 2021-02-03
 ### Added
-- Integration with Gravity Forms [read the blog post](https://shopmagic.app/blog/shopmagic-2-22-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-22-is-here).
+- Integration with Gravity Forms [read the blog post](https://shopmagic.app/sk/shopmagic-2-22-is-here/).
 - Action: Add E-mail to List.
 - Action: Delete E-mail from List.
 - Backend support for automation history.
@@ -724,7 +763,7 @@
 
 ## [2.21.0] - 2021-01-13
 ### Added
-- SMS support with Twilio [read the blog post](https://shopmagic.app/blog/shopmagic-2-21-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-21-is-here).
+- SMS support with Twilio [read the blog post](https://shopmagic.app/sk/shopmagic-2-21-is-here/).
 - Event sanity check to ensure that is provides declared data types.
 - Additional error message when WordPress can't send an e-mail without any error.
 ### Fixed
@@ -737,7 +776,7 @@
 
 ## [2.20.0] - 2020-12-30
 ### Added
-- `order.payment_url` placeholder to facilitate paying for the order [read the blog post](https://shopmagic.app/blog/shopmagic-2-20-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-20-is-here).
+- `order.payment_url` placeholder to facilitate paying for the order [read the blog post](https://shopmagic.app/sk/shopmagic-2-20-is-here/).
 - "Order Paid" event to react when a user pays for an order.
 - BCC field in email actions.
 - Support for guests in comments.
@@ -762,7 +801,7 @@
 
 ## [2.19.0] - 2020-12-10
 ### Added
-- New placeholder `order.downloads` that can show the downloads table [read the blog post](https://shopmagic.app/blog/shopmagic-2-19-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-19-is-here).
+- New placeholder `order.downloads` that can show the downloads table [read the blog post](https://shopmagic.app/sk/shopmagic-2-19-is-here/).
 - New placeholder `order.shipment_tracking_links` integrating ShopMagic with "Table Rate for WooCommerce by Flexible Shipping" plugin.
 - New placeholder `order.checkout_field` integrating ShopMagic with "Flexible Checkout Fields" plugin.
 - Support for plain text in `order.details` placeholder.
@@ -774,7 +813,7 @@
 
 ## [2.18.0] - 2020-11-26
 ### Added
-- Support for templates and product images in `products_ordered` placeholder [read the blog post](https://shopmagic.app/blog/shopmagic-2-18-is-here-support-for-product-images/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-18-is-here-support-for-product-images).
+- Support for templates and product images in `products_ordered` placeholder [read the blog post](https://shopmagic.app/sk/shopmagic-2-18-is-here).
 - Support for modification parameter for all date/time placeholders.
 ### Fixed
 - Possibility of the endless loop while converting guests.
@@ -786,7 +825,7 @@
 
 ## [2.17.0] - 2020-11-04
 ### Added
-- Support for the new and FREE Abandoned Carts add-on, [read the blog post](https://shopmagic.app/blog/shopmagic-2-17-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-17-is-here).
+- Support for the new and FREE Abandoned Carts add-on, [read the blog post](https://shopmagic.app/sk/shopmagic-2-17-is-here/).
 - Support for Guest session tracking and pre-submit data capture.
 - Cron events that allow execution of non-essential periodic tasks.
 ### Improved
@@ -796,7 +835,7 @@
 
 ## [2.16.0] - 2020-10-21
 ### Added
-- Support for the new WooCommerce Memberships add-on, [read the blog post](https://shopmagic.app/blog/shopmagic-2-16-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-16-is-here).
+- Support for the new WooCommerce Memberships add-on, [read the blog post](https://shopmagic.app/sk/shopmagic-2-16-is-here/).
 - New filter: customer ID.
 - New placeholder: customer username.
 - New internal class `BeforeEventHelper`.
@@ -806,7 +845,7 @@
 
 ## [2.15.0] - 2020-10-14
 ### Added
-- Support for sending newsletters or trigger manual subscription events from the Manual Actions add-on, [read the blog post](https://shopmagic.app/blog/shopmagic-2-15-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-15-is-here).
+- Support for sending newsletters or trigger manual subscription events from the Manual Actions add-on, [read the blog post](https://shopmagic.app/sk/shopmagic-2-15-is-here/).
 - Order Note Added event, filters (order note type and content) and placeholders (order note content and author).
 - `order.customer_note` placeholder for displaying customer notes from the checkout form.
 - Support for date formatting in date placeholders.
@@ -822,7 +861,7 @@
 
 ## [2.14.0] - 2020-09-30
 ### Added
-- Support for the new WooCommerce Subscriptions add-on, [read the blog post](https://shopmagic.app/blog/shopmagic-2-14-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-14-is-here).
+- Support for the new WooCommerce Subscriptions add-on, [read the blog post](https://shopmagic.app/sk/shopmagic-2-14-is-here/).
 - Hook emitters for firing before events.
 ### Fixed
 - Possible "Guests" duplication in the admin menu.
@@ -834,7 +873,7 @@
 
 ## [2.13.0] - 2020-09-16
 ### Added
-- Guest listing, [read the blog post](https://shopmagic.app/blog/shopmagic-2-13-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-13-is-here).
+- Guest listing, [read the blog post](https://shopmagic.app/sk/shopmagic-2-13-is-here/).
 - Integration with Postmark Message Streams.
 - Customer filtering to automation queue and outcomes.
 - New data object accessible in placeholders and actions: Customer.
@@ -857,14 +896,14 @@
 
 ## [2.11.0] - 2020-07-29
 ### Added
-- Sending test emails for Send Email actions, [read the blog post](https://shopmagic.app/blog/shopmagic-2-11-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-11-is-here).
+- Sending test emails for Send Email actions, [read the blog post](https://shopmagic.app/sk/shopmagic-2-11-is-here/).
 - Support for logger in ShopMagic actions using `LoggerAwareInterface`.
 ### Fixed
 - Unknown status in outcomes when a fatal error occurred.
 
 ## [2.10.0] - 2020-07-22
 ### Added
-- Support for the new Manual Actions add-on, [read the blog post](https://shopmagic.app/blog/shopmagic-2-10-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-10-is-here).
+- Support for the new Manual Actions add-on, [read the blog post](https://shopmagic.app/sk/shopmagic-2-10-is-here/).
 - Filtering to automation queue and outcomes.
 ### Improved
 - Tweaked outcome statuses names and descriptions for better understanding.
@@ -873,7 +912,7 @@
 
 ## [2.9.0] - 2020-07-15
 ### Added
-- Automation queue and outcomes (logs), [read the blog post](https://shopmagic.app/blog/shopmagic-2-9-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-9-is-here).
+- Automation queue and outcomes (logs), [read the blog post](https://shopmagic.app/sk/shopmagic-2-9-is-here/).
 ### Fixed
 - Invalid action call when `ALTERNATE_WP_CRON` is used.
 - Saving automation when invalid/empty filter was added.
@@ -885,7 +924,7 @@
 
 ## [2.8.0] - 2020-07-08
 ### Added
-- Marketing opt-ins and lists, [read the blog post](https://shopmagic.app/blog/shopmagic-2-8-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-8-is-here).
+- Marketing opt-ins and lists, [read the blog post](https://shopmagic.app/sk/shopmagic-2-8-is-here/).
 - Ability for customers to subscribe to lists in WooCommerce checkout.
 - Ability for customers to subscribe or unsubscribe on Communication Preferences/My Account page.
 - Opt-in/opt-out events for lists.
@@ -921,7 +960,7 @@
 
 ## [2.5.0] - 2020-05-20
 ### Added
-- Support for the new Advanced Filters add-on, [read the blog post](https://shopmagic.app/blog/shopmagic-2-5-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-5-is-here).
+- Support for the new Advanced Filters add-on, [read the blog post](https://shopmagic.app/sk/shopmagic-2-5-is-here/).
 - Support for filter grouping into logical AND/OR groups.
 ### Fixed
 - Error while applying `woocommerce_email_styles` filter.
@@ -929,7 +968,7 @@
 
 ## [2.4.0] - 2020-05-06
 ### Added
-- Support for the new Customer Coupons add-on, [read the blog post](https://shopmagic.app/blog/shopmagic-2-4-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-4-is-here).
+- Support for the new Customer Coupons add-on, [read the blog post](https://shopmagic.app/sk/shopmagic-2-4-is-here/).
 - Placeholder dialogs - the easiest way to configure and insert placeholder codes.
 - Ability to enable BCC field in email actions.
 
@@ -947,7 +986,7 @@
 
 ## [2.3.0] - 2020-04-22
 ### Added
-- Support for Review Requests add-on 2.1.0, [read the blog post](https://shopmagic.app/blog/shopmagic-2-3-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-3-is-here).
+- Support for Review Requests add-on 2.1.0, [read the blog post](https://shopmagic.app/sk/shopmagic-2-3-is-here/).
 - Support for guest reviews in Review Requests add-on.
 - New placeholders for products used in Review Requests add-on (`product.id`, `product.name`, `product.link`, `product.meta`).
 
@@ -992,7 +1031,7 @@
 - New placeholder - `customer.phone`.
 - Support for changes in ShopMagic PRO add-ons.
 ### Changed
-- Major update, please [read the blog post](https://shopmagic.app/blog/shopmagic-2-0-is-here/?utm_source=wporg&utm_medium=readme&utm_campaign=shopmagic-for-woocommerce&utm_term=read-the-blog-post&utm_content=post-shopmagic-2-0-is-here).
+- Major update, please [read the blog post](https://shopmagic.app/sk/shopmagic-2-0-is-here/).
 - Completely rewritten events, filters, and actions to prepare for next major updates.
 
 ## [1.9.2] - 2020-02-25
@@ -1032,7 +1071,7 @@
 ### Added
 - Better support for translations.
 - WP Desk libraries to unify plugin development.
-- Support for [premium add-ons](https://shopmagic.app/product-category/add-ons/).
+- Support for [premium add-ons](https://shopmagic.app/sk/shopmagic-changelog-addon/).
 
 ## [1.5.0] - 2019-10-30
 ### Added

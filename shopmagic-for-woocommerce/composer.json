@@ -35,7 +35,7 @@
 		"mailerlite/mailerlite-php": "^1.0",
 		"monolog/monolog": "^2.8",
 		"pelago/emogrifier": "^6",
-		"php-di/php-di": "^6.3.5",
+		"wpdesk/php-di": "^6.3.5",
 		"php-http/curl-client": "^2.3",
 		"php-http/guzzle7-adapter": "^1.1",
 		"php-http/message": "^1.16",
@@ -45,7 +45,7 @@
 		"ramsey/uuid": "^4.2.3",
 		"wpdesk/phpstan-rules": "^1.1",
 		"wpdesk/wp-code-sniffer": "^1.2.6",
-		"wpdesk/wp-codeception": "^2.11",
+		"wpdesk/wp-codeception": "^2.13.6",
 		"wpdesk/wp-forms": "^3.1",
 		"wpdesk/wp-logs": "^1.13",
 		"wpdesk/wp-migrations": "^1.0.1",
@@ -108,6 +108,6 @@
 			"url": "https://gitlab.wpdesk.dev/api/v4/group/wpdesk/-/packages/composer/"
 		}
 	},
-	"version": "4.6.0",
+	"version": "4.7.7",
 	"type": "wordpress-plugin"
 }

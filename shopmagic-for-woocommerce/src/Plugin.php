@@ -375,17 +375,17 @@ final class Plugin extends AbstractPlugin implements HookableCollection, Activat
 			'Settings',
 			'shopmagic-for-woocommerce'
 		) . '</a>';
-		$plugin_links[] = '<a href="https://shopmagic.app/docs/" target="_blank">' . __(
+		$plugin_links[] = '<a href="https://shopmagic.app/sk/shopmagic-for-woocommerce-docs/" target="_blank">' . __(
 			'Docs',
 			'shopmagic-for-woocommerce'
 		) . '</a>';
-		$plugin_links[] = '<a href="https://wordpress.org/support/plugin/shopmagic-for-woocommerce/" target="_blank">' . __(
+		$plugin_links[] = '<a href="https://wpdesk.link/shopmagic-for-woocommerce-support/" target="_blank">' . __(
 			'Support',
 			'shopmagic-for-woocommerce'
 		) . '</a>';
 
 		if ( ! $this->is_pro_active() ) {
-			$plugin_links[] = '<a href="https://shopmagic.app/pricing/?utm_source=user-site&utm_medium=quick-link&utm_campaign=shopmagic-upgrade" target="_blank" style="color:#d64e07;font-weight:bold;">' . __(
+			$plugin_links[] = '<a href="https://shopmagic.app/sk/shopmagic-for-woocommerce-list-pro" target="_blank" style="color:#d64e07;font-weight:bold;">' . __(
 				'Buy PRO',
 				'shopmagic-for-woocommerce'
 			) . '</a>';

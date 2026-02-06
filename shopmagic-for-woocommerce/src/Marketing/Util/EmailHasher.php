@@ -13,6 +13,6 @@ class EmailHasher {
 	}
 
 	public function valid( string $email, string $hash ): bool {
-		return $this->hash( $email ) === $hash;
+		return hash_equals( $this->hash( $email ), $hash );
 	}
 }

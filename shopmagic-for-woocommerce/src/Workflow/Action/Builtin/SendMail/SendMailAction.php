@@ -73,9 +73,9 @@ final class SendMailAction extends AbstractSendMailAction {
 		if ( ( ! WordPressPluggableHelper::is_plugin_active( 'shopmagic-reviews/shopmagic-reviews.php' ) ) && ( time() > $show_after ) ) {
 			$product_link = ( get_locale() === 'pl_PL' )
 				? // phpcs:ignore Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine
-				'https://www.wpdesk.pl/sklep/shopmagic/?utm_source=review-requests&utm_medium=notice&utm_campaign=e08'
+				'https://www.wpdesk.pl/sk/shopmagic-for-woocommerce-mail-action-pl'
 				:
-				'https://shopmagic.app/products/shopmagic-review-requests/?utm_source=review-requests&utm_medium=notice&utm_campaign=e08';
+				'https://shopmagic.app/sk/shopmagic-for-woocommerce-mail-action-en';
 
 			$fields[] = ( new ProItemInfoField() )
 				->set_name( 'review-request-ads' )

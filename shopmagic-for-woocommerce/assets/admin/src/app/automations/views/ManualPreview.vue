@@ -20,7 +20,7 @@ import { useAutomationResourcesStore } from "../resourceStore";
 import { useWpFetch } from "@/composables/useWpFetch";
 import { useSingleAutomation } from "@/app/automations/singleAutomation";
 import { storeToRefs } from "pinia";
-import { __, sprintf } from "@/plugins/i18n";
+import { __, sprintf, _n } from "@/plugins/i18n";
 import { appendSearchParams } from "@/composables/useSearchParams";
 
 const { get: getAutomation } = useSingleAutomation();
@@ -67,7 +67,46 @@ const automationActions = computed(() => {
   });
 });
 const processed = ref(0);
-const processing = computed(() => Math.ceil((processed.value / maxPages.value) * 100));
+const totalProcessingSeconds = ref(0);
+const processing = computed(() => {
+  if (!maxPages.value) {
+    return 0;
+  }
+
+  return Math.ceil((processed.value / maxPages.value) * 100);
+});
+const remainingPages = computed(() => Math.max(maxPages.value - processed.value, 0));
+const averageProcessingSeconds = computed(() => {
+  if (!processed.value) {
+    return 0;
+  }
+
+  return totalProcessingSeconds.value / processed.value;
+});
+const estimatedSecondsRemaining = computed(() => {
+  if (!averageProcessingSeconds.value || !remainingPages.value) {
+    return 0;
+  }
+
+  return averageProcessingSeconds.value * remainingPages.value;
+});
+const estimatedTimeMessage = computed(() => {
+  if (!estimatedSecondsRemaining.value || processing.value === 100) {
+    return null;
+  }
+
+  return sprintf(
+    __("Estimated time remaining: %s", "shopmagic-for-woocommerce"),
+    formatDuration(estimatedSecondsRemaining.value),
+  );
+});
+const isEstimatingTime = computed(() => {
+  if (processing.value === 100) {
+    return false;
+  }
+
+  return processed.value === 0 && maxPages.value > 0;
+});
 
 watchEffect(() => {
   getAutomation(props.id);
@@ -114,6 +153,9 @@ watchEffect(() => {
 async function fetchPreviewRuns(apiMatchEndpoint: string) {
   const CONCURRENT_REQS = 5;
   const batchSize = Math.min(CONCURRENT_REQS, maxPages.value - page.value + 1);
+  if (batchSize <= 0) {
+    return;
+  }
   const promises = Array.from({ length: batchSize }, (_, i) => {
     return get(
       appendSearchParams(apiMatchEndpoint, {
@@ -124,7 +166,9 @@ async function fetchPreviewRuns(apiMatchEndpoint: string) {
     );
   });
   try {
+    const startTime = performance.now();
     const result = await Promise.all(promises);
+    totalProcessingSeconds.value += (performance.now() - startTime) / 1000;
     page.value += batchSize;
 
     if (apiMatchEndpoint.endsWith(`automations/${props.id}/manual/match`)) {
@@ -179,6 +223,42 @@ async function dispatchAutomations() {
     dispatcherError.value = JSON.parse(response);
     return;
   });
+}
+
+function formatDuration(seconds: number): string {
+  if (!seconds || !isFinite(seconds)) {
+    return __("less than a minute", "shopmagic-for-woocommerce");
+  }
+
+  const roundedSeconds = Math.ceil(seconds);
+  if (roundedSeconds < 60) {
+    return sprintf(
+      _n("%d second", "%d seconds", roundedSeconds, "shopmagic-for-woocommerce"),
+      roundedSeconds,
+    );
+  }
+
+  const minutes = Math.ceil(roundedSeconds / 60);
+  if (minutes < 60) {
+    return sprintf(
+      _n("%d minute", "%d minutes", minutes, "shopmagic-for-woocommerce"),
+      minutes,
+    );
+  }
+
+  const hours = Math.ceil(minutes / 60);
+  if (hours < 24) {
+    return sprintf(
+      _n("%d hour", "%d hours", hours, "shopmagic-for-woocommerce"),
+      hours,
+    );
+  }
+
+  const days = Math.ceil(hours / 24);
+  return sprintf(
+    _n("%d day", "%d days", days, "shopmagic-for-woocommerce"),
+    days,
+  );
 }
 
 onUnmounted(() => {
@@ -244,6 +324,12 @@ onUnmounted(() => {
               )
             }}
           </NText>
+        </NP>
+        <NP v-if="isEstimatingTime">
+          {{ __("Calculating estimated time...", "shopmagic-for-woocommerce") }}
+        </NP>
+        <NP v-else-if="estimatedTimeMessage">
+          {{ estimatedTimeMessage }}
         </NP>
         <NProgress
           :height="12"

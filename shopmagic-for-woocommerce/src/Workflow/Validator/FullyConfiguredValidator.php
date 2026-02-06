@@ -15,7 +15,7 @@ final class FullyConfiguredValidator extends WorkflowValidator {
 	/** @var Automation|null */
 	private $automation;
 
-	public function __construct( Automation $automation = null ) {
+	public function __construct( ?Automation $automation = null ) {
 		if ( $automation !== null ) {
 			@trigger_error(
 				sprintf(
@@ -33,7 +33,7 @@ final class FullyConfiguredValidator extends WorkflowValidator {
 	/**
 	 * @param $resources DataLayer|null
 	 */
-	public function valid( DataLayer $resources = null ): bool {
+	public function valid( ?DataLayer $resources = null ): bool {
 		if ( $resources === null ) {
 			@trigger_error(
 				sprintf(

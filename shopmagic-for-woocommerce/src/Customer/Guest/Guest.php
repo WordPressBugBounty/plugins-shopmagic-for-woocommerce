@@ -83,7 +83,7 @@ final class Guest implements Customer {
 	 *
 	 * @return void
 	 */
-	public function add_meta( $meta, string $value = null ): void {
+	public function add_meta( $meta, ?string $value = null ): void {
 		if ( is_string( $meta ) ) {
 			if ( $this->meta->has( $meta ) ) {
 				$meta = $this->meta->get( $meta );

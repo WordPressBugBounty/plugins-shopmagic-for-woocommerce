@@ -19,6 +19,7 @@ use WPDesk\ShopMagic\Workflow\Event\Builtin\Comment\CommentAdded;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Customer\CustomerAccountCreated;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Customer\CustomerOptedIn;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Customer\CustomerOptedOut;
+use WPDesk\ShopMagic\Workflow\Event\Builtin\Post\PostDeleted;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Post\PostPublished;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Post\PostUpdated;
 use WPDesk\ShopMagic\Workflow\Extensions\AbstractExtension;
@@ -26,6 +27,7 @@ use WPDesk\ShopMagic\Workflow\Filter\Builtin\Customer\CustomerIdFilter;
 use WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Customer;
 use WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Post;
 use WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Shop;
+use WPDesk\ShopMagic\Workflow\Filter\Builtin\Post\PostStatusFilter;
 
 final class CoreExtension extends AbstractExtension {
 
@@ -48,6 +50,7 @@ final class CoreExtension extends AbstractExtension {
 			CustomerIdFilter::class,
 			CustomerListFilter::class,
 			CustomerNotSubscribedToListFilter::class,
+			PostStatusFilter::class,
 		];
 	}
 
@@ -57,6 +60,7 @@ final class CoreExtension extends AbstractExtension {
 			CustomerAccountCreated::class,
 			CustomerOptedIn::class,
 			CustomerOptedOut::class,
+			PostDeleted::class,
 			PostPublished::class,
 			PostUpdated::class,
 		];

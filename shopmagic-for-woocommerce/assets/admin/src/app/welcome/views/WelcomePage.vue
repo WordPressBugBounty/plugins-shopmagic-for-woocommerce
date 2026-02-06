@@ -11,18 +11,12 @@ function getImage(name: string) {
 }
 
 function getUrl() {
-  const utm = new URLSearchParams({
-    utm_source: "welcome-screen",
-    utm_medium: "button",
-    utm_campaign: "shopmagic-welcome",
-  });
-
-  let url = "https://shopmagic.app/pricing";
+  let url = "https://shopmagic.app/sk/shopmagic-for-woocommerce-welcome-en/";
   if (navigator.language === "pl-PL") {
-    url = "https://www.wpdesk.pl/sklep/shopmagic/";
+    url = "https://www.wpdesk.pl/sk/shopmagic-for-woocommerce-welcome-pl/";
   }
 
-  return `${url}?${utm.toString()}`;
+  return url;
 }
 </script>
 <template>

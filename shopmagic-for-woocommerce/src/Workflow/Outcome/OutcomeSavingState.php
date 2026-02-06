@@ -27,7 +27,7 @@ class OutcomeSavingState implements OutcomeSaver {
 	public function update_result(
 		string $unique_id,
 		bool $result,
-		string $note = null,
+		?string $note = null,
 		array $context = []
 	): void {
 		$outcome = $this->find_outcome( $unique_id );

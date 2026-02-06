@@ -15,7 +15,7 @@ final class FiltersValidator extends WorkflowValidator {
 	/** @var FilterLogic|null */
 	private $filters;
 
-	public function __construct( FilterLogic $filters = null ) {
+	public function __construct( ?FilterLogic $filters = null ) {
 		if ( null !== $filters ) {
 			@trigger_error(
 				sprintf(
@@ -32,7 +32,7 @@ final class FiltersValidator extends WorkflowValidator {
 	/**
 	 * @param $resources DataLayer|null
 	 */
-	public function valid( DataLayer $resources = null ): bool {
+	public function valid( ?DataLayer $resources = null ): bool {
 		if ( $resources === null ) {
 			@trigger_error(
 				sprintf(

@@ -3,6 +3,8 @@
 namespace ShopMagicVendor\MailerLite;
 
 use ShopMagicVendor\MailerLite\Common\HttpLayer;
+use ShopMagicVendor\MailerLite\Common\HttpLayerPsr;
+use ShopMagicVendor\MailerLite\Common\HttpLayerPsrBridge;
 use ShopMagicVendor\MailerLite\Endpoints\Automation;
 use ShopMagicVendor\MailerLite\Endpoints\Batch;
 use ShopMagicVendor\MailerLite\Endpoints\Campaign;
@@ -15,18 +17,17 @@ use ShopMagicVendor\MailerLite\Endpoints\Subscriber;
 use ShopMagicVendor\MailerLite\Endpoints\Timezone;
 use ShopMagicVendor\MailerLite\Endpoints\Webhook;
 use ShopMagicVendor\MailerLite\Exceptions\MailerLiteException;
-/**
- * This is the PHP SDK for MailerLite
- */
+use ShopMagicVendor\MailerLite\Endpoints\Product;
+use ShopMagicVendor\MailerLite\Endpoints\Order;
+use ShopMagicVendor\MailerLite\Endpoints\Customer;
+use ShopMagicVendor\MailerLite\Endpoints\Cart;
+use ShopMagicVendor\MailerLite\Endpoints\CartItem;
+use ShopMagicVendor\MailerLite\Endpoints\Import;
 class MailerLite
 {
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     protected array $options;
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     protected static array $defaultOptions = ['host' => 'connect.mailerlite.com', 'protocol' => 'https', 'api_path' => 'api', 'api_key' => '', 'debug' => \false];
     protected HttpLayer $httpLayer;
     public Subscriber $subscribers;
@@ -40,8 +41,14 @@ class MailerLite
     public Timezone $timezones;
     public CampaignLanguage $campaignLanguages;
     public Batch $batches;
+    public Product $ecommerceProducts;
+    public Order $ecommerceOrders;
+    public Customer $ecommerceCustomers;
+    public Cart $ecommerceCarts;
+    public CartItem $ecommerceCartItems;
+    public Import $ecommerceImport;
     /**
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     public function __construct(array $options = [], ?HttpLayer $httpLayer = null)
     {
@@ -50,7 +57,7 @@ class MailerLite
         $this->setEndpoints();
     }
     /**
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     protected function setOptions(array $options): void
     {
@@ -68,6 +75,13 @@ class MailerLite
     {
         $this->httpLayer = $httpLayer ?: new HttpLayer($this->options);
     }
+    public function enablePsrTransport(\ShopMagicVendor\MailerLite\Http\ClientInterface $client, \ShopMagicVendor\MailerLite\Http\RequestFactoryInterface $requestFactory, string $apiKey, string $baseUrl = 'https://connect.mailerlite.com'): self
+    {
+        $psr = new HttpLayerPsr($client, $requestFactory, $apiKey, $baseUrl);
+        $this->httpLayer = new HttpLayerPsrBridge($psr);
+        $this->setEndpoints();
+        return $this;
+    }
     protected function setEndpoints(): void
     {
         $this->subscribers = new Subscriber($this->httpLayer, $this->options);
@@ -81,5 +95,11 @@ class MailerLite
         $this->timezones = new Timezone($this->httpLayer, $this->options);
         $this->campaignLanguages = new CampaignLanguage($this->httpLayer, $this->options);
         $this->batches = new Batch($this->httpLayer, $this->options);
+        $this->ecommerceProducts = new Product($this->httpLayer, $this->options);
+        $this->ecommerceOrders = new Order($this->httpLayer, $this->options);
+        $this->ecommerceCustomers = new Customer($this->httpLayer, $this->options);
+        $this->ecommerceCarts = new Cart($this->httpLayer, $this->options);
+        $this->ecommerceCartItems = new CartItem($this->httpLayer, $this->options);
+        $this->ecommerceImport = new Import($this->httpLayer, $this->options);
     }
 }

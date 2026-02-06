@@ -18,8 +18,8 @@ final class GuestMeta {
 	private $meta_id;
 
 	public function __construct(
-		string $meta_key = null,
-		string $meta_value = null
+		?string $meta_key = null,
+		?string $meta_value = null
 	) {
 		$this->meta_key   = $meta_key;
 		$this->meta_value = $meta_value;

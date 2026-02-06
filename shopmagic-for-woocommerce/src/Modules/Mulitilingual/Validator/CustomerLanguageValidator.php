@@ -24,7 +24,7 @@ final class CustomerLanguageValidator extends WorkflowValidator {
 	/**
 	 * @param $resources DataLayer|null
 	 */
-	public function valid( DataLayer $resources = null ): bool {
+	public function valid( ?DataLayer $resources = null ): bool {
 		if ( $resources === null ) {
 			@trigger_error(
 				sprintf(

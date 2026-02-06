@@ -169,7 +169,7 @@ onMounted(() => {
 
 const documentation = sprintf(
   __("Enter the Spreadsheet ID according to our %1$s.", "shopmagic-for-woocommerce"),
-  `<a class="text-blue-300 hover:text-blue-400" href="https://docs.shopmagic.app/article/1118-how-to-use-shopmagic-with-google-sheets" target="_blank">${__("documentation", "shopmagic-for-woocommerce")}</a>`,
+  `<a class="text-blue-300 hover:text-blue-400" href="https://shopmagic.app/sk/shopmagic-with-google-sheets" target="_blank">${__("documentation", "shopmagic-for-woocommerce")}</a>`,
 );
 </script>
 <template>

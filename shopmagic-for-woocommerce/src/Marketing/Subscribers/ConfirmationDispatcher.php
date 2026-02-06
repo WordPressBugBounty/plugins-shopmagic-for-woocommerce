@@ -30,7 +30,7 @@ final class ConfirmationDispatcher {
 	public function __construct(
 		Renderer $renderer,
 		EmailHasher $email_hasher,
-		Mailer $mailer = null
+		?Mailer $mailer = null
 	) {
 		$this->renderer     = $renderer;
 		$this->email_hasher = $email_hasher;
