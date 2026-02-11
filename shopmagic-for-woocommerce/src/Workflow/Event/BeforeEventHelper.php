@@ -57,21 +57,34 @@ final class BeforeEventHelper {
 	 * @return int Returns seconds from 00:00 today to the given hour. UTC timezone.
 	 */
 	public function get_checktime_utc( ContainerInterface $fields_data, array $default ): int {
-		if ( $fields_data->has( $this->param_checktime ) ) {
-			$check_time = json_decode( $fields_data->get( $this->param_checktime ), true );
-		} else {
-			$check_time = $default;
-		}
+		$check_time = $default;
 
-		if ( $check_time === null && is_string( $fields_data->get( $this->param_checktime ) ) ) {
-			$check_time = explode( ':', $fields_data->get( $this->param_checktime ) );
+		if ( $fields_data->has( $this->param_checktime ) ) {
+			$raw_check_time = $fields_data->get( $this->param_checktime );
+
+			if ( is_array( $raw_check_time ) ) {
+				$check_time = $raw_check_time;
+			} elseif ( is_string( $raw_check_time ) ) {
+				$decoded_check_time = json_decode( $raw_check_time, true );
+
+				if ( is_array( $decoded_check_time ) ) {
+					$check_time = $decoded_check_time;
+				} elseif ( strpos( $raw_check_time, ':' ) !== false ) {
+					$check_time = explode( ':', $raw_check_time );
+				}
+			}
 		}
 
 		if ( empty( $check_time ) ) {
 			$check_time = $default;
 		}
 
-		return $this->convert_time_to_utc_int( (int) $check_time[0], (int) $check_time[1] );
+		[ $hour, $minute ] = array_replace( $default, array_values( $check_time ) );
+
+		$hour   = is_numeric( $hour ) ? (int) $hour : (int) $default[0];
+		$minute = is_numeric( $minute ) ? (int) $minute : (int) $default[1];
+
+		return $this->convert_time_to_utc_int( $hour, $minute );
 	}
 
 	private function convert_time_to_utc_int( int $hour, int $minute ): int {

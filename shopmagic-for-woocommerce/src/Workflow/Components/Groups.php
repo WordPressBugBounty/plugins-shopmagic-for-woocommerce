@@ -77,6 +77,7 @@ class Groups {
 				self::ORDER        => __( 'Orders', 'shopmagic-for-woocommerce' ),
 				self::CUSTOMER     => __( 'Customers', 'shopmagic-for-woocommerce' ),
 				self::POST         => __( 'Post', 'shopmagic-for-woocommerce' ),
+				self::PRODUCT      => __( 'Products', 'shopmagic-for-woocommerce' ),
 				self::SUBSCRIPTION => __( 'Subscriptions', 'shopmagic-for-woocommerce' ),
 				self::CART         => __( 'Carts', 'shopmagic-for-woocommerce' ),
 				self::MEMBERSHIP   => __( 'Memberships', 'shopmagic-for-woocommerce' ),

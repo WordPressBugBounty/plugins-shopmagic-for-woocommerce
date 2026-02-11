@@ -14,12 +14,15 @@ use WPDesk\ShopMagic\Workflow\Event\Builtin\Order\OrderPending;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Order\OrderProcessing;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Order\OrderRefunded;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Order\OrderStatusChanged;
+use WPDesk\ShopMagic\Workflow\Event\Builtin\Product\ProductEdit;
+use WPDesk\ShopMagic\Workflow\Event\Builtin\Product\ProductPublished;
 use WPDesk\ShopMagic\Workflow\Event\DeferredStateCheck\OrderStatusDeferredEvent;
 use WPDesk\ShopMagic\Workflow\Event\EventMutex;
 use WPDesk\ShopMagic\Workflow\Extensions\AbstractExtension;
 use WPDesk\ShopMagic\Workflow\Filter\Builtin\Order\OrderItems;
 use WPDesk\ShopMagic\Workflow\Filter\Builtin\Order\OrderNoteContent;
 use WPDesk\ShopMagic\Workflow\Filter\Builtin\Order\OrderNoteType;
+use WPDesk\ShopMagic\Workflow\Filter\Builtin\Product\ProductStatusFilter;
 use WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Order;
 use WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Product;
 use WPDesk\ShopMagic\Workflow\Placeholder\Helper\PlaceholderUTMBuilder;
@@ -51,6 +54,8 @@ final class WooCommerceExtension extends AbstractExtension {
 			OrderStatusChanged::class,
 			OrderPaid::class,
 			OrderNoteAdded::class,
+			ProductPublished::class,
+			ProductEdit::class,
 		];
 	}
 
@@ -59,6 +64,7 @@ final class WooCommerceExtension extends AbstractExtension {
 			OrderItems::class,
 			OrderNoteType::class,
 			OrderNoteContent::class,
+			ProductStatusFilter::class,
 		];
 	}
 
@@ -119,8 +125,15 @@ final class WooCommerceExtension extends AbstractExtension {
 
 			Product\ProductId::class,
 			Product\ProductLink::class,
+			Product\ProductDescription::class,
 			Product\ProductMeta::class,
 			Product\ProductName::class,
+			Product\ProductPrice::class,
+			Product\ProductRegularPrice::class,
+			Product\ProductSalePrice::class,
+			Product\ProductShortDescription::class,
+			Product\ProductSku::class,
+
 		];
 	}
 }

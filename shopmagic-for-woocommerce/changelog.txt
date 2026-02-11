@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.8.0] - 2026-02-11
+### Added
+- New product filters
+
 ## [4.7.7] - 2026-01-26
 ### Changed
 - Readme update

@@ -22,12 +22,14 @@ use WPDesk\ShopMagic\Workflow\Event\Builtin\Customer\CustomerOptedOut;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Post\PostDeleted;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Post\PostPublished;
 use WPDesk\ShopMagic\Workflow\Event\Builtin\Post\PostUpdated;
+use WPDesk\ShopMagic\Workflow\Event\Builtin\Product\ProductEdit;
+use WPDesk\ShopMagic\Workflow\Event\Builtin\Product\ProductPublished;
 use WPDesk\ShopMagic\Workflow\Extensions\AbstractExtension;
 use WPDesk\ShopMagic\Workflow\Filter\Builtin\Customer\CustomerIdFilter;
+use WPDesk\ShopMagic\Workflow\Filter\Builtin\Post\PostStatusFilter;
 use WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Customer;
 use WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Post;
 use WPDesk\ShopMagic\Workflow\Placeholder\Builtin\Shop;
-use WPDesk\ShopMagic\Workflow\Filter\Builtin\Post\PostStatusFilter;
 
 final class CoreExtension extends AbstractExtension {
 

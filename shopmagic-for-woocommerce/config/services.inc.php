@@ -73,6 +73,7 @@ use WPDesk\ShopMagic\Customer\Interceptor\SessionCustomerProvider;
 use WPDesk\ShopMagic\Customer\User\UserRepository;
 use WPDesk\ShopMagic\DataSharing\CustomerTestProvider;
 use WPDesk\ShopMagic\DataSharing\OrderTestProvider;
+use WPDesk\ShopMagic\DataSharing\ProductTestProvider;
 use WPDesk\ShopMagic\DataSharing\TestProvider;
 use WPDesk\ShopMagic\Extensions\ExtensionsSet;
 use WPDesk\ShopMagic\Frontend\Interceptor\CurrentCustomer;
@@ -410,6 +411,7 @@ return [
 
 		if ( WordPressPluggableHelper::is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			$test_provider->add_provider( $c->get( OrderTestProvider::class ) );
+			$test_provider->add_provider( $c->get( ProductTestProvider::class ) );
 		}
 
 		return $test_provider;

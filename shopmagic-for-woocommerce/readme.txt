@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-donate
 Requires at least: 6.4
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 4.7.7
+Stable tag: 4.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -253,6 +253,9 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 
 == Changelog ==
 
+= 4.8.0 - 2026-02-11 =
+* Added new product filters
+
 = 4.7.7 - 2026-01-26 =
 * Readme update.
 
@@ -267,9 +270,6 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 
 = 4.7.3 - 2025-12-15 =
 * Fixed vulnerability in communication preferences update page.
-
-= 4.7.2 - 2025-12-09 =
-* Readme update.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 
