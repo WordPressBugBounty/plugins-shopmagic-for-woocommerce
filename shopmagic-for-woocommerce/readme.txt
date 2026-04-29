@@ -3,10 +3,10 @@ Contributors: wpdesk,dyszczo,bartj
 Tags: customize woocommerce emails, follow up emails, woocommerce email customizer, woocommerce abandoned cart, woocommerce mailchimp
 Author URL: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-author
 Donate link: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-donate
-Requires at least: 6.4
-Tested up to: 6.9
+Requires at least: 6.7
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.8.2
+Stable tag: 4.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -252,6 +252,10 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 37. Documentation and guidance for customizing WooCommerce emails and email marketing campaigns.
 
 == Changelog ==
+
+= 4.8.3 - 2026-04-29 =
+* Added support for WordPress 7.0
+* Fixed WooCommerce placeholders in email footer displayed in raw format.
 
 = 4.8.2 - 2026-04-07 =
 * Added support for WooCommerce 10.7

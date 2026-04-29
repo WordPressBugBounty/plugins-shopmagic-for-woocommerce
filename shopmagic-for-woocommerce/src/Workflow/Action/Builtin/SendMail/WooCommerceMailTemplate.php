@@ -87,13 +87,38 @@ final class WooCommerceMailTemplate implements MailTemplate, LoggerAwareInterfac
 			add_filter( 'woocommerce_email_footer_text', $append_unsubscribe_link );
 		}
 
+		$replace_footer_placeholders = function ( string $content ): string {
+			return $this->replace_footer_placeholders( $content );
+		};
+		add_filter( 'woocommerce_email_footer_text', $replace_footer_placeholders );
+
 		$this->print_template_part( 'email-footer.php' );
+
+		remove_filter( 'woocommerce_email_footer_text', $replace_footer_placeholders );
 
 		if ( null !== $this->unsubscribe_url ) {
 			remove_filter( 'woocommerce_email_footer_text', $append_unsubscribe_link );
 		}
 
 		return (string) ob_get_clean();
+	}
+
+	private function replace_footer_placeholders( string $content ): string {
+		if ( ! function_exists( 'WC' ) ) {
+			return $content;
+		}
+
+		$woocommerce = WC();
+		if ( ! is_object( $woocommerce ) || ! method_exists( $woocommerce, 'mailer' ) ) {
+			return $content;
+		}
+
+		$mailer = $woocommerce->mailer();
+		if ( ! is_object( $mailer ) || ! method_exists( $mailer, 'replace_placeholders' ) ) {
+			return $content;
+		}
+
+		return (string) $mailer->replace_placeholders( $content );
 	}
 
 	/**
