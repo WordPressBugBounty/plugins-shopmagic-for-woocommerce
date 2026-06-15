@@ -1,5 +1,11 @@
 # ShopMagic Changelog
 
+## [4.8.4] - 2026-06-15
+### Added
+- Added support for WooCommerce 10.8
+### Fixed
+- MailChimp integration fault causing actions to be hidden in administration panel.
+
 ## [4.8.3] - 2026-04-29
 ### Added
 - Added support for WordPress 7.0

@@ -53,7 +53,11 @@ final class AddToMailChimpListAction extends Action {
 			[
 				( new CheckboxField() )
 					->set_name( '_mailchimp_doubleoptin' )
-					->set_default_value( get_option( 'wc_settings_tab_mailchimp_double_optin', 'yes' ) )
+					->set_default_value(
+						filter_var( get_option( 'wc_settings_tab_mailchimp_double_optin', 'yes' ), \FILTER_VALIDATE_BOOLEAN )
+							? CheckboxField::VALUE_TRUE
+							: CheckboxField::VALUE_FALSE
+					)
 					->set_label( __( 'Double opt-in', 'shopmagic-for-woocommerce' ) )
 					->set_description(
 						__(

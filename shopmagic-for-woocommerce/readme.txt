@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-donate
 Requires at least: 6.7
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.8.3
+Stable tag: 4.8.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -253,6 +253,10 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 
 == Changelog ==
 
+= 4.8.4 - 2026-06-15 =
+- Added support for WooCommerce 10.8
+- MailChimp integration fault causing actions to be hidden in administration panel.
+
 = 4.8.3 - 2026-04-29 =
 * Added support for WordPress 7.0
 * Fixed WooCommerce placeholders in email footer displayed in raw format.
@@ -265,21 +269,6 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 
 = 4.8.0 - 2026-02-11 =
 * Added new product filters
-
-= 4.7.7 - 2026-01-26 =
-* Readme update.
-
-= 4.7.6 - 2026-01-21 =
-* Added support for WooCommerce 10.5
-
-= 4.7.5 - 2026-01-15 =
-* Improved compatibility with recent PHP versions >= 8.4.
-
-= 4.7.4 - 2025-12-29 =
-* Readme update.
-
-= 4.7.3 - 2025-12-15 =
-* Fixed vulnerability in communication preferences update page.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 
