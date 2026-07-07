@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.8.5] - 2026-07-07 
+### Added
+- Support for WooCommerce 10.9
+
 ## [4.8.4] - 2026-06-15
 ### Added
 - Added support for WooCommerce 10.8

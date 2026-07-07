@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-donate
 Requires at least: 6.7
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.8.4
+Stable tag: 4.8.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -252,6 +252,9 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 37. Documentation and guidance for customizing WooCommerce emails and email marketing campaigns.
 
 == Changelog ==
+
+= 4.8.5 - 2026-07-07 =
+* Added support for WooCommerce 10.9
 
 = 4.8.4 - 2026-06-15 =
 - Added support for WooCommerce 10.8
