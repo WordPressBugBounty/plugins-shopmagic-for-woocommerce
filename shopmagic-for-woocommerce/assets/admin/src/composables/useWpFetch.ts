@@ -8,6 +8,7 @@ export const ErrorSource = {
 } as const;
 
 export const fetchOptions = {
+  credentials: "same-origin" as RequestCredentials,
   headers: {
     Accept: "application/json, application/problem+json",
     "X-WP-Nonce": window.ShopMagic.nonce,

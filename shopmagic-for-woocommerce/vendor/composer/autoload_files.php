@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     '7b11c4dc42b3b3023073cb14e519683c' => $vendorDir . '/ralouphie/getallheaders/src/getallheaders.php',
+    '6e3fae29631ef280660b3cdad06f25a8' => $vendorDir . '/symfony/deprecation-contracts/function.php',
+    'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
     '2f769eff9e3ec7d1b58db8138f040e6e' => $baseDir . '/inc/compat.php',
     '7ae132c84dd37834392e6ded8d4ed6a3' => $baseDir . '/functions.php',
 );

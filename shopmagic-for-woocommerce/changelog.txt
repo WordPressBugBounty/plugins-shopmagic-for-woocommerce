@@ -1,6 +1,12 @@
 # ShopMagic Changelog
 
-## [4.8.5] - 2026-07-07 
+## [4.8.6] - 2026-07-22
+### Fixed
+- TinyMCE editor not loading in the email action when using WordPress 7.0.
+### Added
+- Support for WooCommerce 11
+
+## [4.8.5] - 2026-07-07
 ### Added
 - Support for WooCommerce 10.9
 

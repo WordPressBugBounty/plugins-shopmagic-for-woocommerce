@@ -7,7 +7,6 @@ use ShopMagicVendor\GuzzleHttp\HandlerStack;
 use ShopMagicVendor\GuzzleHttp\Promise as P;
 use ShopMagicVendor\GuzzleHttp\Promise\PromiseInterface;
 use ShopMagicVendor\GuzzleHttp\TransferStats;
-use ShopMagicVendor\GuzzleHttp\Utils;
 use ShopMagicVendor\Psr\Http\Message\RequestInterface;
 use ShopMagicVendor\Psr\Http\Message\ResponseInterface;
 use ShopMagicVendor\Psr\Http\Message\StreamInterface;
@@ -131,7 +130,7 @@ class MockHandler implements \Countable
             if ($value instanceof ResponseInterface || $value instanceof \Throwable || $value instanceof PromiseInterface || \is_callable($value)) {
                 $this->queue[] = $value;
             } else {
-                throw new \TypeError('Expected a Response, Promise, Throwable or callable. Found ' . Utils::describeType($value));
+                throw new \TypeError('Expected a Response, Promise, Throwable or callable. Found ' . \get_debug_type($value));
             }
         }
     }

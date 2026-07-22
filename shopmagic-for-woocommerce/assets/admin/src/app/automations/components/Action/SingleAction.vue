@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { NButton, NCard, NFormItem, NIcon, NInput, NModal, NSelect } from "naive-ui";
 import { CloseOutline } from "@vicons/ionicons5";
-import { computed, inject, ref } from "vue";
+import { computed, inject, ref, toRef } from "vue";
 import type { ActionConfig } from "@/types/automationConfig";
 import { storeToRefs } from "pinia";
 import { useWpFetch } from "@/composables/useWpFetch";
@@ -71,7 +71,7 @@ async function dispatchTest() {
 const showModal = ref(false);
 const emailRecipent = ref<string | null>(inject(userKey)?.email || null);
 
-const { search, renderLabel, renderTag, matches } = useFuzzySearch(props.actions);
+const { search, renderLabel, renderTag, matches } = useFuzzySearch(toRef(props, "actions"));
 </script>
 
 <template>

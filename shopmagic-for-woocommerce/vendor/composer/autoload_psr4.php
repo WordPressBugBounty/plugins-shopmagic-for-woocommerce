@@ -9,6 +9,7 @@ return array(
     'WPDesk\\ShopMagic\\migrations\\' => array($baseDir . '/migrations'),
     'WPDesk\\ShopMagic\\' => array($baseDir . '/src'),
     'WPDesk\\Dashboard\\' => array($vendorDir . '/wpdesk/ltv-dashboard-widget/src'),
+    'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),

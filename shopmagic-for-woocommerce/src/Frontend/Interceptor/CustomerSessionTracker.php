@@ -64,6 +64,10 @@ final class CustomerSessionTracker implements Hookable, Conditional {
 			$this->initialize();
 		}
 
+		if ( empty( $this->tracking_data['email'] ) && empty( $this->tracking_data['user_id'] ) ) {
+			return;
+		}
+
 		$this->session->save_tracking_data( $this->tracking_data );
 	}
 

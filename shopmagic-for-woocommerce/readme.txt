@@ -1,4 +1,4 @@
-=== ShopMagic - email automation ===
+=== ShopMagic - email automation for WordPress ===
 Contributors: wpdesk,dyszczo,bartj
 Tags: customize woocommerce emails, follow up emails, woocommerce email customizer, woocommerce abandoned cart, woocommerce mailchimp
 Author URL: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-author
@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-donate
 Requires at least: 6.7
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.8.5
+Stable tag: 4.8.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,9 +16,9 @@ Flexible email automation and workflows triggered by customer and site events.
 
 ShopMagic – email automation is a WooCommerce extension that allows store owners to create automated emails and actions triggered by store and customer events.
 
-The ShopMagic - email automation plugin provides a system for building email automations using events, optional filters, and actions. It can be used to send follow-up emails, transactional notifications, reminders, and internal messages related to WooCommerce orders, customers, and site activity.
+The ShopMagic - email automation for WordPress plugin provides a system for building email automations using events, optional filters, and actions. It can be used to send follow-up emails, transactional notifications, reminders, and internal messages related to WooCommerce orders, customers, and site activity.
 
-ShopMagic - email automation runs entirely inside WordPress and WooCommerce. All data remains in the site database and is not sent to external services unless explicitly configured by the site administrator (for example, through integrations).
+ShopMagic - email automation for WordPress runs entirely inside WordPress and WooCommerce. All data remains in the site database and is not sent to external services unless explicitly configured by the site administrator (for example, through integrations).
 
 The plugin is designed to be extensible and can be enhanced with add-ons or custom code to support additional events, filters, and actions.
 
@@ -252,6 +252,10 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 37. Documentation and guidance for customizing WooCommerce emails and email marketing campaigns.
 
 == Changelog ==
+
+= 4.8.6 - 2026-07-22
+* TinyMCE editor not loading in the email action when using WordPress 7.0.
+* Support for WooCommerce 11.
 
 = 4.8.5 - 2026-07-07 =
 * Added support for WooCommerce 10.9

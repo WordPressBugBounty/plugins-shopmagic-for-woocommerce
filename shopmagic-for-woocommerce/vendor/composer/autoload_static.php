@@ -4,10 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
+class ComposerStaticInit2b304290df9de6459710baabfc1e89d3
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '2f769eff9e3ec7d1b58db8138f040e6e' => __DIR__ . '/../..' . '/inc/compat.php',
         '7ae132c84dd37834392e6ded8d4ed6a3' => __DIR__ . '/../..' . '/functions.php',
     );
@@ -18,6 +20,10 @@ class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
             'WPDesk\\ShopMagic\\migrations\\' => 28,
             'WPDesk\\ShopMagic\\' => 17,
             'WPDesk\\Dashboard\\' => 17,
+        ),
+        'S' =>
+        array (
+            'Symfony\\Polyfill\\Php80\\' => 23,
         ),
         'P' =>
         array (
@@ -44,6 +50,10 @@ class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
         'WPDesk\\Dashboard\\' =>
         array (
             0 => __DIR__ . '/..' . '/wpdesk/ltv-dashboard-widget/src',
+        ),
+        'Symfony\\Polyfill\\Php80\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
         'Psr\\Log\\' =>
         array (
@@ -192,6 +202,7 @@ class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
         'GuzzleHttp\\Psr7\\Query' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Query.php',
         'GuzzleHttp\\Psr7\\Request' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Request.php',
         'GuzzleHttp\\Psr7\\Response' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Response.php',
+        'GuzzleHttp\\Psr7\\Rfc3986' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Rfc3986.php',
         'GuzzleHttp\\Psr7\\Rfc7230' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Rfc7230.php',
         'GuzzleHttp\\Psr7\\ServerRequest' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/ServerRequest.php',
         'GuzzleHttp\\Psr7\\Stream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Stream.php',
@@ -984,14 +995,19 @@ class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
         'ShopMagicVendor\\GuzzleHttp\\Handler\\CurlFactoryInterface' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlFactoryInterface.php',
         'ShopMagicVendor\\GuzzleHttp\\Handler\\CurlHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlHandler.php',
         'ShopMagicVendor\\GuzzleHttp\\Handler\\CurlMultiHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlMultiHandler.php',
+        'ShopMagicVendor\\GuzzleHttp\\Handler\\CurlShareHandleState' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlShareHandleState.php',
+        'ShopMagicVendor\\GuzzleHttp\\Handler\\CurlVersion' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlVersion.php',
         'ShopMagicVendor\\GuzzleHttp\\Handler\\EasyHandle' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/EasyHandle.php',
         'ShopMagicVendor\\GuzzleHttp\\Handler\\HeaderProcessor' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/HeaderProcessor.php',
         'ShopMagicVendor\\GuzzleHttp\\Handler\\MockHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/MockHandler.php',
         'ShopMagicVendor\\GuzzleHttp\\Handler\\Proxy' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/Proxy.php',
+        'ShopMagicVendor\\GuzzleHttp\\Handler\\ProxyEnvironment' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/ProxyEnvironment.php',
         'ShopMagicVendor\\GuzzleHttp\\Handler\\StreamHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/StreamHandler.php',
+        'ShopMagicVendor\\GuzzleHttp\\Handler\\TlsVersion' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/TlsVersion.php',
         'ShopMagicVendor\\GuzzleHttp\\MessageFormatter' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/MessageFormatter.php',
         'ShopMagicVendor\\GuzzleHttp\\MessageFormatterInterface' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/MessageFormatterInterface.php',
         'ShopMagicVendor\\GuzzleHttp\\Middleware' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Middleware.php',
+        'ShopMagicVendor\\GuzzleHttp\\Multiplexing' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Multiplexing.php',
         'ShopMagicVendor\\GuzzleHttp\\Pool' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Pool.php',
         'ShopMagicVendor\\GuzzleHttp\\PrepareBodyMiddleware' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php',
         'ShopMagicVendor\\GuzzleHttp\\Promise\\AggregateException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/AggregateException.php',
@@ -1030,6 +1046,7 @@ class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
         'ShopMagicVendor\\GuzzleHttp\\Psr7\\Query' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Query.php',
         'ShopMagicVendor\\GuzzleHttp\\Psr7\\Request' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Request.php',
         'ShopMagicVendor\\GuzzleHttp\\Psr7\\Response' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Response.php',
+        'ShopMagicVendor\\GuzzleHttp\\Psr7\\Rfc3986' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Rfc3986.php',
         'ShopMagicVendor\\GuzzleHttp\\Psr7\\Rfc7230' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Rfc7230.php',
         'ShopMagicVendor\\GuzzleHttp\\Psr7\\ServerRequest' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/ServerRequest.php',
         'ShopMagicVendor\\GuzzleHttp\\Psr7\\Stream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Stream.php',
@@ -1045,6 +1062,7 @@ class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
         'ShopMagicVendor\\GuzzleHttp\\RequestOptions' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/RequestOptions.php',
         'ShopMagicVendor\\GuzzleHttp\\RetryMiddleware' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/RetryMiddleware.php',
         'ShopMagicVendor\\GuzzleHttp\\TransferStats' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/TransferStats.php',
+        'ShopMagicVendor\\GuzzleHttp\\TransportSharing' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/TransportSharing.php',
         'ShopMagicVendor\\GuzzleHttp\\Utils' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Utils.php',
         'ShopMagicVendor\\Http\\Adapter\\Guzzle7\\Client' => __DIR__ . '/../..' . '/vendor_prefixed/php-http/guzzle7-adapter/src/Client.php',
         'ShopMagicVendor\\Http\\Adapter\\Guzzle7\\Exception\\UnexpectedValueException' => __DIR__ . '/../..' . '/vendor_prefixed/php-http/guzzle7-adapter/src/Exception/UnexpectedValueException.php',
@@ -1897,10 +1915,13 @@ class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
         'ShopMagicVendor\\WPDesk_Tracker_Sender' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender.php',
         'ShopMagicVendor\\WPDesk_Tracker_Sender_Exception_WpError' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/Exception/class-wpdesk-tracker-sender-exception-wperror.php',
         'ShopMagicVendor\\WPDesk_Tracker_Sender_Logged' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender-logged.php',
+        'ShopMagicVendor\\WPDesk_Tracker_Sender_Resolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender-resolver.php',
         'ShopMagicVendor\\WPDesk_Tracker_Sender_Wordpress_To_WPDesk' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender-wordpress-to-wpdesk.php',
         'ShopMagicVendor\\WPDesk_Translable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Translable.php',
         'ShopMagicVendor\\WPDesk_Translatable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Translatable.php',
         'Stringable' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
+        'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
         'UnhandledMatchError' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'WPDesk\\Dashboard\\DashboardWidget' => __DIR__ . '/..' . '/wpdesk/ltv-dashboard-widget/src/DashboardWidget.php',
@@ -2490,9 +2511,9 @@ class ComposerStaticInitbe44473efadbf70f686af6ebf09203a5
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitbe44473efadbf70f686af6ebf09203a5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitbe44473efadbf70f686af6ebf09203a5::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitbe44473efadbf70f686af6ebf09203a5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit2b304290df9de6459710baabfc1e89d3::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit2b304290df9de6459710baabfc1e89d3::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit2b304290df9de6459710baabfc1e89d3::$classMap;
 
         }, null, ClassLoader::class);
     }

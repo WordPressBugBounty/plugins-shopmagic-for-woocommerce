@@ -2,6 +2,7 @@
   <FieldWrapper v-bind="controlWrapper">
     <Editor
       :init="{
+        base_url: 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.6.0',
         plugins: [
           'table',
           'nonbreaking',
@@ -61,8 +62,8 @@
         entity_encoding: 'raw',
         file_picker_callback: filePickerCb,
         promotion: false,
-        license_key: 'gpl',
       }"
+      license-key="gpl"
       :model-value="control.data"
       class="w-full"
       tinymce-script-src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.6.0/tinymce.min.js"

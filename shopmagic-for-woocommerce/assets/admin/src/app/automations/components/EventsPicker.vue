@@ -51,7 +51,7 @@ function updateData({ data /** errors */ }) {
   });
 }
 
-const { search, matches, renderLabel, renderTag } = useFuzzySearch(props.events);
+const { search, matches, renderLabel, renderTag } = useFuzzySearch(toRef(props, "events"));
 </script>
 <template>
   <EditableCard :hide-default="false" :title="__('Event', 'shopmagic-for-woocommerce')">
