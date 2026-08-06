@@ -17,7 +17,7 @@ final class PostAuthor extends PostBasedPlaceholder {
 
 	public function value( array $parameters ): string {
 		if ( $this->resources->has( \WP_Post::class ) ) {
-			$post = $this->resources->get( \WP_Post::class );
+			$post   = $this->resources->get( \WP_Post::class );
 			$author = get_userdata( $post->post_author );
 			return $author ? $author->display_name : '';
 		}

@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.8.7] - 2026-08-06
+### Fixed
+- Fixed hardcoded database table prefix in migration files.
+
 ## [4.8.6] - 2026-07-22
 ### Fixed
 - TinyMCE editor not loading in the email action when using WordPress 7.0.

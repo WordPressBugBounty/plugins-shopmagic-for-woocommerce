@@ -22,7 +22,7 @@ class MultipleInputTextFieldNormalizer extends JsonSchemaFieldNormalizer {
 		return array_merge(
 			parent::normalize( $object ),
 			[
-				'type' => 'object',
+				'type'                 => 'object',
 				'additionalProperties' => [
 					'type' => 'string',
 				],

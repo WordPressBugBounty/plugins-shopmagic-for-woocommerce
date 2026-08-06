@@ -23,7 +23,7 @@ class GuestNormalizer implements Normalizer {
 								return [ $m->get_meta_key(), $m->get_meta_value() ];
 					}
 				)
-						->to_array();
+					->to_array();
 
 		return [
 			'id'         => $object->get_raw_id(),

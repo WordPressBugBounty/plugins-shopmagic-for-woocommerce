@@ -37,7 +37,6 @@ final class CompoundType implements ComparisonType {
 
 	public function get_fields(): array {
 		return [
-			// @phpstan-ignore method.notFound
 			( new SelectField() )
 				->set_name( self::CONDITION_KEY )
 				->set_options( $this->get_conditions() ),

@@ -62,5 +62,4 @@ final class PostPublished extends PostCommonEvent {
 				->set_default_value( 'post' ),
 		];
 	}
-
 }

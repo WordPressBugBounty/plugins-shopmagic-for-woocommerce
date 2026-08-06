@@ -26,6 +26,17 @@ class CurlFactory implements CurlFactoryInterface
     public const CURL_VERSION_STR = 'curl_version';
     private const DELEGATED_PROXY_TUNNEL_OWNER = 'proxy-tunnel:delegated-to-libcurl';
     /**
+     * String-valued proxy credential cURL options whose values feed the
+     * connection-reuse section signatures. Stringable values are cast
+     * exactly once, before signature computation, so the signature and
+     * ext-curl observe the same string; a stateful __toString() could
+     * otherwise produce one value for the signature and a different one on
+     * the wire, giving two credentials the same section. Numeric options
+     * (CURLOPT_PROXYTYPE, CURLOPT_PROXY_SSLVERSION) and blob options
+     * (CURLOPT_PROXY_SSLCERT_BLOB) are deliberately excluded.
+     */
+    private const STRINGABLE_PROXY_CREDENTIAL_OPTIONS = ['CURLOPT_PROXYUSERPWD', 'CURLOPT_PROXYUSERNAME', 'CURLOPT_PROXYPASSWORD', 'CURLOPT_PROXY_SSLCERT', 'CURLOPT_PROXY_SSLKEY', 'CURLOPT_PROXY_KEYPASSWD', 'CURLOPT_PROXY_TLSAUTH_USERNAME', 'CURLOPT_PROXY_TLSAUTH_PASSWORD'];
+    /**
      * @deprecated
      */
     public const LOW_CURL_VERSION_NUMBER = '7.21.2';
@@ -55,13 +66,31 @@ class CurlFactory implements CurlFactoryInterface
      */
     private $shareMode;
     /**
-     * @param int                            $maxHandles  Maximum number of idle handles.
-     * @param resource|\CurlShareHandle|null $shareHandle
+     * @var bool Whether the configured share handle may own a connection
+     *           cache populated outside this factory
+     */
+    private $opaqueShareConnectionCache = \false;
+    /**
+     * @param int                                                 $maxHandles  Maximum number of idle handles.
+     * @param resource|\CurlShareHandle|CurlShareHandleState|null $shareHandle
      */
     public function __construct(int $maxHandles, string $shareMode = TransportSharing::NONE, $shareHandle = null)
     {
         $this->maxHandles = $maxHandles;
         $this->shareMode = CurlShareHandleState::normalizeMode($shareMode, 'transport_sharing');
+        if ($shareHandle instanceof CurlShareHandleState) {
+            if ($shareHandle->mode !== $this->shareMode) {
+                throw new \InvalidArgumentException('The cURL share handle state mode does not match the configured transport sharing mode.');
+            }
+            // A Guzzle-created handler-lifetime state locks only DNS and TLS
+            // session data, so its handle can never own a connection cache.
+            $shareHandle = $shareHandle->handle;
+        } elseif ($shareHandle !== null) {
+            // An externally supplied handle's lock set and cached contents
+            // cannot be inspected from PHP, so it may own a connection cache
+            // populated outside this factory.
+            $this->opaqueShareConnectionCache = \true;
+        }
         if ($this->shareMode === TransportSharing::NONE && $shareHandle !== null) {
             throw new \InvalidArgumentException('A cURL share handle cannot be provided when transport sharing is disabled.');
         }
@@ -86,6 +115,9 @@ class CurlFactory implements CurlFactoryInterface
     public function create(RequestInterface $request, array $options): EasyHandle
     {
         self::validateRequestUriScheme($request);
+        if (isset($options['on_trailers']) && !\is_callable($options['on_trailers'])) {
+            throw new \InvalidArgumentException('on_trailers must be callable');
+        }
         $protocolVersion = $request->getProtocolVersion();
         if ('' === $protocolVersion) {
             \ShopMagicVendor\trigger_deprecation('guzzlehttp/guzzle', '7.11', 'Sending a request with an empty protocol version is deprecated; guzzlehttp/guzzle 8.0 will reject empty protocol versions.');
@@ -93,9 +125,21 @@ class CurlFactory implements CurlFactoryInterface
             $request = Psr7\Utils::modifyRequest($request, ['version' => $protocolVersion]);
         }
         $multiplex = self::normalizeMultiplex($options);
+        $requiredMultiplex = \in_array($multiplex, [Multiplexing::REQUIRE_EAGER, Multiplexing::REQUIRE_WAIT], \true);
+        if ($requiredMultiplex && isset($options['curl']) && \is_array($options['curl'])) {
+            $requiredModeConflicts = [\CURLOPT_HTTP_VERSION => ['CURLOPT_HTTP_VERSION', 'the request protocol version'], \CURLOPT_URL => ['CURLOPT_URL', 'the request URI'], \CURLOPT_FOLLOWLOCATION => ['CURLOPT_FOLLOWLOCATION', 'the "allow_redirects" request option']];
+            foreach ($requiredModeConflicts as $option => [$name, $replacement]) {
+                if (\array_key_exists($option, $options['curl'])) {
+                    // Key presence alone conflicts: whatever the raw value,
+                    // it is a second authority over the protocol or route,
+                    // applied after the required mode's decisions.
+                    throw new \InvalidArgumentException(\sprintf('The "multiplex" request option cannot be required when the raw %s cURL option is set; remove the raw option and use %s instead.', $name, $replacement));
+                }
+            }
+        }
         if ('2' === $protocolVersion || '2.0' === $protocolVersion) {
             if (!CurlVersion::supportsHttp2()) {
-                if (\in_array($multiplex, [Multiplexing::REQUIRE_EAGER, Multiplexing::REQUIRE_WAIT], \true)) {
+                if ($requiredMultiplex) {
                     throw new ConnectException('Required multiplexing needs libcurl 8.14.0 or newer built with HTTP/2 support.', $request);
                 }
                 throw new ConnectException('HTTP/2 is supported by the cURL handler, however libcurl is built without HTTP/2 support.', $request);
@@ -108,9 +152,16 @@ class CurlFactory implements CurlFactoryInterface
             unset($options['curl']['body_as_string']);
         }
         self::triggerUnsupportedRequestOptionDeprecations($options);
-        $this->rejectRequestLevelShareConflict($options);
         self::triggerUnsupportedCurlOptionDeprecations($options);
         self::triggerConflictingCurlOptionDeprecations($options);
+        // Capture the managed Proxy-Authorization values before header
+        // serialization so they never enter the origin header list, and
+        // record whether a deprecated raw CURLOPT_HTTPHEADER value replaces
+        // every generated header, the managed values included. Key presence
+        // alone replaces: an empty or null raw value still suppresses the
+        // generated list.
+        $managedProxyAuthorization = self::managedProxyAuthorizationHeaderLines($request);
+        $rawHttpHeadersReplaceManaged = isset($options['curl']) && \is_array($options['curl']) && \array_key_exists(\CURLOPT_HTTPHEADER, $options['curl']);
         $easy = new EasyHandle();
         $easy->request = $request;
         $easy->options = $options;
@@ -123,14 +174,27 @@ class CurlFactory implements CurlFactoryInterface
         if (isset($options['curl'])) {
             $conf = \array_replace($conf, $options['curl']);
         }
+        self::assertFinalProxyOptionTypes($conf, $requiredMultiplex && 'https' !== $request->getUri()->getScheme());
+        self::isolatePreProxyOnAffectedCurl($conf);
+        self::normalizeStringableProxyCredentialOptions($conf);
+        if ($requiredMultiplex) {
+            self::assertRequiredMultiplexRouteDirect($easy, $conf);
+            self::assertRequiredMultiplexAuthSupported($conf);
+        }
         self::normalizeCurlHeaderOptions($conf);
         self::applyProxyAuthorizationHeaderHandling($request, $conf);
+        self::applyManagedProxyAuthorization($request, $conf, $managedProxyAuthorization, $rawHttpHeadersReplaceManaged);
+        // Validate the appended managed lines too: a custom RequestInterface
+        // can bypass a normal PSR-7 implementation's header validation.
+        self::normalizeCurlHeaderOptions($conf);
+        $this->rejectRequestLevelShareConflict($options);
         self::rejectRequestLevelShareWithProxyAuth($request, $options, $conf);
         if ($this->shareHandle !== null) {
             // Conservative blanket mode: a configured share handle hides the
             // pooled connections' provenance, so sectioned reuse cannot reason
             // about them.
             self::forceFreshConnectionForAuthenticatedProxy($request, $conf);
+            $this->isolateOpaqueShareAnonymousProxyTunnel($request, $conf);
         } else {
             $signature = self::proxyTunnelSignature($request, $conf);
             $easy->proxyTunnelSignature = $signature;
@@ -192,6 +256,28 @@ class CurlFactory implements CurlFactoryInterface
             }
         }
     }
+    /**
+     * @param array<int|string, mixed> $conf
+     */
+    private static function normalizeStringableProxyCredentialOptions(array &$conf): void
+    {
+        foreach (self::STRINGABLE_PROXY_CREDENTIAL_OPTIONS as $name) {
+            if (!\defined($name)) {
+                continue;
+            }
+            $option = (int) \constant($name);
+            if (!isset($conf[$option]) || !\is_object($conf[$option]) || !\method_exists($conf[$option], '__toString')) {
+                continue;
+            }
+            try {
+                $conf[$option] = (string) $conf[$option];
+            } catch (\Throwable $e) {
+                // Wrap the failure exactly as applyCurlOptions() does for a
+                // value that cannot be applied.
+                throw new \InvalidArgumentException(\sprintf('Unable to set cURL option %s: %s', self::formatCurlOption($option), $e->getMessage()), 0, $e);
+            }
+        }
+    }
     private function rejectRequestLevelShareConflict(array $options): void
     {
         if ($this->shareHandle === null) {
@@ -210,7 +296,7 @@ class CurlFactory implements CurlFactoryInterface
             // is written and no guarantees apply.
             return null;
         }
-        if (!\in_array($multiplex, [Multiplexing::EAGER, Multiplexing::WAIT, Multiplexing::REQUIRE_EAGER, Multiplexing::REQUIRE_WAIT], \true)) {
+        if (!\in_array($multiplex, [Multiplexing::NONE, Multiplexing::EAGER, Multiplexing::WAIT, Multiplexing::REQUIRE_EAGER, Multiplexing::REQUIRE_WAIT], \true)) {
             throw new \InvalidArgumentException(\sprintf('The "multiplex" option must be null or a GuzzleHttp\Multiplexing::* constant; received %s.', \get_debug_type($multiplex)));
         }
         return $multiplex;
@@ -220,15 +306,74 @@ class CurlFactory implements CurlFactoryInterface
         if (!CurlVersion::supportsRequiredMultiplex()) {
             throw new ConnectException('Required multiplexing needs libcurl 8.14.0 or newer built with HTTP/2 support.', $easy->request);
         }
-        if ('https' !== $easy->request->getUri()->getScheme() && self::proxyAppliesTo($easy)) {
+    }
+    /**
+     * Required multiplexing sends cleartext requests with HTTP/2 prior
+     * knowledge, which an HTTP proxy hop silently downgrades, so the request
+     * must reach the origin directly. The check runs against the final
+     * merged cURL configuration because deprecated raw proxy options are
+     * applied after Guzzle's own decisions and may add, replace, or disable
+     * the selected proxy. Value types that ext-curl would coerce are
+     * rejected as ambiguous, and only the exact CURLOPT_NOPROXY wildcard '*'
+     * counts as disabling the primary proxy and pre-proxy: host-specific
+     * patterns are conservatively treated as leaving them active.
+     *
+     * @param array<int|string, mixed> $conf
+     */
+    private static function assertRequiredMultiplexRouteDirect(EasyHandle $easy, array $conf): void
+    {
+        if ('https' === $easy->request->getUri()->getScheme()) {
+            return;
+        }
+        $proxyOptions = [\CURLOPT_PROXY => 'CURLOPT_PROXY'];
+        if (\defined('CURLOPT_NOPROXY')) {
+            $proxyOptions[(int) \constant('CURLOPT_NOPROXY')] = 'CURLOPT_NOPROXY';
+        }
+        if (\defined('CURLOPT_PRE_PROXY')) {
+            $proxyOptions[(int) \constant('CURLOPT_PRE_PROXY')] = 'CURLOPT_PRE_PROXY';
+        }
+        foreach ($proxyOptions as $option => $name) {
+            if (\array_key_exists($option, $conf) && !\is_string($conf[$option])) {
+                throw new \InvalidArgumentException(\sprintf('The "multiplex" request option cannot be required when the final %s cURL option value is not a string.', $name));
+            }
+        }
+        if (\defined('CURLOPT_NOPROXY') && ($conf[(int) \constant('CURLOPT_NOPROXY')] ?? null) === '*') {
+            // libcurl's exact wildcard disables the primary proxy and the
+            // pre-proxy together, leaving a direct route.
+            return;
+        }
+        if (self::getEffectiveProxy($conf) !== null || \defined('CURLOPT_PRE_PROXY') && ($conf[(int) \constant('CURLOPT_PRE_PROXY')] ?? '') !== '') {
             throw new ConnectException('Required multiplexing cannot be guaranteed for cleartext requests sent through a proxy.', $easy->request);
         }
     }
-    private static function proxyAppliesTo(EasyHandle $easy): bool
+    /**
+     * libcurl forces NTLM-authenticated transfers onto HTTP/1.1: when the
+     * server picks NTLM from the offered mask, the connection is closed and
+     * the request is retried over HTTP/1.1 whatever HTTP version was asked
+     * for, silently defeating the required protocol guarantee on both
+     * cleartext and TLS routes. The final merged mask is checked so the
+     * deprecated "auth" request option and the raw CURLOPT_HTTPAUTH cURL
+     * option are both covered, and any mask permitting NTLM, such as
+     * CURLAUTH_ANY, is rejected because the selection is server-controlled.
+     *
+     * @param array<int|string, mixed> $conf
+     */
+    private static function assertRequiredMultiplexAuthSupported(array $conf): void
     {
-        [$proxyConf] = self::resolveProxy($easy->request, $easy->options);
-        self::assertResolvedProxySupported($easy->request, $proxyConf);
-        return \is_string($proxyConf) && $proxyConf !== '';
+        if (!\array_key_exists(\CURLOPT_HTTPAUTH, $conf)) {
+            return;
+        }
+        $auth = $conf[\CURLOPT_HTTPAUTH];
+        if (!\is_scalar($auth)) {
+            throw new \InvalidArgumentException('The "multiplex" request option cannot be required when the final CURLOPT_HTTPAUTH cURL option value is not an integer.');
+        }
+        $ntlmBits = \CURLAUTH_NTLM;
+        if (\defined('CURLAUTH_NTLM_WB')) {
+            $ntlmBits |= (int) \constant('CURLAUTH_NTLM_WB');
+        }
+        if (((int) $auth & $ntlmBits) !== 0) {
+            throw new \InvalidArgumentException('The "multiplex" request option cannot be required when the final CURLOPT_HTTPAUTH cURL option value permits NTLM; libcurl retries NTLM authentication over HTTP/1.1.');
+        }
     }
     /**
      * @param mixed $proxyConf
@@ -292,14 +437,28 @@ class CurlFactory implements CurlFactoryInterface
             return;
         }
         // An external share handle may pool SOCKS connections where no section
-        // signature can reach them, so authenticated SOCKS state is rejected.
-        if (self::isSocksProxy($proxy, $conf) && self::hasAuthenticatedSocksProxyState($proxy, $conf)) {
-            throw new \InvalidArgumentException('The request-level CURLOPT_SHARE cURL option cannot be combined with authenticated SOCKS proxy configuration; use Guzzle-managed "transport_sharing" or a custom handler/factory instead.');
+        // signature can reach them. On affected libcurl, even an anonymous
+        // request could inherit authenticated state already in that pool.
+        if (self::isSocksProxy($proxy, $conf)) {
+            if (!CurlVersion::supportsSocksProxyCredentialAwareConnectionReuse()) {
+                throw new \InvalidArgumentException('The request-level CURLOPT_SHARE cURL option cannot be combined with SOCKS proxy configuration on libcurl before 7.69.0; use Guzzle-managed "transport_sharing" or a custom handler/factory instead.');
+            }
+            if (self::hasAuthenticatedSocksProxyState($proxy, $conf)) {
+                throw new \InvalidArgumentException('The request-level CURLOPT_SHARE cURL option cannot be combined with authenticated SOCKS proxy configuration; use Guzzle-managed "transport_sharing" or a custom handler/factory instead.');
+            }
         }
-        if (!self::usesProxyTunnel($request, $conf) || !self::isHttpProxyForConnectionReuse($proxy, $conf) || !self::hasAuthenticatedHttpProxyState($proxy, $conf)) {
+        if (!self::usesProxyTunnel($request, $conf) || !self::isHttpProxyForConnectionReuse($proxy, $conf)) {
             return;
         }
-        throw new \InvalidArgumentException('The request-level CURLOPT_SHARE cURL option cannot be combined with authenticated HTTP/HTTPS proxy tunnel configuration; use Guzzle-managed "transport_sharing" or a custom handler/factory instead.');
+        if (self::hasAuthenticatedHttpProxyState($proxy, $conf)) {
+            throw new \InvalidArgumentException('The request-level CURLOPT_SHARE cURL option cannot be combined with authenticated HTTP/HTTPS proxy tunnel configuration; use Guzzle-managed "transport_sharing" or a custom handler/factory instead.');
+        }
+        // From libcurl 7.57.0 the external share can also own a connection
+        // cache seeded outside Guzzle with tunnel identity libcurl cannot
+        // key, so anonymous tunnels are rejected there too.
+        if (CurlVersion::supportsShareConnectionCaches()) {
+            throw new \InvalidArgumentException('The request-level CURLOPT_SHARE cURL option cannot be combined with HTTP/HTTPS proxy tunnel configuration on libcurl 7.57.0 or newer; use Guzzle-managed "transport_sharing" or a custom handler/factory instead.');
+        }
     }
     private static function hasRequestLevelCurlShare(array $options): bool
     {
@@ -374,6 +533,9 @@ class CurlFactory implements CurlFactoryInterface
     {
         if (!isset($options['curl']) || !\is_array($options['curl']) || $options['curl'] === []) {
             return;
+        }
+        if (\defined('CURLOPT_PROXYHEADER') && \array_key_exists((int) \constant('CURLOPT_PROXYHEADER'), $options['curl']) && !CurlVersion::supportsProxyHeaderSeparation()) {
+            \ShopMagicVendor\trigger_deprecation('guzzlehttp/guzzle', '7.15', \sprintf('Passing %s in the "curl" request option on a build without proxy header separation support is deprecated; guzzlehttp/guzzle 8.0 will reject this configuration because proxy headers require libcurl 7.37.0 or newer built with proxy header separation support.', self::formatCurlOption((int) \constant('CURLOPT_PROXYHEADER'))));
         }
         $supportedOptions = self::supportedCurlOptions();
         $conflictingOptions = self::conflictingCurlOptions();
@@ -597,7 +759,16 @@ class CurlFactory implements CurlFactoryInterface
     public static function finish(callable $handler, EasyHandle $easy, CurlFactoryInterface $factory): PromiseInterface
     {
         if (isset($easy->options['on_stats'])) {
-            self::invokeStats($easy);
+            try {
+                self::invokeStats($easy);
+            } catch (\Throwable $e) {
+                try {
+                    $factory->release($easy);
+                } catch (\Throwable $releaseFailure) {
+                    // Keep the on_stats throwable as the visible failure.
+                }
+                throw $e;
+            }
         }
         if (!$easy->response || $easy->errno) {
             return self::finishError($handler, $easy, $factory);
@@ -611,7 +782,7 @@ class CurlFactory implements CurlFactoryInterface
         }
         if (isset($easy->options['on_trailers'])) {
             try {
-                $easy->options['on_trailers'](Utils::headersFromLines($easy->trailers), $easy->response);
+                $easy->options['on_trailers'](self::headersFromTrailerLines($easy->trailers), $easy->response);
             } catch (\Throwable $e) {
                 return P\Create::rejectionFor(new RequestException('An error was encountered during the on_trailers event', $easy->request, $easy->response, $e));
             }
@@ -643,6 +814,10 @@ class CurlFactory implements CurlFactoryInterface
     private static function createRejection(EasyHandle $easy, array $ctx): PromiseInterface
     {
         static $connectionErrors = [\CURLE_OPERATION_TIMEOUTED => \true, \CURLE_COULDNT_RESOLVE_HOST => \true, \CURLE_COULDNT_CONNECT => \true, \CURLE_SSL_CONNECT_ERROR => \true, \CURLE_GOT_NOTHING => \true];
+        $uri = $easy->request->getUri();
+        // Redact the native error before it reaches any exception so the
+        // handler context matches the sanitized exception message.
+        $ctx['error'] = self::sanitizeCurlError((string) ($ctx['error'] ?? ''), $uri, $easy->effectiveProxy);
         if ($easy->createResponseException) {
             return P\Create::rejectionFor(new RequestException('An error was encountered while creating the response', $easy->request, null, $easy->createResponseException, $ctx));
         }
@@ -651,8 +826,7 @@ class CurlFactory implements CurlFactoryInterface
         if ($easy->onHeadersException) {
             return P\Create::rejectionFor(new RequestException('An error was encountered during the on_headers event', $easy->request, $easy->response, $easy->onHeadersException, $ctx));
         }
-        $uri = $easy->request->getUri();
-        $sanitizedError = self::sanitizeCurlError($ctx['error'] ?? '', $uri, $easy->effectiveProxy);
+        $sanitizedError = $ctx['error'];
         $message = \sprintf('cURL error %s: %s (%s)', $ctx['errno'], $sanitizedError, 'see https://curl.se/libcurl/c/libcurl-errors.html');
         if ('' !== $sanitizedError) {
             $redactedUriString = Psr7\Utils::redactUserInfo($uri)->__toString();
@@ -684,27 +858,27 @@ class CurlFactory implements CurlFactoryInterface
             return $error;
         }
         // The error message embeds the proxy string exactly as configured, so
-        // the userinfo needle is taken verbatim from the raw authority (up to
-        // the last '@' before any path, query, or fragment): parse_url() and
-        // Psr7\Uri normalize the components, e.g. by rewriting raw control
-        // bytes to '_', which could make the replacement miss.
+        // the userinfo needle is taken verbatim from the raw string:
+        // parse_url() and Psr7\Uri normalize the components, e.g. by rewriting
+        // raw control bytes to '_', which could make the replacement miss.
         $proxyForParsing = \strpos($proxy, '://') === \false ? 'http://' . $proxy : $proxy;
         $remainder = \substr($proxyForParsing, \strpos($proxyForParsing, '://') + 3);
-        $authority = \substr($remainder, 0, \strcspn($remainder, '/?#'));
-        $atPosition = \strrpos($authority, '@');
-        if ($atPosition === \false || $atPosition === 0) {
-            // The last '@' sits past a raw '/', '?', or '#': not userinfo in
-            // a parseable proxy URL, but a proxy that defeats parse_url() may
-            // carry the separator inside its credentials, so everything up to
-            // the last '@' is redacted as a safe-side fallback.
-            if (\parse_url($proxyForParsing) !== \false) {
-                return $error;
-            }
+        if (\parse_url($proxyForParsing) === \false) {
+            // Raw '/', '?', or '#' separators may sit inside the credentials
+            // of a proxy that defeats parse_url(), so the redaction cannot
+            // stop at the apparent authority.
             $atPosition = \strrpos($remainder, '@');
             if ($atPosition === \false || $atPosition === 0) {
                 return $error;
             }
             return \str_replace(\substr($remainder, 0, $atPosition) . '@', '***@', $error);
+        }
+        $authority = \substr($remainder, 0, \strcspn($remainder, '/?#'));
+        $atPosition = \strrpos($authority, '@');
+        if ($atPosition === \false || $atPosition === 0) {
+            // A parseable proxy URL with '@' only past its authority, or with
+            // an empty userinfo, carries no credentials to redact.
+            return $error;
         }
         $rawUserInfo = \substr($authority, 0, $atPosition);
         // Redact with the same policy Psr7\Utils::redactUserInfo() applies to
@@ -728,6 +902,63 @@ class CurlFactory implements CurlFactoryInterface
     {
         $proxy = self::getEffectiveProxy($conf);
         if ($proxy === null || !self::requiresFreshConnectionForAuthenticatedProxy($request, $proxy, $conf)) {
+            return;
+        }
+        $conf[\CURLOPT_FRESH_CONNECT] = \true;
+        $conf[\CURLOPT_FORBID_REUSE] = \true;
+    }
+    /**
+     * @param array<int|string, mixed> $conf
+     */
+    private function isolateOpaqueShareAnonymousProxyTunnel(RequestInterface $request, array &$conf): void
+    {
+        if (!$this->opaqueShareConnectionCache || !CurlVersion::supportsShareConnectionCaches()) {
+            return;
+        }
+        $proxy = self::getEffectiveProxy($conf);
+        if ($proxy === null || !self::usesProxyTunnel($request, $conf) || !self::isHttpProxyForConnectionReuse($proxy, $conf) || self::hasAuthenticatedHttpProxyState($proxy, $conf)) {
+            return;
+        }
+        // From libcurl 7.57.0 an opaque share handle can own a connection
+        // cache, and a tunnel seeded there with a literal Proxy-Authorization
+        // header is never keyed on credentials, so an anonymous request could
+        // inherit it on every later libcurl version. Requests carrying
+        // recognized credential state keep the version-gated channel
+        // safeguards above.
+        $conf[\CURLOPT_FRESH_CONNECT] = \true;
+        $conf[\CURLOPT_FORBID_REUSE] = \true;
+    }
+    /**
+     * @param array<int|string, mixed> $conf
+     */
+    private static function assertFinalProxyOptionTypes(array $conf, bool $requiredCleartextMultiplex): void
+    {
+        if (\array_key_exists(\CURLOPT_PROXYTYPE, $conf) && !\is_int($conf[\CURLOPT_PROXYTYPE])) {
+            throw new \InvalidArgumentException('CURLOPT_PROXYTYPE must be an integer.');
+        }
+        foreach (['CURLOPT_PROXY', 'CURLOPT_NOPROXY', 'CURLOPT_PRE_PROXY'] as $name) {
+            if (!\defined($name)) {
+                continue;
+            }
+            $option = (int) \constant($name);
+            if (\array_key_exists($option, $conf) && !\is_string($conf[$option])) {
+                if ($requiredCleartextMultiplex) {
+                    throw new \InvalidArgumentException(\sprintf('The "multiplex" request option cannot be required when the final %s cURL option value is not a string.', $name));
+                }
+                throw new \InvalidArgumentException($name . ' must be a string.');
+            }
+        }
+    }
+    /**
+     * @param array<int|string, mixed> $conf
+     */
+    private static function isolatePreProxyOnAffectedCurl(array &$conf): void
+    {
+        if (CurlVersion::supportsSocksProxyCredentialAwareConnectionReuse() || !\defined('CURLOPT_PRE_PROXY')) {
+            return;
+        }
+        $option = (int) \constant('CURLOPT_PRE_PROXY');
+        if (!\array_key_exists($option, $conf) || $conf[$option] === '') {
             return;
         }
         $conf[\CURLOPT_FRESH_CONNECT] = \true;
@@ -790,7 +1021,7 @@ class CurlFactory implements CurlFactoryInterface
     private static function proxyScheme(string $proxy): ?string
     {
         $position = \strpos($proxy, '://');
-        return $position === \false ? null : \strtolower(\substr($proxy, 0, $position));
+        return $position === \false ? null : Psr7\Utils::asciiToLower(\substr($proxy, 0, $position));
     }
     /**
      * @param array<int|string, mixed> $conf
@@ -798,12 +1029,11 @@ class CurlFactory implements CurlFactoryInterface
     private static function requiresFreshConnectionForAuthenticatedProxy(RequestInterface $request, string $proxy, array $conf): bool
     {
         // SOCKS authentication binds an identity to the connection itself, and
-        // below 7.69.0 the easy and multi handle pools match a SOCKS proxy
-        // credential-blind, so an authenticated SOCKS request is isolated onto
-        // a fresh non-reusable connection; FORBID_REUSE keeps it out of every
-        // pool, so anonymous requests cannot inherit it and need no forcing.
+        // below 7.69.0 an opaque configured share may already contain a SOCKS
+        // connection whose credential state Guzzle cannot inspect. Isolate
+        // authenticated and anonymous requests so neither can inherit it.
         if (self::isSocksProxy($proxy, $conf)) {
-            return !CurlVersion::supportsSocksProxyCredentialAwareConnectionReuse() && self::hasAuthenticatedSocksProxyState($proxy, $conf);
+            return !CurlVersion::supportsSocksProxyCredentialAwareConnectionReuse();
         }
         if (!self::usesProxyTunnel($request, $conf) || !self::isHttpProxyForConnectionReuse($proxy, $conf)) {
             return \false;
@@ -881,7 +1111,7 @@ class CurlFactory implements CurlFactoryInterface
             if (!\is_array($proxyParts) || !isset($proxyParts['scheme'])) {
                 return \false;
             }
-            $proxyScheme = \strtolower($proxyParts['scheme']);
+            $proxyScheme = Psr7\Utils::asciiToLower($proxyParts['scheme']);
             return $proxyScheme === 'http' || $proxyScheme === 'https';
         }
         return !self::isSocksProxyType($conf[\CURLOPT_PROXYTYPE] ?? null);
@@ -1010,6 +1240,46 @@ class CurlFactory implements CurlFactoryInterface
         }
     }
     /**
+     * Routes the managed first-class Proxy-Authorization values to libcurl's
+     * proxy-only header channel, independently of Guzzle's proxy prediction:
+     * libcurl alone decides whether the proxy-only list is used for the
+     * actual transfer, so the credential can never reach an origin through
+     * CURLOPT_HTTPHEADER. Without proxy header separation support, values are
+     * safely omitted on known direct, bypassed, and SOCKS routes; a route that
+     * may use an HTTP(S) proxy is rejected before cURL initialization and
+     * network I/O. A deprecated raw CURLOPT_HTTPHEADER replacement suppresses
+     * every generated header, the managed values included.
+     *
+     * @param array<int|string, mixed> $conf
+     * @param list<string>             $headers
+     */
+    private static function applyManagedProxyAuthorization(RequestInterface $request, array &$conf, array $headers, bool $rawHttpHeadersReplaceManaged): void
+    {
+        if ($rawHttpHeadersReplaceManaged || $headers === []) {
+            return;
+        }
+        if (!CurlVersion::supportsProxyHeaderSeparation()) {
+            $proxy = self::getEffectiveProxy($conf);
+            if ($proxy !== null && !self::isSocksProxy($proxy, $conf)) {
+                throw new RequestException('Proxy-Authorization request headers through a possible HTTP or HTTPS proxy require libcurl 7.37.0 or newer built with proxy header separation support.', $request);
+            }
+            return;
+        }
+        self::appendCurlProxyHeaders($conf, $headers);
+        $conf[(int) \constant('CURLOPT_HEADEROPT')] = (int) \constant('CURLHEADER_SEPARATE');
+    }
+    /**
+     * @return list<string>
+     */
+    private static function managedProxyAuthorizationHeaderLines(RequestInterface $request): array
+    {
+        $headers = [];
+        foreach ($request->getHeader('Proxy-Authorization') as $value) {
+            $headers[] = $value === '' ? 'Proxy-Authorization;' : 'Proxy-Authorization: ' . $value;
+        }
+        return $headers;
+    }
+    /**
      * @param array<int|string, mixed> $conf
      * @param list<string>             $headers
      */
@@ -1018,7 +1288,7 @@ class CurlFactory implements CurlFactoryInterface
         $option = (int) \constant('CURLOPT_PROXYHEADER');
         if (\array_key_exists($option, $conf)) {
             if (!\is_array($conf[$option])) {
-                throw new \InvalidArgumentException('CURLOPT_PROXYHEADER must be an array when Proxy-Authorization is migrated from CURLOPT_HTTPHEADER.');
+                throw new \InvalidArgumentException('CURLOPT_PROXYHEADER must be an array when a Proxy-Authorization request header is routed to the proxy header channel.');
             }
             $headers = \array_merge($conf[$option], $headers);
         }
@@ -1037,7 +1307,7 @@ class CurlFactory implements CurlFactoryInterface
         if ($length === \strlen($header)) {
             return \false;
         }
-        return 0 === \strcasecmp(\trim(\substr($header, 0, $length), " \n\r\t\x00\v"), 'Proxy-Authorization');
+        return Psr7\Utils::caselessEquals(\trim(\substr($header, 0, $length), " \n\r\t\x00\v"), 'Proxy-Authorization');
     }
     private static function proxyAuthorizationHeaderValue(string $header): ?string
     {
@@ -1045,7 +1315,7 @@ class CurlFactory implements CurlFactoryInterface
         if ($position === \false) {
             return null;
         }
-        if (0 !== \strcasecmp(\trim(\substr($header, 0, $position), " \n\r\t\x00\v"), 'Proxy-Authorization')) {
+        if (!Psr7\Utils::caselessEquals(\trim(\substr($header, 0, $position), " \n\r\t\x00\v"), 'Proxy-Authorization')) {
             return null;
         }
         $value = \trim(\substr($header, $position + 1), " \n\r\t\x00\v");
@@ -1219,7 +1489,7 @@ class CurlFactory implements CurlFactoryInterface
         if (!\is_string($type) || $type === '') {
             throw new \InvalidArgumentException(\sprintf('%s must be a non-empty string', $option));
         }
-        return \strtoupper($type);
+        return Psr7\Utils::asciiToUpper($type);
     }
     private static function shouldValidateSslKeyFile(?string $type): bool
     {
@@ -1239,7 +1509,7 @@ class CurlFactory implements CurlFactoryInterface
                 $this->removeHeader('Content-Length', $conf);
             }
             $this->removeHeader('Transfer-Encoding', $conf);
-            if (\strcasecmp(\trim($easy->request->getHeaderLine('Expect'), " \n\r\t\x00\v"), '100-continue') === 0) {
+            if (Psr7\Utils::caselessEquals(\trim($easy->request->getHeaderLine('Expect'), " \n\r\t\x00\v"), '100-continue')) {
                 $this->removeHeader('Expect', $conf);
             }
             return;
@@ -1278,8 +1548,17 @@ class CurlFactory implements CurlFactoryInterface
             if ($body->isSeekable()) {
                 $body->rewind();
             }
-            $conf[\CURLOPT_READFUNCTION] = static function ($ch, $fd, $length) use ($body) {
-                return $body->read($length);
+            $remaining = $size;
+            $conf[\CURLOPT_READFUNCTION] = static function ($ch, $fd, $length) use ($body, &$remaining) {
+                if ($remaining === 0) {
+                    return '';
+                }
+                $limit = $remaining === null ? $length : \min($length, $remaining);
+                $data = $body->read($limit);
+                if ($remaining !== null) {
+                    $remaining -= \strlen($data);
+                }
+                return $data;
             };
         }
         // If the Expect header is not present, prevent curl from adding it
@@ -1294,6 +1573,16 @@ class CurlFactory implements CurlFactoryInterface
     private function applyHeaders(EasyHandle $easy, array &$conf): void
     {
         foreach ($conf['_headers'] as $name => $values) {
+            // A first-class Proxy-Authorization header is proxy-scoped and
+            // must never be generated in the origin header list; managed
+            // handling routes it to CURLOPT_PROXYHEADER or safely omits it on
+            // a legacy non-HTTP-proxy route. The
+            // caselessEquals() helper is locale-independent, unlike
+            // strcasecmp(), so a locale cannot make this match miss and
+            // re-leak the credential.
+            if (Psr7\Utils::caselessEquals((string) $name, 'Proxy-Authorization')) {
+                continue;
+            }
             foreach ($values as $value) {
                 $value = (string) $value;
                 if ($value === '') {
@@ -1319,7 +1608,7 @@ class CurlFactory implements CurlFactoryInterface
     private function removeHeader(string $name, array &$options): void
     {
         foreach (\array_keys($options['_headers']) as $key) {
-            if (!\strcasecmp((string) $key, $name)) {
+            if (Psr7\Utils::caselessEquals((string) $key, $name)) {
                 unset($options['_headers'][$key]);
                 return;
             }
@@ -1400,7 +1689,7 @@ class CurlFactory implements CurlFactoryInterface
             $timeoutRequiresNoSignal |= $options['connect_timeout'] < 1;
             $conf[\CURLOPT_CONNECTTIMEOUT_MS] = $options['connect_timeout'] * 1000;
         }
-        if ($timeoutRequiresNoSignal && \strtoupper(\substr(\PHP_OS, 0, 3)) !== 'WIN') {
+        if ($timeoutRequiresNoSignal && Psr7\Utils::asciiToUpper(\substr(\PHP_OS, 0, 3)) !== 'WIN') {
             $conf[\CURLOPT_NOSIGNAL] = \true;
         }
         // Always pin CURLOPT_PROXY (and CURLOPT_NOPROXY when available) so
@@ -1443,7 +1732,7 @@ class CurlFactory implements CurlFactoryInterface
             // see https://curl.se/libcurl/c/CURLOPT_SSLCERTTYPE.html
             $ext = pathinfo($cert, \PATHINFO_EXTENSION);
             if ($certType === null && preg_match('#^(der|p12)$#iD', $ext)) {
-                $conf[\CURLOPT_SSLCERTTYPE] = strtoupper($ext);
+                $conf[\CURLOPT_SSLCERTTYPE] = Psr7\Utils::asciiToUpper($ext);
             }
             $conf[\CURLOPT_SSLCERT] = $cert;
         }
@@ -1608,6 +1897,21 @@ class CurlFactory implements CurlFactoryInterface
         }
         return $handler($easy->request, $easy->options);
     }
+    /**
+     * Parses validated trailer field lines into an associative array keyed by
+     * lowercased field name, preserving first-occurrence key order and wire
+     * value order.
+     */
+    private static function headersFromTrailerLines(array $lines): array
+    {
+        $headers = [];
+        foreach ($lines as $line) {
+            [$name, $value] = \explode(':', $line, 2);
+            $name = Psr7\Utils::asciiToLower(\trim($name, " \n\r\t\x00\v"));
+            $headers[$name][] = \trim($value, " \n\r\t\x00\v");
+        }
+        return $headers;
+    }
     private function createHeaderFn(EasyHandle $easy): callable
     {
         if (isset($easy->options['on_headers'])) {
@@ -1620,7 +1924,8 @@ class CurlFactory implements CurlFactoryInterface
         }
         $startingResponse = \false;
         $collectingTrailers = \false;
-        return static function ($ch, $h) use ($onHeaders, $easy, &$startingResponse, &$collectingTrailers) {
+        $retainTrailers = isset($easy->options['on_trailers']);
+        return static function ($ch, $h) use ($onHeaders, $easy, &$startingResponse, &$collectingTrailers, $retainTrailers) {
             $value = \trim($h, " \n\r\t\x00\v");
             if ($h === "\r\n" || $h === "\n" || $h === "\r" || $h === '') {
                 if ($collectingTrailers) {
@@ -1652,7 +1957,7 @@ class CurlFactory implements CurlFactoryInterface
                     // the body; a new header block always begins with a status
                     // line.
                     $collectingTrailers = \true;
-                    if (HeaderProcessor::isValidHeaderFieldLine($h)) {
+                    if ($retainTrailers && HeaderProcessor::isValidHeaderFieldLine($h)) {
                         $easy->trailers[] = $value;
                     }
                 } else {

@@ -4,7 +4,7 @@ Plugin Name: ShopMagic for WooCommerce
 Plugin URI: https://shopmagic.app/sk/shopmagic-for-woocommerce-plugin/
 Description: Marketing Automation and Custom Email Designer for WooCommerce
 Author: WP Desk
-Version: 4.8.6
+Version: 4.8.7
 Author URI: https://shopmagic.app/sk/shopmagic-for-woocommerce-author/
 Text Domain: shopmagic-for-woocommerce
 Domain Path: /lang/
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 /* THESE VARIABLES CAN BE CHANGED AUTOMATICALLY */
-$plugin_version = '4.8.6';
+$plugin_version = '4.8.7';
 
 if ( ! defined( 'SHOPMAGIC_VERSION' ) ) {
 	define( 'SHOPMAGIC_VERSION', $plugin_version );

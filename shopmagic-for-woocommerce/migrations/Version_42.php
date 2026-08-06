@@ -14,17 +14,17 @@ final class Version_42 extends AbstractMigration {
 		$result = $this->wpdb->query( $sql );
 
 		$has_column = $this->wpdb->get_results(
-			"SHOW COLUMNS FROM wp_shopmagic_automation_outcome_logs WHERE Field = 'note_context';",
+			"SHOW COLUMNS FROM {$table_name} WHERE Field = 'note_context';",
 			\ARRAY_N
 		);
 
 		if ( count( $has_column ) > 0 ) {
-			return $result;
+			return $result !== false;
 		}
 
 		// We actually need to create the column.
 		$sql    = "ALTER TABLE {$table_name} ADD `note_context` TEXT";
 
-		return $result && $this->wpdb->query( $sql );
+		return $result !== false && $this->wpdb->query( $sql ) !== false;
 	}
 }

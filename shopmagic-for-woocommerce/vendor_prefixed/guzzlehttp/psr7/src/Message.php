@@ -26,7 +26,7 @@ final class Message
             throw new \InvalidArgumentException('Unknown message type');
         }
         foreach ($message->getHeaders() as $name => $values) {
-            if (is_string($name) && strtolower($name) === 'set-cookie') {
+            if (is_string($name) && Utils::asciiToLower($name) === 'set-cookie') {
                 foreach ($values as $value) {
                     $msg .= "\r\n{$name}: " . $value;
                 }
@@ -227,7 +227,7 @@ final class Message
         $hostKey = array_filter(array_keys($headers), function ($k) {
             // Numeric array keys are converted to int by PHP.
             $k = (string) $k;
-            return strtolower($k) === 'host';
+            return Utils::asciiToLower($k) === 'host';
         });
         if (!$hostKey) {
             return null;

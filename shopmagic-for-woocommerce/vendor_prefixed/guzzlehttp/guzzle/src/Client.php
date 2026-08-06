@@ -52,9 +52,19 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
      * - transport_sharing: (string|null) Transport sharing mode for the
      *   default handler. Accepts TransportSharing::* or null. Defaults to null.
      * - max_host_connections: (int|null) Maximum concurrent connections per
-     *   host for the default cURL multi handler.
-     * - max_total_connections: (int|null) Maximum concurrent connections for
-     *   the default cURL multi handler.
+     *   host, applied by the default CurlMultiHandler. The default stream
+     *   fallback receives the cap as a marker only: it rejects enabled
+     *   response streaming ("stream" => true) and does not limit overlapping
+     *   buffered calls.
+     * - max_total_connections: (int|null) Maximum concurrent connections
+     *   overall, applied by the default CurlMultiHandler. The default stream
+     *   fallback receives the cap as a marker only: it rejects enabled
+     *   response streaming ("stream" => true) and does not limit overlapping
+     *   buffered calls.
+     * - multiplex: (string|null) Multiplexing::NONE to disable multiplexing on
+     *   the default CurlMultiHandler; the value also becomes the default
+     *   "multiplex" request option. Other Multiplexing::* values act as the
+     *   default request option only.
      * - **: any request option
      *
      * @param array $config Client configuration settings.
@@ -72,6 +82,9 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
                 unset($config[$capOption]);
             }
         }
+        // Deliberately not unset: the value also becomes the default
+        // "multiplex" request option, which the configured handler accepts.
+        $handlerMultiplex = ($config['multiplex'] ?? null) === Multiplexing::NONE;
         $transportSharing = \array_key_exists('transport_sharing', $config) ? $config['transport_sharing'] : null;
         $transportSharingMode = CurlShareHandleState::normalizeMode($transportSharing, 'transport_sharing');
         unset($config['transport_sharing']);
@@ -79,11 +92,14 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
             if ($transportSharingMode !== TransportSharing::NONE) {
                 $handlerOptions['transport_sharing'] = $transportSharingMode;
             }
+            if ($handlerMultiplex) {
+                $handlerOptions['multiplex'] = Multiplexing::NONE;
+            }
             $config['handler'] = $handlerOptions === [] ? HandlerStack::create() : HandlerStack::create(Utils::chooseHandler($handlerOptions));
         } elseif (!\is_callable($config['handler'])) {
             throw new InvalidArgumentException('handler must be a callable');
         } elseif ($handlerOptions !== []) {
-            throw new InvalidArgumentException('The "max_host_connections" and "max_total_connections" client options require Guzzle to create the default handler. Configure the option on CurlMultiHandler when providing a custom handler.');
+            throw new InvalidArgumentException('The "max_host_connections" and "max_total_connections" client options require Guzzle to create the default handler. Configure the options on the CurlMultiHandler constructor to apply numeric connection caps, or on the StreamHandler constructor to reject enabled response streaming, when providing a custom handler.');
         } elseif ($transportSharingMode === TransportSharing::HANDLER_REQUIRE) {
             throw new InvalidArgumentException('The "transport_sharing" client option can only require sharing when Guzzle creates the default handler. Configure the "transport_sharing" option on CurlHandler or CurlMultiHandler when providing a custom cURL handler.');
         }
@@ -103,6 +119,7 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
      */
     public function __call($method, $args)
     {
+        \ShopMagicVendor\trigger_deprecation('guzzlehttp/guzzle', '7.1', '%s::%s() is deprecated and will be removed in 8.0.', __CLASS__, __FUNCTION__);
         if (\count($args) < 1) {
             throw new InvalidArgumentException('Magic request methods require a URI and optional options array');
         }
@@ -110,7 +127,7 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
         $opts = $args[1] ?? [];
         $isAsync = \substr($method, -5) === 'Async';
         $method = $isAsync ? \substr($method, 0, -5) : $method;
-        $method = \strtoupper($method);
+        $method = Psr7\Utils::asciiToUpper($method);
         return $isAsync ? $this->requestAsync($method, $uri, $opts) : $this->request($method, $uri, $opts);
     }
     /**
@@ -123,7 +140,7 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
     {
         // Merge the base URI into the request URI if needed.
         $options = $this->prepareDefaults($options);
-        return $this->transfer($request->withUri($this->buildUri($request->getUri(), $options), $request->hasHeader('Host')), $options);
+        return $this->transfer($request->withUri($this->buildUri($request->getUri(), $options), self::shouldPreserveHost($request)), $options);
     }
     /**
      * Send an HTTP request.
@@ -164,7 +181,7 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
      */
     public function requestAsync(string $method, $uri = '', array $options = []): PromiseInterface
     {
-        $normalizedMethod = \strtoupper($method);
+        $normalizedMethod = Psr7\Utils::asciiToUpper($method);
         if ($method !== $normalizedMethod) {
             \ShopMagicVendor\trigger_deprecation('guzzlehttp/guzzle', '7.11', 'Passing a non-uppercase HTTP method to Client::requestAsync() is deprecated; guzzlehttp/guzzle 8.0 will preserve HTTP method casing. Pass an uppercase method explicitly if uppercase is required.');
             $method = $normalizedMethod;
@@ -204,7 +221,7 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
      */
     public function request(string $method, $uri = '', array $options = []): ResponseInterface
     {
-        $normalizedMethod = \strtoupper($method);
+        $normalizedMethod = Psr7\Utils::asciiToUpper($method);
         if ($method !== $normalizedMethod) {
             \ShopMagicVendor\trigger_deprecation('guzzlehttp/guzzle', '7.11', 'Passing a non-uppercase HTTP method to Client::request() is deprecated; guzzlehttp/guzzle 8.0 will preserve HTTP method casing. Pass an uppercase method explicitly if uppercase is required.');
             $method = $normalizedMethod;
@@ -242,6 +259,26 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
         return $uri;
     }
     /**
+     * Whether to preserve an existing Host header when the URI changes.
+     *
+     * A header matching the current URI carries no explicit override and is
+     * regenerated after base URI resolution or IDN conversion. Other values
+     * are preserved as deliberate overrides, as PSR-7 requires.
+     */
+    private static function shouldPreserveHost(RequestInterface $request): bool
+    {
+        if (!$request->hasHeader('Host')) {
+            return \false;
+        }
+        $uri = $request->getUri();
+        $host = $uri->getHost();
+        $port = $uri->getPort();
+        if ($port !== null) {
+            $host .= ':' . $port;
+        }
+        return $host !== $request->getHeaderLine('Host');
+    }
+    /**
      * Configures the default options for a client.
      */
     private function configureDefaults(array $config): void
@@ -272,7 +309,7 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
             // Add the User-Agent header if one was not already set.
             $hasUserAgent = \false;
             foreach (\array_keys($this->config['headers']) as $name) {
-                if (\strtolower((string) $name) === 'user-agent') {
+                if (Psr7\Utils::asciiToLower((string) $name) === 'user-agent') {
                     $hasUserAgent = \true;
                     break;
                 }
@@ -855,7 +892,12 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
             unset($options['multipart']);
         }
         if (isset($options['json'])) {
-            $options['body'] = Utils::jsonEncode($options['json']);
+            $json = \json_encode($options['json']);
+            if (\JSON_ERROR_NONE !== \json_last_error()) {
+                throw new InvalidArgumentException('json_encode error: ' . \json_last_error_msg());
+            }
+            /** @var non-empty-string $json */
+            $options['body'] = $json;
             unset($options['json']);
             // Ensure that we don't have the header in different case and set the new value.
             $options['_conditional'] = Psr7\Utils::caselessRemove(['Content-Type'], $options['_conditional']);
@@ -875,7 +917,7 @@ class Client implements ClientInterface, \ShopMagicVendor\Psr\Http\Client\Client
         }
         if (!empty($options['auth']) && \is_array($options['auth'])) {
             $value = $options['auth'];
-            $type = isset($value[2]) ? \strtolower($value[2]) : 'basic';
+            $type = isset($value[2]) ? Psr7\Utils::asciiToLower($value[2]) : 'basic';
             switch ($type) {
                 case 'basic':
                     // Ensure that we don't have the header in different case and set the new value.

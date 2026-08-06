@@ -53,5 +53,4 @@ final class PostUpdated extends PostCommonEvent {
 				->set_default_value( 'post' ),
 		];
 	}
-
 }

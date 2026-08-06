@@ -40,10 +40,10 @@ final class SubscriptionFormShortcode implements HookProvider {
 		Renderer $renderer,
 		LoggerInterface $logger
 	) {
-		$this->repository            = $repository;
-		$this->plugin_bag            = $plugin_bag;
-		$this->renderer              = $renderer;
-		$this->logger                = $logger;
+		$this->repository = $repository;
+		$this->plugin_bag = $plugin_bag;
+		$this->renderer   = $renderer;
+		$this->logger     = $logger;
 	}
 
 	public function hooks(): void {
