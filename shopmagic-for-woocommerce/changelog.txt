@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.8.8] - 2026-08-17 
+### Added
+- Support for WordPress 7.1
+
 ## [4.8.7] - 2026-08-06
 ### Fixed
 - Fixed hardcoded database table prefix in migration files.

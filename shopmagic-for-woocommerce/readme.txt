@@ -4,9 +4,9 @@ Tags: customize woocommerce emails, follow up emails, woocommerce email customiz
 Author URL: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-author
 Donate link: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-donate
 Requires at least: 6.7
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.8.7
+Stable tag: 4.8.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -252,6 +252,9 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 37. Documentation and guidance for customizing WooCommerce emails and email marketing campaigns.
 
 == Changelog ==
+
+= 4.8.8 - 2026-08-17 =
+* Added support for WordPress 7.1
 
 = 4.8.7 - 2026-08-06
 * Fixed hardcoded database table prefix in migration files.
