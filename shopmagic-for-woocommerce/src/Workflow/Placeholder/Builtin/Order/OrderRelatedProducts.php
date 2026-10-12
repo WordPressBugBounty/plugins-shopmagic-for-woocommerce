@@ -55,8 +55,13 @@ final class OrderRelatedProducts extends WooCommerceOrderBasedPlaceholder {
 			}
 		}
 
+		$template = $parameters['template'] ?? 'comma_separated_list';
+		if ( ! $this->renderer->is_template_valid( $template ) ) {
+			$template = 'comma_separated_list';
+		}
+
 		return $this->renderer->render(
-			'placeholder/products_ordered/' . $parameters['template'] ?? 'comma_separated_list',
+			'placeholder/products_ordered/' . $template,
 			[
 				'order_items'   => $order_items,
 				'products'      => $related_products,

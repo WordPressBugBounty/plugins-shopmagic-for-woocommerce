@@ -4,21 +4,20 @@ declare(strict_types=1);
 namespace WPDesk\ShopMagic\Tracker;
 
 use WPDesk\ShopMagic\Components\HookProvider\HookProvider;
-use WPDesk\ShopMagic\Helper\PluginBag;
 
 /**
  * Tracks data about usages.
  */
 class UsageDataTracker implements HookProvider {
 
-	/** @var string */
-	private $plugin_file_name;
+	/** @var array<\WPDesk_Tracker_Data_Provider> */
+	private $providers;
 
-	/** @var array */
-	private $providers = [];
-
-	public function __construct( PluginBag $plugin_bag ) {
-		$this->plugin_file_name = $plugin_bag->get_filename();
+	/**
+	 * @param array<\WPDesk_Tracker_Data_Provider> $providers
+	 */
+	public function __construct( array $providers = [] ) {
+		$this->providers = $providers;
 	}
 
 	/**
@@ -33,19 +32,25 @@ class UsageDataTracker implements HookProvider {
 	}
 
 	public function hooks(): void {
-		$tracker_factory = new \WPDesk_Tracker_Factory();
-		/** @var \WPDesk_Tracker_Interface $tracker */
-		$tracker = $tracker_factory->create_tracker( $this->plugin_file_name );
-
-		foreach ( $this->providers as $provider ) {
-			$tracker->add_data_provider( $provider );
-		}
-
+		add_filter( 'wpdesk_tracker_data', [ $this, 'append_usage_data' ] );
 		add_filter(
 			'wpdesk_tracker_enabled',
 			static function () {
 				return true;
 			}
 		);
+	}
+
+	/**
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	public function append_usage_data( array $data ): array {
+		foreach ( $this->providers as $provider ) {
+			$data = array_merge( $data, $provider->get_data() );
+		}
+
+		return $data;
 	}
 }

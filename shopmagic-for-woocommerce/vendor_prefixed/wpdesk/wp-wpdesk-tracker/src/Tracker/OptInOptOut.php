@@ -2,8 +2,6 @@
 
 namespace ShopMagicVendor\WPDesk\Tracker;
 
-use ShopMagicVendor\WPDesk\PluginBuilder\Plugin\HookableCollection;
-use ShopMagicVendor\WPDesk\PluginBuilder\Plugin\HookableParent;
 class OptInOptOut implements HookableCollection
 {
     use HookableParent;

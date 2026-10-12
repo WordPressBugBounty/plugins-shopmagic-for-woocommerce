@@ -6,7 +6,6 @@ namespace ShopMagicVendor\DI\Definition\Resolver;
 use ShopMagicVendor\DI\Definition\ArrayDefinition;
 use ShopMagicVendor\DI\Definition\DecoratorDefinition;
 use ShopMagicVendor\DI\Definition\Definition;
-use ShopMagicVendor\DI\Definition\EnvironmentVariableDefinition;
 use ShopMagicVendor\DI\Definition\Exception\InvalidDefinition;
 use ShopMagicVendor\DI\Definition\FactoryDefinition;
 use ShopMagicVendor\DI\Definition\InstanceDefinition;
@@ -37,7 +36,6 @@ class ResolverDispatcher implements DefinitionResolver
     private $decoratorResolver;
     private $objectResolver;
     private $instanceResolver;
-    private $envVariableResolver;
     public function __construct(ContainerInterface $container, ProxyFactory $proxyFactory)
     {
         $this->container = $container;
@@ -99,11 +97,6 @@ class ResolverDispatcher implements DefinitionResolver
                     $this->arrayResolver = new ArrayResolver($this);
                 }
                 return $this->arrayResolver;
-            case $definition instanceof EnvironmentVariableDefinition:
-                if (!$this->envVariableResolver) {
-                    $this->envVariableResolver = new EnvironmentVariableResolver($this);
-                }
-                return $this->envVariableResolver;
             case $definition instanceof InstanceDefinition:
                 if (!$this->instanceResolver) {
                     $this->instanceResolver = new InstanceInjector($this, $this->proxyFactory);

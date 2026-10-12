@@ -19,9 +19,6 @@ class DeactivationTracker implements HookProvider {
 	}
 
 	public function hooks(): void {
-		$tracker_factory = new \WPDesk_Tracker_Factory();
-		$tracker_factory->create_tracker( $this->plugin_file_name );
-
 		add_filter( 'wpdesk_track_plugin_deactivation', [ $this, 'wpdesk_track_plugin_deactivation' ] );
 	}
 
@@ -31,7 +28,7 @@ class DeactivationTracker implements HookProvider {
 	 * @return array
 	 */
 	public function wpdesk_track_plugin_deactivation( array $plugins ): array {
-		$plugins['shopmagic-for-woocommerce/shopMagic.php'] = 'shopmagic-for-woocommerce/shopMagic.php';
+		$plugins[ $this->plugin_file_name ] = $this->plugin_file_name;
 
 		return $plugins;
 	}

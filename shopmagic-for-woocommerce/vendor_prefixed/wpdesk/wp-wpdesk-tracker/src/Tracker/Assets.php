@@ -2,7 +2,6 @@
 
 namespace ShopMagicVendor\WPDesk\Tracker;
 
-use ShopMagicVendor\WPDesk\PluginBuilder\Plugin\Hookable;
 /**
  * Can enqueue assets.
  */

@@ -8,6 +8,7 @@ import ClientSearch from "@/components/Select/ClientSearch.vue";
 import DataTable from "@/components/Table/DataTable.vue";
 import { useOutcomesStore } from "@/app/logs/store";
 import { storeToRefs } from "pinia";
+import { useRoute } from "vue-router";
 
 const store = useOutcomesStore();
 const { outcomes, loading, count } = storeToRefs(store);
@@ -17,8 +18,12 @@ const tableFilters = reactive<Filters>({
   status: null,
   action: null,
   user: null,
-  automation: null,
+  automation: Number(useRoute().query.automation) || null,
 });
+
+if (tableFilters.automation) {
+  store.fetch({ filters: tableFilters });
+}
 
 function filterStatus(value: string) {
   tableFilters.status = value;

@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-donate
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.8.9
+Stable tag: 4.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -253,38 +253,15 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 
 == Changelog ==
 
-= 4.8.9 - 2026-08-19 =
-* Added support for WooCommerce 11.1
+= 4.9.1 - 2026-09-10
+* Constant database deadlock when trying to perform a database migration caused by race conditions.
+* Remove interpolating placeholders within placeholders.
+* Fix `customer.company` placeholder error when used for guest customers.
 
-= 4.8.8 - 2026-08-17 =
-* Added support for WordPress 7.1
-
-= 4.8.7 - 2026-08-06
-* Fixed hardcoded database table prefix in migration files.
-
-= 4.8.6 - 2026-07-22
-* TinyMCE editor not loading in the email action when using WordPress 7.0.
-* Support for WooCommerce 11.
-
-= 4.8.5 - 2026-07-07 =
-* Added support for WooCommerce 10.9
-
-= 4.8.4 - 2026-06-15 =
-- Added support for WooCommerce 10.8
-- MailChimp integration fault causing actions to be hidden in administration panel.
-
-= 4.8.3 - 2026-04-29 =
-* Added support for WordPress 7.0
-* Fixed WooCommerce placeholders in email footer displayed in raw format.
-
-= 4.8.2 - 2026-04-07 =
-* Added support for WooCommerce 10.7
-
-= 4.8.1 - 2026-03-07 =
-* Added support for WooCommerce 10.6
-
-= 4.8.0 - 2026-02-11 =
-* Added new product filters
+= 4.9.0 - 2026-09-10
+* Improvements to automation list with run count with sparkline, queue count and quick publish toggle.
+* Doubled JSON responses for some foreign plugins being affected by ShopMagic.
+* Fixed data tracker deprecation notice.
 
 [See changelog for all versions](https://plugins.trac.wordpress.org/browser/shopmagic-for-woocommerce/trunk/changelog.txt).
 

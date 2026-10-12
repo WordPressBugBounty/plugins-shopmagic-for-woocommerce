@@ -41,8 +41,13 @@ class OrderQuantityProducts extends WooCommerceOrderBasedPlaceholder {
 
 		$items = $this->resources->get( \WC_Order::class )->get_items();
 
+		$template = $parameters['template'] ?? 'grid_2_col';
+		if ( ! $this->renderer->is_template_valid( $template ) ) {
+			$template = 'grid_2_col';
+		}
+
 		return $this->renderer->render(
-			'placeholder/quantity_products/' . ( $parameters['template'] ?? 'grid_2_col' ),
+			'placeholder/quantity_products/' . $template,
 			[
 				'order_items' => $items,
 				'parameters'  => $parameters,

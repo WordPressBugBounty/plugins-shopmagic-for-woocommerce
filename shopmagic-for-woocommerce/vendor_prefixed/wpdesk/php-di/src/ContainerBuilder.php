@@ -4,7 +4,6 @@ declare (strict_types=1);
 namespace ShopMagicVendor\DI;
 
 use ShopMagicVendor\DI\Compiler\Compiler;
-use ShopMagicVendor\DI\Definition\Source\AnnotationBasedAutowiring;
 use ShopMagicVendor\DI\Definition\Source\DefinitionArray;
 use ShopMagicVendor\DI\Definition\Source\DefinitionFile;
 use ShopMagicVendor\DI\Definition\Source\DefinitionSource;
@@ -46,10 +45,6 @@ class ContainerBuilder
      * @var bool
      */
     private $useAutowiring = \true;
-    /**
-     * @var bool
-     */
-    private $useAnnotations = \false;
     /**
      * @var bool
      */
@@ -112,10 +107,7 @@ class ContainerBuilder
     public function build()
     {
         $sources = array_reverse($this->definitionSources);
-        if ($this->useAnnotations) {
-            $autowiring = new AnnotationBasedAutowiring($this->ignorePhpDocErrors);
-            $sources[] = $autowiring;
-        } elseif ($this->useAutowiring) {
+        if ($this->useAutowiring) {
             $autowiring = new ReflectionBasedAutowiring();
             $sources[] = $autowiring;
         } else {
@@ -145,7 +137,7 @@ class ContainerBuilder
         $containerClass = $this->containerClass;
         if ($this->compileToDirectory) {
             $compiler = new Compiler($proxyFactory);
-            $compiledContainerFile = $compiler->compile($source, $this->compileToDirectory, $containerClass, $this->containerParentClass, $this->useAutowiring || $this->useAnnotations);
+            $compiledContainerFile = $compiler->compile($source, $this->compileToDirectory, $containerClass, $this->containerParentClass, $this->useAutowiring);
             // Only load the file if it hasn't been already loaded
             // (the container can be created multiple times in the same process)
             if (!class_exists($containerClass, \false)) {
@@ -189,19 +181,6 @@ class ContainerBuilder
     {
         $this->ensureNotLocked();
         $this->useAutowiring = $bool;
-        return $this;
-    }
-    /**
-     * Enable or disable the use of annotations to guess injections.
-     *
-     * Disabled by default.
-     *
-     * @return $this
-     */
-    public function useAnnotations(bool $bool): self
-    {
-        $this->ensureNotLocked();
-        $this->useAnnotations = $bool;
         return $this;
     }
     /**

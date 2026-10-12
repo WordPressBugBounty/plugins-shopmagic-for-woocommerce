@@ -55,8 +55,13 @@ class OrderProductsOrdered extends WooCommerceOrderBasedPlaceholder {
 			}
 		}
 
+		$template = $parameters['template'] ?? 'comma_separated_list';
+		if ( ! $this->renderer->is_template_valid( $template ) ) {
+			$template = 'comma_separated_list';
+		}
+
 		return $this->renderer->render(
-			$this->get_template_path( $parameters['template'] ?? 'comma_separated_list' ),
+			$this->get_template_path( $template ),
 			[
 				'order_items'   => $items,
 				'products'      => $products,

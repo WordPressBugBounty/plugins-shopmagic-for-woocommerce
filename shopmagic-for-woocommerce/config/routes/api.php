@@ -28,9 +28,22 @@ return static function ( \WPDesk\ShopMagic\Components\Routing\RoutesConfigurator
 	$routes->add( '/automations/count' )
 			->controller( [ Controller\AutomationController::class, 'count' ] );
 
+	$routes->add( '/automations/metrics' )
+			->controller( [ Controller\AutomationController::class, 'metrics' ] );
+
 	$routes->add( '/automations/(?P<id>[\d]+)' )
 			->args( new ArgumentCollection( new Argument( 'id' ) ) )
 			->controller( [ Controller\AutomationController::class, 'show' ] );
+
+	$routes->add( '/automations/(?P<id>[\d]+)/status' )
+			->args(
+				new ArgumentCollection(
+					( new IntArgument( 'id' ) )->required(),
+					( new StringArgument( 'status' ) )->required()
+				)
+			)
+			->controller( [ Controller\AutomationController::class, 'update_status' ] )
+			->methods( 'PATCH' );
 
 	$routes->add( '/automations/(?P<id>[\d]+)/children' )
 			->args( new ArgumentCollection( new Argument( 'id' ) ) )

@@ -45,29 +45,18 @@ final class PlaceholderProcessor {
 	 * @TODO: Process method should directly receive DataLayer.
 	 */
 	public function process( string $message ): string {
-		$replacement_count = 0;
-		do {
-			$message = preg_replace_callback(
-				self::PLACEHOLDER_REGEX,
-				function ( $matches ): string {
-					$full_placeholder = $matches[1] ?? null;
-					if ( $full_placeholder === null ) {
-						return '';
-					}
+		return preg_replace_callback(
+			self::PLACEHOLDER_REGEX,
+			function ( $matches ): string {
+				$full_placeholder = $matches[1] ?? null;
+				if ( $full_placeholder === null ) {
+					return '';
+				}
 
-					return $this->process_single_placeholder( $full_placeholder );
-				},
-				$message,
-				1,
-				$replacement_count
-			);
-
-			if ( $message === null ) {
-				return '';
-			}
-		} while ( $replacement_count > 0 );
-
-		return $message;
+				return $this->process_single_placeholder( $full_placeholder );
+			},
+			$message
+		) ?? '';
 	}
 
 	private function process_single_placeholder( string $full_placeholder ): string {

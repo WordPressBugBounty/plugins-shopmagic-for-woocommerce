@@ -7,12 +7,11 @@ import { queueTableColumns } from "../data/queueTable";
 import { useQueueStore } from "@/app/logs/queueStore";
 import { storeToRefs } from "pinia";
 import { __ } from "@/plugins/i18n";
+import { useRoute } from "vue-router";
 
 const store = useQueueStore();
 const { getQueue, cancelQueue, cancelAll } = store;
 const { queue, queueTotal, loading, error } = storeToRefs(store);
-
-getQueue();
 
 const columns = [
   ...queueTableColumns,
@@ -44,8 +43,10 @@ const columns = [
 ];
 
 const tableFilters = reactive<{ automation: number | null }>({
-  automation: null,
+  automation: Number(useRoute().query.automation) || null,
 });
+
+getQueue({ filters: tableFilters });
 
 function filterAutomations(automationId: number) {
   tableFilters.automation = automationId;

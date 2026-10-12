@@ -147,19 +147,20 @@ class RestRoutesRegistry implements LoggerAwareInterface {
 	}
 
 	/**
-	 * @param bool $_ Unused. We either return own value or exit immediately, so we don't need to respect filter parameter.
+	 * @param bool $served Whether the request has already been served.
+	 * @param \WP_HTTP_Response $response
 	 * @param \WP_REST_Request<mixed[]> $request
 	 *
 	 * @return bool True if request have been served. False otherwise. Returning false will restore WordPress processing of REST route.
 	 */
 	public function serve_request(
-		$_,
-		\WP_REST_Response $response,
+		$served,
+		\WP_HTTP_Response $response,
 		\WP_REST_Request $request
 	): bool {
 		// Serve requests only for shopmagic routes.
-		if ( ! str_starts_with( $request->get_route(), '/shopmagic/' ) ) {
-			return false;
+		if ( $served || ! str_starts_with( $request->get_route(), '/shopmagic/' ) ) {
+			return (bool) $served;
 		}
 
 		if (

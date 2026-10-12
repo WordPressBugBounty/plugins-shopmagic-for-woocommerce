@@ -195,15 +195,15 @@ return [
 	CurrentCustomer::class                         => autowire()->constructorParameter( 'logger', get( LoggerInterface::class ) ),
 
 	Tracker\UsageDataTracker::class                => autowire()
-	->method(
-		'set_providers',
-		[
-			get( Tracker\Provider\AutomationDataProvider::class ),
-			get( Tracker\Provider\ExtensionDataProvider::class ),
-			get( Tracker\Provider\SettingsDataProvider::class ),
-			get( Tracker\Provider\RecipeDataProvider::class ),
-		]
-	),
+		->constructorParameter(
+			'providers',
+			[
+				get( Tracker\Provider\AutomationDataProvider::class ),
+				get( Tracker\Provider\ExtensionDataProvider::class ),
+				get( Tracker\Provider\SettingsDataProvider::class ),
+				get( Tracker\Provider\RecipeDataProvider::class ),
+			]
+		),
 
 	OutcomeManager::class                          => autowire()
 		->constructorParameter( 'repository', get( OutcomeRepository::class ) )
@@ -366,6 +366,7 @@ return [
 				WPDesk\ShopMagic\migrations\Version_46::class,
 				WPDesk\ShopMagic\migrations\Version_47::class,
 				WPDesk\ShopMagic\migrations\Version_48::class,
+				WPDesk\ShopMagic\migrations\Version_49::class,
 			],
 			'shopmagic_db'
 		);

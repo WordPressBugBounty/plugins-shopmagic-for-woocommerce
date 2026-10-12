@@ -1,5 +1,5 @@
 import type { DataTableColumns } from "naive-ui";
-import { NButton, NIcon, NPopover, NSpace, NTag } from "naive-ui";
+import { NButton, NIcon, NPopover, NSpace } from "naive-ui";
 import type { AutomationData } from "@/types/automation";
 import { h } from "vue";
 import { RouterLink } from "vue-router";
@@ -9,6 +9,8 @@ import DuplicationMessage from "../components/DuplicationMessage.vue";
 import DeleteButtonWithNotification from "../components/DeleteButtonWithNotification.vue";
 import { downloadAutomation } from "@/app/automations/singleAutomation";
 import AutomationSubTable from "@/app/automations/components/AutomationSubTable.vue";
+import QuickPublishToggle from "@/app/automations/components/QuickPublishToggle.vue";
+import AutomationTrend from "@/app/automations/components/AutomationTrend.vue";
 
 export const automationTableColumns: DataTableColumns<AutomationData> = [
   {
@@ -34,6 +36,60 @@ export const automationTableColumns: DataTableColumns<AutomationData> = [
         () => name || __("(Unnamed)", "shopmagic-for-woocommerce"),
       ),
     sorter: (a, b) => a.name.localeCompare(b.name),
+  },
+  {
+    key: "status",
+    title: __("Active", "shopmagic-for-woocommerce"),
+    width: 96,
+    render: ({ source }) => h(QuickPublishToggle, { automation: source }),
+  },
+  {
+    key: "event",
+    title: __("Event", "shopmagic-for-woocommerce"),
+  },
+  {
+    key: "actions",
+    title: __("Actions", "shopmagic-for-woocommerce"),
+    render: ({ actions }) => actions?.join(", ") || "",
+  },
+  {
+    key: "executed",
+    title: __("Runs", "shopmagic-for-woocommerce"),
+    width: 132,
+    render: ({ id, metrics }) =>
+      metrics === null
+        ? h(
+            "span",
+            {
+              "aria-label": __("Metrics unavailable", "shopmagic-for-woocommerce"),
+              style: { color: "#646970" },
+            },
+            "—",
+          )
+        : h(NSpace, { align: "center", size: 10, wrap: false }, () => [
+            h(RouterLink, { to: { name: "outcomes", query: { automation: id } } }, () =>
+              metrics.executed.toLocaleString(),
+            ),
+            h(AutomationTrend, { values: metrics.trend }),
+          ]),
+  },
+  {
+    key: "queued",
+    title: __("Queued", "shopmagic-for-woocommerce"),
+    width: 76,
+    render: ({ id, metrics }) =>
+      metrics === null
+        ? h(
+            "span",
+            {
+              "aria-label": __("Metrics unavailable", "shopmagic-for-woocommerce"),
+              style: { color: "#646970" },
+            },
+            "—",
+          )
+        : h(RouterLink, { to: { name: "queue", query: { automation: id } } }, () =>
+            metrics.queued.toLocaleString(),
+          ),
   },
   {
     key: "actionable",
@@ -70,47 +126,5 @@ export const automationTableColumns: DataTableColumns<AutomationData> = [
           },
         ),
       ]),
-  },
-  {
-    key: "event",
-    title: __("Event", "shopmagic-for-woocommerce"),
-  },
-  {
-    key: "actions",
-    title: __("Actions", "shopmagic-for-woocommerce"),
-    render: ({ actions }) => actions?.join(", ") || "",
-  },
-  {
-    key: "status",
-    title: __("Status", "shopmagic-for-woocommerce"),
-    width: 105,
-    render: ({ status }) =>
-      h(
-        NTag,
-        {
-          type: (() => {
-            if (status === "publish") {
-              return "info";
-            } else if (status === "trash") {
-              return "error";
-            } else {
-              return "";
-            }
-          })(),
-        },
-        {
-          default: () => {
-            if (status === "publish") {
-              return __("published", "shopmagic-for-woocommerce");
-            } else if (status === "draft") {
-              return __("draft", "shopmagic-for-woocommerce");
-            } else if (status === "trash") {
-              return __("trash", "shopmagic-for-woocommerce");
-            } else {
-              return __("unknown", "shopmagic-for-woocommerce");
-            }
-          },
-        },
-      ),
   },
 ];

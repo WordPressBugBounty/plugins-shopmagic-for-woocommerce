@@ -24,7 +24,7 @@ final class CustomerCompany extends CustomerBasedPlaceholder {
 		$customer = $this->resources->get( Customer::class );
 
 		if ( $customer->is_guest() ) {
-			return $customer->get_meta_value( 'billing_company' );
+			return $customer->get_meta_value( 'billing_company' ) ?? '';
 		} else {
 			return get_user_meta( $customer->get_id(), 'billing_company', true );
 		}

@@ -2,7 +2,6 @@
 
 namespace ShopMagicVendor\WPDesk\Tracker;
 
-use ShopMagicVendor\WPDesk\PluginBuilder\Plugin\Hookable;
 use ShopMagicVendor\WPDesk\View\Renderer\SimplePhpRenderer;
 use ShopMagicVendor\WPDesk\View\Resolver\DirResolver;
 class OptInPage implements Hookable

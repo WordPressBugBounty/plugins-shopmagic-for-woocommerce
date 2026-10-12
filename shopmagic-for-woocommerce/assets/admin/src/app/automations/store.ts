@@ -1,5 +1,5 @@
 import { defineStore, storeToRefs } from "pinia";
-import type { Automation } from "@/types/automation";
+import type { Automation, AutomationMetrics } from "@/types/automation";
 import { useAutomationResourcesStore } from "./resourceStore";
 import type { Query } from "@/_utils";
 import { get } from "@/_utils";
@@ -28,11 +28,33 @@ export const useAutomationCollectionStore = defineStore("automationCollection", 
   const automationsUrl = ref<string | null>(null);
   const countUrl = ref<string | null>(null);
   const loading = ref(false);
+  const metrics = ref<Record<number, AutomationMetrics> | null>(null);
+  let metricsRequestId = 0;
   const { data, mutate } = useSWRV<Automation[]>(() => automationsUrl.value);
 
   watch(data, (data) => {
     if (data !== undefined) {
+      const requestId = ++metricsRequestId;
       loading.value = false;
+      metrics.value = null;
+      const ids = data.map(({ id }) => id).filter((id): id is number => id !== null);
+      if (ids.length === 0) {
+        metrics.value = {};
+      } else {
+        void get<Record<number, AutomationMetrics>>(
+          appendSearchParams("/automations/metrics", { filters: { ids } }),
+        )
+          .then((result) => {
+            if (requestId === metricsRequestId) {
+              metrics.value = result;
+            }
+          })
+          .catch(() => {
+            if (requestId === metricsRequestId) {
+              metrics.value = null;
+            }
+          });
+      }
     }
   });
 
@@ -155,8 +177,17 @@ export const useAutomationCollectionStore = defineStore("automationCollection", 
         .map((a) => a.label as string);
       return {
         ...automation,
+        source: automation,
         event: event?.label || "No event selected",
         actions,
+        metrics:
+          metrics.value === null
+            ? null
+            : (automation.id !== null && metrics.value[automation.id]) || {
+                executed: 0,
+                queued: 0,
+                trend: Array(14).fill(0),
+              },
       };
     });
   });

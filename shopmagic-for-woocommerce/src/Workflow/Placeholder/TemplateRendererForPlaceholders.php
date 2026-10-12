@@ -51,6 +51,10 @@ final class TemplateRendererForPlaceholders {
 		);
 	}
 
+	public function is_template_valid( string $template ): bool {
+		return array_key_exists( $template, $this->get_possible_templates() );
+	}
+
 	/**
 	 * @param string|null $template Array key passed may be empty. If so, take first template.
 	 * @param array $parameters Data injected into template.

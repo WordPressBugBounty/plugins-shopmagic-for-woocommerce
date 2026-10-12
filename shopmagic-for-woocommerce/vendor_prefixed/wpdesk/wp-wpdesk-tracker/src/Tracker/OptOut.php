@@ -3,7 +3,6 @@
 namespace ShopMagicVendor\WPDesk\Tracker;
 
 use ShopMagicVendor\WPDesk\Notice\Notice;
-use ShopMagicVendor\WPDesk\PluginBuilder\Plugin\Hookable;
 class OptOut implements Hookable
 {
     /**

@@ -7,7 +7,6 @@ use function chmod;
 use ShopMagicVendor\DI\Definition\ArrayDefinition;
 use ShopMagicVendor\DI\Definition\DecoratorDefinition;
 use ShopMagicVendor\DI\Definition\Definition;
-use ShopMagicVendor\DI\Definition\EnvironmentVariableDefinition;
 use ShopMagicVendor\DI\Definition\Exception\InvalidDefinition;
 use ShopMagicVendor\DI\Definition\FactoryDefinition;
 use ShopMagicVendor\DI\Definition\ObjectDefinition;
@@ -201,19 +200,6 @@ class Compiler
                 $entryName = $this->compileValue($definition->getName());
                 $expression = $this->compileValue($definition->getExpression());
                 $code = 'return \DI\Definition\StringDefinition::resolveExpression(' . $entryName . ', ' . $expression . ', $this->delegateContainer);';
-                break;
-            case $definition instanceof EnvironmentVariableDefinition:
-                $variableName = $this->compileValue($definition->getVariableName());
-                $isOptional = $this->compileValue($definition->isOptional());
-                $defaultValue = $this->compileValue($definition->getDefaultValue());
-                $code = <<<PHP
-        \$value = \$_ENV[{$variableName}] ?? \$_SERVER[{$variableName}] ?? getenv({$variableName});
-        if (false !== \$value) return \$value;
-        if (!{$isOptional}) {
-            throw new \\DI\\Definition\\Exception\\InvalidDefinition("The environment variable '{$definition->getVariableName()}' has not been defined");
-        }
-        return {$defaultValue};
-PHP;
                 break;
             case $definition instanceof ArrayDefinition:
                 try {

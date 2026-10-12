@@ -51,6 +51,22 @@ type AutomationData = Readonly<{
   status: PostStatus;
   language: string | null;
   recipe: boolean;
+  metrics: AutomationMetrics | null;
+  source: Automation;
 }>;
 
-export type { Automation, Automations, AutomationData, Filter, FilterOrGroup, Action };
+type AutomationMetrics = {
+  executed: number;
+  queued: number;
+  trend: number[];
+};
+
+export type {
+  Automation,
+  Automations,
+  AutomationData,
+  AutomationMetrics,
+  Filter,
+  FilterOrGroup,
+  Action,
+};

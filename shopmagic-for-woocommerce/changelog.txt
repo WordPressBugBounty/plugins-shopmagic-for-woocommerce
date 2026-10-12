@@ -1,10 +1,24 @@
 # ShopMagic Changelog
 
-## [4.8.9] - 2026-08-19 
+## [4.9.1] - 2026-10-12
+### Fixed
+- Constant database deadlock when trying to perform a database migration caused by race conditions.
+- Remove interpolating placeholders within placeholders.
+- Fix `customer.company` placeholder error when used for guest customers.
+
+## [4.9.0] - 2026-09-10
+### Added
+- Improvements to automation list with run count with sparkline, queue count and quick publish toggle.
+
+### Fixed
+- Doubled JSON responses for some foreign plugins being affected by ShopMagic.
+- Fixed data tracker deprecation notice.
+
+## [4.8.9] - 2026-08-19
 ### Added
 - Support for WooCommerce 11.1
 
-## [4.8.8] - 2026-08-17 
+## [4.8.8] - 2026-08-17
 ### Added
 - Support for WordPress 7.1
 

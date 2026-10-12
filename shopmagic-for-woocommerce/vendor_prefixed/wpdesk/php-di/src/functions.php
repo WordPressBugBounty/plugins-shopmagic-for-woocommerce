@@ -4,7 +4,6 @@ declare (strict_types=1);
 namespace ShopMagicVendor\DI;
 
 use ShopMagicVendor\DI\Definition\ArrayDefinitionExtension;
-use ShopMagicVendor\DI\Definition\EnvironmentVariableDefinition;
 use ShopMagicVendor\DI\Definition\Helper\AutowireDefinitionHelper;
 use ShopMagicVendor\DI\Definition\Helper\CreateDefinitionHelper;
 use ShopMagicVendor\DI\Definition\Helper\FactoryDefinitionHelper;
@@ -83,20 +82,6 @@ if (!function_exists('ShopMagicVendor\DI\get')) {
     function get(string $entryName): Reference
     {
         return new Reference($entryName);
-    }
-}
-if (!function_exists('ShopMagicVendor\DI\env')) {
-    /**
-     * Helper for referencing environment variables.
-     *
-     * @param string $variableName The name of the environment variable.
-     * @param mixed $defaultValue The default value to be used if the environment variable is not defined.
-     */
-    function env(string $variableName, $defaultValue = null): EnvironmentVariableDefinition
-    {
-        // Only mark as optional if the default value was *explicitly* provided.
-        $isOptional = 2 === func_num_args();
-        return new EnvironmentVariableDefinition($variableName, $isOptional, $defaultValue);
     }
 }
 if (!function_exists('ShopMagicVendor\DI\add')) {

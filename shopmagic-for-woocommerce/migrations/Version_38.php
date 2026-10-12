@@ -25,7 +25,8 @@ final class Version_38 extends AbstractMigration {
 			finished tinyint(1) NOT NULL DEFAULT FALSE,
 			created datetime NOT NULL,
 			updated datetime NOT NULL,
-			PRIMARY KEY  (id)
+			PRIMARY KEY  (id),
+			KEY automation_metrics (automation_id, finished, updated)
 		) {$charset_collate};";
 
 		return $this->wpdb->query( $sql );
