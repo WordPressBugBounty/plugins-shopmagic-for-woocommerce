@@ -6,7 +6,7 @@ Donate link: https://shopmagic.app/sk/shopmagic-for-woocommerce-readme-donate
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.9.1
+Stable tag: 4.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -252,6 +252,10 @@ Security issues can be reported through the Patchstack Vulnerability Disclosure 
 37. Documentation and guidance for customizing WooCommerce emails and email marketing campaigns.
 
 == Changelog ==
+
+= 4.9.2 - 2026-10-19
+* Fixed some translation phrases not being loaded in the plugin.
+* Fixed some recipes blocked though not requiring additional add-ons.
 
 = 4.9.1 - 2026-09-10
 * Constant database deadlock when trying to perform a database migration caused by race conditions.

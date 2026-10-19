@@ -5,7 +5,6 @@ import { rendererProps, useJsonFormsControl, type ControlElement } from "@jsonfo
 import { useVanillaControl } from "../util";
 import FieldWrapper from "./FieldWrapper.vue";
 import { ref, watch, computed } from "vue";
-import { __ } from "@/plugins/i18n";
 import { isObject } from "@vueuse/core";
 
 interface KeyValuePair {

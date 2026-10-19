@@ -9,7 +9,7 @@ import { useMarketingStore } from "@/app/marketing-lists/store";
 import JsonForm from "@/components/JsonForm.vue";
 import { useMarketingResources } from "@/app/marketing-lists/resourceStore";
 import { computed } from "vue";
-import { __ } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
 import MarketingListSidebar from "@/app/marketing-lists/components/MarketingListSidebar.vue";
 
 const store = useMarketingStore();
@@ -39,7 +39,7 @@ const message = useMessage();
 const router = useRouter();
 
 async function saveList() {
-  const m = message.loading(__("Saving marketing list", "shopmagic-for-woocommerce"), {
+  const m = message.loading(i18n.__("Saving marketing list", "shopmagic-for-woocommerce"), {
     duration: 0,
   });
   try {
@@ -56,7 +56,7 @@ async function saveList() {
         });
       }
     }
-    m.content = __("Marketing list saved", "shopmagic-for-woocommerce");
+    m.content = i18n.__("Marketing list saved", "shopmagic-for-woocommerce");
     m.type = "success";
   } catch (e) {
     m.content = e.message;

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { NButton, NIcon, NP } from "naive-ui";
 import { OpenOutline, RepeatOutline } from "@vicons/ionicons5";
-import { __ } from "../../../../plugins/i18n";
 import type { Automation } from "@/types/automation";
 import FeedbackControls from "./FeedbackControls.vue";
 import Markdown from "./MarkdownRenderer.vue";

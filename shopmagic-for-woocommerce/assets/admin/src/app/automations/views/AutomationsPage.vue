@@ -24,7 +24,8 @@ import StatusSelect from "@/app/automations/components/StatusSelect.vue";
 import { useDebounceFn } from "@vueuse/core";
 import { useAutomationCollectionStore } from "@/app/automations/store";
 import { useSingleAutomation } from "@/app/automations/singleAutomation";
-import { __, sprintf } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
+import { sprintf } from "@/plugins/i18n";
 
 const automationStore = useAutomationCollectionStore();
 const { fetchItems, deleteAutomations, downloadAutomations } = automationStore;
@@ -63,7 +64,7 @@ async function executeBulkAction() {
 }
 
 async function bulkExportAutomations(ids: number[]) {
-  const m = message.loading(__("Exporting automations...", "shopmagic-for-woocommerce"), {
+  const m = message.loading(i18n.__("Exporting automations...", "shopmagic-for-woocommerce"), {
     duration: 0,
     keepAliveOnHover: true,
   });
@@ -71,7 +72,7 @@ async function bulkExportAutomations(ids: number[]) {
     await downloadAutomations(ids);
     m.content = () =>
       h(NotificationMessage, {
-        title: __("Automations exported", "shopmagic-for-woocommerce"),
+        title: i18n.__("Automations exported", "shopmagic-for-woocommerce"),
       });
     m.type = "info";
   } finally {
@@ -80,7 +81,7 @@ async function bulkExportAutomations(ids: number[]) {
 }
 
 async function bulkDeleteAutomations(ids: number[]) {
-  const m = message.loading(__("Deleting automations...", "shopmagic-for-woocommerce"), {
+  const m = message.loading(i18n.__("Deleting automations...", "shopmagic-for-woocommerce"), {
     duration: 0,
     keepAliveOnHover: true,
   });
@@ -88,12 +89,12 @@ async function bulkDeleteAutomations(ids: number[]) {
     const result = await deleteAutomations(ids);
     const deletedMessage =
       result.deleted > 0
-        ? sprintf(__("%d automations deleted.", "shopmagic-for-woocommerce"), result.deleted)
+        ? sprintf(i18n.__("%d automations deleted.", "shopmagic-for-woocommerce"), result.deleted)
         : "";
     const errorsMessage =
       result.errors > 0
         ? sprintf(
-            __("%d automations failed to delete.", "shopmagic-for-woocommerce"),
+            i18n.__("%d automations failed to delete.", "shopmagic-for-woocommerce"),
             result.errors,
           )
         : "";
@@ -101,8 +102,8 @@ async function bulkDeleteAutomations(ids: number[]) {
       h(NotificationMessage, {
         title:
           result.deleted > 0
-            ? __("Automations deleted", "shopmagic-for-woocommerce")
-            : __("Failed to delete automations", "shopmagic-for-woocommerce"),
+            ? i18n.__("Automations deleted", "shopmagic-for-woocommerce")
+            : i18n.__("Failed to delete automations", "shopmagic-for-woocommerce"),
         message: deletedMessage + " " + errorsMessage,
       });
     m.type = "info";

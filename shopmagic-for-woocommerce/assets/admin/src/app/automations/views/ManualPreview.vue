@@ -20,7 +20,8 @@ import { useAutomationResourcesStore } from "../resourceStore";
 import { useWpFetch } from "@/composables/useWpFetch";
 import { useSingleAutomation } from "@/app/automations/singleAutomation";
 import { storeToRefs } from "pinia";
-import { __, sprintf, _n } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
+import { sprintf } from "@/plugins/i18n";
 import { appendSearchParams } from "@/composables/useSearchParams";
 
 const { get: getAutomation } = useSingleAutomation();
@@ -53,7 +54,7 @@ const dispatcherError = ref<object | null>(null);
 const automationName = computed(
   () =>
     automation.value?.name ||
-    (automation.value?.id && sprintf(__("Automation #%d"), automation.value?.id)),
+    (automation.value?.id && sprintf(i18n.__("Automation #%d"), automation.value?.id)),
 );
 const automationActions = computed(() => {
   const rawActions = automation.value?.actions || [];
@@ -96,7 +97,7 @@ const estimatedTimeMessage = computed(() => {
   }
 
   return sprintf(
-    __("Estimated time remaining: %s", "shopmagic-for-woocommerce"),
+    i18n.__("Estimated time remaining: %s", "shopmagic-for-woocommerce"),
     formatDuration(estimatedSecondsRemaining.value),
   );
 });
@@ -227,13 +228,13 @@ async function dispatchAutomations() {
 
 function formatDuration(seconds: number): string {
   if (!seconds || !isFinite(seconds)) {
-    return __("less than a minute", "shopmagic-for-woocommerce");
+    return i18n.__("less than a minute", "shopmagic-for-woocommerce");
   }
 
   const roundedSeconds = Math.ceil(seconds);
   if (roundedSeconds < 60) {
     return sprintf(
-      _n("%d second", "%d seconds", roundedSeconds, "shopmagic-for-woocommerce"),
+      i18n._n("%d second", "%d seconds", roundedSeconds, "shopmagic-for-woocommerce"),
       roundedSeconds,
     );
   }
@@ -241,7 +242,7 @@ function formatDuration(seconds: number): string {
   const minutes = Math.ceil(roundedSeconds / 60);
   if (minutes < 60) {
     return sprintf(
-      _n("%d minute", "%d minutes", minutes, "shopmagic-for-woocommerce"),
+      i18n._n("%d minute", "%d minutes", minutes, "shopmagic-for-woocommerce"),
       minutes,
     );
   }
@@ -249,14 +250,14 @@ function formatDuration(seconds: number): string {
   const hours = Math.ceil(minutes / 60);
   if (hours < 24) {
     return sprintf(
-      _n("%d hour", "%d hours", hours, "shopmagic-for-woocommerce"),
+      i18n._n("%d hour", "%d hours", hours, "shopmagic-for-woocommerce"),
       hours,
     );
   }
 
   const days = Math.ceil(hours / 24);
   return sprintf(
-    _n("%d day", "%d days", days, "shopmagic-for-woocommerce"),
+    i18n._n("%d day", "%d days", days, "shopmagic-for-woocommerce"),
     days,
   );
 }

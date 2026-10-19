@@ -33,7 +33,7 @@ export function sprintf(format: string, ...args: any[]) {
   return wp.i18n.sprintf(format, args);
 }
 
-declare module "@vue/runtime-core" {
+declare module "vue" {
   export interface ComponentCustomProperties {
     __: (text: string, domain?: string) => string;
     _n: (singular: string, plural: string, count: number, domain?: string) => string;

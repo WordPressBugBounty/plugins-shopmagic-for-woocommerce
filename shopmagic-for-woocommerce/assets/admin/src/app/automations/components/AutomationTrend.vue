@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import { __, sprintf } from "@/plugins/i18n";
+import { sprintf } from "@/plugins/i18n";
 
 const props = defineProps<{ values: number[] }>();
 const width = 72;

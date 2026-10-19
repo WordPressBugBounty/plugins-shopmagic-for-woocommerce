@@ -5,7 +5,7 @@ import { type Recipe, useRecipesStore } from "@/stores/recipes";
 import { h } from "vue";
 import RecipeDescription from "../components/RecipeDescription.vue";
 import DataTable from "@/components/Table/DataTable.vue";
-import { __, _n } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
 import { canUseRecipe } from "../utils/recipe";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
@@ -26,7 +26,7 @@ function createRecipe(name: string) {
       });
     })
     .catch(() => {
-      message.error(__("Failed to use recipe", "shopmagic-for-woocommerce"));
+      message.error(i18n.__("Failed to use recipe", "shopmagic-for-woocommerce"));
     });
 }
 
@@ -39,7 +39,7 @@ const RecipeButton = (recipe: Recipe) => {
         type: "error",
         disabled: true,
       },
-      { default: () => __("Missing plugins", "shopmagic-for-woocommerce") },
+      { default: () => i18n.__("Missing plugins", "shopmagic-for-woocommerce") },
     );
   }
   return h(
@@ -49,19 +49,19 @@ const RecipeButton = (recipe: Recipe) => {
       type: "info",
       onClick: () => createRecipe(recipe.name),
     },
-    { default: () => __("Use recipe", "shopmagic-for-woocommerce") },
+    { default: () => i18n.__("Use recipe", "shopmagic-for-woocommerce") },
   );
 };
 
 const columns: DataTableColumns<Recipe> = [
   {
     key: "recipe",
-    title: () => __("Recipe", "shopmagic-for-woocommerce"),
+    title: () => i18n.__("Recipe", "shopmagic-for-woocommerce"),
     render: (recipe) => h(RecipeDescription, { recipe }),
   },
   {
     key: "action",
-    title: () => __("Action", "shopmagic-for-woocommerce"),
+    title: () => i18n.__("Action", "shopmagic-for-woocommerce"),
     render: RecipeButton,
     width: 180,
   },

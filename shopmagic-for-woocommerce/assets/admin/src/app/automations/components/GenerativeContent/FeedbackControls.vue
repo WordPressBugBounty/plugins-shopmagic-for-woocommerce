@@ -2,7 +2,6 @@
 import { computed } from "vue";
 import { NButton, NIcon } from "naive-ui";
 import { ThumbsUpOutline, ThumbsDownOutline } from "@vicons/ionicons5";
-import { __ } from "../../../../plugins/i18n";
 
 const props = defineProps<{
   currentVote: int<-1, 1> | null;

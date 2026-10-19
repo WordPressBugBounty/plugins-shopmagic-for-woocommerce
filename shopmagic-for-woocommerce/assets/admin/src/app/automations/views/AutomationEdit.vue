@@ -11,7 +11,7 @@ import { storeToRefs } from "pinia";
 import { useSingleAutomation } from "../singleAutomation";
 import { onBeforeRouteLeave, useRoute, useRouter } from "vue-router";
 import EditBar from "@/components/EditBar.vue";
-import { __ } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
 import { h } from "vue";
 
 const message = useMessage();
@@ -37,7 +37,7 @@ if (route.params.id === "new" && automation.value === null) {
 }
 
 async function saveAutomation() {
-  const m = message.loading(__("Saving automation", "shopmagic-for-woocommerce"), {
+  const m = message.loading(i18n.__("Saving automation", "shopmagic-for-woocommerce"), {
     duration: 0,
     keepAliveOnHover: true,
   });
@@ -56,7 +56,7 @@ async function saveAutomation() {
       }
     }
     m.content = () =>
-      h(NotificationMessage, { title: __("Automation saved", "shopmagic-for-woocommerce") });
+      h(NotificationMessage, { title: i18n.__("Automation saved", "shopmagic-for-woocommerce") });
     m.type = "success";
   } catch (e) {
     m.content = () =>
@@ -105,7 +105,7 @@ function updateParent(value: string) {
 }
 
 async function deleteAutomation() {
-  const m = message.loading(__("Deleting automation", "shopmagic-for-woocommerce"), {
+  const m = message.loading(i18n.__("Deleting automation", "shopmagic-for-woocommerce"), {
     duration: 0,
     keepAliveOnHover: true,
   });
@@ -116,7 +116,7 @@ async function deleteAutomation() {
         name: "automations",
       });
       m.content = () =>
-        h(NotificationMessage, { title: __("Automation removed", "shopmagic-for-woocommerce") });
+        h(NotificationMessage, { title: i18n.__("Automation removed", "shopmagic-for-woocommerce") });
       m.type = "success";
     } catch (e) {
       m.content = () =>

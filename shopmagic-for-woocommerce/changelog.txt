@@ -1,5 +1,10 @@
 # ShopMagic Changelog
 
+## [4.9.2] - 2026-10-19
+### Fixed
+- Fixed some translation phrases not being loaded in the plugin.
+- Fixed some recipes blocked though not requiring additional add-ons.
+
 ## [4.9.1] - 2026-10-12
 ### Fixed
 - Constant database deadlock when trying to perform a database migration caused by race conditions.

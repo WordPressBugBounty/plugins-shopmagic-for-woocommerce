@@ -2,7 +2,7 @@
 import { NButton, NIcon, NPopover, useMessage } from "naive-ui";
 import { CopyOutline } from "@vicons/ionicons5";
 import { useSingleAutomation } from "../singleAutomation";
-import { __ } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
 
 const props = defineProps<{ id: number }>();
 
@@ -10,12 +10,12 @@ const message = useMessage();
 const { duplicate } = useSingleAutomation();
 
 function duplicateAutomation() {
-  const m = message.loading(__("Duplicating automation", "shopmagic-for-woocommerce"), {
+  const m = message.loading(i18n.__("Duplicating automation", "shopmagic-for-woocommerce"), {
     duration: 0,
   });
   duplicate(props.id)
     .then(() => {
-      m.content = __("Automation duplicated", "shopmagic-for-woocommerce");
+      m.content = i18n.__("Automation duplicated", "shopmagic-for-woocommerce");
       m.type = "success";
     })
     .catch((e) => {

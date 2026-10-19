@@ -12,7 +12,8 @@ import { type LayoutProps, rendererProps, useControl } from "@jsonforms/vue";
 import { useVanillaLayout } from "../util";
 import FieldWrapper from "./FieldWrapper.vue";
 import { type Ref, computed, ref, unref, watch, onMounted } from "vue";
-import { __, sprintf } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
+import { sprintf } from "@/plugins/i18n";
 import { get, useMessageOptions } from "@/_utils";
 import { useDebounceFn } from "@vueuse/core";
 
@@ -29,7 +30,7 @@ const spreadsheetTitleRef = ref<string | null>();
 const spreadsheetErrorRef = ref<string | null>();
 const spreadsheetTitle = computed(() =>
   spreadsheetTitleRef.value
-    ? sprintf(__("Spreadsheet: %s", "shopmagic-for-woocommerce"), spreadsheetTitleRef.value)
+    ? sprintf(i18n.__("Spreadsheet: %s", "shopmagic-for-woocommerce"), spreadsheetTitleRef.value)
     : "",
 );
 const worksheetRef = ref<string | null>(layout.value.data["spreadsheet_tab"] || null);
@@ -104,7 +105,7 @@ async function doGetWorksheets(spreadsheet: string | Ref<string> | null) {
 async function populateHeaderRows(useRealLabels: boolean) {
   if (useRealLabels && (worksheetRef.value === null || spreadsheetRef.value === null)) {
     message.warning(
-      __("Please select a spreadsheet and a worksheet first", "shopmagic-for-woocommerce"),
+      i18n.__("Please select a spreadsheet and a worksheet first", "shopmagic-for-woocommerce"),
       useMessageOptions,
     );
     return;
@@ -168,8 +169,8 @@ onMounted(() => {
 });
 
 const documentation = sprintf(
-  __("Enter the Spreadsheet ID according to our %1$s.", "shopmagic-for-woocommerce"),
-  `<a class="text-blue-300 hover:text-blue-400" href="https://shopmagic.app/sk/shopmagic-with-google-sheets" target="_blank">${__("documentation", "shopmagic-for-woocommerce")}</a>`,
+  i18n.__("Enter the Spreadsheet ID according to our %1$s.", "shopmagic-for-woocommerce"),
+  `<a class="text-blue-300 hover:text-blue-400" href="https://shopmagic.app/sk/shopmagic-with-google-sheets" target="_blank">${i18n.__("documentation", "shopmagic-for-woocommerce")}</a>`,
 );
 </script>
 <template>

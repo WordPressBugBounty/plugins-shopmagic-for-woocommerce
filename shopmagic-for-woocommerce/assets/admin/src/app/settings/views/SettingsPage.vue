@@ -9,7 +9,7 @@ import {
   NSpace,
   useMessage,
 } from "naive-ui";
-import { __ } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
 import { storeToRefs } from "pinia";
 import { useSettingsStore } from "../store";
 import { computed, toRefs } from "vue";
@@ -37,10 +37,10 @@ const determinedRenderer = computed(() => {
 });
 
 async function saveSettings() {
-  const m = message.loading(__("Saving settings", "shopmagic-for-woocommerce"), { duration: 0 });
+  const m = message.loading(i18n.__("Saving settings", "shopmagic-for-woocommerce"), { duration: 0 });
   try {
     await save(values.value);
-    m.content = __(
+    m.content = i18n.__(
       "Settings saved. You may need to reload the page to apply the changes.",
       "shopmagic-for-woocommerce",
     );

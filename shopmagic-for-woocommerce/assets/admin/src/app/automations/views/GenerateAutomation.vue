@@ -6,7 +6,7 @@ import AutomationPrompt from "../components/GenerativeContent/AutomationPrompt.v
 import AutomationResult from "../components/GenerativeContent/AutomationResult.vue";
 import PromptSuggestions from "../components/GenerativeContent/PromptSuggestions.vue";
 import type { Automation } from "@/types/automation";
-import { __ } from "../../../plugins/i18n";
+import * as i18n from "../../../plugins/i18n";
 import { useFetch } from "@vueuse/core";
 import { useSingleAutomation } from "@/app/automations/singleAutomation";
 import { useRouter } from "vue-router";
@@ -60,11 +60,11 @@ function preventUnload(e) {
 }
 
 const waitingMessages = [
-  __("Thinking about your automation...", "shopmagic-for-woocommerce"),
-  __("Crafting your automation...", "shopmagic-for-woocommerce"),
-  __("Generating the perfect automation for you...", "shopmagic-for-woocommerce"),
-  __("Working on your request...", "shopmagic-for-woocommerce"),
-  __("Almost there, creating your automation...", "shopmagic-for-woocommerce"),
+  i18n.__("Thinking about your automation...", "shopmagic-for-woocommerce"),
+  i18n.__("Crafting your automation...", "shopmagic-for-woocommerce"),
+  i18n.__("Generating the perfect automation for you...", "shopmagic-for-woocommerce"),
+  i18n.__("Working on your request...", "shopmagic-for-woocommerce"),
+  i18n.__("Almost there, creating your automation...", "shopmagic-for-woocommerce"),
 ];
 
 function getRandomWaitingMessage() {
@@ -96,7 +96,7 @@ async function sendMessage() {
   isGenerating.value = false;
 
   if (error.value) {
-    generatedDescription.value = __(
+    generatedDescription.value = i18n.__(
       "Sorry, I couldn't generate an automation. Please try again.",
       "shopmagic-for-woocommerce",
     );
@@ -120,7 +120,7 @@ async function sendMessage() {
         generatedAutomation.value = JSON.parse(automationContent.text);
         generatedDescription.value =
           combinedDescription ||
-          __("Your automation was generated successfully.", "shopmagic-for-woocommerce");
+          i18n.__("Your automation was generated successfully.", "shopmagic-for-woocommerce");
 
         // Store the UUID for voting
         generatedAutomationUuid.value = data.value.uuid || null;
@@ -131,7 +131,7 @@ async function sendMessage() {
         console.error("Error parsing automation data:", parseError);
         generatedDescription.value =
           combinedDescription ||
-          __(
+          i18n.__(
             "Received a response but couldn't create an automation. Please try again.",
             "shopmagic-for-woocommerce",
           );
@@ -143,7 +143,7 @@ async function sendMessage() {
       generatedAutomation.value = null;
     } else {
       // No valid content found
-      generatedDescription.value = __(
+      generatedDescription.value = i18n.__(
         "Received an empty response. Please try again.",
         "shopmagic-for-woocommerce",
       );
@@ -151,7 +151,7 @@ async function sendMessage() {
     }
   } else {
     // Invalid response format
-    generatedDescription.value = __(
+    generatedDescription.value = i18n.__(
       "Received an invalid response. Please try again.",
       "shopmagic-for-woocommerce",
     );
@@ -178,7 +178,7 @@ function confirmReset() {
   if (generatedAutomation.value && !automationSaved.value) {
     if (
       confirm(
-        __(
+        i18n.__(
           "Are you sure you want to start a new automation? Your current unsaved automation will be lost.",
           "shopmagic-for-woocommerce",
         ),
@@ -206,7 +206,7 @@ function confirmReset() {
 }
 
 async function openAutomation() {
-  const m = message.loading(__("Saving automation", "shopmagic-for-woocommerce"), {
+  const m = message.loading(i18n.__("Saving automation", "shopmagic-for-woocommerce"), {
     duration: 0,
     keepAliveOnHover: true,
   });
@@ -218,7 +218,7 @@ async function openAutomation() {
     const id = await save();
     if (!id) return;
     m.content = () =>
-      h(NotificationMessage, { title: __("Automation saved", "shopmagic-for-woocommerce") });
+      h(NotificationMessage, { title: i18n.__("Automation saved", "shopmagic-for-woocommerce") });
     m.type = "success";
 
     automationSaved.value = true;

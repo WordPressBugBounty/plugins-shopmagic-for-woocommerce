@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { NButton, NH1, NP, NA, NText } from "naive-ui";
-import { __, _n } from "@/plugins/i18n";
 import { canUseRecipe } from "../utils/recipe";
 
 defineProps<{

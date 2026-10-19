@@ -6,7 +6,7 @@ import { h, ref, reactive } from "vue";
 import { queueTableColumns } from "../data/queueTable";
 import { useQueueStore } from "@/app/logs/queueStore";
 import { storeToRefs } from "pinia";
-import { __ } from "@/plugins/i18n";
+import * as i18n from "@/plugins/i18n";
 import { useRoute } from "vue-router";
 
 const store = useQueueStore();
@@ -17,7 +17,7 @@ const columns = [
   ...queueTableColumns,
   {
     key: "actions",
-    title: () => __("Actions", "shopmagic-for-woocommerce"),
+    title: () => i18n.__("Actions", "shopmagic-for-woocommerce"),
     render: ({ id }) =>
       h(
         NPopover,
@@ -36,7 +36,7 @@ const columns = [
               },
               { icon: () => h(NIcon, () => h(CloseOutline)) },
             ),
-          default: () => __("Cancel", "shopmagic-for-woocommerce"),
+          default: () => i18n.__("Cancel", "shopmagic-for-woocommerce"),
         },
       ),
   },
