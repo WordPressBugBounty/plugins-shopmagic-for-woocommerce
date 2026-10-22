@@ -2304,6 +2304,7 @@ class ComposerStaticInit083e42ae6355d11b9688df32e092280a
         'WPDesk\\ShopMagic\\migrations\\Version_47' => __DIR__ . '/../..' . '/migrations/Version_47.php',
         'WPDesk\\ShopMagic\\migrations\\Version_48' => __DIR__ . '/../..' . '/migrations/Version_48.php',
         'WPDesk\\ShopMagic\\migrations\\Version_49' => __DIR__ . '/../..' . '/migrations/Version_49.php',
+        'WPDesk\\ShopMagic\\migrations\\Version_50' => __DIR__ . '/../..' . '/migrations/Version_50.php',
         'WPDesk_Tracker_Data_Provider' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-data-provider.php',
         'WPDesk_Tracker_Factory' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Helper/TrackerFactory.php',
         'WPDesk_Tracker_Interface' => __DIR__ . '/..' . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-interface.php',

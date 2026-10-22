@@ -2274,6 +2274,7 @@ return array(
     'WPDesk\\ShopMagic\\migrations\\Version_47' => $baseDir . '/migrations/Version_47.php',
     'WPDesk\\ShopMagic\\migrations\\Version_48' => $baseDir . '/migrations/Version_48.php',
     'WPDesk\\ShopMagic\\migrations\\Version_49' => $baseDir . '/migrations/Version_49.php',
+    'WPDesk\\ShopMagic\\migrations\\Version_50' => $baseDir . '/migrations/Version_50.php',
     'WPDesk_Tracker_Data_Provider' => $vendorDir . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-data-provider.php',
     'WPDesk_Tracker_Factory' => $vendorDir . '/wpdesk/wp-wpdesk-helper-override/src/Helper/TrackerFactory.php',
     'WPDesk_Tracker_Interface' => $vendorDir . '/wpdesk/wp-wpdesk-helper-override/src/Interop/Tracker/class-wpdesk-tracker-interface.php',

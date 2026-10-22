@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.9.3] - 2026-10-22
+### Fixed
+- Subscriber exports are no longer saved to disk.
+
 ## [4.9.2] - 2026-10-19
 ### Fixed
 - Fixed some translation phrases not being loaded in the plugin.

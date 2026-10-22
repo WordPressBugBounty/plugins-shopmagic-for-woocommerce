@@ -367,6 +367,7 @@ return [
 				WPDesk\ShopMagic\migrations\Version_47::class,
 				WPDesk\ShopMagic\migrations\Version_48::class,
 				WPDesk\ShopMagic\migrations\Version_49::class,
+				WPDesk\ShopMagic\migrations\Version_50::class,
 			],
 			'shopmagic_db'
 		);

@@ -83,38 +83,41 @@ class SubscribersController {
 	}
 
 	private function export( int $id ): \WP_REST_Response {
-		$file_path   = $this->get_file_path();
-		$writer      = Writer::createFromPath( $file_path, 'a+' );
-		$subscribers = $this->repository->find_by( [ 'list_id' => $id ] )
-				->map(
-					static function ( SingleListSubscriber $subscriber ): string {
-												return $subscriber->get_email();
-					}
-				);
-
-		foreach ( $subscribers as $subscriber ) {
-			try {
-				$writer->insertOne( [ $subscriber ] );
-			} catch ( CannotInsertRecord $e ) {
-			}
+		$stream = tmpfile();
+		if ( $stream === false ) {
+			throw new \RuntimeException( 'Cannot create subscriber export temporary file.' );
 		}
 
-		return new \WP_REST_Response(
-			$writer->getContent(),
-			\WP_Http::OK,
-			[
-				'Content-Type'        => 'text/csv',
-				'Content-Disposition' => sprintf( 'attachment; filename="%s"', basename( $file_path ) ),
-				'Content-Description' => 'File Transfer',
-				'Content-Encoding'    => 'None',
-			]
-		);
-	}
+		try {
+			$writer      = Writer::createFromStream( $stream );
+			$subscribers = $this->repository->find_by( [ 'list_id' => $id ] )
+					->map(
+						static function ( SingleListSubscriber $subscriber ): string {
+													return $subscriber->get_email();
+						}
+					);
 
-	private function get_file_path(): string {
-		[ 'path' => $path ] = wp_upload_dir();
+			foreach ( $subscribers as $subscriber ) {
+				try {
+					$writer->insertOne( [ $subscriber ] );
+				} catch ( CannotInsertRecord $e ) {
+				}
+			}
 
-		return trailingslashit( $path ) . 'shopmagic-subscribers-' . gmdate( 'YmdHms' ) . '.csv';
+			return new \WP_REST_Response(
+				$writer->getContent(),
+				\WP_Http::OK,
+				[
+					'Content-Type'        => 'text/csv',
+					'Cache-Control'       => 'private, no-store',
+					'Content-Disposition' => sprintf( 'attachment; filename="%s"', 'shopmagic-subscribers-' . gmdate( 'YmdHis' ) . '.csv' ),
+					'Content-Description' => 'File Transfer',
+					'Content-Encoding'    => 'None',
+				]
+			);
+		} finally {
+			fclose( $stream );
+		}
 	}
 
 	public function count( \WP_REST_Request $request ): \WP_REST_Response {
