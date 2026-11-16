@@ -4,6 +4,7 @@ namespace ShopMagicVendor\MailerLite\Endpoints;
 
 class Campaign extends AbstractEndpoint
 {
+    public const EDITOR_SIMPLE = 'simple';
     protected string $endpoint = 'campaigns';
     /**
      * @param array<string, mixed> $params
@@ -70,5 +71,23 @@ class Campaign extends AbstractEndpoint
     public function getSubscriberActivity(string $campaignId, array $params): array
     {
         return $this->httpLayer->post($this->buildUri("{$this->endpoint}/{$campaignId}/reports/subscriber-activity"), $params);
+    }
+    /**
+     * @param array<string, mixed> $params
+     *
+     * @return array<string, mixed>
+     */
+    public function getEcommerceStats(string $campaignId, array $params): array
+    {
+        return $this->httpLayer->get($this->buildUri("{$this->endpoint}/{$campaignId}/reports/ecommerce", $params));
+    }
+    /**
+     * @param array<string, mixed> $params
+     *
+     * @return array<string, mixed>
+     */
+    public function getEcommerceOrders(string $campaignId, array $params): array
+    {
+        return $this->httpLayer->get($this->buildUri("{$this->endpoint}/{$campaignId}/reports/ecommerce/orders", $params));
     }
 }

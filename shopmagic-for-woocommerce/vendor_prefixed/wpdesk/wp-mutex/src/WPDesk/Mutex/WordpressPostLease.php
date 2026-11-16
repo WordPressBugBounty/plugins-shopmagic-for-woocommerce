@@ -119,23 +119,24 @@ class WordpressPostLease implements ExpiringMutex
     {
         $sql = $this->wpdb->prepare(
             // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-            "SELECT meta_value FROM {$this->wpdb->postmeta} WHERE post_id = %d AND meta_key = %s AND CAST(CASE WHEN LOCATE(%s, meta_value) > 0 THEN SUBSTRING_INDEX(meta_value, %s, -1) ELSE SUBSTRING_INDEX(meta_value, '_', -1) END AS UNSIGNED) >= UNIX_TIMESTAMP() ORDER BY meta_id ASC LIMIT 1",
+            "SELECT meta_value FROM {$this->wpdb->postmeta} WHERE post_id = %d AND meta_key = %s ORDER BY meta_id ASC",
             $this->postId,
-            $this->key->getResource(),
-            self::VALUE_DELIMITER,
-            self::VALUE_DELIMITER
+            $this->key->getResource()
         );
-        $value = $this->wpdb->get_var($sql);
+        $values = $this->wpdb->get_col($sql);
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-        if (null === $value) {
-            if ('' !== $this->wpdb->last_error) {
-                throw new MutexException($this->databaseError('Unable to read the post lease.'));
-            }
-            return null;
+        if ('' !== $this->wpdb->last_error) {
+            throw new MutexException($this->databaseError('Unable to read the post lease.'));
         }
-        $delimiter = \false !== strpos((string) $value, self::VALUE_DELIMITER) ? self::VALUE_DELIMITER : '_';
-        $parts = explode($delimiter, (string) $value, 2);
-        return 2 === count($parts) ? $parts[0] : null;
+        $now = $this->databaseTime();
+        foreach ($values as $value) {
+            $delimiter = \false !== strpos((string) $value, self::VALUE_DELIMITER) ? self::VALUE_DELIMITER : '_';
+            $parts = explode($delimiter, (string) $value, 2);
+            if ($this->expiry((string) $value) >= $now && 2 === count($parts)) {
+                return $parts[0];
+            }
+        }
+        return null;
     }
     private function isOwnedByCurrentKey(): bool
     {
@@ -146,17 +147,45 @@ class WordpressPostLease implements ExpiringMutex
     {
         $sql = $this->wpdb->prepare(
             // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-            "DELETE FROM {$this->wpdb->postmeta} WHERE post_id = %d AND meta_key = %s AND CAST(CASE WHEN LOCATE(%s, meta_value) > 0 THEN SUBSTRING_INDEX(meta_value, %s, -1) ELSE SUBSTRING_INDEX(meta_value, '_', -1) END AS UNSIGNED) < UNIX_TIMESTAMP()",
+            "SELECT meta_id, meta_value FROM {$this->wpdb->postmeta} WHERE post_id = %d AND meta_key = %s",
             $this->postId,
-            $this->key->getResource(),
-            self::VALUE_DELIMITER,
-            self::VALUE_DELIMITER
+            $this->key->getResource()
         );
-        $result = $this->wpdb->query($sql);
+        $rows = $this->wpdb->get_results($sql);
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-        if (\false === $result) {
+        if ('' !== $this->wpdb->last_error) {
             throw new MutexException($this->databaseError('Unable to clean expired post leases.'));
         }
+        $now = $this->databaseTime();
+        foreach ($rows as $row) {
+            if ($this->expiry((string) $row->meta_value) >= $now) {
+                continue;
+            }
+            $sql = $this->wpdb->prepare(
+                // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                "DELETE FROM {$this->wpdb->postmeta} WHERE meta_id = %d AND meta_value = %s",
+                $row->meta_id,
+                $row->meta_value
+            );
+            if (\false === $this->wpdb->query($sql)) {
+                // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+                throw new MutexException($this->databaseError('Unable to clean expired post leases.'));
+            }
+        }
+    }
+    private function expiry(string $value): int
+    {
+        $delimiter = \false !== strpos($value, self::VALUE_DELIMITER) ? self::VALUE_DELIMITER : '_';
+        $position = strrpos($value, $delimiter);
+        return (int) (\false === $position ? $value : substr($value, $position + 1));
+    }
+    private function databaseTime(): int
+    {
+        $now = (int) $this->wpdb->get_var('SELECT UNIX_TIMESTAMP()');
+        if ($now < 1) {
+            throw new MutexException($this->databaseError('Unable to read the database time.'));
+        }
+        return $now;
     }
     private function formatValue(string $token, int $ttl): string
     {

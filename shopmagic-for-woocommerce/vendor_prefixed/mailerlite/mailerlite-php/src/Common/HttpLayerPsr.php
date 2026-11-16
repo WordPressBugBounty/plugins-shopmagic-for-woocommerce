@@ -31,43 +31,64 @@ final class HttpLayerPsr
     }
     /**
      * @param array<string, array<mixed>|bool|float|int|string|null> $query
+     * @param array<string,string> $headers
      */
-    public function get(string $path, array $query = []): ResponseInterface
+    public function get(string $path, array $query = [], array $headers = []): ResponseInterface
     {
         $uri = $this->buildUri($path, $query);
-        $req = $this->requestFactory->create('GET', $uri, $this->headers());
+        $req = $this->requestFactory->create('GET', $uri, $this->headers($headers));
         $res = $this->client->sendRequest($req);
         HttpErrorMapper::throwIfError($res);
         return $res;
     }
     /**
      * @param array<mixed> $payload
+     * @param array<string,string> $headers
      */
-    public function post(string $path, array $payload = []): ResponseInterface
+    public function post(string $path, array $payload = [], array $headers = []): ResponseInterface
     {
         $uri = $this->buildUri($path);
         $body = $this->encodeJsonBody($payload);
-        $req = $this->requestFactory->create('POST', $uri, $this->headers(), $body);
+        $req = $this->requestFactory->create('POST', $uri, $this->headers($headers), $body);
         $res = $this->client->sendRequest($req);
         HttpErrorMapper::throwIfError($res);
         return $res;
     }
     /**
      * @param array<mixed> $payload
+     * @param array<string,string> $headers
      */
-    public function put(string $path, array $payload = []): ResponseInterface
+    public function put(string $path, array $payload = [], array $headers = []): ResponseInterface
     {
         $uri = $this->buildUri($path);
         $body = $this->encodeJsonBody($payload);
-        $req = $this->requestFactory->create('PUT', $uri, $this->headers(), $body);
+        $req = $this->requestFactory->create('PUT', $uri, $this->headers($headers), $body);
         $res = $this->client->sendRequest($req);
         HttpErrorMapper::throwIfError($res);
         return $res;
     }
-    public function delete(string $path): ResponseInterface
+    /**
+     * @param array<mixed> $payload
+     * @param array<string,string> $headers
+     */
+    public function patch(string $path, array $payload = [], array $headers = []): ResponseInterface
     {
         $uri = $this->buildUri($path);
-        $req = $this->requestFactory->create('DELETE', $uri, $this->headers());
+        $body = $this->encodeJsonBody($payload);
+        $req = $this->requestFactory->create('PATCH', $uri, $this->headers($headers), $body);
+        $res = $this->client->sendRequest($req);
+        HttpErrorMapper::throwIfError($res);
+        return $res;
+    }
+    /**
+     * @param array<mixed> $payload
+     * @param array<string,string> $headers
+     */
+    public function delete(string $path, array $payload = [], array $headers = []): ResponseInterface
+    {
+        $uri = $this->buildUri($path);
+        $body = $this->encodeJsonBody($payload);
+        $req = $this->requestFactory->create('DELETE', $uri, $this->headers($headers), $body);
         $res = $this->client->sendRequest($req);
         HttpErrorMapper::throwIfError($res);
         return $res;
@@ -94,10 +115,11 @@ final class HttpLayerPsr
         return json_encode($payload, \JSON_UNESCAPED_UNICODE | \JSON_THROW_ON_ERROR);
     }
     /**
+     * @param array<string,string> $extra
      * @return array<string,string|string[]>
      */
-    private function headers(): array
+    private function headers(array $extra = []): array
     {
-        return ['Authorization' => 'Bearer ' . $this->apiKey] + $this->defaultHeaders;
+        return ['Authorization' => 'Bearer ' . $this->apiKey] + $extra + $this->defaultHeaders;
     }
 }

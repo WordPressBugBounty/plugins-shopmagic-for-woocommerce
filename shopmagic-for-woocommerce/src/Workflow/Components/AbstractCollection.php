@@ -37,7 +37,7 @@ abstract class AbstractCollection implements ArrayAccess, IteratorAggregate, \Co
 		return isset( $this->storage[ $offset ] );
 	}
 
-	/** @return \Generator<T> */
+	/** @return \Generator<string, T> */
 	public function getIterator(): \Traversable {
 		if ( $this instanceof Sortable ) {
 			uasort( $this->storage, [ $this, 'compare' ] );

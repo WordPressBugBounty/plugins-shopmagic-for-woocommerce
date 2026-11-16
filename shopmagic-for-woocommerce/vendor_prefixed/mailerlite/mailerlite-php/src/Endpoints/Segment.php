@@ -31,10 +31,12 @@ class Segment extends AbstractEndpoint
         return $this->httpLayer->delete($this->buildUri($this->endpoint . "/{$segmentId}"));
     }
     /**
+     * @param array<string, mixed> $params
+     *
      * @return array<string, mixed>
      */
-    public function getSubscribers(string $segmentId): array
+    public function getSubscribers(string $segmentId, array $params = []): array
     {
-        return $this->httpLayer->get($this->buildUri($this->endpoint) . "/{$segmentId}/subscribers");
+        return $this->httpLayer->get($this->buildUri($this->endpoint . "/{$segmentId}/subscribers", $params));
     }
 }

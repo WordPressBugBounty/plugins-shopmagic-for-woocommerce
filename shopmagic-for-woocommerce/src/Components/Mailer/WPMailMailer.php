@@ -39,7 +39,7 @@ class WPMailMailer implements Mailer {
 
 			throw new MailerException( sprintf( 'wp_mail() failure. Original error: %s', $e->getMessage() ), 0, $e );
 		} finally {
-			remove_action( 'wp_mail_failed', [ $this, 'catch_error' ], 99999 );
+			remove_action( 'wp_mail_failed', [ $this, 'catch_error' ] );
 			remove_filter( 'wp_mail_from', $from_cb );
 			remove_filter( 'wp_mail_from_name', $from_name_cb );
 		}

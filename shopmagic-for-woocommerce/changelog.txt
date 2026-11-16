@@ -1,5 +1,9 @@
 # ShopMagic Changelog
 
+## [4.9.4] - 2026-11-16
+### Fixed
+- Fixed mail hook listener deregistration issue.
+
 ## [4.9.3] - 2026-10-22
 ### Fixed
 - Subscriber exports are no longer saved to disk.

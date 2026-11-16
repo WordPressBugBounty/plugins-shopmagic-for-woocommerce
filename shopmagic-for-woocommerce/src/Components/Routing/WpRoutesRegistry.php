@@ -97,13 +97,7 @@ class WpRoutesRegistry implements \WPDesk\ShopMagic\Components\HookProvider\Hook
 
 			$controller = $this->resolver->get_controller( $route->controller );
 
-			if ( empty( $path ) ) {
-				if ( isset( $_SERVER['PATH_INFO'] ) ) {
-					$path = $_SERVER['PATH_INFO']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-				} else {
-					$path = '/';
-				}
-			}
+			$path = isset( $_SERVER['PATH_INFO'] ) ? $_SERVER['PATH_INFO'] : '/'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			// Mimic WordPress rest request creation.
 			$request = new \WP_REST_Request( $_SERVER['REQUEST_METHOD'], $path ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 

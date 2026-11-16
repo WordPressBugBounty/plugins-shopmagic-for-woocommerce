@@ -12,30 +12,35 @@ final class HttpLayerPsrBridge extends HttpLayer
     {
         $this->psrLayer = $psrLayer;
     }
-    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface} */
-    public function get(string $uri, array $body = []): array
+    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface,is_idempotent_replay:bool} */
+    public function get(string $uri, array $body = [], array $headers = []): array
     {
         /** @var array<string, array<mixed>|bool|float|int|string|null> $query */
         $query = $this->sanitizeQuery($body);
-        return $this->executeAndConvert(fn() => $this->psrLayer->get($uri, $query));
+        return $this->executeAndConvert(fn() => $this->psrLayer->get($uri, $query, $headers));
     }
-    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface} */
-    public function post(string $uri, array $body = []): array
+    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface,is_idempotent_replay:bool} */
+    public function post(string $uri, ?array $body = [], array $headers = []): array
     {
-        return $this->executeAndConvert(fn() => $this->psrLayer->post($uri, $body));
+        return $this->executeAndConvert(fn() => $this->psrLayer->post($uri, $body ?? [], $headers));
     }
-    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface} */
-    public function put(string $uri, array $body): array
+    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface,is_idempotent_replay:bool} */
+    public function put(string $uri, array $body, array $headers = []): array
     {
-        return $this->executeAndConvert(fn() => $this->psrLayer->put($uri, $body));
+        return $this->executeAndConvert(fn() => $this->psrLayer->put($uri, $body, $headers));
     }
-    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface} */
-    public function delete(string $uri, array $body = []): array
+    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface,is_idempotent_replay:bool} */
+    public function patch(string $uri, array $body = [], array $headers = []): array
     {
-        // Note: $body parameter is ignored for DELETE requests as per HTTP semantics
-        return $this->executeAndConvert(fn() => $this->psrLayer->delete($uri));
+        return $this->executeAndConvert(fn() => $this->psrLayer->patch($uri, $body, $headers));
     }
-    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface} */
+    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface,is_idempotent_replay:bool} */
+    public function delete(string $uri, array $body = [], array $headers = []): array
+    {
+        // Email writes send their etag in the DELETE body
+        return $this->executeAndConvert(fn() => $this->psrLayer->delete($uri, $body, $headers));
+    }
+    /** @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface,is_idempotent_replay:bool} */
     public function request(string $method, string $uri, string $body = ''): array
     {
         $method = strtoupper($method);
@@ -47,8 +52,10 @@ final class HttpLayerPsrBridge extends HttpLayer
                 return $this->post($uri, $decodedBody);
             case 'PUT':
                 return $this->put($uri, $decodedBody);
+            case 'PATCH':
+                return $this->patch($uri, $decodedBody);
             case 'DELETE':
-                return $this->delete($uri, []);
+                return $this->delete($uri, $decodedBody);
             default:
                 throw new MailerLiteException("Unsupported HTTP method: {$method}");
         }
@@ -56,7 +63,7 @@ final class HttpLayerPsrBridge extends HttpLayer
     /**
      * Execute PSR layer method and convert response to compatibility format
      * @param callable(): ResponseInterface $psrMethod
-     * @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface}
+     * @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface,is_idempotent_replay:bool}
      */
     private function executeAndConvert(callable $psrMethod): array
     {
@@ -110,7 +117,7 @@ final class HttpLayerPsrBridge extends HttpLayer
         return $out;
     }
     /**
-     * @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface}
+     * @return array{status_code:int,headers:array<string,string[]>,body:mixed,response:ResponseInterface,is_idempotent_replay:bool}
      */
     private function compatResponse(ResponseInterface $response): array
     {
@@ -126,6 +133,6 @@ final class HttpLayerPsrBridge extends HttpLayer
             default:
                 $body = (string) $response->getBody();
         }
-        return ['status_code' => $statusCode, 'headers' => $headers, 'body' => $body, 'response' => $response];
+        return ['status_code' => $statusCode, 'headers' => $headers, 'body' => $body, 'response' => $response, 'is_idempotent_replay' => $this->isIdempotentReplay($response)];
     }
 }

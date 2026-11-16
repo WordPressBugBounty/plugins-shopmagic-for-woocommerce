@@ -7,9 +7,12 @@ use ShopMagicVendor\MailerLite\Common\HttpLayerPsr;
 use ShopMagicVendor\MailerLite\Common\HttpLayerPsrBridge;
 use ShopMagicVendor\MailerLite\Endpoints\Automation;
 use ShopMagicVendor\MailerLite\Endpoints\Batch;
+use ShopMagicVendor\MailerLite\Endpoints\BrandStyle;
 use ShopMagicVendor\MailerLite\Endpoints\Campaign;
 use ShopMagicVendor\MailerLite\Endpoints\CampaignLanguage;
+use ShopMagicVendor\MailerLite\Endpoints\Email;
 use ShopMagicVendor\MailerLite\Endpoints\Field;
+use ShopMagicVendor\MailerLite\Endpoints\File;
 use ShopMagicVendor\MailerLite\Endpoints\Form;
 use ShopMagicVendor\MailerLite\Endpoints\Group;
 use ShopMagicVendor\MailerLite\Endpoints\Segment;
@@ -23,6 +26,10 @@ use ShopMagicVendor\MailerLite\Endpoints\Customer;
 use ShopMagicVendor\MailerLite\Endpoints\Cart;
 use ShopMagicVendor\MailerLite\Endpoints\CartItem;
 use ShopMagicVendor\MailerLite\Endpoints\Import;
+use ShopMagicVendor\MailerLite\Endpoints\Shop;
+use ShopMagicVendor\MailerLite\Endpoints\Category;
+use ShopMagicVendor\MailerLite\Endpoints\ProductVariant;
+use ShopMagicVendor\MailerLite\Endpoints\EcommerceSetting;
 class MailerLite
 {
     /** @var array<string, mixed> */
@@ -32,6 +39,9 @@ class MailerLite
     protected HttpLayer $httpLayer;
     public Subscriber $subscribers;
     public Campaign $campaigns;
+    public Email $emails;
+    public BrandStyle $brandStyles;
+    public File $files;
     public Group $groups;
     public Segment $segments;
     public Field $fields;
@@ -47,6 +57,10 @@ class MailerLite
     public Cart $ecommerceCarts;
     public CartItem $ecommerceCartItems;
     public Import $ecommerceImport;
+    public Shop $ecommerceShops;
+    public Category $ecommerceCategories;
+    public ProductVariant $ecommerceProductVariants;
+    public EcommerceSetting $ecommerceSettings;
     /**
      * @param array<string,mixed> $options
      */
@@ -86,6 +100,9 @@ class MailerLite
     {
         $this->subscribers = new Subscriber($this->httpLayer, $this->options);
         $this->campaigns = new Campaign($this->httpLayer, $this->options);
+        $this->emails = new Email($this->httpLayer, $this->options);
+        $this->brandStyles = new BrandStyle($this->httpLayer, $this->options);
+        $this->files = new File($this->httpLayer, $this->options);
         $this->forms = new Form($this->httpLayer, $this->options);
         $this->fields = new Field($this->httpLayer, $this->options);
         $this->segments = new Segment($this->httpLayer, $this->options);
@@ -101,5 +118,9 @@ class MailerLite
         $this->ecommerceCarts = new Cart($this->httpLayer, $this->options);
         $this->ecommerceCartItems = new CartItem($this->httpLayer, $this->options);
         $this->ecommerceImport = new Import($this->httpLayer, $this->options);
+        $this->ecommerceShops = new Shop($this->httpLayer, $this->options);
+        $this->ecommerceCategories = new Category($this->httpLayer, $this->options);
+        $this->ecommerceProductVariants = new ProductVariant($this->httpLayer, $this->options);
+        $this->ecommerceSettings = new EcommerceSetting($this->httpLayer, $this->options);
     }
 }
