@@ -19,7 +19,7 @@ use WPDesk\ShopMagic\Customer\Guest\GuestFactory;
 use WPDesk\ShopMagic\Exception\CannotProvideCustomerException;
 use WPDesk\ShopMagic\Exception\CustomerNotFound;
 use WPDesk\ShopMagic\Helper\RestRequestUtil;
-use WPDesk\ShopMagic\Helper\WooCommerceCookies;
+use WPDesk\ShopMagic\Frontend\Session\CookiePersistence;
 use WPDesk\ShopMagic\Helper\WordPressPluggableHelper;
 use function WC;
 
@@ -44,14 +44,11 @@ final class CurrentCustomer implements Hookable, CustomerProvider, Conditional {
 	/** @var GuestFactory */
 	private $guest_factory;
 
-	/** @var string */
-	private $cookie_name;
+	/** @var CookiePersistence */
+	private $cookie_persistence;
 
-	/** @var int */
-	private $days_to_expire_cookie;
-
-	/** @var array{user_id?: numeric-string, hash: string, email?: string, meta: string[]} */
-	private $tracking_data = [];
+	/** @var array{user_id?: int|numeric-string, email?: string, meta: string[]} */
+	private $tracking_data = [ self::META => [] ];
 
 	/** @var CustomerRepository */
 	private $customer_repository;
@@ -71,27 +68,7 @@ final class CurrentCustomer implements Hookable, CustomerProvider, Conditional {
 			return;
 		}
 
-		$this->cookie_name =
-			/**
-			 * Cookie name for customer tracking. Used to properly identify the same guest users.
-			 *
-			 * @param string $cookie_name Current cookie name. shopmagic_visitor_HASH by default.
-			 *
-			 * @return string New cookie name.
-			 * @sice 2.17
-			 */
-			apply_filters( 'shopmagic/core/customer_interceptor/cookie_name', 'shopmagic_visitor_' . COOKIEHASH );
-		$this->days_to_expire_cookie =
-			/**
-			 * The expiration time for customer tracking cookie.
-			 *
-			 * @param int $cookie_expiry Current cookie expiration. 365 by default.
-			 *
-			 * @return int New expiration time.
-			 * @sice 2.17
-			 * @see  shopmagic/core/customer_interceptor/cookie_name
-			 */
-			apply_filters( 'shopmagic/core/customer_interceptor/cookie_expiry', 365 );
+		$this->cookie_persistence = new CookiePersistence();
 
 		$this->tracking_data = $this->get_decoded_tracking_data();
 		$this->refresh_tracking_user_id();
@@ -115,50 +92,23 @@ final class CurrentCustomer implements Hookable, CustomerProvider, Conditional {
 	}
 
 	/**
-	 * @return array{user_id?: numeric-string, email?: string, meta: string[]}
+	 * @return array{user_id?: int|numeric-string, email?: string, meta: string[]}
 	 */
 	private function get_decoded_tracking_data(): array {
-		$data = json_decode( $this->get_raw_tracking_data(), true );
-		if ( ! \is_array( $data ) ) {
-			$data = [ self::META => [] ];
-		}
-
-		unset( $data['hash'] );
-
-		return $data;
-	}
-
-	private function get_raw_tracking_data(): string {
+		$data = null;
 		if ( function_exists( 'WC' ) && WC()->session instanceof \WC_Session ) {
 			$raw_data = WC()->session->get( self::SESSION_TRACKING_DATA_KEY );
-			if ( ! empty( $raw_data ) ) {
-				return $raw_data;
+			if ( is_string( $raw_data ) && $raw_data !== '' ) {
+				$data = json_decode( $raw_data, true );
 			}
 		} else {
 			$this->logger->warning( 'Failed to retrieve customer tracking data. WC session not found.' );
 		}
 
-		if ( $this->is_enabled_cookie() ) {
-			$raw_data = WooCommerceCookies::get( $this->cookie_name );
-			if ( ! empty( $raw_data ) ) {
-				return $raw_data;
-			}
-		}
+		$data = is_array( $data ) ? $data : $this->cookie_persistence->get_tracking_data();
+		unset( $data['hash'] );
 
-		return '';
-	}
-
-	private function is_enabled_cookie(): bool {
-		/**
-		 * Can be used to globally override cookie usage. When disabled no cookies will ever be created
-		 * by the ShopMagic plugins.
-		 *
-		 * @param bool $enabled Current value. True by default.
-		 *
-		 * @returns bool
-		 * @since 2.17
-		 */
-		return apply_filters( 'shopmagic/core/customer_interceptor/cookies_enabled', true );
+		return $data + [ self::META => [] ];
 	}
 
 	/**
@@ -287,56 +237,11 @@ final class CurrentCustomer implements Hookable, CustomerProvider, Conditional {
 	 * @internal
 	 */
 	public function remember_tracking_key(): void {
-		$encoded_tracking_data = $this->encode_tracking_data();
 		if ( WC()->session instanceof \WC_Session ) {
-			WC()->session->set( self::SESSION_TRACKING_DATA_KEY, $encoded_tracking_data );
-		}
-		if ( $this->can_save_cookie( $this->cookie_name, $encoded_tracking_data ) ) {
-			WooCommerceCookies::set(
-				$this->cookie_name,
-				$encoded_tracking_data,
-				time() + $this->days_to_expire_cookie * DAY_IN_SECONDS
-			);
-		}
-	}
-
-	private function encode_tracking_data(): string {
-		if ( defined( 'AUTH_SALT' ) ) {
-			$salt = AUTH_SALT;
-		} else {
-			try {
-				// We never decode this data yet,
-				// then use totally random sequence during write
-				$salt = random_bytes( 12 );
-			} catch ( \Exception $e ) {
-				$salt = '';
-			}
-		}
-		$hash         = md5( json_encode( $this->tracking_data ) . $salt );
-		$data         = $this->tracking_data;
-		$data['hash'] = $hash;
-
-		return json_encode( $data );
-	}
-
-	private function can_save_cookie( string $name, $data ): bool {
-		if ( headers_sent() ) {
-			return false;
+			WC()->session->set( self::SESSION_TRACKING_DATA_KEY, json_encode( $this->tracking_data ) );
 		}
 
-		if ( ! $this->is_enabled_cookie() ) {
-			return false;
-		}
-
-		if ( empty( $this->tracking_data['email'] ) && empty( $this->tracking_data['user_id'] ) ) {
-			return false;
-		}
-
-		if ( WooCommerceCookies::is_set( $name ) && WooCommerceCookies::get( $name ) === $data ) {
-			return false;
-		}
-
-		return true;
+		$this->cookie_persistence->save_tracking_data( $this->tracking_data );
 	}
 
 	/**

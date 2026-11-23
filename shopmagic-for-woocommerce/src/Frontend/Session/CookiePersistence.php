@@ -6,6 +6,7 @@ namespace WPDesk\ShopMagic\Frontend\Session;
 
 use WPDesk\ShopMagic\Helper\WooCommerceCookies;
 
+/** Persists customer tracking data in an authenticated browser cookie. */
 final class CookiePersistence implements SessionPersistence {
 
 	/** @var string */
@@ -45,28 +46,46 @@ final class CookiePersistence implements SessionPersistence {
 		}
 
 		$raw_data = WooCommerceCookies::get( $this->cookie_name );
-		if ( strlen( $raw_data ) === 0 ) {
+		[ $signature, $payload ] = array_pad( explode( '.', $raw_data, 2 ), 2, '' );
+		if ( $payload === '' || ! hash_equals( $this->sign( $payload ), $signature ) ) {
 			return [];
 		}
 
-		return json_decode( wp_unslash( $raw_data ), true ) ?: [];
+		$json = base64_decode( $payload, true );
+		$data = $json === false ? null : json_decode( $json, true );
+
+		return is_array( $data ) ? $data : [];
 	}
 
 	public function save_tracking_data( array $data ): void {
 		if (
 			headers_sent() ||
-				$this->has_cookies_enabled() === false ||
-				( empty( $data['email'] ) && empty( $data['user_id'] ) ) ||
-				wp_unslash( WooCommerceCookies::get( $this->cookie_name ) ) === json_encode( $data )
+			! $this->has_cookies_enabled() ||
+			( empty( $data['email'] ) && empty( $data['user_id'] ) )
 		) {
+			return;
+		}
+
+		$json = json_encode( $data );
+		if ( $json === false ) {
+			return;
+		}
+
+		$payload = base64_encode( $json );
+		$value   = $this->sign( $payload ) . '.' . $payload;
+		if ( WooCommerceCookies::get( $this->cookie_name ) === $value ) {
 			return;
 		}
 
 		WooCommerceCookies::set(
 			$this->cookie_name,
-			json_encode( $data ) ?: '',
+			$value,
 			time() + $this->days_to_expire_cookie * DAY_IN_SECONDS
 		);
+	}
+
+	private function sign( string $payload ): string {
+		return hash_hmac( 'sha256', 'shopmagic_visitor:' . $payload, wp_salt( 'auth' ) );
 	}
 
 	private function has_cookies_enabled(): bool {
